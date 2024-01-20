@@ -25,7 +25,7 @@
               <div class="content">
                 <div class="stname-address">
                   <!-- 가게 명 -->
-                  <a :href="item.place_link" target="_blank"
+                  <a :href="'https://map.naver.com/p/search/' + item.place_name" target="_blank"
                     ><h5 class="stName">{{ item.place_name }}</h5></a
                   >
                   <!-- 가게 주소 -->

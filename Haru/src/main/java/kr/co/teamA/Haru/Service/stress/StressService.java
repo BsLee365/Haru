@@ -12,10 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class StressService {
@@ -64,10 +61,10 @@ public class StressService {
         System.out.println(stressData.toString());
         StressData vo = new StressData();
 
-        Member mem = memberRepository.findByUserId(stressData.getUserid());
+        Optional<Member> mem = memberRepository.findByUserId(stressData.getUserid());
 
         //유저 아이디
-        vo.setMember(mem);
+        mem.ifPresent(vo::setMember);
         //얼굴
         vo.setFaceData(stressData.getFacefigure());
         //일기

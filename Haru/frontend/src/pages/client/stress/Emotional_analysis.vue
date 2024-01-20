@@ -425,7 +425,7 @@ export default {
                 //일기 저장
                 axios
                   .post(
-                    "http://192.168.0.46/Haru/stress/saveDiary",
+                    "http://192.168.0.217/Haru/diary/saveDiary",
                     {
                       user_id: this.data.id,
                       diary_title: this.dirayTitle,
@@ -445,7 +445,7 @@ export default {
 
                     // 스트레스 측정 저장
                     axios
-                      .post("http://192.168.0.46/Haru/stress/saveStress", {
+                      .post("http://192.168.0.217/Haru/stress/saveStress", {
                         diaryfigure: this.diaryFigure,
                         facefigure: this.faceFigure,
                         stressscore: this.stressScore,
@@ -459,7 +459,7 @@ export default {
                     // 장소추천 알고리즘 axios
                     axios
                       .post(
-                        "http://192.168.0.46/Haru/stress/recommend",
+                        "http://192.168.0.217/Haru/stress/recommend",
                         {
                           userid: this.data.id,
                           stress_rate: String(this.stressRate),

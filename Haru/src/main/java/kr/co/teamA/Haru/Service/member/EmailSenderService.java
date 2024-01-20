@@ -79,8 +79,6 @@ public class EmailSenderService {
             throw new RuntimeException(e);
         }
      }
-<<<<<<< HEAD
-=======
     public void sendFindByIdEmail(String toEmail) {
         createAuthCode();
         MimeMessage message = mailSender.createMimeMessage();
@@ -109,7 +107,6 @@ public class EmailSenderService {
         }
     }
 
->>>>>>> Member
 
      public boolean isVerify(String email, String authCode) {
         System.out.println(certificationNumberDAO.hasKey(email));

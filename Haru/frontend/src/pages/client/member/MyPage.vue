@@ -2,13 +2,8 @@
   <div class="container1">
     <!-- 프로필 사진 업데이트 모달 창 -->
     <UpdateProfileImgModal
-<<<<<<< HEAD
-        :mStatus="profileModalStatus"
-        @modalClose="closeModal"
-=======
       :mStatus="profileModalStatus"
       @modalClose="closeModal"
->>>>>>> Member
     />
 
     <!-- 컨텐츠 -->
@@ -59,17 +54,10 @@
             </li>
             <div class="update-mydata-box">
               <a
-<<<<<<< HEAD
-                  class="big-ctlbtn update-btn"
-                  href="/userConfirmation"
-                  id="updateMyDataBtn"
-              >내 정보 수정</a
-=======
                 class="big-ctlbtn update-btn"
                 href="/userConfirmation"
                 id="updateMyDataBtn"
                 >내 정보 수정</a
->>>>>>> Member
               >
             </div>
           </ul>
@@ -82,17 +70,6 @@
                 <li>
                   <div>
                     <img
-<<<<<<< HEAD
-                        class="alarm-img"
-                        src="@/assets/icon/alarm/alarm_heart_icon.png"
-                    />
-                    <span id="comment-content">댓글 내용</span>
-                    <span class="alarm-time"
-                    ><img
-                        src="@/assets/icon/time_icon.png"
-                        alt=""
-                    />10분전</span
-=======
                       class="alarm-img"
                       src="@/assets/icon/alarm/alarm_heart_icon.png"
                     />
@@ -102,24 +79,12 @@
                         src="@/assets/icon/time_icon.png"
                         alt=""
                       />10분전</span
->>>>>>> Member
                     >
                   </div>
                 </li>
                 <li>
                   <div>
                     <img
-<<<<<<< HEAD
-                        class="alarm-img"
-                        src="@/assets/icon/login/kakao_login_icon.png"
-                    />
-                    <span id="comment-content">댓글 내용</span>
-                    <span class="alarm-time"
-                    ><img
-                        src="@/assets/icon/time_icon.png"
-                        alt=""
-                    />40분전</span
-=======
                       class="alarm-img"
                       src="@/assets/icon/login/kakao_login_icon.png"
                     />
@@ -129,20 +94,14 @@
                         src="@/assets/icon/time_icon.png"
                         alt=""
                       />40분전</span
->>>>>>> Member
                     >
                   </div>
                 </li>
                 <li>
                   <div>
                     <img
-<<<<<<< HEAD
-                        class="alarm-img"
-                        src="@/assets/icon/alarm/alarm_basic_icon.png"
-=======
                       class="alarm-img"
                       src="@/assets/icon/alarm/alarm_basic_icon.png"
->>>>>>> Member
                     />
                     <span id="comment-content">댓글 내용</span>
                     <span class="alarm-time">23.12.27 1:03</span>
@@ -151,13 +110,8 @@
                 <li>
                   <div>
                     <img
-<<<<<<< HEAD
-                        class="alarm-img"
-                        src="@/assets/icon/alarm/alarm_heart_icon.png"
-=======
                       class="alarm-img"
                       src="@/assets/icon/alarm/alarm_heart_icon.png"
->>>>>>> Member
                     />
                     <span id="comment-content">댓글 내용</span>
                     <span class="alarm-time">23.12.26 1:03</span>
@@ -166,13 +120,8 @@
                 <li>
                   <div>
                     <img
-<<<<<<< HEAD
-                        class="alarm-img"
-                        src="@/assets/icon/alarm/alarm_comment_icon.png"
-=======
                       class="alarm-img"
                       src="@/assets/icon/alarm/alarm_comment_icon.png"
->>>>>>> Member
                     />
                     <span id="comment-content">댓글 내용</span>
                     <span class="alarm-time">23.12.25 1:03</span>
@@ -181,13 +130,8 @@
                 <li>
                   <div>
                     <img
-<<<<<<< HEAD
-                        class="alarm-img"
-                        src="@/assets/icon/alarm/alarm_comment_icon.png"
-=======
                       class="alarm-img"
                       src="@/assets/icon/alarm/alarm_comment_icon.png"
->>>>>>> Member
                     />
                     <span id="comment-content">댓글 내용</span>
                     <span class="alarm-time">23.12.24 1:03</span>
@@ -196,13 +140,8 @@
                 <li>
                   <div>
                     <img
-<<<<<<< HEAD
-                        class="alarm-img"
-                        src="@/assets/icon/alarm/alarm_basic_icon.png"
-=======
                       class="alarm-img"
                       src="@/assets/icon/alarm/alarm_basic_icon.png"
->>>>>>> Member
                     />
                     <span id="comment-content">댓글 내용</span>
                     <span class="alarm-time">23.12.23 1:03</span>
@@ -263,15 +202,6 @@ export default {
 
     const logout = () => {
       axios
-<<<<<<< HEAD
-          .get(`http://${process.env.VUE_APP_BACK_END_URL}/api/auth/logout`)
-          .then((res) => {
-            if (res.data == "Logout") {
-              localStorage.removeItem("jwtToken");
-              window.location.href = "/login";
-            }
-          });
-=======
         .get(`http://${process.env.VUE_APP_BACK_END_URL}/api/auth/logout`)
         .then((res) => {
           if (res.data == "Logout") {
@@ -279,7 +209,6 @@ export default {
             window.location.href = "/login";
           }
         });
->>>>>>> Member
     };
 
     const decodeToken = (token) => {

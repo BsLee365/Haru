@@ -43,15 +43,11 @@
         >
           뒤로가기
         </button>
-<<<<<<< HEAD
-        <button class="big-ctlbtn delete-btn" id="deleteMyInfo-submit">
-=======
         <button
           class="big-ctlbtn delete-btn"
           id="deleteMyInfo-submit"
           @click="deleteUser"
         >
->>>>>>> Member
           탈퇴하기
         </button>
       </div>
@@ -59,11 +55,8 @@
   </div>
 </template>
 <script>
-<<<<<<< HEAD
-=======
 import axios from "axios";
 
->>>>>>> Member
 export default {
   name: "DeleteMyInfoModal",
   data() {
@@ -71,8 +64,6 @@ export default {
   },
   props: {
     deleteMyInfoModal: Boolean,
-<<<<<<< HEAD
-=======
     userId: String,
   },
   methods: {
@@ -94,7 +85,6 @@ export default {
         alert("아이디를 확인해주세요.");
       }
     },
->>>>>>> Member
   },
 };
 </script>

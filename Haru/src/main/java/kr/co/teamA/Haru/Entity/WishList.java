@@ -24,10 +24,6 @@ public class WishList {
     private Member member;
 
     @ManyToOne
-<<<<<<< HEAD
-    @JoinColumn(name = "placeNum")
-=======
     @JoinColumn(name = "placeNumber")
->>>>>>> Member
     private Place place;
 }

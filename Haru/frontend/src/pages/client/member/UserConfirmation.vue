@@ -16,11 +16,7 @@
           class="big-ctlbtn update-btn"
           type="submit"
           id="userConfirm-btn"
-<<<<<<< HEAD
-          @click="userConfirmBtn"
-=======
           @click="confirmPwd"
->>>>>>> Member
         >
           개인 정보 수정
         </button>
@@ -29,13 +25,10 @@
   </div>
 </template>
 <script>
-<<<<<<< HEAD
-=======
 import axios from "axios";
 import { ref, onMounted } from "vue";
 import { jwtDecode } from "jwt-decode";
 
->>>>>>> Member
 export default {
   name: "UserConfirmation",
   data() {
@@ -47,12 +40,6 @@ export default {
   created() {
     // 페이지가 로드될 때 초기 이미지 설정
     this.bgImage();
-<<<<<<< HEAD
-    this.getToken();
-  },
-  methods: {
-    // 해당 화면 Background 이미지 설정
-=======
   },
   setup() {
     const isLoggedIn = ref(false);
@@ -90,26 +77,10 @@ export default {
     return { logout, data }; // Return data in the setup function
   },
   methods: {
->>>>>>> Member
     bgImage() {
       var newImage = "type1";
       this.$emit("bgImage", newImage);
     },
-<<<<<<< HEAD
-    getToken() {
-      this.AccessToken = localStorage.getItem("jwtToken");
-      console.log(this.AccessToken);
-      if (this.AccessToken != null) {
-        this.isLoggedIn = true;
-      } else {
-        this.isLoggedIn = false;
-        this.$router.push("/login");
-      }
-    },
-    userConfirmBtn() {
-      this.$router.push("/updateMyInfo");
-    },
-=======
 
     userConfirmBtn() {
       this.$router.push("/updateMyInfo");
@@ -143,7 +114,6 @@ export default {
           }
         });
     },
->>>>>>> Member
   },
 };
 </script>

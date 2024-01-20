@@ -15,15 +15,6 @@
 
         <div class="pw-change-input-area">
           <label for="password" class="password-label">비밀번호 확인</label>
-<<<<<<< HEAD
-          <input type="password" id="password" />
-          <p id="userComfirm-pwd-msg"></p>
-        </div>
-        <button
-          class="big-ctlbtn update-btn"
-          type="submit"
-          id="userConfirm-btn"
-=======
           <input type="password" id="password-check" />
           <p id="userComfirm-pwdcheck-msg"></p>
         </div>
@@ -32,7 +23,6 @@
           type="button"
           id="userConfirm-btn"
           @click="resetPwd"
->>>>>>> Member
         >
           비밀번호 재설정
         </button>
@@ -41,31 +31,20 @@
   </div>
 </template>
 <script>
-<<<<<<< HEAD
-=======
 import axios from "axios";
 
->>>>>>> Member
 export default {
   name: "UserConfirmation",
   data() {
     return {
-<<<<<<< HEAD
-      AccessToken: "",
-=======
       formData: new FormData(),
->>>>>>> Member
       isLoggedIn: false,
     };
   },
   created() {
     // 페이지가 로드될 때 초기 이미지 설정
     this.bgImage();
-<<<<<<< HEAD
-    this.getToken();
-=======
     this.checkTokenUserId();
->>>>>>> Member
   },
   methods: {
     // 해당 화면 Background 이미지 설정
@@ -73,21 +52,6 @@ export default {
       var newImage = "type1";
       this.$emit("bgImage", newImage);
     },
-<<<<<<< HEAD
-    getToken() {
-      this.AccessToken = localStorage.getItem("jwtToken");
-      console.log(this.AccessToken);
-      if (this.AccessToken != null) {
-        this.isLoggedIn = true;
-      } else {
-        this.isLoggedIn = false;
-        this.$router.push("/login");
-      }
-    },
-    userConfirmBtn() {
-      this.$router.push("/updateMyInfo");
-    },
-=======
     checkTokenUserId() {
       if (localStorage.getItem("userId") === null) {
         this.$router.push("/login");
@@ -154,7 +118,6 @@ export default {
           }
         });
     },
->>>>>>> Member
   },
 };
 </script>
@@ -169,10 +132,6 @@ export default {
 }
 
 .pw-change-input-area:first-child {
-<<<<<<< HEAD
-  margin-bottom: 15px;
-=======
   margin-bottom: 30px;
->>>>>>> Member
 }
 </style>

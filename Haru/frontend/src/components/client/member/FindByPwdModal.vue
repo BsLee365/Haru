@@ -61,15 +61,7 @@
                 id="email"
                 placeholder="이메일 입력"
               />
-<<<<<<< HEAD
-              <button
-                class="input-in-btn"
-                id="email-ckeck"
-                @click.prevent="submit"
-              >
-=======
               <button class="input-in-btn" id="email-ckeck" @click="findByPwd">
->>>>>>> Member
                 인증
               </button>
               <div class="error-msg-area">
@@ -97,11 +89,7 @@
           </div>
 
           <div class="btn-area">
-<<<<<<< HEAD
-            <button class="big-ctlbtn insert-btn" @click="findIdToggleModal">
-=======
             <button class="big-ctlbtn insert-btn" @click="submit">
->>>>>>> Member
               비밀번호 재설정
             </button>
           </div>
@@ -111,11 +99,8 @@
   </div>
 </template>
 <script>
-<<<<<<< HEAD
-=======
 import axios from "axios";
 
->>>>>>> Member
 export default {
   name: "FindByIdModal",
   data() {
@@ -124,8 +109,6 @@ export default {
   props: {
     modalOpen: Boolean,
   },
-<<<<<<< HEAD
-=======
   methods: {
     findByPwd(event) {
       event.preventDefault();
@@ -229,7 +212,6 @@ export default {
         });
     },
   },
->>>>>>> Member
 };
 </script>
 

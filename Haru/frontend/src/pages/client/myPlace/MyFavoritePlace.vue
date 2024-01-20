@@ -3,47 +3,21 @@
     <!-- 장소보여주기 -->
     <div>
       <div class="main-title">
-<<<<<<< HEAD
-        <h2>닉네임 님이 찜한 장소</h2>
-=======
         <h2>{{ data.nickname }} 님이 찜한 장소</h2>
->>>>>>> Member
       </div>
       <div class="myFavorite-place">
         <div
           class="myFavorite-place-card"
-<<<<<<< HEAD
-          v-for="(item, idx) in myFaboritePlace"
-          :key="idx"
-        >
-          {{ item }}
-          <!-- <div class="'food-img">
-            <img class="heart-img" src="@/img/Total_stress/img/image 47.png" />
-            <img :src="item.place_img" alt="" class="place-card" />
-=======
           v-for="(item, idx) in this.placeData"
           :key="idx"
         >
           <div class="'food-img">
             <img class="heart-img" src="@/img/Total_stress/img/image 47.png" />
             <img :src="item" alt="" class="place-card" />
->>>>>>> Member
           </div>
           <div class="food-desc">
             <div class="food-desc-box">
               <div class="food-title">
-<<<<<<< HEAD
-                <h4>{{ item }}</h4>
-              </div>
-              <div class="hash-tag">
-                <span class="review-score">★ {{ item.place_score }}</span>
-              </div>
-              <div class="food-detail">
-                <span class="food-address">주소: {{ item.place_address }}</span>
-              </div>
-            </div>
-          </div> -->
-=======
                 <h4>{{ item[2] }}</h4>
               </div>
               <div class="hash-tag">
@@ -54,7 +28,6 @@
               </div>
             </div>
           </div>
->>>>>>> Member
         </div>
       </div>
     </div>
@@ -75,19 +48,13 @@ export default {
   },
   created() {
     this.bgImage();
-<<<<<<< HEAD
-=======
     this.getToken();
->>>>>>> Member
   },
   setup() {
     const isLoggedIn = ref(false);
     const data = ref([]);
     const myFaboritePlace = ref({});
-<<<<<<< HEAD
-=======
     const placeData = ref([]);
->>>>>>> Member
 
     const getToken = () => {
       const token = localStorage.getItem("jwtToken");
@@ -134,12 +101,9 @@ export default {
         .then((res) => {
           // 요청 성공 시 처리 로직
           myFaboritePlace.value = res.data.place;
-<<<<<<< HEAD
-=======
           res.data[0].forEach((element) => {
             placeData.value.push(element);
           });
->>>>>>> Member
         })
         .catch((error) => {
           // 요청 실패 시 처리 로직
@@ -147,11 +111,7 @@ export default {
         });
     };
 
-<<<<<<< HEAD
-    return { logout, data, getData, myFaboritePlace }; // Return data in the setup function
-=======
     return { logout, data, getData, placeData }; // Return data in the setup function
->>>>>>> Member
   },
 
   methods: {
@@ -159,8 +119,6 @@ export default {
       var newImage = "type5";
       this.$emit("bgImage", newImage);
     },
-<<<<<<< HEAD
-=======
     getToken() {
       this.AccessToken = localStorage.getItem("jwtToken");
       console.log(this.AccessToken);
@@ -171,7 +129,6 @@ export default {
         this.$router.push("/login");
       }
     },
->>>>>>> Member
   },
 };
 </script>

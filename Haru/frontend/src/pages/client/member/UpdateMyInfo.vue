@@ -1,14 +1,9 @@
 <template>
   <div class="container1">
     <div>
-      <DeleteMyInfoModal
-        :deleteMyInfoModal="deleteMyInfoModal"
-        @modalClose="toggleDeleteMyInfoModal"
-<<<<<<< HEAD
-=======
-        :userId="userId"
->>>>>>> Member
-      />
+      <DeleteMyInfoModal :deleteMyInfoModal="deleteMyInfoModal"
+      @modalClose="toggleDeleteMyInfoModal" <<<<<<< HEAD =======
+      :userId="userId" >>>>>>> Member />
     </div>
     <div>
       <form
@@ -34,14 +29,13 @@
               type="text"
               id="userId"
               readonly
-<<<<<<< HEAD
+              <<<<<<<
+              HEAD
               value="rhdudwnd82"
             />
-=======
-              :value="userId"
-            />
+            ======= :value="userId" />
             <input type="hidden" id="userId-v" :value="userId" />
->>>>>>> Member
+            >>>>>>> Member
           </div>
         </div>
 
@@ -51,18 +45,9 @@
             <label for="nickname" class="mustInput">닉네임</label>
           </div>
           <div class="input-area">
-            <input
-              class="input-text"
-              type="text"
-              name="nickname"
-              id="nickname"
-              placeholder="한글, 영문 대소문자, 숫자만 사용 가능"
-<<<<<<< HEAD
-              value="개구쟁이"
-=======
-              :value="nickname"
->>>>>>> Member
-            />
+            <input class="input-text" type="text" name="nickname" id="nickname"
+            placeholder="한글, 영문 대소문자, 숫자만 사용 가능" <<<<<<< HEAD
+            value="개구쟁이" ======= :value="nickname" >>>>>>> Member />
             <button
               class="input-in-btn"
               id="nickname-check"
@@ -82,18 +67,9 @@
             <label for="name" class="mustInput">이름</label>
           </div>
           <div class="input-area">
-            <input
-              class="input-text"
-              type="text"
-              name="name"
-              id="name"
-              placeholder="이름 입력"
-<<<<<<< HEAD
-              value="고영중"
-=======
-              :value="name"
->>>>>>> Member
-            />
+            <input class="input-text" type="text" name="name" id="name"
+            placeholder="이름 입력" <<<<<<< HEAD value="고영중" =======
+            :value="name" >>>>>>> Member />
           </div>
           <div class="error-msg-area">
             <p style="display: none" id="nameCheck-msg" class="msg"></p>
@@ -106,18 +82,10 @@
             <label for="email" class="mustInput">이메일</label>
           </div>
           <div class="input-area">
-            <input
-              class="input-text"
-              type="email"
-              @keydown.enter.prevent="handleEnter"
-              id="email"
-              placeholder="이메일 입력"
-<<<<<<< HEAD
-              value="rhdudwnd82@naver.com"
-=======
-              :value="email"
->>>>>>> Member
-            />
+            <input class="input-text" type="email"
+            @keydown.enter.prevent="handleEnter" id="email" placeholder="이메일
+            입력" <<<<<<< HEAD value="rhdudwnd82@naver.com" =======
+            :value="email" >>>>>>> Member />
             <button class="input-in-btn" id="email-ckeck" @click="emailCheck">
               중복확인
             </button>
@@ -154,17 +122,9 @@
             value="뒤로가기"
             class="big-ctlbtn cancle-btn"
           />
-          <input
-            type="button"
-            id="update-my-info"
-<<<<<<< HEAD
-            @click="updateMyInfo"
-=======
-            @click="submit"
->>>>>>> Member
-            value="정보수정"
-            class="big-ctlbtn select-btn"
-          />
+          <input type="button" id="update-my-info" <<<<<<< HEAD
+          @click="updateMyInfo" ======= @click="submit" >>>>>>> Member
+          value="정보수정" class="big-ctlbtn select-btn" />
 
           <input
             type="button"

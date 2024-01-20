@@ -385,28 +385,12 @@ export default {
       }
 
       console.log(selectedList);
-<<<<<<< HEAD
-      const token = localStorage.getItem("jwtToken");
-      const data = ref([]);
-=======
->>>>>>> Member
 
       this.formData.append("hobbyList", selectedList);
       axios
         .post(
           `http://${process.env.VUE_APP_BACK_END_URL}/setHobby`,
-<<<<<<< HEAD
-          this.formData,
-          data.value,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-              "Content-Type": "application/json",
-            },
-          }
-=======
           this.formData
->>>>>>> Member
         )
         .then((res) => {
           console.log(res);

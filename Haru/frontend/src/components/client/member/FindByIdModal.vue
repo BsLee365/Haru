@@ -45,15 +45,7 @@
                 id="email"
                 placeholder="이메일 입력"
               />
-<<<<<<< HEAD
-              <button
-                class="input-in-btn"
-                id="email-ckeck"
-                @click.prevent="submit"
-              >
-=======
               <button class="input-in-btn" id="email-ckeck" @click="findById">
->>>>>>> Member
                 인증
               </button>
               <div class="error-msg-area">
@@ -86,9 +78,6 @@
               <label for="emailCheck" id="findMyIdLabel">찾은 아이디</label>
             </div>
             <div class="input-area">
-<<<<<<< HEAD
-              <input class="input-text" type="text" id="findMyId" readonly />
-=======
               <input
                 class="input-text"
                 type="text"
@@ -96,7 +85,6 @@
                 :value="this.findUserId"
                 readonly
               />
->>>>>>> Member
             </div>
             <div class="error-msg-area">
               <p style="display: none" id="Code-msg" class="msg"></p>
@@ -104,11 +92,7 @@
           </div>
 
           <div class="btn-area">
-<<<<<<< HEAD
-            <button class="big-ctlbtn insert-btn" @click="findIdToggleModal">
-=======
             <button class="big-ctlbtn insert-btn" @click="submit">
->>>>>>> Member
               아이디 찾기
             </button>
           </div>
@@ -118,12 +102,6 @@
   </div>
 </template>
 <script>
-<<<<<<< HEAD
-export default {
-  name: "FindByIdModal",
-  data() {
-    return {};
-=======
 import axios from "axios";
 
 export default {
@@ -133,13 +111,10 @@ export default {
       formData: new FormData(),
       findUserId: "",
     };
->>>>>>> Member
   },
   props: {
     modalOpen: Boolean,
   },
-<<<<<<< HEAD
-=======
   methods: {
     findById(event) {
       event.preventDefault();
@@ -193,7 +168,6 @@ export default {
         });
     },
   },
->>>>>>> Member
 };
 </script>
 <style scoped>

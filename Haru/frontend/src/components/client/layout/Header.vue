@@ -215,7 +215,10 @@ img {
 
 .login-ul-box > .login-ul > div > li {
   margin-left: 20px;
+<<<<<<< HEAD
   white-space: nowrap;
+=======
+>>>>>>> junghyoun
 }
 
 .login-ul-box > .login-ul > div > li > a {

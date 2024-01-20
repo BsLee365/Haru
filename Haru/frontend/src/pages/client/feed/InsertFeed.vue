@@ -75,15 +75,24 @@
           <div class="hashtag-area-two">
             <div
               class="write-down-hash-area"
+<<<<<<< HEAD
               v-for="(wHash, whIdx) in writeHashtag"
+=======
+              v-for="(whIdx, wHash) in writeHashtag"
+>>>>>>> junghyoun
               :key="whIdx"
             >
               <span class="hash-icon">#</span>
               <input
                 type="text"
                 class="hashtag writeHash"
+<<<<<<< HEAD
                 placeholder="직접 입력"
                 :value="wHash"
+=======
+                placeholder="직접 입력하기"
+                :key="wHash"
+>>>>>>> junghyoun
                 :ref="'writeHashtagInput' + whIdx"
               />
             </div>
@@ -123,6 +132,11 @@ export default {
   name: "InsertFeed",
   data() {
     return {
+<<<<<<< HEAD
+=======
+      isLoggedIn: false,
+      AccessToken: "",
+>>>>>>> junghyoun
       uid: "abc",
       hashtag: [
         "고기",
@@ -219,12 +233,29 @@ export default {
   },
   created() {
     this.bgImage();
+<<<<<<< HEAD
+=======
+    this.getToken();
+>>>>>>> junghyoun
   },
   methods: {
     bgImage() {
       var newImage = "type4";
       this.$emit("bgImage", newImage);
     },
+<<<<<<< HEAD
+=======
+    getToken() {
+      this.AccessToken = localStorage.getItem("jwtToken");
+      console.log(this.AccessToken);
+      if (this.AccessToken != null) {
+        this.isLoggedIn = true;
+      } else {
+        this.isLoggedIn = false;
+        this.$router.push("/login");
+      }
+    },
+>>>>>>> junghyoun
     toggleActive(index) {
       const indexOfTag = this.activeTags.indexOf(index);
 
@@ -242,6 +273,7 @@ export default {
       };
     },
     // 해시태그 직접 입력
+<<<<<<< HEAD
     addHashTag() {
       // 기존에 입력 값 배열에 넣기
       for (var i = 0; i < this.writeHashtag.length; i++) {
@@ -256,6 +288,9 @@ export default {
         alert("해시태그는 5개 이하로 입력 가능합니다.");
       }
     },
+=======
+    addHashTag() {},
+>>>>>>> junghyoun
 
     openModal() {
       this.modal_Check = true;
@@ -275,6 +310,9 @@ export default {
   height: 42px;
   font-size: 1rem;
   font-weight: 500;
+<<<<<<< HEAD
   margin-top: 5px;
+=======
+>>>>>>> junghyoun
 }
 </style>

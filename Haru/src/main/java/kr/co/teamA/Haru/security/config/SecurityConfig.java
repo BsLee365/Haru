@@ -73,15 +73,27 @@ public class SecurityConfig {
                 .logout((logout) -> logout.disable());
         return http.build();
     }
+<<<<<<< HEAD
+=======
+
+>>>>>>> junghyoun
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration corsConfiguration = new CorsConfiguration();
         corsConfiguration.setAllowCredentials(true);
+<<<<<<< HEAD
         corsConfiguration.setAllowedOrigins(List.of(serverPortLocalUrl,serverPortUrl));
         corsConfiguration.setAllowedMethods(List.of("GET","POST","PUT","DELETE","PATCH","OPTIONS"));
         corsConfiguration.setAllowedHeaders(List.of("*"));
         UrlBasedCorsConfigurationSource urlBasedCorsConfigurationSource = new UrlBasedCorsConfigurationSource();
         urlBasedCorsConfigurationSource.registerCorsConfiguration("/**",corsConfiguration);
+=======
+        corsConfiguration.setAllowedOrigins(List.of(serverPortLocalUrl, serverPortUrl));
+        corsConfiguration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"));
+        corsConfiguration.setAllowedHeaders(List.of("*"));
+        UrlBasedCorsConfigurationSource urlBasedCorsConfigurationSource = new UrlBasedCorsConfigurationSource();
+        urlBasedCorsConfigurationSource.registerCorsConfiguration("/**", corsConfiguration);
+>>>>>>> junghyoun
 
         return urlBasedCorsConfigurationSource;
     }

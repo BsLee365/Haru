@@ -6,8 +6,11 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+<<<<<<< HEAD
 import java.util.Date;
 
+=======
+>>>>>>> junghyoun
 @Data
 @Entity
 @NoArgsConstructor
@@ -30,6 +33,10 @@ public class PlaceRecommendList {
     private Member member;
 
     @Column(columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+<<<<<<< HEAD
     private Date placeCdate;
+=======
+    private String placeCdate;
+>>>>>>> junghyoun
 
 }

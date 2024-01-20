@@ -95,12 +95,20 @@
   background-color: #ffeee7;
 }
 
+<<<<<<< HEAD
 /* 직접 입력 input */
+=======
+/* 직접 입력하기 input */
+>>>>>>> junghyoun
 .hashtag:focus {
   outline: 0;
 }
 
+<<<<<<< HEAD
 /* 직접 입력 영역 */
+=======
+/* 직접 입력하기 영역 */
+>>>>>>> junghyoun
 .write-down-hash-area {
   display: inline-block;
 }

@@ -21,10 +21,13 @@
                 </tr>
               </thead>
 
+<<<<<<< HEAD
 <!--              'cal-set-today': isToday(childIndex),   ==>   오늘 날짜면 background-color 주기     -->
 <!--              'selected-cal-day': isSelected(i, childIndex),   ==>   선택이 됐으면 border 색상 주기     -->
 <!--              'calendar-event': isInRecList(i, childIndex),   ==>   추천된 기록이 있으면 작은 점으로 표시     -->
 <!--              'prev-next-monthDay': isPrevNextDay(i, childIndex),   ==>   전달, 다음달 날짜는 흐리게 표시     -->
+=======
+>>>>>>> junghyoun
               <tbody>
                 <tr v-for="(index, i) in days" :key="i">
                   <td
@@ -34,7 +37,11 @@
                     :class="{
                       'cal-set-today': isToday(childIndex),
                       'selected-cal-day': isSelected(i, childIndex),
+<<<<<<< HEAD
                       'calendar-event': isInRecList(i, childIndex),
+=======
+                      'calendar-event': isInRecList(childIndex),
+>>>>>>> junghyoun
                       'prev-next-monthDay': isPrevNextDay(i, childIndex),
                     }"
                   >
@@ -54,7 +61,10 @@
           <div
             class="tab-btn-left cursor-p"
             :class="{ 'tab-btn-active': isTabRecList === true }"
+<<<<<<< HEAD
             @click="changeTab('recommend')"
+=======
+>>>>>>> junghyoun
           >
             추천 리스트
           </div>
@@ -67,6 +77,7 @@
           </div>
         </div>
 
+<<<<<<< HEAD
         <!-- 컴포넌트로 토글되는 영역 (추천리스트, 일기 리스트) -->
         <div class="tab-content-area">
           <RecommendList
@@ -75,6 +86,14 @@
             :isBtnHeartNone="isBtnHeartNone"
             class="rlist-container"
 
+=======
+        <!-- 컴포넌트로 토글되는 영역 (추천리스트, 일기 리스트)myNum -->
+        <div class="tab-content-area">
+          <RecommendList
+            :RecommendList="RecommendList"
+            :isBtnHeartNone="isBtnHeartNone"
+            class="rlist-container"
+>>>>>>> junghyoun
             v-if="isTabRecList === true"
             ref="recList"
           />
@@ -93,9 +112,12 @@
 import RecommendList from "@/components/client/myPlace/RecommendList.vue";
 import MyDiaryList from "@/components/client/myPlace/MyDiaryList.vue";
 import moment from "moment";
+<<<<<<< HEAD
 import {onMounted, ref} from "vue";
 import axios from "axios";
 import {jwtDecode} from "jwt-decode";
+=======
+>>>>>>> junghyoun
 
 export default {
   data() {
@@ -106,6 +128,7 @@ export default {
     return {
       // 달력 외 관련
       activeTab: "recommend", // 기본값으로 추천 리스트를 활성화
+<<<<<<< HEAD
       isBtnHeartNone: false, // 하트버튼이 안보여야되는지
       isTabRecList: true, // 추천 리스트 탭 활성화
       RecommendList: [], // controller 에서 넘어온 월별 추천리스트 + 일기 data
@@ -113,6 +136,114 @@ export default {
       sendSelectedDate: "", // 추천리스트로 넘길 날짜
       // 일기 리스트
       diaryList: [],
+=======
+      // rDate: "2024-01-05",
+      isBtnHeartNone: false, // 하트버튼이 안보여야되는지
+      isTabRecList: true, // 추천 리스트 탭 활성화
+      RecommendList: [
+        // 추천 받았던 리스트 (날짜별)
+        {
+          rdate: "2024-01-15",
+          recList: [
+            {
+              storeName: "신논현역 딸부자네 불백",
+              stAddress: "서울시 강남구 꼬마빌딩 1층",
+              img: require("@/img/Feed/bul.png"),
+              link: "#",
+              hashtag: ["푸드", "맛집", "고기", "돼지고기", "갈매기살"],
+              heartOnOff: "on",
+            },
+            {
+              storeName: "신논현역 버거킹",
+              stAddress: "서울시 강남구 꼬마빌딩 2층",
+              img: require("@/img/Feed/bul.png"),
+              link: "#",
+              hashtag: ["패스트푸드", "맛집", "와퍼"],
+              heartOnOff: "off",
+            },
+            {
+              storeName: "신논현역 버거킹",
+              stAddress: "서울시 강남구 꼬마빌딩 2층",
+              img: require("@/img/Feed/bul.png"),
+              link: "#",
+              hashtag: ["패스트푸드", "맛집", "와퍼"],
+              heartOnOff: "off",
+            },
+          ],
+        },
+        {
+          rdate: "2024-01-10",
+          recList: [
+            {
+              storeName: "신논현역 와플대학",
+              stAddress: "서울시 강남구 꼬마빌딩 3층",
+              img: require("@/img/Feed/bul.png"),
+              link: "#",
+              hashtag: [
+                "카페",
+                "맛집",
+                "와플",
+                "애플시나몬",
+                "레몬에이드",
+                "레몬에이드",
+                "레몬에이드",
+              ],
+              heartOnOff: "on",
+            },
+            {
+              storeName: "신논현역 딸부자네 불백",
+              stAddress: "서울시 강남구 꼬마빌딩 1층",
+              img: require("@/img/Feed/bul.png"),
+              link: "#",
+              hashtag: [
+                "푸드",
+                "맛집",
+                "고기",
+                "돼지고기",
+                "갈매기살",
+                "갈매기살",
+              ],
+              heartOnOff: "on",
+            },
+          ],
+        },
+        {
+          rdate: "2024-01-07",
+          recList: [
+            {
+              storeName: "신논현역 버거킹",
+              stAddress: "서울시 강남구 꼬마빌딩 2층",
+              img: require("@/img/Feed/bul.png"),
+              hashtag: ["패스트푸드", "맛집", "와퍼"],
+              heartOnOff: "off",
+            },
+          ],
+        },
+      ],
+      // 일기 리스트
+      diaryList: {
+        rdate: "2024년 01월 10일(수)",
+        dList: [
+          {
+            diaryNum: 0,
+            diaryName: "오늘 와룡산 갔다오고 나서(1)",
+            dContents:
+              "오늘은 크리스마스, 하얀 눈이 내리는 마법 같은 날이었다. 아침에 눈을 뜨자 창밖으로 내리쏟는 눈을 보며 설렘을 감추지 못했다. 따뜻한 코코아 한 잔을 손에 쥐고, 창가에 앉아 눈 내리는 거리를 바라봤다.오늘은 크리스마스, 하얀 눈이 내리는 마법 같은 날이었다. 아침에 눈을 뜨자 창밖으로 내리쏟는 눈을 보며 설렘을 감추지 못했다.",
+          },
+          {
+            diaryNum: 1,
+            diaryName: "오늘 와룡산 갔다오고 나서(2)",
+            dContents:
+              "따뜻한 코코아 한 잔을 손에 쥐고, 창가에 앉아 눈 내리는 거리를 바라봤다. 점심 식사, 우리가 나눈 웃음과 이야기들이 마음을 더욱 풍성하게 만들어주었다. 선물 교환은 언제나 즐거움의 정점을 찍는다. 서로의 마음을 담은 선물을 주고받으며, 그 속에 담긴 사랑과 감사의 마음을 느낄 수 있었다. 저녁이 되어, 가족들과 함께 크리스마스 영화를 보며 하루를 마무리했다.모든 순간이 따뜻하고, 평화롭고, 기쁨 가득했다. 오늘 하루가 주는 작은 기적들에 감사하며, 내일을 기대한다.",
+          },
+          {
+            diaryNum: 2,
+            diaryName: "강남에 맛집 탐방 후기",
+            dContents: "강남에 맛집 닭도리탕타앝수육",
+          },
+        ],
+      },
+>>>>>>> junghyoun
       // 달력 관련 데이터
       today: today,
       sDate: sDate,
@@ -125,13 +256,17 @@ export default {
   },
   mounted() {
     this.calendarImplementation();
+<<<<<<< HEAD
     this.getMyRecPlace(this.sDate);
+=======
+>>>>>>> junghyoun
   },
   created() {
     // 페이지가 로드될 때 초기 이미지 설정
     this.bgImage();
     this.getToken();
   },
+<<<<<<< HEAD
   setup() {
     const isLoggedIn = ref(false);
     const data = ref([]);
@@ -197,6 +332,9 @@ export default {
       .catch(error => {console.error('error! ' + error)});
     },
 
+=======
+  methods: {
+>>>>>>> junghyoun
     // 달력 만들기----------------------------------
     calendarImplementation: function () {
       this.days = [];
@@ -239,7 +377,10 @@ export default {
       }
       this.calendarHeader = `${this.myDate[0]}년 ${this.myDate[1] + 1} 월`;
       this.addLastWeekEmptyDays();
+<<<<<<< HEAD
       this.getMyRecPlace(); // 달력에 event 작은 점 표시 -> 데이터가 있으면 표시
+=======
+>>>>>>> junghyoun
     },
 
     // 막주 날짜 채우기----------------------------------
@@ -300,6 +441,7 @@ export default {
 
       return indexDay == today.format("YYYY-MM-DD");
     },
+<<<<<<< HEAD
     // 선택됐는지 확인해서 css 적용
     isSelected(i, day) {
       // 선택한 날짜
@@ -315,6 +457,18 @@ export default {
 
       // 화면 최초 진입 시 오늘 날짜면 오늘 날짜에 표시
       if (this.isToday(day) && sdate && !this.isSelectedtoday) {
+=======
+
+    isSelected(i, day) {
+      var sdate = moment([this.sDate[0], this.sDate[1], this.sDate[2]]).format(
+        "YYYY-MM-DD"
+      );
+      var nowdate = moment([this.myDate[0], this.myDate[1], day]).format(
+        "YYYY-MM-DD"
+      );
+      // 화면 최초 진입 시 오늘 날짜면 오늘 날짜에 표시
+      if (this.isToday(day) && sdate) {
+>>>>>>> junghyoun
         return true;
       } else if (sdate == nowdate && i == this.sDate[3]) {
         return true;
@@ -322,11 +476,17 @@ export default {
       return false;
     },
 
+<<<<<<< HEAD
     // 날짜 클릭했을 때---------------------------------------------------------------------------------
     dayClick(i, day) {
       // 한 번 클릭된 이후엔 오늘 날짜 자동으로 선택 안되게
       if (this.isSelectedtoday == false) this.isSelectedtoday = !this.isSelectedtoday;
 
+=======
+    // 한번 움직였으면 상태값 바꾸고 클릭한 곳에 동그라미 표시
+    // 데이터 불러오기
+    dayClick(i, day) {
+>>>>>>> junghyoun
       if (i == 0 && day > 6) {
         // 이전 달 클릭 시
         this.changeMonth(-1);
@@ -344,6 +504,7 @@ export default {
       } else {
         this.sDate = [this.myDate[0], this.myDate[1], day, i];
       }
+<<<<<<< HEAD
 
       // 선택한 일자에 해당하는 추천리스트 목록 담는 배열
       this.RecPlace = []; // 배열 초기화
@@ -387,6 +548,16 @@ export default {
       }
       indexDay = indexDay.format("YYYY-MM-DD")
       // console.log('indexDay : ' + indexDay);
+=======
+    },
+
+    // 받아온 추천 리스트에 rDate를 화면에 점으로 표시하기----------------------------------
+    isInRecList(day) {
+      const rdates = this.RecommendList.map((item) => item.rdate);
+      var indexDay = moment([this.myDate[0], this.myDate[1], day]).format(
+        "YYYY-MM-DD"
+      );
+>>>>>>> junghyoun
       return rdates.includes(indexDay);
     },
 

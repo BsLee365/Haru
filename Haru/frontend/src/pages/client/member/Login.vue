@@ -96,8 +96,13 @@ export default {
     return {
       isIdModalOpen: false,
       isPwdModalOpen: false,
+<<<<<<< HEAD
       userId: "rhdudwnd82",
       pwd: "Admin12!",
+=======
+      userId: "",
+      pwd: "",
+>>>>>>> junghyoun
       AccessToken: "",
     };
   },

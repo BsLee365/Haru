@@ -12,7 +12,11 @@
       </div>
 
       <div class="findMyAccount-title-area">
+<<<<<<< HEAD
         <h2>비밀번호 재설정</h2>
+=======
+        <h2>비밀번호 찾기</h2>
+>>>>>>> junghyoun
       </div>
 
       <div class="findModalContent">
@@ -94,7 +98,11 @@
 
           <div class="btn-area">
             <button class="big-ctlbtn insert-btn" @click="findIdToggleModal">
+<<<<<<< HEAD
               비밀번호 재설정
+=======
+              비밀번호 찾기
+>>>>>>> junghyoun
             </button>
           </div>
         </form>

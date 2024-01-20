@@ -19,6 +19,7 @@
         <div class="feed-rec-selected-area">
           <p class="feed-rec-area-title">선택한 장소</p>
           <div class="contents">
+<<<<<<< HEAD
             <div v-if="!recItemInfo" class="feed-rec-noplace">
               장소를 선택해주세요!
             </div>
@@ -51,6 +52,9 @@
                 </div>
               </div>
             </div>
+=======
+            <div class="feed-rec-noplace">장소를 선택해주세요!</div>
+>>>>>>> junghyoun
           </div>
         </div>
 
@@ -61,7 +65,10 @@
             :RecommendList="RecommendList"
             :isBtnHeartNone="isBtnHeartNone"
             class="feed-rec-recList"
+<<<<<<< HEAD
             @send-rec-List="getRecList"
+=======
+>>>>>>> junghyoun
           />
         </div>
 
@@ -84,6 +91,7 @@ export default {
   data() {
     return {
       isBtnHeartNone: true,
+<<<<<<< HEAD
       recItemInfo: "",
     };
   },
@@ -93,6 +101,10 @@ export default {
       this.recItemInfo = recItem;
     },
   },
+=======
+    };
+  },
+>>>>>>> junghyoun
   components: {
     RecList,
   },
@@ -104,7 +116,10 @@ export default {
 <style scoped>
 @import "@/css/client/feed/uploadFeed.css";
 @import "@/css/client/feed/feedRecommend.css";
+<<<<<<< HEAD
 .rlist-card-area {
   padding-left: 30px;
 }
+=======
+>>>>>>> junghyoun
 </style>

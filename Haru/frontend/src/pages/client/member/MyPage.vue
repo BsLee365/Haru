@@ -1,11 +1,14 @@
 <template>
   <div class="container1">
+<<<<<<< HEAD
     <!-- 프로필 사진 업데이트 모달 창 -->
     <UpdateProfileImgModal
       :mStatus="profileModalStatus"
       @modalClose="closeModal"
     />
 
+=======
+>>>>>>> junghyoun
     <!-- 컨텐츠 -->
     <div class="mypage-box">
       <!-- title -->
@@ -15,11 +18,15 @@
       <div class="mypage-two-box">
         <div class="mypage-left-box">
           <ul>
+<<<<<<< HEAD
             <li id="profileArea">
               <div class="profileImgBg cursor-p" @click="openModal">
                 <img src="@/img/FaceRegistration/camera.png" alt="" />
                 <p>프로필 수정</p>
               </div>
+=======
+            <li>
+>>>>>>> junghyoun
               <img src="@/assets/bgImage/type3.png" class="profileImg" />
             </li>
             <li>
@@ -159,7 +166,10 @@
 import axios from "axios";
 import { ref, onMounted } from "vue";
 import { jwtDecode } from "jwt-decode";
+<<<<<<< HEAD
 import UpdateProfileImgModal from "@/components/client/member/UpdateProfileImgModal.vue";
+=======
+>>>>>>> junghyoun
 
 export default {
   name: "MyPage",
@@ -167,22 +177,29 @@ export default {
     return {
       isLoggedIn: false,
       AccessToken: "",
+<<<<<<< HEAD
       profileModalStatus: false,
+=======
+>>>>>>> junghyoun
     };
   },
   created() {
     // 페이지가 로드될 때 초기 이미지 설정
     this.bgImage();
   },
+<<<<<<< HEAD
   components: {
     UpdateProfileImgModal,
   },
+=======
+>>>>>>> junghyoun
   methods: {
     // 해당 화면 Background 이미지 설정
     bgImage() {
       var newImage = "type1";
       this.$emit("bgImage", newImage);
     },
+<<<<<<< HEAD
     openModal() {
       this.profileModalStatus = true;
     },
@@ -190,6 +207,8 @@ export default {
     closeModal() {
       this.profileModalStatus = false;
     },
+=======
+>>>>>>> junghyoun
   },
   setup() {
     const isLoggedIn = ref(false); // Use ref to create reactive isLoggedIn

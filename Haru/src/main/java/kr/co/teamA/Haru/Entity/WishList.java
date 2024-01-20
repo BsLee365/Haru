@@ -24,6 +24,10 @@ public class WishList {
     private Member member;
 
     @ManyToOne
+<<<<<<< HEAD
     @JoinColumn(name = "placeNumber")
+=======
+    @JoinColumn(name = "placeNum")
+>>>>>>> junghyoun
     private Place place;
 }

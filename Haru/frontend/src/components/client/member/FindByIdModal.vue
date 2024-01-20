@@ -76,6 +76,7 @@
             </div>
           </div>
 
+<<<<<<< HEAD
           <!-- 찾은 아이디 -->
           <div class="info-input-container">
             <div class="label-area">
@@ -94,6 +95,8 @@
             </div>
           </div>
 
+=======
+>>>>>>> junghyoun
           <div class="btn-area">
             <button class="big-ctlbtn insert-btn" @click="findIdToggleModal">
               아이디 찾기
@@ -123,7 +126,10 @@ export default {
   width: fit-content;
   margin: 0 auto;
 }
+<<<<<<< HEAD
 #findMyIdLabel, #findMyId {
   color: #f39f7e;
 }
+=======
+>>>>>>> junghyoun
 </style>

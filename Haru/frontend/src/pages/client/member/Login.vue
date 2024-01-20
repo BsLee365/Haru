@@ -96,8 +96,8 @@ export default {
     return {
       isIdModalOpen: false,
       isPwdModalOpen: false,
-      userId: "",
-      pwd: "",
+      userId: "rhdudwnd82",
+      pwd: "Admin12!",
       AccessToken: "",
     };
   },

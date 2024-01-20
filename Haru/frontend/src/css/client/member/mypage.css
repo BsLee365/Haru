@@ -29,11 +29,38 @@
   justify-content: center;
 }
 
+.profileImgBg {
+  display: none;
+}
+
 /* 프로필 이미지 */
 .profileImg {
   width: 200px;
   height: 200px;
   border-radius: 100px;
+}
+
+#profileArea:hover .profileImgBg {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  border-radius: 100px;
+  background-color: #37373763;
+  z-index: 5;
+}
+
+.profileImgBg > img {
+  width: 70px;
+}
+
+.profileImgBg > p {
+  font-weight: 500;
+  color: #000000;
+  margin-top: 5px;
 }
 
 /* 닉네임 영역 */
@@ -234,4 +261,47 @@
   width: 18px;
   top: -1px;
   margin-right: 7px;
+}
+
+/* 프로필 사진 수정 모달 팝업 -------------------------------------------- */
+/* form 영역 */
+.up-profile-modal-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* 프로필 사진 영역 */
+#up-profile-area {
+  width: fit-content;
+  margin: 20px 0 40px;
+}
+
+/* 마우스 hover 했을 때 나오는 영역 */
+.up-profileImgBg {
+  display: none;
+}
+
+/* 마우스 hover 했을 때 효과 */
+#up-profile-area:hover .up-profileImgBg {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  border-radius: 100px;
+  background-color: #37373763;
+  z-index: 15;
+}
+
+.up-profileImgBg > img {
+  width: 70px;
+}
+
+.up-profileImgBg > p {
+  font-weight: 500;
+  color: #000000;
+  margin-top: 5px;
 }

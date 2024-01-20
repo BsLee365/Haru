@@ -9,6 +9,7 @@ import MyPage from "@/pages/client/member/MyPage.vue"; // 마이페이지
 import UserConfirmation from "@/pages/client/member/UserConfirmation.vue"; // 내 정보 수정 화면 전 비밀번호 입력 화면
 import UpdateMyInfo from "@/pages/client/member/UpdateMyInfo.vue"; // 내 정보 수정
 import SelectHobby from "@/pages/client/member/SelectHobby.vue"; // 취미 및 관심사 선택
+import ChangeMyPwd from "@/pages/client/member/ChangeMyPwd.vue"; // 비밀번호 재설정
 
 // 스트레스 분석하기 stress--------------------------------------
 import Emotional_analysis from "@/pages/client/stress/Emotional_analysis.vue"; // 스트레스 분석 화면
@@ -50,6 +51,11 @@ const routes = [
     path: "/Signup",
     name: "Signup",
     component: Signup,
+  },
+  {
+    path: "/ChangeMyPwd",
+    name: "ChangeMyPwd",
+    component: ChangeMyPwd,
   },
   {
     path: "/Feed",

@@ -95,12 +95,12 @@
   background-color: #ffeee7;
 }
 
-/* 직접 입력하기 input */
+/* 직접 입력 input */
 .hashtag:focus {
   outline: 0;
 }
 
-/* 직접 입력하기 영역 */
+/* 직접 입력 영역 */
 .write-down-hash-area {
   display: inline-block;
 }

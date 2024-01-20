@@ -215,6 +215,7 @@ img {
 
 .login-ul-box > .login-ul > div > li {
   margin-left: 20px;
+  white-space: nowrap;
 }
 
 .login-ul-box > .login-ul > div > li > a {

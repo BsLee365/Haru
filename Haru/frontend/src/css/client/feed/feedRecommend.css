@@ -23,13 +23,14 @@
 
 /* 장소 선택 안함 안내 div */
 .feed-rec-noplace {
+  text-align: center;
+  line-height: 140px;
+  font-size: 18px;
+  padding-left: 10px;
   height: 140px;
   width: 680px;
   background-color: #eee;
   border-radius: 20px;
-  text-align: center;
-  line-height: 140px;
-  font-size: 18px;
   color: #bfbfbf;
 }
 
@@ -39,7 +40,6 @@
 }
 
 .feed-rec-selected-area > .contents {
-  padding-left: 10px;
 }
 
 .feed-rec-recList {

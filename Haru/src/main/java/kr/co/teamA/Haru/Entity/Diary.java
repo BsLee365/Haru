@@ -1,12 +1,10 @@
 package kr.co.teamA.Haru.Entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-import java.sql.Date;
+import java.util.Date;
+
 
 @Data
 @Entity
@@ -22,7 +20,7 @@ public class Diary {
     private Long diaryNum;
 
     @ManyToOne
-    @JoinColumn(name = "userId", referencedColumnName = "userId")
+    @JoinColumn(nullable = false, name = "userId", referencedColumnName = "userId")
     private Member member;
 
     @Column(length = 100, nullable = false)
@@ -31,7 +29,6 @@ public class Diary {
     @Column(length = 1200, nullable = false)
     private String diaryContext;
 
-    @Column(nullable = false)
+    @Column(columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private Date diaryCdate;
-
 }

@@ -19,7 +19,40 @@
         <div class="feed-rec-selected-area">
           <p class="feed-rec-area-title">선택한 장소</p>
           <div class="contents">
-            <div class="feed-rec-noplace">장소를 선택해주세요!</div>
+            <div v-if="!recItemInfo" class="feed-rec-noplace">
+              장소를 선택해주세요!
+            </div>
+
+            <div v-if="recItemInfo">
+              <div class="rlist-card-area">
+                <div class="rlist-content-area">
+                  <div class="all-info">
+                    <div class="rlist-img-area">
+                      <a :href="recItemInfo.link"
+                        ><img
+                          class="rec-detail-img"
+                          :src="recItemInfo.img"
+                          alt=""
+                      /></a>
+                    </div>
+                    <div class="content">
+                      <div class="stname-address">
+                        <!-- 가게 명 -->
+                        <h5 class="stName">{{ recItemInfo.storeName }}</h5>
+                        <!-- 가게 주소 -->
+                        <p class="stAddress">{{ recItemInfo.stAddress }}</p>
+                      </div>
+                      <!-- 별점 -->
+                      <p class="rlist-score-area">
+                        <span class="rlist-score"
+                          >★ {{ item.place_score / 10 }}</span
+                        >
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -30,6 +63,7 @@
             :RecommendList="RecommendList"
             :isBtnHeartNone="isBtnHeartNone"
             class="feed-rec-recList"
+            @send-rec-List="getRecList"
           />
         </div>
 
@@ -52,7 +86,14 @@ export default {
   data() {
     return {
       isBtnHeartNone: true,
+      recItemInfo: "",
     };
+  },
+  methods: {
+    getRecList(recItem) {
+      console.log(recItem);
+      this.recItemInfo = recItem;
+    },
   },
   components: {
     RecList,
@@ -65,4 +106,7 @@ export default {
 <style scoped>
 @import "@/css/client/feed/uploadFeed.css";
 @import "@/css/client/feed/feedRecommend.css";
+.rlist-card-area {
+  padding-left: 30px;
+}
 </style>

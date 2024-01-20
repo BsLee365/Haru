@@ -12,7 +12,7 @@
       </div>
 
       <div class="findMyAccount-title-area">
-        <h2>비밀번호 찾기</h2>
+        <h2>비밀번호 재설정</h2>
       </div>
 
       <div class="findModalContent">
@@ -94,7 +94,7 @@
 
           <div class="btn-area">
             <button class="big-ctlbtn insert-btn" @click="findIdToggleModal">
-              비밀번호 찾기
+              비밀번호 재설정
             </button>
           </div>
         </form>

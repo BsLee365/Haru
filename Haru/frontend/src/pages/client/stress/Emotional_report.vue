@@ -105,138 +105,138 @@
 </template>
 
 <script>
-// import {
-//   Chart as ChartJS,
-//   CategoryScale,
-//   LinearScale,
-//   PointElement,
-//   LineElement,
-//   Title,
-//   Tooltip,
-//   Legend,
-// } from "chart.js";
-// import { Line } from "vue-chartjs";
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend,
+} from "chart.js";
+import { Line } from "vue-chartjs";
 
-// ChartJS.register(
-//   CategoryScale,
-//   LinearScale,
-//   PointElement,
-//   LineElement,
-//   Title,
-//   Tooltip,
-//   Legend
-// );
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend
+);
 
-// // export default {
-// // //   name: "Emotional_report",
-// // //   components: {
-// // //     Line,
-// // //   },
-// // //   data() {
-// // //     return {
-// // //       SelectDate: "day",
-// // //       UserName: "이범석",
+export default {
+  name: "Emotional_report",
+  components: {
+    Line,
+  },
+  data() {
+    return {
+      SelectDate: "day",
+      UserName: "이범석",
 
-// // //       // 현재 날짜
-// // //       nowDate: new Date().toISOString().slice(0, 10),
+      // 현재 날짜
+      nowDate: new Date().toISOString().slice(0, 10),
 
-// // //       // 하루
-// // //       Oneday: new Date().toISOString().slice(0, 10),
+      // 하루
+      Oneday: new Date().toISOString().slice(0, 10),
 
-// // //       // 일간
-// // //       Startdays: new Date().toISOString().slice(0, 10),
-// // //       Enddays: new Date().toISOString().slice(0, 10),
-// // //       minEndDays: "",
-// // //       maxEndDays: "",
+      // 일간
+      Startdays: new Date().toISOString().slice(0, 10),
+      Enddays: new Date().toISOString().slice(0, 10),
+      minEndDays: "",
+      maxEndDays: "",
 
-// // //       // 월간
-// // //       Startmonth: new Date().toISOString().slice(0, 10),
-// // //       Endmonth: new Date().toISOString().slice(0, 10),
-// // //       minEndMonth: "",
-// // //       maxEndMonth: "",
+      // 월간
+      Startmonth: new Date().toISOString().slice(0, 10),
+      Endmonth: new Date().toISOString().slice(0, 10),
+      minEndMonth: "",
+      maxEndMonth: "",
 
-// // //       // 연도별로
-// // //       SelectYear: new Date().toISOString().slice(0, 4),
+      // 연도별로
+      SelectYear: new Date().toISOString().slice(0, 4),
 
-// // //       //차트 영역
-// // //       chartData: {
-// // //         //바뀌어야 될 부분
-// // //         labels: [
-// // //           "1월",
-// // //           "2월",
-// // //           "3월",
-// // //           "4월",
-// // //           "5월",
-// // //           "6월",
-// // //           "7월",
-// // //           "8월",
-// // //           "9월",
-// // //           "10월",
-// // //           "11월",
-// // //           "12월",
-// // //         ],
-// // //         datasets: [
-// // //           {
-// // //             label: this.UserName + "님 스트레스 수치",
-// // //             backgroundColor: "#f87979",
-// // //             // 바뀌어야 될 부분
-// // //             data: [10, 7.8, 2.1, 3.4, 5.6, 7.8, 9.1, 8.7, 6.5, 4.3, 2.1, 1.2],
-// // //             tension: 0.1,
-// // //           },
-// // //         ],
-// // //       },
-// // //       chartOptions: {
-// // //         responsive: false,
-// // //         pointStyle: "circle",
-// // //         lineWidth: 5,
-// // //         pointRadius: 8,
-// // //         pointHoverRadius: 12,
-// // //       },
-// // //     };
-// // //   },
-// // //   created() {
-// // //     this.bgImage();
-// // //     this.chartData.datasets[0].label = this.UserName + "님 스트레스 수치";
-// // //   },
-// // //   methods: {
-// // //     bgImage() {
-// // //       var newImage = "type2";
-// // //       this.$emit("bgImage", newImage);
-// // //     },
-// // //     // 일간 유효성 검사
-// // //     updateEndDateRange() {
-// // //       // 종료 날짜 초기화
-// // //       this.Enddays = this.Startdays;
-// // //       // 시작일이 변경되면 종료일의 범위를 다시 계산
-// // //       const getMinDate = new Date(this.Startdays);
-// // //       const getMaxDate = new Date(this.Startdays);
+      //  차트 영역
+      chartData: {
+        //  바뀌어야 될 부분
+        labels: [
+          "1월",
+          "2월",
+          "3월",
+          "4월",
+          "5월",
+          "6월",
+          "7월",
+          "8월",
+          "9월",
+          "10월",
+          "11월",
+          "12월",
+        ],
+        datasets: [
+          {
+            label: this.UserName + "님 스트레스 수치",
+            backgroundColor: "#f87979",
+            // 바뀌어야 될 부분
+            data: [10, 7.8, 2.1, 3.4, 5.6, 7.8, 9.1, 8.7, 6.5, 4.3, 2.1, 1.2],
+            tension: 0.1,
+          },
+        ],
+      },
+      chartOptions: {
+        responsive: false,
+        pointStyle: "circle",
+        lineWidth: 5,
+        pointRadius: 8,
+        pointHoverRadius: 12,
+      },
+    };
+  },
+  created() {
+    this.bgImage();
+    this.chartData.datasets[0].label = this.UserName + "님 스트레스 수치";
+  },
+  methods: {
+    bgImage() {
+      var newImage = "type2";
+      this.$emit("bgImage", newImage);
+    },
+    // 일간 유효성 검사
+    updateEndDateRange() {
+      // 종료 날짜 초기화
+      this.Enddays = this.Startdays;
+      // 시작일이 변경되면 종료일의 범위를 다시 계산
+      const getMinDate = new Date(this.Startdays);
+      const getMaxDate = new Date(this.Startdays);
 
-// // //       getMinDate.setDate(getMinDate.getDate() - 13);
-// // //       this.minEndDays = getMinDate.toISOString().slice(0, 10);
+      getMinDate.setDate(getMinDate.getDate() - 13);
+      this.minEndDays = getMinDate.toISOString().slice(0, 10);
 
-// // //       getMaxDate.setDate(getMaxDate.getDate() + 13);
-// // //       this.maxEndDays = getMaxDate.toISOString().slice(0, 10);
+      getMaxDate.setDate(getMaxDate.getDate() + 13);
+      this.maxEndDays = getMaxDate.toISOString().slice(0, 10);
 
-// // //       console.log(this.minEndDays, this.maxEndDays);
-// // //     },
-// // //     // 월간 유효성 검사
-// // //     updateEndMonthRange() {
-// // //       // 종료 날짜 초기화
-// // //       this.Endmonth = this.Startmonth;
-// // //       // 시작일이 변경되면 종료일의 범위를 다시 계산
-// // //       const getMinDate = new Date(this.Startmonth);
-// // //       const getMaxDate = new Date(this.Startmonth);
+      console.log(this.minEndDays, this.maxEndDays);
+    },
+    // 월간 유효성 검사
+    updateEndMonthRange() {
+      // 종료 날짜 초기화
+      this.Endmonth = this.Startmonth;
+      // 시작일이 변경되면 종료일의 범위를 다시 계산
+      const getMinDate = new Date(this.Startmonth);
+      const getMaxDate = new Date(this.Startmonth);
 
-// // //       getMinDate.setMonth(getMinDate.getMonth() - 11);
-// // //       this.minEndMonth = getMinDate.toISOString().slice(0, 7);
+      getMinDate.setMonth(getMinDate.getMonth() - 11);
+      this.minEndMonth = getMinDate.toISOString().slice(0, 7);
 
-// // //       getMaxDate.setMonth(getMaxDate.getMonth() + 11);
-// // //       this.maxEndMonth = getMaxDate.toISOString().slice(0, 7);
+      getMaxDate.setMonth(getMaxDate.getMonth() + 11);
+      this.maxEndMonth = getMaxDate.toISOString().slice(0, 7);
 
-// // //       console.log(this.minEndMonth, this.maxEndMonth);
-// // //     },
-// // //   },
-// // // };
+      console.log(this.minEndMonth, this.maxEndMonth);
+    },
+  },
+};
 </script>
 <script setup></script>
 

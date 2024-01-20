@@ -6,7 +6,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.sql.Date;
+import java.util.Date;
+
 
 @Data
 @Entity
@@ -26,16 +27,17 @@ public class StressData {
     private Member member;
 
     @Column(nullable = false)
-    private Long faceData;
+    private Double faceData;
 
     @Column(nullable = false)
-    private Long diaryData;
+    private Double diaryData;
+
+      // 척도 안받아옴.
+//    @Column(nullable = false)
+//    private Long measureData;
 
     @Column(nullable = false)
-    private Long measureData;
-
-    @Column(nullable = false)
-    private String stressScore;
+    private Double stressScore;
 
     @Column(nullable = false)
     private Date stressCdate;

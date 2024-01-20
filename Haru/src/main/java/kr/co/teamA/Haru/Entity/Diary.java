@@ -1,19 +1,10 @@
 package kr.co.teamA.Haru.Entity;
 
 import jakarta.persistence.*;
-<<<<<<< HEAD
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
-import java.sql.Date;
-=======
 import lombok.*;
 
 import java.util.Date;
 
->>>>>>> BeomSeok
 
 @Data
 @Entity
@@ -29,11 +20,7 @@ public class Diary {
     private Long diaryNum;
 
     @ManyToOne
-<<<<<<< HEAD
-    @JoinColumn(name = "userId", referencedColumnName = "userId")
-=======
     @JoinColumn(nullable = false, name = "userId", referencedColumnName = "userId")
->>>>>>> BeomSeok
     private Member member;
 
     @Column(length = 100, nullable = false)
@@ -42,13 +29,6 @@ public class Diary {
     @Column(length = 1200, nullable = false)
     private String diaryContext;
 
-<<<<<<< HEAD
-    @Column(nullable = false)
-    private Date diaryCdate;
-
-}
-=======
     @Column(columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private Date diaryCdate;
 }
->>>>>>> BeomSeok

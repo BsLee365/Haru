@@ -1,23 +1,10 @@
 package kr.co.teamA.Haru.Repository;
 
-<<<<<<< HEAD
-import kr.co.teamA.Haru.DTO.EmailCheckDTO;
-import kr.co.teamA.Haru.DTO.MemberDTO;
-import kr.co.teamA.Haru.DTO.NicknameDTO;
-import kr.co.teamA.Haru.DTO.UserIdDTO;
-=======
->>>>>>> BeomSeok
 import kr.co.teamA.Haru.Entity.Member;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
-<<<<<<< HEAD
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Repository;
-import org.springframework.web.bind.annotation.RequestBody;
-=======
-import org.springframework.stereotype.Repository;
->>>>>>> BeomSeok
 
 import java.util.Optional;
 
@@ -32,17 +19,9 @@ public interface MemberRepository extends JpaRepository<Member, String> {
     @Query("SELECT new kr.co.teamA.Haru.DTO.NicknameDTO(m.nickname) FROM Member m WHERE m.nickname = :nickname")
     Optional findNicknameByNickname(@Param("nickname") String nickname);
 
-<<<<<<< HEAD
-
-    Optional<UserDetails> findByUserId(String userId);
-
-    MemberDTO findMemberByUserId(String userId);
-    Member findMemberByuserId(String memberId);
-=======
     // 추가함. - 이범석
-    Optional<Member> findById(@Param("userId") String userId);
+    //Optional<Member> findById(@Param("userId") String userId);
 
     // 추가함. - 이범석
-    Member findByUserId(@Param("userId") String userId);
->>>>>>> BeomSeok
+    Optional<Member> findByUserId(@Param("userId") String userId);
 }

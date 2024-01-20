@@ -6,11 +6,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-<<<<<<< HEAD
-=======
-import java.util.List;
-
->>>>>>> BeomSeok
 @Data
 @Entity
 @NoArgsConstructor
@@ -22,18 +17,7 @@ public class MainCategory {
     @Column(length = 255, nullable = false)
     private String mainCategory;
 
-<<<<<<< HEAD
     private Long placeStressGrade;
 
     private Long placeSeasonInformation;
-=======
-    @Column(nullable = false)
-    private Long placeStressGrade;
-
-    @Column(nullable = false)
-    private Long placeSeasonInformation;
-
-
-
->>>>>>> BeomSeok
 }

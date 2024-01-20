@@ -29,11 +29,7 @@ public class FeedImg {
 
     @OneToOne
     @JoinColumn(name = "feedNum")
-<<<<<<< HEAD
-    private Feed feed;
-=======
     private Feed feedNum;
->>>>>>> junghyoun
 
     @Column(length = 255, nullable = false)
     private String feedImg;

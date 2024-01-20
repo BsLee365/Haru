@@ -76,27 +76,19 @@
             </div>
           </div>
 
-<<<<<<< HEAD
           <!-- 찾은 아이디 -->
           <div class="info-input-container">
             <div class="label-area">
               <label for="emailCheck" id="findMyIdLabel">찾은 아이디</label>
             </div>
             <div class="input-area">
-              <input
-                  class="input-text"
-                  type="text"
-                  id="findMyId"
-                  readonly
-              />
+              <input class="input-text" type="text" id="findMyId" readonly />
             </div>
             <div class="error-msg-area">
               <p style="display: none" id="Code-msg" class="msg"></p>
             </div>
           </div>
 
-=======
->>>>>>> junghyoun
           <div class="btn-area">
             <button class="big-ctlbtn insert-btn" @click="findIdToggleModal">
               아이디 찾기
@@ -126,10 +118,8 @@ export default {
   width: fit-content;
   margin: 0 auto;
 }
-<<<<<<< HEAD
-#findMyIdLabel, #findMyId {
+#findMyIdLabel,
+#findMyId {
   color: #f39f7e;
 }
-=======
->>>>>>> junghyoun
 </style>

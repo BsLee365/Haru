@@ -23,23 +23,14 @@
 
 /* 장소 선택 안함 안내 div */
 .feed-rec-noplace {
-<<<<<<< HEAD
   text-align: center;
   line-height: 140px;
   font-size: 18px;
   padding-left: 10px;
-=======
->>>>>>> junghyoun
   height: 140px;
   width: 680px;
   background-color: #eee;
   border-radius: 20px;
-<<<<<<< HEAD
-=======
-  text-align: center;
-  line-height: 140px;
-  font-size: 18px;
->>>>>>> junghyoun
   color: #bfbfbf;
 }
 
@@ -49,10 +40,6 @@
 }
 
 .feed-rec-selected-area > .contents {
-<<<<<<< HEAD
-=======
-  padding-left: 10px;
->>>>>>> junghyoun
 }
 
 .feed-rec-recList {

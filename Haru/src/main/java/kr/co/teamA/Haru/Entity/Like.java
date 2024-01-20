@@ -21,16 +21,9 @@ public class Like {
 
     @ManyToOne
     @JoinColumn(name = "feedNum")
-<<<<<<< HEAD
-    private Feed feed;
-
-    @Column(length = 255, nullable = false)
-    private String feedLikeBy;
-=======
     private Feed feedNum;
 
     @ManyToOne
     @JoinColumn(name = "feedLikeBy")
     private Member feedLikeBy;
->>>>>>> junghyoun
 }

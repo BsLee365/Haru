@@ -52,13 +52,10 @@ p {
   margin: 0;
 }
 
-<<<<<<< HEAD
 h5 {
   color: #333 !important;
 }
 
-=======
->>>>>>> junghyoun
 /* 커서 모양 pointer로 변경 */
 .cursor-p {
   cursor: pointer;

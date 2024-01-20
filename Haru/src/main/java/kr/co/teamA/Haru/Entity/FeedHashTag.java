@@ -23,9 +23,5 @@ public class FeedHashTag {
 
     @ManyToOne
     @JoinColumn(name = "feedNum")
-<<<<<<< HEAD
-    private Feed feed_num;
-=======
     private Feed feedNum;
->>>>>>> junghyoun
 }

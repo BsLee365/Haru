@@ -101,7 +101,7 @@
               <p>{{ card.content }}</p>
             </div>
 
-            <!-- 좋아요, 댓글 버튼 -->
+            <!-- 좋아요,  댓글 버튼 -->
             <div class="card-btn">
               <div>
                 <div class="heart" :key="likeload">

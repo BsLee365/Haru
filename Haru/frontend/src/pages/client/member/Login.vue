@@ -139,7 +139,10 @@ export default {
         .then((res) => {
           console.log(res);
           if (!res.data.access_token == "") {
+<<<<<<< HEAD
             alert("로그인 성공");
+=======
+>>>>>>> Member
             localStorage.setItem("jwtToken", res.data.access_token);
             this.$router.replace("/");
           } else {

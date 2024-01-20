@@ -15,6 +15,7 @@
 
         <div class="pw-change-input-area">
           <label for="password" class="password-label">비밀번호 확인</label>
+<<<<<<< HEAD
           <input type="password" id="password" />
           <p id="userComfirm-pwd-msg"></p>
         </div>
@@ -22,6 +23,16 @@
           class="big-ctlbtn update-btn"
           type="submit"
           id="userConfirm-btn"
+=======
+          <input type="password" id="password-check" />
+          <p id="userComfirm-pwdcheck-msg"></p>
+        </div>
+        <button
+          class="big-ctlbtn update-btn"
+          type="button"
+          id="userConfirm-btn"
+          @click="resetPwd"
+>>>>>>> Member
         >
           비밀번호 재설정
         </button>
@@ -30,18 +41,31 @@
   </div>
 </template>
 <script>
+<<<<<<< HEAD
+=======
+import axios from "axios";
+
+>>>>>>> Member
 export default {
   name: "UserConfirmation",
   data() {
     return {
+<<<<<<< HEAD
       AccessToken: "",
+=======
+      formData: new FormData(),
+>>>>>>> Member
       isLoggedIn: false,
     };
   },
   created() {
     // 페이지가 로드될 때 초기 이미지 설정
     this.bgImage();
+<<<<<<< HEAD
     this.getToken();
+=======
+    this.checkTokenUserId();
+>>>>>>> Member
   },
   methods: {
     // 해당 화면 Background 이미지 설정
@@ -49,6 +73,7 @@ export default {
       var newImage = "type1";
       this.$emit("bgImage", newImage);
     },
+<<<<<<< HEAD
     getToken() {
       this.AccessToken = localStorage.getItem("jwtToken");
       console.log(this.AccessToken);
@@ -62,6 +87,74 @@ export default {
     userConfirmBtn() {
       this.$router.push("/updateMyInfo");
     },
+=======
+    checkTokenUserId() {
+      if (localStorage.getItem("userId") === null) {
+        this.$router.push("/login");
+      }
+    },
+
+    userConfirmBtn() {
+      this.$router.push("/updateMyInfo");
+    },
+    resetPwd() {
+      const pwd = document.getElementById("password").value;
+      const pwdCheck = document.getElementById("password-check").value;
+
+      if (pwd === "" || pwd.length < 8) {
+        document.getElementById("userComfirm-pwd-msg").innerHTML =
+          "비밀번호는 영문 대문자와 숫자, 특수문자를 포함한 8자리 이상이어야 합니다.";
+        document.getElementById("userComfirm-pwd-msg").style.display = "block";
+        document.getElementById("password").focus();
+        document.getElementById("userComfirm-pwd-msg").style.color = "red";
+        return false;
+      } else {
+        document.getElementById("userComfirm-pwd-msg").style.display = "none";
+      }
+      if (pwdCheck !== pwd) {
+        document.getElementById("userComfirm-pwdcheck-msg").innerHTML =
+          "비밀번호가 일치하지 않습니다.";
+        document.getElementById("userComfirm-pwdcheck-msg").style.display =
+          "block";
+        document.getElementById("userComfirm-pwdcheck-msg").style.color = "red";
+        return false;
+      } else {
+        document.getElementById("userComfirm-pwdcheck-msg").style.display =
+          "none";
+      }
+
+      this.formData = new FormData();
+
+      const userId = localStorage.getItem("userId");
+
+      this.formData.append("id", userId);
+      this.formData.append("pwd", pwd);
+
+      console.log(this.formData.get("userId"));
+
+      axios
+        .post(
+          `http://${process.env.VUE_APP_BACK_END_URL}/api/auth/resetPwd`,
+          this.formData,
+          {
+            headers: {
+              "Content-Type": "application/json",
+              Accept: "application/json",
+            },
+          }
+        )
+        .then((res) => {
+          console.log(res);
+          if (res.data == 1) {
+            alert("비밀번호가 변경되었습니다.");
+            localStorage.removeItem("userId");
+            this.$router.push("/login");
+          } else {
+            alert("비밀번호 변경에 실패하였습니다.");
+          }
+        });
+    },
+>>>>>>> Member
   },
 };
 </script>
@@ -76,6 +169,10 @@ export default {
 }
 
 .pw-change-input-area:first-child {
+<<<<<<< HEAD
   margin-bottom: 15px;
+=======
+  margin-bottom: 30px;
+>>>>>>> Member
 }
 </style>

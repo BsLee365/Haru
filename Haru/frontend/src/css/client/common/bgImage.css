@@ -1,0 +1,21 @@
+/* body에 배경 이미지 설정 */
+.bg-type1 {
+  background-image: url("@/assets/bgImage/type1.png");
+  background-size: cover;
+}
+.bg-type2 {
+  background-image: url("@/assets/bgImage/type2.png");
+  background-size: cover;
+}
+.bg-type3 {
+  background-image: url("@/assets/bgImage/type3.png");
+  background-size: cover;
+}
+.bg-type4 {
+  background-image: url("@/assets/bgImage/type4.png");
+  background-size: cover;
+}
+.bg-type5 {
+  background-image: url("@/assets/bgImage/type5.png");
+  background-size: cover;
+}

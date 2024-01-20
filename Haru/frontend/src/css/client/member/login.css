@@ -1,0 +1,174 @@
+.login-container {
+  display: flex;
+  margin: 0 auto;
+  width: fit-content;
+}
+
+.white-box {
+  display: flex;
+  background-color: rgba(255, 255, 255, 0.6);
+  border-radius: 25px;
+}
+
+.left-box {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.6);
+  border-radius: 25px 0 0 25px;
+  padding: 5px 140px 5px 130px;
+}
+
+.left-box h2 {
+  margin-top: 30px;
+  text-align: center;
+  font-size: 30px;
+}
+
+.left-box img {
+  margin-top: 15px;
+  width: 200px;
+}
+
+.left-box p {
+  margin-top: 20px;
+  text-align: center;
+  font-size: 18px;
+  color: #879090;
+  font-weight: 200;
+}
+
+.left-box a {
+  margin-top: 25px;
+  text-align: center;
+  line-height: 50px;
+}
+
+/* 로그인 박스 */
+.login-box {
+  display: flex;
+  left: -20px;
+  height: 450px;
+  flex-direction: column;
+  align-items: center;
+  background-color: rgb(236 184 163);
+  border-radius: 15px;
+  padding: 0 70px;
+}
+
+/* 로그인 텍스트 */
+.login-box h1 {
+  margin-top: 30px;
+  margin-bottom: 10px;
+  text-align: center;
+  padding: 0px;
+  font-size: 30px;
+}
+
+/* 로그인 박스 */
+.form-input-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 300px;
+}
+
+.form-input-box .form-input:first-child input {
+  margin-bottom: 10px;
+}
+
+/* 아이디, 비밀번호 input */
+.form-input-box .form-input input {
+  min-height: 50px;
+}
+
+.form-input {
+  width: 270px;
+}
+
+.form-check {
+  display: flex;
+  margin: 10px 0;
+  padding: 0px;
+}
+
+.form-check .remember-checkbox {
+  display: flex;
+}
+
+.form-check .remember-checkbox label {
+  margin-left: 10px;
+}
+
+.login-search-box {
+  display: flex;
+  margin: 15px 0 7px;
+  padding: 0px;
+}
+
+.login-search-box button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: black;
+  font-size: 15px;
+  border: none;
+  background-color: transparent;
+}
+
+.social-login-box {
+  display: flex;
+  height: 50px;
+  justify-content: center;
+  align-items: center;
+}
+
+.social-login-box a {
+  display: flex;
+  width: 40px;
+  height: 40px;
+  margin: 0px 10px;
+  border-radius: 50%;
+  background-color: white;
+}
+
+/* 모달창 */
+/* -------------------------- */
+/* 전체 모달 영역 */
+.FindMyAccount-modal {
+  display: flex;
+  position: fixed;
+  z-index: 10;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  justify-content: center;
+}
+
+/* 흰색 영역 */
+.findMyAccount-modal-content {
+  background-color: #f9f8f7;
+  margin: 3% auto;
+  padding: 40px 70px;
+  border: 1px solid #888;
+  border-radius: 40px;
+  width: 550px;
+}
+
+/* 제목 영역 */
+.findMyAccount-title-area {
+  margin: 10px 0 30px;
+  width: -moz-fit-content;
+  width: fit-content;
+}
+
+/* 제목 텍스트 */
+.findMyAccount-title-area > h2 {
+  width: fit-content;
+  font-size: 1.5rem;
+  font-weight: 700;
+}

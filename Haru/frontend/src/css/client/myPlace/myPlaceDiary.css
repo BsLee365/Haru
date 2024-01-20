@@ -1,0 +1,134 @@
+/* 내 장소 - 추천 리스트 화면 */
+/* 달력, 탭 영역 flex 주는 영역 */
+.myplace-content-area {
+  display: flex;
+  width: fit-content;
+  margin: 0 auto;
+}
+
+/* 달력 */
+.myplace-calendar-area {
+  margin-right: 70px;
+}
+
+/* 탭 버튼 */
+.myplace-tab-btn-area {
+  display: flex;
+  width: fit-content;
+  margin: 0 auto;
+}
+
+/* 탭 영역 버튼 */
+/* [추천 리스트] 버튼 */
+.myplace-tab-btn-area > .tab-btn-left {
+  border-radius: 10px 0px 0px 0px;
+  width: 424px;
+  height: 50px;
+  background: #efefef;
+  text-align: center;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 50px;
+}
+
+/* [일기] 버튼 */
+.myplace-tab-btn-area > .tab-btn-right {
+  border-radius: 0px 10px 0px 0px;
+  width: 424px;
+  height: 50px;
+  background: #efefef;
+  text-align: center;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 50px;
+}
+
+/* 버튼 클릭 됐을 때 */
+.myplace-tab-btn-area > .tab-btn-active {
+  background: #9fd1e9;
+  font-weight: 700;
+}
+
+/* 탭 컨텐츠 영역 */
+.tab-content-area {
+  width: 848px;
+  max-height: 650px;
+  min-height: fit-content;
+  padding: 20px 50px 50px;
+  background: #f8f8f8;
+  border-radius: 0 0 10px 10px;
+  overflow: auto;
+}
+
+/* 추천 리스트 전체 영역 */
+.rlist-container {
+  margin-top: 20px;
+}
+
+/* ----------------- 일기 ----------------- */
+/* 날짜 area */
+.myplace-diary-date {
+  margin-bottom: 20px;
+}
+
+/* 일기 하나 영역 */
+.myplace-diary-area {
+  display: flex;
+  background-color: #ffe2d9;
+  border-radius: 15px;
+  height: 55px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 5px 10px;
+  margin-bottom: 20px;
+}
+
+/* 일기 아이콘 뒤에 흰 바탕색 */
+.myplace-diary-icon-bg {
+  width: 40px;
+  height: 40px;
+  background-color: #fff;
+  border-radius: 20px;
+  text-align: center;
+  line-height: 37px;
+}
+
+/* 일기 아이콘 */
+.myplace-diary-icon-bg > img {
+  width: 30px;
+}
+
+/* 일기 제목 영역 */
+.myplace-diary-title-area {
+  width: 570px;
+}
+
+.myplace-diary-title-area > p {
+  font-size: 18px;
+}
+
+/* 일기 리스트 - 버튼 영역 */
+.myplace-diary-btn-area {
+  display: flex;
+  align-items: center;
+  width: 75px;
+  justify-content: space-between;
+}
+
+/* 일기 리스트 - 수정 버튼 */
+.diary-update-btn {
+  background: url("@/img/myPlace/diary-update-btn.png") no-repeat;
+  width: 29px;
+  height: 28px;
+  border: 0;
+  background-size: 27px;
+}
+
+/* 일기 리스트 - 삭제 버튼 */
+.diary-delete-btn {
+  background: url("@/img/myPlace/diary-delete-btn.png") no-repeat;
+  width: 29px;
+  height: 28px;
+  border: 0;
+  background-size: 27px;
+}

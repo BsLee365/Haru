@@ -31,8 +31,6 @@ public class MemberController {
     @Value("${profile-img-path}")
     private String imageDirctory;
 
-    private final MemberService memberService;
-
     public MemberController(MemberService memberService, EmailSenderService mailSender) {
         this.memberService = memberService;
     }

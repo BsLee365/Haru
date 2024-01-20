@@ -1,8 +1,11 @@
 package kr.co.teamA.Haru.Repository;
 
+import kr.co.teamA.Haru.DTO.ShowMyRecommendPlaceDTO;
 import kr.co.teamA.Haru.Entity.PlaceRecommendList;
 import kr.co.teamA.Haru.Entity.UserInterestCategory;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.Date;
@@ -14,5 +17,5 @@ public interface PlaceRecommendListRepository extends JpaRepository<PlaceRecomme
             "from PlaceRecommendList prl WHERE prl.member.userId = :userId " +
             "and prl.placeCdate between :startDate and :endDate")
 
-    List<ShowMyRecommendPlaceDTO> getMyRecommendPlace(@Param("userId") String userId,@Param("startDate") Date startDate, @Param("endDate") Date endDate);
+    List<ShowMyRecommendPlaceDTO> getMyRecommendPlace(@Param("userId") String userId, @Param("startDate") Date startDate, @Param("endDate") Date endDate);
 }

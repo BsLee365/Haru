@@ -1,0 +1,104 @@
+.report-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/*전체 카드 부분*/
+.total_report_card {
+  width: 90%;
+  height: 90%;
+  margin-top: 20px;
+  background-color: rgb(238 238 238 / 60%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 10px;
+  padding-top: 40px;
+  padding-bottom: 70px;
+}
+.total_report_card,
+.report-chart-area,
+.report-contents {
+  margin-top: 50px;
+}
+/*카드 타이틀*/
+.report-title > span {
+  font-size: 30px !important;
+  font-weight: bold;
+}
+
+/*날짜 입력 부분*/
+.select-date-area {
+  display: flex;
+  flex-direction: row;
+  width: fit-content;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.date-input-area {
+  font-size: 20px;
+}
+/*selector*/
+.date-selector {
+  background-color: #dadada;
+  color: #525252;
+  border: none;
+  border-radius: 10px;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin: 0 20px;
+  transition: background-color 0.2s;
+  height: 53px;
+}
+
+.date-selector:hover {
+  background-color: #ffffff91;
+}
+
+/*연도 선택*/
+.year-selector {
+  margin-left: 10px;
+  border-radius: 20px;
+  border: 2px solid #737373;
+}
+/*검색 버튼*/
+.date-input-area > button {
+  margin-left: 40px;
+}
+.date-input-area > button:hover {
+  background-color: #b7b7b7;
+}
+
+/* 뱃지 부분 */
+.normal-badge {
+  background-color: #26bd36;
+}
+.warn-badge {
+  background-color: #ff0000;
+}
+.attention-badge {
+  background-color: #ff7b15;
+}
+
+.report-contents > div,
+.attention-badge,
+.warn-badge,
+.normal-badge {
+  font-size: 25px;
+  font-weight: 600;
+}
+
+/*차트 부분*/
+.report-chart-area {
+  background-color: white;
+  width: 80%;
+  border: #5a5a5a solid 1px;
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

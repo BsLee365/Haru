@@ -1,0 +1,207 @@
+/* ----------- 회원가입, 내 정보 수정 공통 css ----------- */
+/* container form */
+.myInfo-form {
+  display: flex;
+  flex-direction: column;
+  width: 800px;
+  padding: 70px;
+  border-radius: 21px;
+  background-color: rgba(255, 255, 255, 0.3);
+  margin: 0 auto;
+}
+
+/* 필수 사항 * 표시 */
+.mustInput::after {
+  content: "*";
+  margin-left: 5px;
+  color: #ff4900;
+}
+
+/* 각 입력 항목 영역 */
+.info-input-container {
+  padding-bottom: 40px;
+}
+
+/* 각 항목 label div */
+.label-area {
+  margin-bottom: 10px;
+}
+
+/* 각 항목 label */
+.label-area > label {
+  font-size: 17px;
+}
+
+/* 프로필 올리기 박스 */
+.profile-box {
+  width: 280px;
+  height: 255px;
+  padding: 25px;
+  border: 3px dotted #e99571;
+  border-radius: 45px;
+  background-color: rgb(255 255 255 / 50%);
+}
+
+/* 박스 안에 컨텐츠 */
+.profile-contents {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+}
+
+/* 카메라 아이콘 */
+.profile-box #preview-img {
+  width: 90px;
+}
+
+/* 사진 끌어다 올리기 텍스트 */
+.profile-box p {
+  text-align: center;
+  font-size: 16px;
+  color: #747474;
+}
+
+/* 파일 업로드 - 라벨 버튼 */
+#labelForProfile {
+  display: inline-block;
+  width: fit-content;
+  padding: 7px 16px;
+  border: 1px solid #cfcfcf;
+  border-radius: 20px;
+  background-color: rgb(255 255 255 / 50%);
+  transition: border 0.2s, color 0.2s;
+}
+
+#labelForProfile:hover {
+  border: 1px solid #ff922e;
+  color: #f77600;
+}
+
+/* 프로필 input */
+#profile {
+  display: none;
+}
+
+/* ------------------- 이용약관 ------------------- */
+/* 이용약관 전체 영역 */
+.termsOfUse-container {
+  display: flex;
+  flex-direction: column;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+/* 각각의 약관 항목 div */
+.termsOfUse-box {
+  display: flex;
+  flex-direction: row;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  background-color: white;
+  border-radius: 49px;
+  padding: 10px 24px 10px 30px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* 각각 이용약관 항목 area */
+.termsOfUse-box > div {
+  display: flex;
+  align-items: center;
+  width: fit-content;
+}
+
+/* 약관 동의 체크박스 */
+.termsOfUse-box > div > input {
+  margin-right: 20px;
+  width: 30px;
+  height: 30px;
+}
+
+/* 모달창 여는 버튼 '>' */
+.termsOfUse-container .termsOfUse-box button {
+  width: 40px;
+  height: 40px;
+  background-color: white;
+  border: 0px;
+  font-size: 20px;
+  font-weight: 100;
+}
+
+/* 뒤로가기, 가입하기 버튼 영역 */
+.myinfo-btn-area {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* 뒤로가기, 가입하기 버튼 */
+.myinfo-btn-area button {
+  width: 300px;
+}
+
+/* ------------------- 모달 ------------------- */
+/* 모달 스타일 */
+.terms-modal {
+  display: block;
+  position: fixed;
+  z-index: 10;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+/* 모달 콘텐츠 스타일 */
+.terms-modal-content {
+  background-color: #fff;
+  margin: 3% auto;
+  padding: 40px;
+  border: 1px solid #888;
+  border-radius: 40px;
+  width: fit-content;
+  max-width: 600px;
+}
+
+/* 모달 닫기 버튼 스타일 */
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+/* 약관 명 area */
+.terms-title-area {
+  margin: 10px 0 30px;
+  width: fit-content;
+}
+
+/* 약관 명 텍스트 */
+.terms-title-area > p {
+  width: fit-content;
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+/* 약관 내용 */
+.terms-contents-area {
+  height: 620px;
+  overflow: auto;
+  overflow-x: hidden;
+}
+
+/* 내용 p 태그 각각 */
+.terms-contents-area > p {
+  font-size: 0.9rem;
+  line-height: 1.2rem;
+  margin-bottom: 15px;
+}
+
+/* 약관 내용 - b태그 */
+.terms-contents-area b {
+  font-size: 0.97rem;
+}

@@ -3,7 +3,11 @@ video {
   margin: 0px;
   max-width: 100%;
   object-fit: cover;
+<<<<<<< HEAD
   height: 100vh;
+=======
+  z-index: -2;
+>>>>>>> BeomSeok
 }
 .home {
   display: block;
@@ -13,6 +17,7 @@ video {
   top: -5px;
   z-index: -1;
 }
+<<<<<<< HEAD
 .main-container {
   position: absolute;
   width: 100%;
@@ -298,3 +303,20 @@ video {
   border-radius: 50px;
   box-shadow: 1px 5px 5px 1px rgba(0, 0, 0, 0.2);
 }
+=======
+
+.screen-1 {
+  width: 80%;
+  height: 500px;
+  top: 150px;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  color: white;
+  z-index: 1;
+}
+
+.home .screen-1 h1 {
+  margin-bottom: 20px;
+}
+>>>>>>> BeomSeok

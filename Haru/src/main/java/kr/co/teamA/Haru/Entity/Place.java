@@ -26,6 +26,7 @@ public class Place {
     private String placeAddress;
 
     @ManyToOne
+<<<<<<< HEAD
     @JoinColumn(name = "subCategory")
     private SubCategory subCategory;
 
@@ -33,6 +34,15 @@ public class Place {
     private String placeImg;
 
     @Column(length = 500, nullable = false)
+=======
+    @JoinColumn(name = "subCategoryId")
+    private SubCategory subCategory;
+
+    @Column(length = 255, nullable = false)
+    private String placeImg;
+
+    @Column(length = 255, nullable = false)
+>>>>>>> BeomSeok
     private String placeLink;
 
     @Column(nullable = false)

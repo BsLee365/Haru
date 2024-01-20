@@ -362,6 +362,7 @@
   margin-top: -10px;
 }
 
+<<<<<<< HEAD
 /* 로딩화면 */
 .object {
   position: inherit;
@@ -470,6 +471,8 @@
   }
 }
 
+=======
+>>>>>>> BeomSeok
 /*진행바 CSS */
 .pro-bar-box {
   width: 100%;
@@ -549,3 +552,29 @@
   font-weight: 300;
   transition: 0.8s;
 }
+<<<<<<< HEAD
+=======
+
+
+/* 로딩화면 */
+.loading{
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 101;
+  flex-direction: column;
+}
+
+.container-3{
+  display: inline-block;
+}
+.loading-box h1 {
+  color: white;
+}
+>>>>>>> BeomSeok

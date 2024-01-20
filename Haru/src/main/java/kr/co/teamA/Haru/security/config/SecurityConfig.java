@@ -2,7 +2,10 @@ package kr.co.teamA.Haru.security.config;
 
 import kr.co.teamA.Haru.security.filter.JwtTokenFilter;
 import org.springframework.beans.factory.annotation.Autowired;
+<<<<<<< HEAD
 import org.springframework.beans.factory.annotation.Value;
+=======
+>>>>>>> BeomSeok
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -16,16 +19,20 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
+<<<<<<< HEAD
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import java.util.List;
+=======
+>>>>>>> BeomSeok
 
 @EnableWebSecurity
 @Configuration
 public class SecurityConfig {
     // JWT 토큰을 검증하는 필터
+<<<<<<< HEAD
 
     @Value("${server-port-local-url}")
     private String serverPortLocalUrl;
@@ -33,12 +40,18 @@ public class SecurityConfig {
     @Value("${server-port-url}")
     private String serverPortUrl;
 
+=======
+>>>>>>> BeomSeok
     @Autowired
     private JwtTokenFilter jwtAuthenticationFilter;
 
     @Autowired
     private UserDetailsService userDetailsService;
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> BeomSeok
     @Bean
     public DaoAuthenticationProvider daoAuthenticationProvider() {
         DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
@@ -47,6 +60,10 @@ public class SecurityConfig {
         return provider;
     }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> BeomSeok
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
@@ -62,7 +79,10 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .csrf((csrf) -> csrf.disable())
+<<<<<<< HEAD
                 .cors((cors) -> cors.configurationSource(corsConfigurationSource()))
+=======
+>>>>>>> BeomSeok
                 .formLogin((login) -> login.disable())
                 .httpBasic((basic) -> basic.disable())
                 .authorizeHttpRequests((auth) -> auth
@@ -73,6 +93,7 @@ public class SecurityConfig {
                 .logout((logout) -> logout.disable());
         return http.build();
     }
+<<<<<<< HEAD
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration corsConfiguration = new CorsConfiguration();
@@ -85,4 +106,6 @@ public class SecurityConfig {
 
         return urlBasedCorsConfigurationSource;
     }
+=======
+>>>>>>> BeomSeok
 }

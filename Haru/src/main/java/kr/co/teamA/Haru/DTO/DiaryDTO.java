@@ -10,6 +10,10 @@ import java.util.Date;
 @AllArgsConstructor
 @ToString
 public class DiaryDTO {
+<<<<<<< HEAD
+=======
+
+>>>>>>> BeomSeok
     private Long diaryNum;
 
     private String userId;
@@ -19,4 +23,8 @@ public class DiaryDTO {
     private String diaryContext;
 
     private Date diaryCdate;
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> BeomSeok

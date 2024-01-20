@@ -1,12 +1,43 @@
 package kr.co.teamA.Haru.Service.stress;
 
+<<<<<<< HEAD
 import kr.co.teamA.Haru.security.filter.JwtTokenProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+=======
+import kr.co.teamA.Haru.DTO.RecommendPlaceDTO;
+import kr.co.teamA.Haru.DTO.StressSaveDTO;
+import kr.co.teamA.Haru.Entity.Member;
+import kr.co.teamA.Haru.Entity.StressData;
+import kr.co.teamA.Haru.Repository.MemberRepository;
+import kr.co.teamA.Haru.Repository.RecommendPlaceRepository;
+import kr.co.teamA.Haru.Repository.StressRepository;
+import kr.co.teamA.Haru.security.filter.JwtTokenProvider;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Date;
+import java.util.List;
+>>>>>>> BeomSeok
 
 @Service
 public class StressService {
 
+<<<<<<< HEAD
+=======
+    @Autowired
+    private RecommendPlaceRepository recommendPlaceRepository;
+
+    @Autowired
+    private StressRepository stressRepository;
+
+    @Autowired
+    private MemberRepository memberRepository;
+
+>>>>>>> BeomSeok
     JwtTokenProvider jwtTokenProvider;
     public String tokenValidation(String token) {
         boolean verification = jwtTokenProvider.validateToken(token);
@@ -16,4 +47,49 @@ public class StressService {
             return "fail";
         }
     }
+<<<<<<< HEAD
+=======
+
+    // 회원이 추천 알고리즘
+    public List<RecommendPlaceDTO> getRecommendPlaces(String userId) {
+
+        // 카테고리
+        List<RecommendPlaceDTO> Category = recommendPlaceRepository.recommendQuery(userId);
+        // 찜 목록, 여기가 문제
+        List<RecommendPlaceDTO> Bid = recommendPlaceRepository.recommendDibs(userId);
+
+        ArrayList<RecommendPlaceDTO> recommendList = new ArrayList<>();
+
+        recommendList.addAll(Category);
+        recommendList.addAll(Bid);
+
+        Collections.shuffle(recommendList);
+
+        return recommendList.subList(0, Math.min(5, recommendList.size()));
+    }
+
+    // 스트레스 데이터 저장
+    @Transactional
+    public void saveStressData(StressSaveDTO stressData){
+
+        System.out.println(stressData.toString());
+        StressData vo = new StressData();
+
+        Member mem = memberRepository.findByUserId(stressData.getUserid());
+
+        //유저 아이디
+        vo.setMember(mem);
+        //얼굴
+        vo.setFaceData(stressData.getFacefigure());
+        //일기
+        vo.setDiaryData(stressData.getDiaryfigure());
+        //총 점수
+        vo.setStressScore(stressData.getStressscore());
+        //날짜
+        vo.setStressCdate(new Date());
+        //DB에 저장
+        stressRepository.save(vo);
+    }
+
+>>>>>>> BeomSeok
 }

@@ -1,0 +1,296 @@
+html {
+  margin: 0px;
+  padding: 0px;
+}
+/* 전체 기본 텍스트 설정 */
+* {
+  font-family: "SUITE";
+  color: #333333;
+  font-size: 16px;
+  position: relative;
+}
+
+/*이미지 드래그 및 복사 방지*/
+img {
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+  -webkit-user-drag: none;
+  -khtml-user-drag: none;
+  -moz-user-drag: none;
+  -o-user-drag: none;
+  user-drag: none;
+}
+
+.container1 {
+  padding: 80px 228px 150px;
+  margin: 0 auto;
+  min-height: calc(100vh - 249px); /* footer 계산용 */
+}
+
+a {
+  text-decoration: none;
+}
+
+ul {
+  margin: 0;
+  padding-left: 0;
+}
+
+ul,
+li {
+  list-style: none;
+}
+
+ul,
+li {
+  list-style: none;
+}
+
+p {
+  margin: 0;
+}
+
+/* 커서 모양 pointer로 변경 */
+.cursor-p {
+  cursor: pointer;
+}
+
+/* 메인 타이틀 영역 */
+.main-title {
+  margin-bottom: 20px;
+  width: fit-content;
+}
+
+/* 가운데 정렬 */
+.main-title-center {
+  margin: 0 auto 20px;
+}
+
+/* 메인 타이틀 텍스트 */
+.main-title > h2,
+.main-title-center > h2 {
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: #f39f7e;
+}
+
+/* input 항목 + 중복확인btn + 안내문구 영역 ------------------------------------------------- */
+.input-area {
+  position: relative;
+}
+/* 읽기 전용 */
+.readonly-input {
+  background-color: #f3f3f3 !important;
+}
+/* input 태그 */
+.input-text {
+  position: relative;
+  min-height: 55px;
+  width: 100%;
+  filter: none;
+  color: #454545;
+  cursor: auto;
+  background-color: #fff;
+  border: 1px solid #ededed;
+  border-radius: 100px;
+  margin-bottom: 0;
+  padding: 16px 24px;
+  font-size: 16px;
+  line-height: 1.111em;
+  transition: box-shadow 0.3s, color 0.3s, border-color 0.3s;
+  box-shadow: 0 1px 8px rgba(3, 3, 3, 0.06);
+}
+.input-text:hover {
+  border-color: #f8c08d;
+  box-shadow: 0 2px 4px rgba(3, 3, 3, 0.1);
+}
+.input-text:focus {
+  color: #0b0b0b;
+  outline: none !important;
+  border-color: #f39f7e;
+  box-shadow: 0 2px 4px rgba(3, 3, 3, 0.1);
+}
+
+.input-select {
+  position: relative;
+  min-height: 55px;
+  width: 30%;
+  color: #454545;
+  cursor: pointer;
+  background-color: #fff;
+  border: 1px solid #ededed;
+  border-radius: 100px;
+  outline: none !important;
+  margin-bottom: 0;
+  padding: 16px 24px;
+  font-size: 16px;
+  line-height: 1.111em;
+  transition: box-shadow 0.3s, color 0.3s, border-color 0.3s;
+}
+
+.input-select:hover {
+  border-color: #f8c08d;
+  box-shadow: 0 2px 4px rgba(3, 3, 3, 0.1);
+}
+
+.input-text:focus {
+  color: #0b0b0b;
+  outline: none !important;
+  border-color: #f39f7e;
+  box-shadow: 0 2px 4px rgba(3, 3, 3, 0.1);
+}
+
+/* input 태그 안에 우측 버튼 (중복확인, 인증 등) */
+.input-in-btn {
+  position: absolute;
+  right: 10px;
+  top: 8px;
+  width: fit-content;
+  padding: 7px 16px;
+  border: 1px solid #cfcfcf;
+  border-radius: 20px;
+  background-color: #fff;
+  transition: border 0.2s, color 0.2s;
+}
+
+.input-in-btn:hover {
+  border: 1px solid #ff922e;
+  color: #f77600;
+}
+/* 안내 문구 영역 */
+.error-msg-area {
+  margin-top: 5px;
+}
+
+/* 안내 문구 */
+.error-msg-area > .msg {
+  color: red;
+}
+
+/*big button 크기 (추가, 수정, 삭제)*/
+.big-ctlbtn {
+  /*button*/
+  width: 180px;
+  height: 50px;
+  font-size: 1.1rem;
+  font-weight: 500;
+  border: 0;
+  border-radius: 25px;
+  transition: background-color 0.2s;
+}
+
+/* 페이지 네이션 ----------------------------------------------------------------------------- */
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px; /* 버튼 사이의 간격 */
+  margin-top: 40px;
+  margin-bottom: 30px;
+}
+
+.pagination-button {
+  padding: 7px;
+  border: none;
+  background-color: #fff; /* 하얀 배경 */
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+  font-size: 16px;
+}
+
+.pagination-button.active {
+  color: black;
+  font-weight: bold;
+}
+
+.pagination-button.disabled {
+  cursor: default;
+  opacity: 0.5; /* 비활성화된 버튼은 더 흐릿하게 */
+}
+
+/* 버튼 css ----------------------------------------------------------------------------- */
+/*big button 색상 (추가, 수정, 삭제)*/
+.insert-btn {
+  background-color: #f7a27e;
+  color: #fff;
+  border: 0;
+  border-radius: 25px;
+}
+.insert-btn:hover {
+  background-color: #eb7543;
+  color: #fff;
+}
+.update-btn {
+  background-color: #ffc664;
+  color: #fff;
+  border: 0;
+  border-radius: 25px;
+}
+.update-btn:hover {
+  background-color: #ffa200;
+  color: #fff;
+}
+.delete-btn {
+  background-color: #e18585;
+  color: #fff;
+  border: 0;
+  border-radius: 25px;
+}
+.delete-btn:hover {
+  background-color: #c74c4c;
+  color: #fff;
+}
+.select-btn {
+  background-color: #7facef;
+  color: #fff;
+  border: 0;
+  border-radius: 25px;
+}
+.select-btn:hover {
+  background-color: #437fd7;
+  color: #fff;
+}
+.reset-btn {
+  background-color: #ffe6c7;
+  color: #000000;
+  border: 0;
+  border-radius: 25px;
+}
+.reset-btn:hover {
+  background-color: #ffd49f;
+  color: #000000;
+}
+.normal-btn {
+  background-color: #ffffff;
+  border: 1px solid #252525;
+  color: #252525;
+  border-radius: 25px;
+}
+.normal-btn:hover {
+  background-color: rgb(235, 235, 235);
+  border: 1px solid #252525;
+  color: #252525;
+}
+.else-btn {
+  background-color: #6d6d6d;
+  color: #fff;
+  border: 0;
+  border-radius: 25px;
+}
+.else-btn:hover {
+  background-color: #454545;
+  color: #fff;
+}
+.cancle-btn {
+  background-color: #d5d5d5;
+  color: #000000;
+  border: 0;
+  border-radius: 25px;
+}
+.cancle-btn:hover {
+  background-color: #c5c5c5;
+  color: #000000;
+}

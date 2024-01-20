@@ -1,0 +1,110 @@
+/* 내 장소 - 추천 리스트-좌측 달력 */
+.myplace-calendar-table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+.myplace-calendar-container {
+  width: 511px;
+  background-color: #f7f7f7;
+  border-radius: 20px;
+  padding: 0 30px 30px;
+}
+
+.myplace-calendar {
+  text-align: center;
+}
+
+.myplace-calendar header {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  padding: 30px 0;
+}
+
+.myplace-calendar header span {
+  font-size: 21px;
+  font-weight: 600;
+}
+
+.myplace-calendar h2 {
+  text-transform: uppercase;
+}
+
+.myplace-calendar thead {
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.myplace-calendar tbody {
+  color: #7c8a95;
+}
+
+.myplace-calendar tbody td:hover,
+.selected-cal-day {
+  border: 2px solid #00addf !important;
+}
+
+.myplace-calendar .prev-month,
+.myplace-calendar .next-month {
+  color: #cbd1d2;
+}
+
+.myplace-calendar .prev-month:hover,
+.myplace-calendar .next-month:hover {
+  border: 2px solid #cbd1d2;
+}
+
+/* 오늘 날짜에 표시 */
+.cal-set-today {
+  background: #c1e7f9;
+}
+
+.calendar-event {
+  cursor: pointer;
+  position: relative;
+}
+
+.calendar-event:after {
+  background: #00addf;
+  border-radius: 50%;
+  bottom: 0.5em;
+  display: block;
+  content: "";
+  height: 0.5em;
+  left: 50%;
+  margin: -0.25em 0 0 -0.25em;
+  position: absolute;
+  width: 0.5em;
+}
+
+.calendar-event.calendar-current-day:after {
+  background: #f9f9f9;
+}
+
+.cal-btn-prev,
+.cal-btn-next {
+  font-size: 30px;
+  width: 55px;
+  height: 55px;
+  border: 1px solid;
+  border-radius: 30px;
+  display: inline-block;
+  background-color: #fff;
+  font-weight: 100;
+  transition: background-color 0.2s ease-in;
+}
+
+.cal-btn-prev:hover,
+.cal-btn-next:hover {
+  background: #e7e7e7;
+  color: #333333;
+}
+
+.cal-btn-prev::after {
+  content: "<";
+}
+
+.cal-btn-next::after {
+  content: ">";
+}

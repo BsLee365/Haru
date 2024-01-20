@@ -5,7 +5,10 @@
     <content url="file://$MODULE_DIR$">
       <sourceFolder url="file://$MODULE_DIR$" isTestSource="false" />
     </content>
-    <orderEntry type="jdk" jdkName="Ateam" jdkType="Python SDK" />
+    <orderEntry type="jdk" jdkName="ateam" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
+  </component>
+  <component name="SonarLintModuleSettings">
+    <option name="uniqueId" value="087b6afa-0927-4cee-9b21-f32c23bca760" />
   </component>
 </module>

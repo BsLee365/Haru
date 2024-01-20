@@ -3,7 +3,6 @@ import datetime
 import time
 from django.http import HttpResponse
 
-
 import numpy as np
 import pandas as pd
 from selenium import webdriver
@@ -35,23 +34,21 @@ from transformers import BertTokenizer, TFBertModel
 
 tokenizer = BertTokenizer.from_pretrained('bert-base-multilingual-cased')
 
-
 # 모델 파일 경로
 model_path = 'text/textmodel/finalsentense.h5'
-
-
 
 # custom_objects 매개변수를 사용하여 레이어를 등록
 with custom_object_scope({'TFBertModel': TFBertModel, 'RectifiedAdam': RectifiedAdam}):
     model = load_model(model_path)
 
-
 model.summary()
+
+
 def convert_data(data_df):
     global tokenizer
 
-    SEQ_LEN = 128 #SEQ_LEN : 버트에 들어갈 인풋의 길이
-    #토큰 인풋, 마스크 인풋, 세그먼트 인풋, 타겟
+    SEQ_LEN = 128  # SEQ_LEN : 버트에 들어갈 인풋의 길이
+    # 토큰 인풋, 마스크 인풋, 세그먼트 인풋, 타겟
     tokens, masks, segments, targets = [], [], [], []
 
     for i in tqdm(range(len(data_df))):
@@ -62,10 +59,10 @@ def convert_data(data_df):
         # num_zeros를 구해서 패딩 처리 하기 위해서 연산
         num_zeros = token.count(0)
         # SEQ_LEN-num_zeros : 실제 문장의 길이를 연산
-        mask = [1]*(SEQ_LEN-num_zeros) + [0]*num_zeros
-        #print(mask)
+        mask = [1] * (SEQ_LEN - num_zeros) + [0] * num_zeros
+        # print(mask)
         # 문장의 전후관계를 구분해주는 세그먼트는 문장이 1개밖에 없으므로 모두 0
-        segment = [0]*SEQ_LEN
+        segment = [0] * SEQ_LEN
 
         # 버트 인풋으로 들어가는 token, mask, segment를 tokens, segments에 각각 저장
         tokens.append(token)
@@ -83,6 +80,7 @@ def convert_data(data_df):
 
     return [tokens, masks, segments], targets
 
+
 # 위에 정의한 convert_data 함수를 불러오는 함수를 정의
 def load_data(pandas_dataframe):
     data_df = pandas_dataframe
@@ -90,6 +88,7 @@ def load_data(pandas_dataframe):
     data_df[LABEL_COLUMN] = data_df[LABEL_COLUMN].astype(int)
     data_x, data_y = convert_data(data_df)
     return data_x, data_y
+
 
 SEQ_LEN = 128
 BATCH_SIZE = 20
@@ -99,17 +98,15 @@ DATA_COLUMN = "document"
 LABEL_COLUMN = "label"
 
 
-
 def predict_convert_data(data_df):
     global tokenizer
     tokens, masks, segments = [], [], []
 
     for i in tqdm(range(len(data_df))):
-
         token = tokenizer.encode(data_df[DATA_COLUMN][i], max_length=SEQ_LEN, truncation=True, padding='max_length')
         num_zeros = token.count(0)
-        mask = [1]*(SEQ_LEN-num_zeros) + [0]*num_zeros
-        segment = [0]*SEQ_LEN
+        mask = [1] * (SEQ_LEN - num_zeros) + [0] * num_zeros
+        segment = [0] * SEQ_LEN
 
         tokens.append(token)
         segments.append(segment)
@@ -120,6 +117,7 @@ def predict_convert_data(data_df):
     segments = np.array(segments)
     return [tokens, masks, segments]
 
+
 # 위에 정의한 convert_data 함수를 불러오는 함수를 정의
 def predict_load_data(pandas_dataframe):
     data_df = pandas_dataframe
@@ -128,15 +126,14 @@ def predict_load_data(pandas_dataframe):
     return data_x
 
 
-
 def sentence_convert_data(data):
     global tokenizer
     tokens, masks, segments = [], [], []
     token = tokenizer.encode(data, max_length=SEQ_LEN, truncation=True, padding='max_length')
 
     num_zeros = token.count(0)
-    mask = [1]*(SEQ_LEN-num_zeros) + [0]*num_zeros
-    segment = [0]*SEQ_LEN
+    mask = [1] * (SEQ_LEN - num_zeros) + [0] * num_zeros
+    segment = [0] * SEQ_LEN
 
     tokens.append(token)
     segments.append(segment)
@@ -146,7 +143,6 @@ def sentence_convert_data(data):
     masks = np.array(masks)
     segments = np.array(segments)
     return [tokens, masks, segments]
-
 
 
 def text_data(data):
@@ -162,6 +158,8 @@ def text_data(data):
 
     print(text_results)
     return text_results
+
+
 def review_crawl(request):
     df3 = pd.read_csv('reviewcrolling/data/place_final.csv')
     service = Service(executable_path='reviewcrolling/data/msedgedriver.exe')

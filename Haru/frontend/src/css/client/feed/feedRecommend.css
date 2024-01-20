@@ -1,0 +1,59 @@
+/* 모달 컨테이너 상세 속성 -> 피드 등록/수정 화면 - 추천 리스트 모달 */
+.feed-rec-modal {
+  background-color: #fff;
+  width: 880px;
+}
+
+/* X버튼 */
+.feed-rec-modal-btn {
+  width: 800px;
+}
+
+.feed-rec-area {
+  width: fit-content;
+  margin: 0 auto;
+}
+
+/* 제목 */
+.feed-rec-area-title {
+  margin-bottom: 10px;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+/* 장소 선택 안함 안내 div */
+.feed-rec-noplace {
+  height: 140px;
+  width: 680px;
+  background-color: #eee;
+  border-radius: 20px;
+  text-align: center;
+  line-height: 140px;
+  font-size: 18px;
+  color: #bfbfbf;
+}
+
+/* 선택한 장소 전체 영역 */
+.feed-rec-selected-area {
+  margin-bottom: 30px;
+}
+
+.feed-rec-selected-area > .contents {
+  padding-left: 10px;
+}
+
+.feed-rec-recList {
+  width: 690px;
+  padding: 20px 30px;
+  height: 400px;
+  overflow: auto;
+  background-color: #f5f5f5;
+  border-radius: 20px;
+}
+
+.feed-rec-btn-area {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  margin-top: 25px;
+}

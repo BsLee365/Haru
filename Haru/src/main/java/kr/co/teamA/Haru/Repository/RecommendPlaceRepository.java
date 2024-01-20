@@ -16,23 +16,23 @@ public interface RecommendPlaceRepository extends JpaRepository<Place, Long> {
 
 
     // 사용자가 선택한 카테고리 기반 추천
-    @Query(nativeQuery = true, value = "select a.place_num as placeNum , a.place_address as placeAddress, a.place_img as placeImg, a.place_link as placeLink," +
-            " a.place_name as placeName, b.user_id as userId" +
-            " from place a" +
-            " join (select a.main_category, a.user_id, a.interest_category_num , b.sub_category" +
-            " from (select b.main_category, a.user_id, a.interest_category_num" +
-            " from (select a.user_id, b.interest_category_num, b.main_category" +
-            " from member a join userinterestcategory b" +
-            " on a.user_id = b.user_id " +
-            " where a.user_id = :userId) a join maincategory b" +
-            " on a.main_category = b.main_category) a join subcategory b" +
-            " on a.main_category = b.main_category) b" +
-            " on a.sub_category = b.sub_category")
+    @Query(nativeQuery = true, value = "select a.place_num as placeNum , a.place_address as placeAddress, a.place_img as placeImg, a.place_link as placeLink, " +
+            "a.place_name as placeName, b.user_id as userId, a.place_score as placeScore " +
+            "from place a " +
+            "join (select a.main_category, a.user_id, a.interest_category_num , b.sub_category " +
+            "from (select b.main_category, a.user_id, a.interest_category_num " +
+            "from (select a.user_id, b.interest_category_num, b.main_category " +
+            "from member a join userinterestcategory b " +
+            "on a.user_id = b.user_id " +
+            "where a.user_id = :userId ) a join maincategory b " +
+            "on a.main_category = b.main_category) a join subcategory b " +
+            "on a.main_category = b.main_category) b " +
+            "on a.sub_category = b.sub_category")
     List<RecommendPlaceDTO> recommendQuery(@Param("userId") String userId);
 
-    // 사용자가 찜한 카테고리 기반 추천
+    // 사용자가 찜한 장소랑 유사한 장소 추천 (사용자가 찜한 장소는 제외)
     @Query(nativeQuery = true, value= "select distinct p.place_num as placeNum, p.place_address as placeAddress, p.place_img as placeImg, " +
-            "p.place_link as placeLink, p.place_name as placeName, c.user_id as userId " +
+            "p.place_link as placeLink, p.place_name as placeName, c.user_id as userId, p.place_score as placeScore " +
             "from place p join (select p.sub_category, t.user_id " +
             "from place p join " +
             "(select m.user_id, w.wish_list_num, w.place_num " +
@@ -40,12 +40,20 @@ public interface RecommendPlaceRepository extends JpaRepository<Place, Long> {
             "on m.user_id = w.user_id " +
             "where m.user_id = :userId) t " +
             "on t.place_num = p.place_num) c " +
-            "on p.sub_category = c.sub_category")
+            "on p.sub_category = c.sub_category " +
+            "minus " +
+            "select w.place_num as placeNum , p.place_address as placeAddress , p.place_img as placeImg, p.place_link as placeLink, " +
+            "p.place_name as placeName, w.user_id as userId, p.place_score as placeScore " +
+            "from wishlist w join place p " +
+            "on w.place_num = p.place_num " +
+            "where w.user_id = :userId")
     List<RecommendPlaceDTO> recommendDibs(@Param("userId") String userId);
 
-    // 사용자가 스트레스 수치 기반 장소 추천
-
-
-
-
+    // 사용자가 찜한 카테고리 가져오기
+    @Query(nativeQuery = true, value = "select w.place_num as placeNum , p.place_address as placeAddress , p.place_img as placeImg, p.place_link as placeLink, " +
+            "p.place_name as placeName, w.user_id as userId, p.place_score as placeScore " +
+            "from wishlist w join place p " +
+            "on w.place_num = p.place_num " +
+            "where w.user_id = :userId")
+    List<RecommendPlaceDTO> DibsList(@Param("userId") String userId);
 }

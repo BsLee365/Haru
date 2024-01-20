@@ -41,13 +41,20 @@ public class StressService {
 
         // 카테고리
         List<RecommendPlaceDTO> Category = recommendPlaceRepository.recommendQuery(userId);
-        // 찜 목록, 여기가 문제
-        List<RecommendPlaceDTO> Bid = recommendPlaceRepository.recommendDibs(userId);
+        // 찜 목록 유사한 장소 (사용자가 찜한 장소 제외)
+        List<RecommendPlaceDTO> Dibs = recommendPlaceRepository.recommendDibs(userId);
+        // 찜목록
+        List<RecommendPlaceDTO> Dibslist = recommendPlaceRepository.DibsList(userId);
+        // 스트레스 기반 장소추천
+        //List<RecommendPlaceDTO> stresslist = recomendPl
 
+
+        // 모든 장소 리스트
         ArrayList<RecommendPlaceDTO> recommendList = new ArrayList<>();
 
         recommendList.addAll(Category);
-        recommendList.addAll(Bid);
+        recommendList.addAll(Dibs);
+        recommendList.addAll(Dibslist);
 
         Collections.shuffle(recommendList);
 
@@ -61,10 +68,12 @@ public class StressService {
         System.out.println(stressData.toString());
         StressData vo = new StressData();
 
+        //
         Optional<Member> mem = memberRepository.findByUserId(stressData.getUserid());
 
         //유저 아이디
         mem.ifPresent(vo::setMember);
+
         //얼굴
         vo.setFaceData(stressData.getFacefigure());
         //일기

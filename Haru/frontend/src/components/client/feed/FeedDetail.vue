@@ -183,7 +183,7 @@
 
             <!-- 수정하기, 삭제하기 버튼 => 본인 게시글일 경우 -->
             <div class="card-ctrl-btn-area">
-              <button class="card-ctrl-btn update">수정</button>
+              <button class="card-ctrl-btn update" @click="feedUpdate">수정</button>
               <button class="card-ctrl-btn delete">삭제</button>
             </div>
           </div>
@@ -310,6 +310,20 @@ export default {
           console.log("좋아요 갱신");
           this.likeload += 1;
         });
+    },
+    feedUpdate() {
+      var formData = new FormData();
+      formData.append("feedNum", this.card.feedNum);
+      axios.post(`http://${process.env.VUE_APP_BACK_END_URL}/feedUpdateForm`, formData)
+      .then(res => {
+        const feedData = res.data;
+        this.$router.push({
+          name: 'UpdateFeed',
+          state: {
+            feedData: feedData,
+          },
+        });
+      })
     },
   },
   created() {

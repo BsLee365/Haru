@@ -53,6 +53,7 @@
   border: 1px solid #dbdbdb;
   padding: 5px 10px;
   transition: border 0.15s ease-in 0s, box-shadow 0.2s ease-in 0s;
+  resize: none;
 }
 
 #contents:focus {

@@ -5,12 +5,22 @@ import java.util.Map;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
+
+import kr.co.teamA.Haru.Entity.Feed;
 import kr.co.teamA.Haru.Entity.FeedComment;
 import kr.co.teamA.Haru.Service.feed.FeedService;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import java.io.File;
 import java.util.List;
+import java.util.ArrayList;
 
 @RestController
 public class FeedController {
@@ -51,4 +61,64 @@ public class FeedController {
         return likes;
     }
 
+    @PostMapping("/uploadFeed")
+    public void uploadFeed(@RequestParam Map<String, Object> data, @RequestParam("file") List<MultipartFile> files,
+            @RequestParam("hashTag") List<String> hashTag) {
+        System.out.println(data);
+        List<String> feedImgs = new ArrayList<>();
+        for (MultipartFile file : files) {
+            if (!file.isEmpty()) {
+                saveFile(file);
+                feedImgs.add(file.getOriginalFilename());
+            }
+        }
+        feedService.uploadFeed(data, feedImgs, hashTag);
+
+    }
+
+    private void saveFile(MultipartFile file) {
+        try {
+            String uploadDir = "E:\\ICT\\final\\Haru\\Haru\\src\\main\\resources\\static\\FeedImg";
+            String fileName = file.getOriginalFilename();
+
+            file.transferTo(new File(uploadDir + File.separator + fileName));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @PostMapping("/feedUpdateForm")
+    public Feed feedUpdateForm(@RequestParam("feedNum") String feedNum) {
+        Feed feed = feedService.getFeed(feedNum);
+        System.out.println(feed);
+        return feed;
+    }
+
+    @PostMapping("/getFeedImgAndHashTag")
+    public Map<String, Object> getFeedImgAndHashTag(@RequestParam("feedNum") String feedNum) {
+        Map<String, Object> feedImgAndHashTag = feedService.getFeedImgAndHashTag(feedNum);
+
+        return feedImgAndHashTag;
+    }
+
+    @PostMapping("/updateFeed")
+    public void feedUpdate(@RequestParam Map<String, Object> data,
+            @RequestParam(value = "file", required = false) List<MultipartFile> files,
+            @RequestParam("hashTag") List<String> hashTag) {
+        System.out.println(data);
+        List<String> feedImgs = new ArrayList<>();
+        if (files != null) {
+            for (MultipartFile file : files) {
+                saveFile(file);
+            }
+        }
+        if (data.get("imageName").getClass() == String.class) {
+            feedImgs.add((String) data.get("imageName"));
+        } else {
+            for (String file : (List<String>) data.get("imageName")) {
+                feedImgs.add(file);
+            }
+        }
+        feedService.feedUpdate(data, feedImgs, hashTag);
+    }
 }

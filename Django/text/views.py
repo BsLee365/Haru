@@ -1,4 +1,5 @@
 import pickle
+import random
 import re
 import pandas as pd
 from konlpy.tag import Okt
@@ -42,7 +43,7 @@ def predict_load_data(new_sentence):
 
 @csrf_exempt
 def feedKeyword(request):
-    feedsentence = request.POST['feedSentence']
+    feedsentence = request.GET['contents']
     sentence = re.sub(r'[^ㄱ-ㅎㅏ-ㅣ가-힣 ]', '', feedsentence)
     nounkeyword = getNoun(sentence)
     nounsentence = ' '.join(nounkeyword)
@@ -52,9 +53,13 @@ def feedKeyword(request):
     filteredkeyword = [word for word in keyword if word not in stopwords]
 
     filteredkeyword = list(set(filteredkeyword))
+    filteredkeyword = [word for word in filteredkeyword if len(word) > 1]
+    random.shuffle(filteredkeyword)
+    randomkeyword = filteredkeyword[:10]
     print(filteredkeyword)
+    print(randomkeyword)
 
-    return JsonResponse(filteredkeyword, safe=False)
+    return JsonResponse(randomkeyword, safe=False)
 
 
 def getNoun(sentence):

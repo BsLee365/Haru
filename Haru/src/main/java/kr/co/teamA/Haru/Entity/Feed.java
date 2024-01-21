@@ -41,7 +41,7 @@ public class Feed {
     @Column(length = 255, nullable = false)
     private String feedCategory;
 
-    @Column(columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+    @Column(columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP", insertable = false)
     private String feedCdate;
 
 }

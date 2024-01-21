@@ -19,15 +19,18 @@
               <label :for="'file' + (idx + 1)">
                 <div class="file" :class="{ upfile: idx === 0 }">
                   <img v-if="idx === 0" src="@/img/Feed/camera.png" alt="" />
+                  <img @click="removeImg(idx)" v-if="idx > 0 && previewImageUrls[idx]" :src="previewImageUrls[idx]" alt="" style="object-fit: cover; width: 100%; height: 100%; border-radius: 15px;"/>
                 </div>
               </label>
               <input
-                v-if="idx === 0"
-                type="file"
-                :id="'file' + (idx + 1)"
-                accept="image/*"
-                hidden
+              @change="addImage"
+              v-if="idx === 0"
+              type="file"
+              :id="'file' + (idx + 1)"
+              accept="image/*"
+              hidden
               />
+              
             </div>
           </div>
         </div>
@@ -39,6 +42,7 @@
             cols="68"
             rows="7"
             placeholder="피드 내용을 작성하세요."
+            @change="getHashTag"
           ></textarea>
         </div>
 
@@ -110,7 +114,7 @@
         </div>
 
         <div class="updateFeed-btn-area">
-          <button id="uploadFeed">피드 올리기</button>
+          <button type="button" id="uploadFeed" @click="uploadFeed">피드 올리기</button>
         </div>
       </div>
     </form>
@@ -118,22 +122,26 @@
 </template>
 <script>
 import FeedRecommend from "@/components/client/feed/FeedRecommendModal.vue";
-
+import axios from "axios"
+import { ref, onMounted } from "vue";
+import { jwtDecode } from "jwt-decode";
 export default {
   name: "InsertFeed",
   data() {
     return {
+      imageList : [],
+      previewImageUrls: [],
       isLoggedIn: false,
       AccessToken: "",
       uid: "abc",
       hashtag: [
-        "고기",
-        "돼지고기",
-        "목살",
-        "삼겹살",
-        "소고기",
-        "무한리필",
-        "생고기",
+        // "고기",
+        // "돼지고기",
+        // "목살",
+        // "삼겹살",
+        // "소고기",
+        // "무한리필",
+        // "생고기",
       ],
       writeHashtag: [""], // 직접 입력 해시태그
       activeTags: [], // 활성화된 해시태그
@@ -265,6 +273,7 @@ export default {
       // 배열의 길이가 5개 이하면 입력하는 항목란 추가
       if (this.writeHashtag.length < 5) {
         this.writeHashtag.length = this.writeHashtag.length + 1;
+
       } else {
         alert("해시태그는 5개 이하로 입력 가능합니다.");
       }
@@ -277,6 +286,120 @@ export default {
     closeModal() {
       this.modal_Check = false;
     },
+    getHashTag() {
+      axios.get(`http://${process.env.VUE_APP_DJANGO_CROSS_URL}/text/feedKeyword`, {
+        params: {
+          contents: document.getElementById("contents").value,
+        },
+      }).then((res) => {
+        console.log(res.data);
+        this.hashtag = res.data;
+      });
+    },
+    uploadFeed() {
+      var formData = new FormData();
+      for (const index in this.activeTags) {
+        formData.append("hashTag", this.hashtag[this.activeTags[index]]);
+      }
+      for (const [index, tag] of this.writeHashtag.entries()) {
+        console.log(tag);
+
+        // 마지막 요소를 제외하고 싶다면
+        if (index < this.writeHashtag.length - 1) {
+          formData.append("hashTag", tag);
+        }
+      }
+      console.log(this.writeHashtag)
+      for (const image of this.imageList) {
+        formData.append("file", image);
+      }
+      formData.append("contents", document.getElementById("contents").value);
+      formData.append("userId", this.data.id);
+      formData.append("placeNum", 1500);
+      console.log("해시태그", formData.getAll("hashTag"));
+      console.log("이미지", formData.getAll("file"));
+      console.log("내용", formData.getAll("contents"));
+      console.log("아이디", formData.getAll("userId"));
+      console.log("장소넘버", formData.getAll("placeNum"));
+      axios
+        .post(
+          `http://${process.env.VUE_APP_BACK_END_URL}/uploadFeed`,
+          formData,
+          {
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
+          }
+        )
+        .then(() => {
+          alert("피드가 등록되었습니다.");
+        }).then(() => {
+          this.$router.push("/feed");
+        })
+    },
+    addImage(e) {
+      const file = e.target.files[0];
+      this.imageList.push(file);
+      console.log("이미지 리스트", this.imageList);
+      console.log(file);
+
+      this.previewImageUrls = ['default'];
+      for (let i = 0; i < Math.min(this.imageList.length, 5); i++) {
+        const file = this.imageList[i];
+
+        if (file && file.type.startsWith('image/')) {
+          const reader = new FileReader();
+
+          reader.onload = () => {
+            this.previewImageUrls.push(reader.result);
+          };
+          reader.readAsDataURL(file);
+        }
+      }
+      console.log("미리보기 리스트", this.previewImageUrls)
+      
+    },
+    removeImg(idx) {
+      this.imageList.splice(idx - 1, 1);
+      console.log("이미지 리스트", this.imageList);
+      this.previewImageUrls.splice(idx, 1);
+      console.log("미리보기 리스트", this.previewImageUrls);
+    },
+  },
+  setup() {
+    const isLoggedIn = ref(false); // Use ref to create reactive isLoggedIn
+    const data = ref([]); // Use ref to create reactive data
+
+    const getToken = () => {
+      const token = localStorage.getItem("jwtToken");
+      isLoggedIn.value = token ? true : false;
+    };
+
+    const logout = () => {
+      axios
+        .get(`http://${process.env.VUE_APP_BACK_END_URL}/api/auth/logout`)
+        .then((res) => {
+          if (res.data == "Logout") {
+            localStorage.removeItem("jwtToken");
+            window.location.href = "/login";
+          }
+        });
+    };
+
+    const decodeToken = (token) => {
+      if (token == null) return false;
+      const decoded = jwtDecode(token);
+      data.value = decoded; // Use data.value to set the value of the ref
+      return decoded;
+    };
+
+    onMounted(() => {
+      getToken();
+      const token = localStorage.getItem("jwtToken");
+      decodeToken(token);
+    });
+
+    return { logout, data }; // Return data in the setup function
   },
   components: { FeedRecommend },
 };

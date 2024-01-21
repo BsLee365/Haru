@@ -1,4 +1,4 @@
 
-Epython:S1940"-Use the opposite operator ("not in") instead.(Å’÷á
-npython:S1542,"QRename function "feedKeyword" to match the regular expression ^[a-z_][a-z0-9_]*$.(«ÃŸ›øÿÿÿÿ
-jpython:S1542<"MRename function "getNoun" to match the regular expression ^[a-z_][a-z0-9_]*$.(«Ùùüÿÿÿÿ
+Lpython:S1940"-Use the opposite operator ("not in") instead.(Å’÷á8øÔöÖÒ1
+upython:S1542-"QRename function "feedKeyword" to match the regular expression ^[a-z_][a-z0-9_]*$.(«ÃŸ›øÿÿÿÿ8øÔöÖÒ1
+qpython:S1542A"MRename function "getNoun" to match the regular expression ^[a-z_][a-z0-9_]*$.(«Ùùüÿÿÿÿ8øÔöÖÒ1

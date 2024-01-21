@@ -364,7 +364,7 @@ export default {
       this.loadingParam = 1;
       // axios를 통해 장고모델에 전달 (출력 결과는 모두 console.log로 찍음.)
       axios
-        .post("http://192.168.0.215:8000/calculate/getStress1", this.formData, {
+        .post(`http://${process.env.VUE_APP_DJANGO_CROSS_URL}/calculate/getStress1`, this.formData, {
           headers: {
             "Content-Type": "multipart/form-data",
           },
@@ -405,7 +405,7 @@ export default {
 
             axios
               .post(
-                "http://192.168.0.215:8000/calculate/getStress2", // 이미지 처리 끝 일기 처리 시작
+                `http://${process.env.VUE_APP_DJANGO_CROSS_URL}/calculate/getStress2`, // 이미지 처리 끝 일기 처리 시작
                 this.formData,
                 {
                   headers: {
@@ -425,7 +425,7 @@ export default {
                 //일기 저장
                 axios
                   .post(
-                    "http://192.168.0.217/Haru/diary/saveDiary",
+                    `http://${process.env.VUE_APP_BACK_END_URL}/diary/saveDiary`,
                     {
                       user_id: this.data.id,
                       diary_title: this.dirayTitle,
@@ -445,7 +445,7 @@ export default {
 
                     // 스트레스 측정 저장
                     axios
-                      .post("http://192.168.0.217/Haru/stress/saveStress", {
+                      .post(`http://${process.env.VUE_APP_BACK_END_URL}/stress/saveStress`, {
                         diaryfigure: this.diaryFigure,
                         facefigure: this.faceFigure,
                         stressscore: this.stressScore,
@@ -459,7 +459,7 @@ export default {
                     // 장소추천 알고리즘 axios
                     axios
                       .post(
-                        "http://192.168.0.217/Haru/stress/recommend",
+                        `http://${process.env.VUE_APP_BACK_END_URL}/stress/recommend`,
                         {
                           userid: this.data.id,
                           stress_rate: String(this.stressRate),

@@ -9,3 +9,9 @@ G
 text/views.py,2\9\29f70beb14af2cae163a247ca80a7b7fe9b18ece
 =
 face/views.py,6\d\6d9e4d6713e245ea2a454bdbed6f6ea4d23e6d2d
+>
+HaruAI/urls.py,c\9\c92ed7ba2af9bf4c8fef840f8737d230617c667d
+A
+calculate/urls.py,e\f\efb7f83994c7dc69a9c961c20011c486680a591a
+<
+text/urls.py,0\9\096b3e33ea506dece311e584904e25454feb0dc0

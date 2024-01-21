@@ -39,20 +39,21 @@ public class SecurityConfig {
     @Autowired
     private UserDetailsService userDetailsService;
 
-    @Bean
+    @Bean // 사용자 인증을 위한 DaoAuthenticationProvider를 빈으로 등록
     public DaoAuthenticationProvider daoAuthenticationProvider() {
         DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
-        provider.setUserDetailsService(userDetailsService);
-        provider.setPasswordEncoder(passwordEncoder());
+        provider.setUserDetailsService(userDetailsService); // 사용자 정보를 제공하는 'userDetailService'
+        provider.setPasswordEncoder(passwordEncoder()); // 비밀번호 인코딩 위한 passwordEncoder 설정
         return provider;
     }
 
-    @Bean
+    @Bean // 사용자 비밀번호 안전하게 저장하기 위해
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
-    @Bean
+    @Bean // Spring Security의 AuthenticationManager를 빈으로 등록
+    // 인증(authentication)을 관리
     AuthenticationManager authenticationManager(
             AuthenticationConfiguration authenticationConfiguration) throws Exception {
         return authenticationConfiguration.getAuthenticationManager();

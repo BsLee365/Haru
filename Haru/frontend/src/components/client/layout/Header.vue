@@ -4,7 +4,7 @@
     <header>
       <div class="left-side-area">
         <div class="logo">
-          <a href="/"><img src="@/assets/logo/logo_검정.png" /></a>
+          <a href="/"><img src="@/img/assets/logo/logo_검정.png" /></a>
         </div>
         <div class="dropdown">
           <button class="dropbtn dropbtn-1">나의 스트레스</button>

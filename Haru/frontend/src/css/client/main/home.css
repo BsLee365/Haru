@@ -289,8 +289,8 @@ video {
 .main-footer > div {
   margin-right: 30px;
 }
-#channel-btn{
-  background-color:transparent;
+#channel-btn {
+  background-color: transparent;
   border: 0;
   outline: 0;
   border-radius: 50px;
@@ -299,7 +299,6 @@ video {
   border-radius: 50px;
   box-shadow: 1px 5px 5px 1px rgba(0, 0, 0, 0.2);
 }
-
 
 /*.screen-1 {*/
 /*  width: 80%;*/

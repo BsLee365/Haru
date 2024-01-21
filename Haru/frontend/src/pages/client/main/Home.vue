@@ -1,7 +1,7 @@
 <template>
   <div class="home-container">
     <video muted autoplay loop class="home">
-      <source src="@/assets/bgImage/main_bg.mp4" type="video/mp4" />
+      <source src="@/img/assets/bgImage/main_bg.mp4" type="video/mp4" />
     </video>
     <div class="main-section" id="main-section"></div>
 
@@ -102,7 +102,9 @@
                 <img src="@/img/main/logo.png" width="250" />
               </div>
               <div class="last-page-channel">
-                <button id="channel-btn"><img src="@/img/main/channelBtn.png" width="250" /></button>
+                <button id="channel-btn">
+                  <img src="@/img/main/channelBtn.png" width="250" />
+                </button>
               </div>
             </div>
             <div class="last-page-right-box">
@@ -114,7 +116,7 @@
           <!--          푸터 영역-->
           <div class="main-footer">
             <div class="img-area">
-              <img src="@/assets/logo/logo_white.png" alt="" />
+              <img src="@/img/assets/logo/logo_white.png" alt="" />
             </div>
 
             <div class="info-area">

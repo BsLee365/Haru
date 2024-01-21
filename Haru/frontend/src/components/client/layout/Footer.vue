@@ -6,7 +6,7 @@
     <footer class="footer-area">
       <!-- 로고 이미지 -->
       <div class="img-area">
-        <img src="@/assets/logo/logo_white.png" alt="" />
+        <img src="@/img/assets/logo/logo_white.png" alt="" />
       </div>
 
       <div class="info-area">

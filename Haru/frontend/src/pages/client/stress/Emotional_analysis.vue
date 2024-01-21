@@ -291,14 +291,14 @@ export default {
       dirayTitle: null,
       diaryContent: null,
 
-      //최종 스트레스 수치
-      stressRate: 0.0,
-
       // 스트레스 결과를 위한 데이터들
       diaryFigure: 0,
       faceFigure: 0,
-      stressScore: 0,
+      stressScore: 0, // 최종 스트레스 수치
       stressCdate: null,
+
+      // 현재 클라이언트 주소
+      ipAddress : window.location.host.split(':')[0]
     };
   },
   created() {
@@ -364,7 +364,7 @@ export default {
       this.loadingParam = 1;
       // axios를 통해 장고모델에 전달 (출력 결과는 모두 console.log로 찍음.)
       axios
-        .post("http://192.168.0.215:8000/calculate/getStress1", this.formData, {
+        .post(`http://192.168.0.215:8000/calculate/getStress1`, this.formData, {
           headers: {
             "Content-Type": "multipart/form-data",
           },
@@ -425,7 +425,7 @@ export default {
                 //일기 저장
                 axios
                   .post(
-                    "http://192.168.0.217/Haru/diary/saveDiary",
+                    `http://${this.ipAddress}/Haru/diary/saveDiary`,
                     {
                       user_id: this.data.id,
                       diary_title: this.dirayTitle,
@@ -440,12 +440,11 @@ export default {
                   .then((res) => {
                     console.log(res);
                     console.log("성공!");
-                    console.log(this.stressRate);
                     console.log(this.data.id);
 
                     // 스트레스 측정 저장
                     axios
-                      .post("http://192.168.0.217/Haru/stress/saveStress", {
+                      .post(`http://${this.ipAddress}/Haru/stress/saveStress`, {
                         diaryfigure: this.diaryFigure,
                         facefigure: this.faceFigure,
                         stressscore: this.stressScore,
@@ -459,10 +458,10 @@ export default {
                     // 장소추천 알고리즘 axios
                     axios
                       .post(
-                        "http://192.168.0.217/Haru/stress/recommend",
+                        `http://${this.ipAddress}/Haru/stress/recommend`,
                         {
                           userid: this.data.id,
-                          stress_rate: String(this.stressRate),
+                          stresssocre: this.stressScore,
                         },
                         {
                           headers: {
@@ -470,12 +469,17 @@ export default {
                           },
                         }
                       )
-                      .then((res) => {
+                      .then((recommend) => {
                         console.log("성공!");
                         // 장소 들어갈 곳
-                        console.log(res);
+                        console.log("추천 받은 장소");
+                        console.log(recommend);
 
-                        this.$router.push("/Total_stress");
+
+
+
+
+                        //this.$router.push("/Total_stress");
                       });
                   });
                 //최종 스트레스로 이동.

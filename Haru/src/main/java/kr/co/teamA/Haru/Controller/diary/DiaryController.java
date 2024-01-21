@@ -17,6 +17,8 @@ public class DiaryController {
     // 일기 저장.
     @PostMapping("/saveDiary")
         public DiaryDTO saveDiary(@RequestBody DiaryDTO diary){
+        System.out.println("다이어리 컨트롤러 실행");
+        System.out.println(diary.toString());
         diaryService.saveDiary(diary);
         return diary;
     }

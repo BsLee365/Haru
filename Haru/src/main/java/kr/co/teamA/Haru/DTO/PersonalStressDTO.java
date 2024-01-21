@@ -7,5 +7,5 @@ import lombok.Data;
 @Data
 public class PersonalStressDTO {
     private String userid;
-    private String stressRate;
+    private Double stresssocre;
 }

@@ -18,4 +18,6 @@ public interface PlaceRecommendListRepository extends JpaRepository<PlaceRecomme
             "and prl.placeCdate between :startDate and :endDate")
 
     List<ShowMyRecommendPlaceDTO> getMyRecommendPlace(@Param("userId") String userId,@Param("startDate") Date startDate, @Param("endDate") Date endDate);
+
+
 }

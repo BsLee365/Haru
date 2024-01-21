@@ -2,6 +2,7 @@ package kr.co.teamA.Haru.Repository;
 
 import kr.co.teamA.Haru.DTO.RecommendPlaceDTO;
 import kr.co.teamA.Haru.Entity.Place;
+import kr.co.teamA.Haru.Entity.PlaceRecommendList;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -10,7 +11,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.util.Optional;
 
-// 장소추천 레파지토리
+// 분석시 나올 장소추천 레파지토리
 @Repository
 public interface RecommendPlaceRepository extends JpaRepository<Place, Long> {
 
@@ -56,4 +57,7 @@ public interface RecommendPlaceRepository extends JpaRepository<Place, Long> {
             "on w.place_num = p.place_num " +
             "where w.user_id = :userId")
     List<RecommendPlaceDTO> DibsList(@Param("userId") String userId);
+
+    // 사용자가 추천 받은 장소 저장하기.
+
 }

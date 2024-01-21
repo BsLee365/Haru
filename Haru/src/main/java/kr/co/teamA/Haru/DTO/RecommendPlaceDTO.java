@@ -13,7 +13,6 @@ public interface RecommendPlaceDTO {
     String getPlaceName();
 
     String getUserId();
-    Long getPlaceScore();
-
+    int getPlaceScore();
 
 }

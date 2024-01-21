@@ -300,7 +300,7 @@ export default {
       this.$emit("bgImage", newImage);
     },
     selectActivity(index) {
-      this.printSelect();
+      // this.printSelect();
       const selectedIndex = this.selectedActivity.indexOf(index);
       if (selectedIndex > -1) {
         this.selectedActivity.splice(selectedIndex, 1);

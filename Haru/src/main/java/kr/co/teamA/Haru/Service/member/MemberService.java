@@ -50,9 +50,9 @@ public class MemberService {
         LocalDateTime now = LocalDateTime.now();
         String encoderPassword = passwordEncoder.encode(dto.getPwd());
         System.out.println("encodeing" + encoderPassword);
-        System.out.println(dto.getUserId());
+        System.out.println(dto.getId());
         Member entity = Member.builder()
-                .userId(dto.getUserId())
+                .userId(dto.getId())
         // System.out.println(dto.getId());
         // Member entity = Member.builder()
         //         .userId(dto.getId())

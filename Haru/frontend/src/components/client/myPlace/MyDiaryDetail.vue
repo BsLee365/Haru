@@ -19,7 +19,7 @@
               placeholder="제목"
               maxlength="30"
               ref="diaryTitle"
-              :value="selectedDiary.diaryName"
+              :value="selectedDiary.diary_title"
               :readonly="dStatus === 'read'"
             />
           </div>
@@ -29,7 +29,7 @@
               id="diary-content"
               placeholder="어떤 일이 있었나요?"
               maxlength="1000"
-              :value="selectedDiary.dContents"
+              :value="selectedDiary.diary_context"
               :readonly="dStatus === 'read'"
             ></textarea>
           </div>
@@ -75,6 +75,7 @@ export default {
     dStatus: String,
   },
   methods: {
+    // 수정하기 눌렀을 때
     updateDStatus(status) {
       this.$emit("update-d-status", status);
       if (status === "update") {

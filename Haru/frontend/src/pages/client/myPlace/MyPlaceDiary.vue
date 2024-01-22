@@ -78,8 +78,9 @@
             ref="recList"
           />
           <MyDiaryList
-            :diaryList="diaryList"
+            :diaryList="FinMyDiaryList"
             class="rlist-container"
+            :sendSelectedDate="sendSelectedDate"
             v-if="isTabRecList === false"
           />
         </div>
@@ -101,6 +102,7 @@ export default {
     const today = moment(); // moment 객체 생성
     const sDate = [today.year(), today.month(), today.date(), 0]; // 선택한 날짜 정보 (연도, 월, 일, index)
     const myDate = []; // 현재 화면에 보여지는 날짜 정보
+    const allDateList = new Set(); // 추천리스트, 일기 받은 날짜 담는 곳
 
     return {
       // 달력 외 관련
@@ -109,6 +111,7 @@ export default {
       isTabRecList: true, // 추천 리스트 탭 활성화
       RecommendList: [], // controller 에서 넘어온 월별 추천리스트 + 일기 data
       RecPlace: [], // 추천리스트로 넘길 데이터 담는 배열
+      FinMyDiaryList: [], // 일기 탭으로 넘길 데이터 담는 배열
       sendSelectedDate: "", // 추천리스트로 넘길 날짜
       // 일기 리스트
       diaryList: [],
@@ -120,6 +123,8 @@ export default {
       calendarHeader: "",
       days: [], // 해당 월의 일 담은 배열
       isSelectedtoday: false, // 한 번 이라도 선택된게 있는지
+      allDateList: allDateList,
+      miniDotDates: [], // 달력에 작은 점 => 추천리스트 / 일기 있으면 찍힘
     };
   },
   mounted() {
@@ -130,6 +135,7 @@ export default {
     // 페이지가 로드될 때 초기 이미지 설정
     this.bgImage();
     this.getToken();
+    moment.locale('ko');
   },
   setup() {
     const isLoggedIn = ref(false);
@@ -197,9 +203,21 @@ export default {
           enddate: endSdate,
         })
         .then((res) => {
-          console.log(res.data);
+          // console.log(res.data);
           this.RecommendList = res.data.rec_list;
           this.diaryList = res.data.diary_list;
+
+          this.allDateList = new Set();
+
+          this.RecommendList.forEach((item) => {
+            this.allDateList.add(moment(item.place_cdate).format("YYYY-MM-DD"));
+          });
+
+          this.diaryList.forEach(item => {
+            this.allDateList.add(moment(item.diary_cdate).format("YYYY-MM-DD"));
+          });
+
+          this.miniDotDates = Array.from(this.allDateList);
         })
         .catch((error) => {
           console.error("error! " + error);
@@ -266,7 +284,7 @@ export default {
       }
     },
 
-    // 날짜 변경----------------------------------
+    // 월(날짜) 변경----------------------------------
     changeMonth: function (val) {
       this.today = moment(this.today).add(val, "months").startOf("month");
       this.calendarImplementation();
@@ -309,7 +327,7 @@ export default {
 
       return indexDay == today.format("YYYY-MM-DD");
     },
-    // 선택됐는지 확인해서 css 적용
+    // 선택됐는지 확인해서 css 적용 ----------------------------------------------------------------
     isSelected(i, day) {
       // 선택한 날짜
       var sdate = moment([this.sDate[0], this.sDate[1], this.sDate[2]]).format(
@@ -355,11 +373,12 @@ export default {
         this.sDate = [this.myDate[0], this.myDate[1], day, i];
       }
 
-      // 선택한 일자에 해당하는 추천리스트 목록 담는 배열
+      // 선택한 일자에 해당하는 추천리스트, 일기 목록 담는 배열
       this.RecPlace = []; // 배열 초기화
+      this.FinMyDiaryList = [];
 
       // 데이터 가져오기
-      this.RecommendList.map((item) => {
+      this.RecommendList.forEach((item) => {
         // 가져온 데이터
         const placeCdate = moment(item.place_cdate).format("YYYY-MM-DD");
         // 선택한 날짜
@@ -375,22 +394,33 @@ export default {
           this.RecPlace.push(item.place);
         }
       });
+
+      this.diaryList.forEach(item => {
+        // 가져온 데이터
+        const diaryCdate = moment(item.diary_cdate).format("YYYY-MM-DD");
+        // 선택한 날짜
+        var selectedDate = moment([this.sDate[0], this.sDate[1], day]).format(
+            "YYYY-MM-DD"
+        );
+
+        if (diaryCdate == selectedDate) {
+          // console.log('!!!!!! : ' + item.diary_title)
+          this.FinMyDiaryList.push(item);
+        }
+      });
+
+      // 선택한 날짜 변수에 담기 -> 화면에 띄우기 용
       this.sendSelectedDate = moment([
         this.sDate[0],
         this.sDate[1],
         this.sDate[2],
-      ]).format("MM월 DD일");
-      console.log(this.RecPlace);
+      ]).format("MM월 DD일 (dddd)");
+      // console.log(this.RecPlace);
     },
 
-    // 받아온 추천 리스트에 rDate를 화면에 점으로 표시하기----------------------------------
+    // 받아온 추천 리스트에 rDate를 화면에 점으로 표시하기--------------------------------------------------------
     isInRecList(idx, day) {
       // console.log(idx + ' / ' + day);
-      // 가져온 데이터
-      const rdates = this.RecommendList.map((item) => {
-        // console.log('rDate!! : ' + moment(item.place_cdate).format("YYYY-MM-DD"));
-        return moment(item.place_cdate).format("YYYY-MM-DD");
-      });
 
       // 달력에 표시된 각각 날짜
       var indexDay = moment([this.myDate[0], this.myDate[1], day]);
@@ -403,7 +433,7 @@ export default {
       }
       indexDay = indexDay.format("YYYY-MM-DD");
       // console.log('indexDay : ' + indexDay);
-      return rdates.includes(indexDay);
+      return this.miniDotDates.includes(indexDay);
     },
 
     // 이전달, 다음달 날짜면 회색 처리

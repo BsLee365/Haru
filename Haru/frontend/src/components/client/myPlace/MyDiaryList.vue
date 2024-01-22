@@ -1,25 +1,26 @@
 <template>
   <!-- 내 장소 - 일기 리스트 -->
   <div class="">
-    <MyDiaryDetail
-      @close-modal="closeModal"
-      @update-d-status="changeStatus"
-      v-if="modal_Check"
-      :selectedDiary="selectedDiary"
-      :rDate="diaryList.rdate"
-      :dStatus="dStatus"
-    />
+
     <!-- 날짜 -->
     <div class="myplace-diary-date">
-      <p>{{ diaryList.rdate }}</p>
+      <p>{{ sendSelectedDate }}</p>
     </div>
 
     <!-- 일기 하나씩 -->
     <div
       class="myplace-diary-area"
-      v-for="(diary, idx) in diaryList.dList"
+      v-for="(diary, idx) in diaryList"
       :key="idx"
     >
+    <MyDiaryDetail
+      @close-modal="closeModal"
+      @update-d-status="changeStatus"
+      v-if="modal_Check"
+      :selectedDiary="diary"
+      :rDate="sendSelectedDate"
+      :dStatus="dStatus"
+    /> <!-- dStatus : 수정, 읽기 인지 판별 -->
       <!-- 아이콘 -->
       <div class="myplace-diary-icon-bg">
         <img src="@/img/myPlace/diaryicon.png" alt="" />
@@ -31,7 +32,7 @@
           class="cursor-p"
           @click="changeStatus('read'), openModal(), openDiaryUpdate(diary)"
         >
-          {{ diary.diaryName }}
+          {{ diary.diary_title }}
         </p>
       </div>
 
@@ -56,10 +57,12 @@ export default {
       selectedDiary: null,
       modal_Check: false,
       dStatus: "",
+      // sendSelectedDate: String,
     };
   },
   props: {
     diaryList: Object,
+    sendSelectedDate: String,
   },
   components: { MyDiaryDetail },
   methods: {

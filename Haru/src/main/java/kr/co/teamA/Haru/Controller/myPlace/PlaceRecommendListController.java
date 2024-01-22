@@ -11,6 +11,7 @@ import java.util.Date;
 import java.util.List;
 
 @RestController
+@RequestMapping("/recommend")
 public class PlaceRecommendListController {
 
     private final PlaceRecommendListService placeRecommendListService;

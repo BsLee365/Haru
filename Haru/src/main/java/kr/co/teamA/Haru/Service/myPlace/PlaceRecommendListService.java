@@ -9,6 +9,7 @@ import kr.co.teamA.Haru.Repository.PlaceRecommendListRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -36,6 +37,7 @@ public class PlaceRecommendListService {
     }
 
     // 추천 리스트 항목 가져오기
+    @Transactional
     public RecommendItemsDTO getRecommendList(GetRecommendList getRecommendListDto) {
         Date startDate = ReturnDate(getRecommendListDto.getStartdate());
         Date endDate = ReturnDate(getRecommendListDto.getEnddate());

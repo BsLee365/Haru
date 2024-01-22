@@ -43,4 +43,23 @@ public class DiaryService{
 
         diaryRepository.save(diary);
     }
+    
+    // 일기 업데이트 - 이리수
+    public void updateDiary(DiaryDTO diaryVO) {
+        Diary diary = new Diary();
+
+        memberRepository.findById(diaryVO.getUserId()).ifPresent(diary::setMember);
+
+        diary.setDiaryNum(diaryVO.getDiaryNum());
+        diary.setDiaryTitle(diaryVO.getDiaryTitle());
+        diary.setDiaryContext(diaryVO.getDiaryContext());
+        diary.setDiaryCdate(diaryVO.getDiaryCdate());
+
+        diaryRepository.save(diary);
+    }
+
+    // 일기 삭제 - 이리수
+    public void deleteDiary(Long diaryNum) {
+        diaryRepository.deleteById(diaryNum);
+    }
 }

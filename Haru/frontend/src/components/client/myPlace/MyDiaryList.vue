@@ -3,6 +3,7 @@
   <div class="">
     <MyDiaryDetail
       @close-modal="closeModal"
+      @delete-diary="deleteDiary"
       @update-d-status="changeStatus"
       v-if="modal_Check"
       :selectedDiary="selectedDiary"
@@ -42,7 +43,7 @@
           @click="changeStatus('update'); openModal(); openDiaryUpdate(diary);"
           class="diary-update-btn"
         ></button>
-        <button class="diary-delete-btn"></button>
+        <button class="diary-delete-btn" @click="deleteDiary(diary.diary_num)"></button>
       </div>
     </div>
   </div>
@@ -50,6 +51,7 @@
 
 <script>
 import MyDiaryDetail from "@/components/client/myPlace/MyDiaryDetail.vue";
+import axios from "axios";
 
 export default {
   data() {
@@ -80,6 +82,19 @@ export default {
     changeStatus(status) {
       this.dStatus = status;
     },
+
+    // 일기 삭제
+    deleteDiary(diaryNum) {
+      axios.post(`http://${process.env.VUE_APP_BACK_END_URL}/diary/deleteDiary/${diaryNum}`)
+          .then(() => {
+            alert("일기가 삭제되었습니다.");
+            // this.$emit('close-modal');
+            if (this.modal_Check==true) {this.closeModal();}
+          })
+          .catch(error => {
+            console.log(error);
+          })
+    }
   },
 };
 </script>

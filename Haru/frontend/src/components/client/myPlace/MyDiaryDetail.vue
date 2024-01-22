@@ -56,7 +56,7 @@
           >
             수정완료
           </button>
-          <button class="big-ctlbtn delete-btn" @click="deleteDiary">
+          <button class="big-ctlbtn delete-btn" @click="$emit('delete-diary', this.selectedDiary.diary_num)">
             삭제하기
           </button>
         </div>
@@ -110,20 +110,6 @@ export default {
             console.log(error);
           })
     },
-
-    // 일기 삭제
-    deleteDiary() {
-      axios.post(`http://${process.env.VUE_APP_BACK_END_URL}/diary/deleteDiary/${this.selectedDiary.diary_num}`)
-          .then(() => {
-            alert("일기가 삭제되었습니다.");
-            // 일기 수정하면 새로운 데이터로 가져와지게
-            // this.$router.push("/MyPlaceDiary");
-            this.updateDStatus('read');
-          })
-          .catch(error => {
-            console.log(error);
-          })
-    }
   },
   setup() {
     const isLoggedIn = ref(false); // Use ref to create reactive isLoggedIn

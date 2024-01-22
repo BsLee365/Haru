@@ -105,7 +105,8 @@
             >
               ... 더보기
             </span>
-          </p>
+          </p><br>
+          <p id="hashTag">{{ i.hashTag.join(' ') }}</p>
         </div>
         <!-- 좋아요, 댓글 버튼 -->
         <div class="card-btn">
@@ -137,17 +138,17 @@
 import axios from "axios";
 import { ref, onMounted } from "vue";
 import { jwtDecode } from "jwt-decode";
+
 export default {
   name: "FeedList",
   data() {
     return {
       modal_Check: false,
       selectedNickname: "",
+      hashTag: "",
     };
   },
-  props: {
-    cardList: Object, // 부모로부터 받은 데이터
-  },
+  props: ["cardList", "listCnt", "allCardList", "userData"],
   methods: {
     getMyFeedList(nickname) {
       this.$emit("getMyFeedList", nickname);
@@ -210,5 +211,8 @@ export default {
 <style scoped>
 .page-upload-title {
   margin-left: 43px;
+}
+#hashTag {
+  color: #928e8e;
 }
 </style>

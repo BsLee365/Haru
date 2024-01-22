@@ -13,7 +13,7 @@
 			</form>
 
 			<!-- 피드 Start -->
-			<FeedList :userData="this.data" :cardList="cardList" @open-modal="openModal" @getMyFeedList="getMyFeedList" @getFeedList="getFeedList" ref="feedList" />
+			<FeedList :userData="this.data" :cardList="cardList" :listCnt="listCnt" :allCardList="allCardList" @open-modal="openModal" @getMyFeedList="getMyFeedList" @getFeedList="getFeedList" @getNextFeedList="getNextFeedList" ref="feedList" />
 		</div>
 	</div>
 </template>
@@ -23,7 +23,6 @@ import FeedDetail from "@/components/client/feed/FeedDetail.vue";
 import axios from "axios";
 import { ref, onMounted } from "vue";
 import { jwtDecode } from "jwt-decode";
-
 export default {
 	name: "feedMain",
 	data() {
@@ -42,6 +41,8 @@ export default {
 				// comments: 5,
 				// },
 			],
+			allCardList: [],
+			listCnt: 6,
 			card: null,
 			modal_Check: false,
 			userData: null,
@@ -67,6 +68,7 @@ export default {
 			this.$emit("bgImage", newImage);
 		},
 		async getFeedList() {
+      this.allCardList = [];
 			this.cardList = [];
 			await axios.get(`http://${process.env.VUE_APP_BACK_END_URL}/feedList`).then((res) => {
 				const data = res.data;
@@ -88,6 +90,12 @@ export default {
 							comments.push(comment);
 						}
 					}
+          const hashTag = [];
+          for (const tag of data.feedHashTag) {
+            if (tag.feed_num.feed_num === feedNum) {
+              hashTag.push("#" + tag.feed_hash_tag);
+            }
+          }
 					const cardList = {
 						profileImage: require("@/img/Feed/no_profile.png"), //data.feed[index].member.profile_img,
 						uid: data.feed[index].member.user_id,
@@ -102,22 +110,24 @@ export default {
 						feedComments: comments,
 						recommend: data.feed[index].place_num,
 						feedNum: data.feed[index].feed_num,
+            hashTag: hashTag,
 					};
-					this.cardList.push(cardList);
-					this.cardList.sort((a, b) => {
-						// rDate를 Date 객체로 변환하여 비교
+					this.allCardList.push(cardList);
+					this.allCardList.sort((a, b) => {
 						const dateA = new Date(a.rDate);
 						const dateB = new Date(b.rDate);
 
-						// 내림차순 정렬
 						return dateB - dateA;
 					});
 					index++;
 				}
+				this.cardList = this.allCardList.slice(0, this.listCnt);
 				console.log(data);
 			});
 		},
 		async getMyFeedList(nickname) {
+      this.allCardList = [];
+      this.cardList = [];
 			var formData = new FormData();
 			formData.append("nickname", nickname);
 			this.cardList = [];
@@ -141,6 +151,12 @@ export default {
 							comments.push(comment);
 						}
 					}
+          const hashTag = [];
+          for (const tag of data.feedHashTag) {
+            if (tag.feed_num.feed_num === feedNum) {
+              hashTag.push("#" + tag.feed_hash_tag);
+            }
+          }
 					const cardList = {
 						profileImage: require("@/img/Feed/no_profile.png"), //data.feed[index].member.profile_img,
 						uid: data.feed[index].member.user_id,
@@ -155,34 +171,29 @@ export default {
 						feedComments: comments,
 						recommend: data.feed[index].place_num,
 						feedNum: data.feed[index].feed_num,
+            hashTag: hashTag,
 					};
-					this.cardList.push(cardList);
-					this.cardList.sort((a, b) => {
-						// rDate를 Date 객체로 변환하여 비교
+					this.allCardList.push(cardList);
+					this.allCardList.sort((a, b) => {
 						const dateA = new Date(a.rDate);
 						const dateB = new Date(b.rDate);
 
-						// 내림차순 정렬
 						return dateB - dateA;
 					});
 					index++;
 				}
+        this.cardList = this.allCardList.slice(0, this.listCnt);
 				console.log(data);
 			});
 		},
 		searchFeed() {
+      this.allCardList = [];
+      this.cardList = [];
 			const search = document.querySelector(".hashtag-search-input").value;
 			if (search === "") {
 				alert("검색어를 입력해주세요");
 				return false;
 			} else {
-				// this.getFeedList();
-				// this.cardList = this.cardList.filter((card) => {
-				//   card.content.includes(search);
-				// });
-				// console.log("검색어", search);
-				// console.log("검색 피드", this.cardList);
-				// this.cardList = []
 				axios.get(`http://${process.env.VUE_APP_BACK_END_URL}/feedList`).then((res) => {
 					const data = res.data;
 					var index = 0;
@@ -204,6 +215,12 @@ export default {
 								comments.push(comment);
 							}
 						}
+            const hashTag = [];
+            for (const tag of data.feedHashTag) {
+              if (tag.feed_num.feed_num === feedNum) {
+                hashTag.push("#" + tag.feed_hash_tag);
+              }
+            }
 						const cardList = {
 							profileImage: require("@/img/Feed/no_profile.png"), //data.feed[index].member.profile_img,
 							uid: data.feed[index].member.user_id,
@@ -218,12 +235,14 @@ export default {
 							feedComments: comments,
 							recommend: data.feed[index].place_num,
 							feedNum: data.feed[index].feed_num,
+              hashTag: hashTag,
 						};
 						if (cardList.content.includes(search)) {
-							this.cardList.push(cardList);
+							this.allCardList.push(cardList);
 						}
 						index++;
 					}
+          this.cardList = this.allCardList.slice(0, this.listCnt);
 					console.log(data);
 				});
 				const feedList = this.$refs.feedList;
@@ -238,48 +257,56 @@ export default {
 		closeModal() {
 			this.modal_Check = false;
 		},
-	},
-	mounted() {
-		// Spring Boot에서 정적 리소스 제공하는 URL로 설정
-		this.imagePath = `http://${process.env.VUE_APP_BACK_END_URL}/feedImg/java.png`;
-	},
-	components: {
-		FeedDetail,
-		FeedList,
+    getNextFeedList() {
+      this.listCnt += 3;
+      this.cardList = this.allCardList.slice(0, this.listCnt);
+    },
+    handleScroll() {
+      if (window.innerHeight + window.scrollY + 400 >= document.body.offsetHeight) {
+        this.getNextFeedList();
+      }
+    },
 	},
 	setup() {
-		const isLoggedIn = ref(false); // Use ref to create reactive isLoggedIn
+    const isLoggedIn = ref(false); // Use ref to create reactive isLoggedIn
 		const data = ref([]); // Use ref to create reactive data
-
+    
 		const getToken = () => {
-			const token = localStorage.getItem("jwtToken");
+      const token = localStorage.getItem("jwtToken");
 			isLoggedIn.value = token ? true : false;
 		};
-
+    
 		const logout = () => {
-			axios.get(`http://${process.env.VUE_APP_BACK_END_URL}/api/auth/logout`).then((res) => {
-				if (res.data == "Logout") {
-					localStorage.removeItem("jwtToken");
+      axios.get(`http://${process.env.VUE_APP_BACK_END_URL}/api/auth/logout`).then((res) => {
+        if (res.data == "Logout") {
+          localStorage.removeItem("jwtToken");
 					window.location.href = "/login";
 				}
 			});
 		};
-
+    
 		const decodeToken = (token) => {
 			if (token == null) return false;
 			const decoded = jwtDecode(token);
 			data.value = decoded; // Use data.value to set the value of the ref
 			return decoded;
 		};
-
+    
 		onMounted(() => {
-			getToken();
+      getToken();
 			const token = localStorage.getItem("jwtToken");
 			decodeToken(token);
 		});
-
-		return { logout, data }; // Return data in the setup function
+    
+		return { logout, data}; // Return data in the setup function
 	},
+  mounted() {
+    window.addEventListener('scroll', this.handleScroll, true);
+  },
+  components: {
+    FeedDetail,
+    FeedList,
+  },
 };
 </script>
 <style scoped>

@@ -98,7 +98,8 @@
             <!-- 본문 contents -->
             <!-- 이미지 여러개면 margin-top 조금 올리기 -->
             <div class="feed-card-content">
-              <p>{{ card.content }}</p>
+              <p>{{ card.content }}</p> <br>
+              <p id="hashTag">{{ card.hashTag.join(' ') }}</p>
             </div>
 
             <!-- 좋아요,  댓글 버튼 -->
@@ -344,4 +345,7 @@ export default {
 
 <style scoped>
 @import "@/css/client/feed/feedDetail.css";
+#hashTag {
+  color: #928e8e;
+}
 </style>

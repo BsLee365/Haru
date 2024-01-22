@@ -1,0 +1,551 @@
+/* 공통 영역 시작 */
+/* 공통영역 emotional_analysis.html에 맞게 수정해야됨. */
+.stress-container {
+  padding: 30px 0 100px;
+  min-height: calc(100vh - 249px);
+  overflow: hidden;
+}
+
+/* 전체 카드 컨테이너 */
+.reg-container {
+  width: 100%;
+  display: flex;
+}
+
+/* 1개 카드 박스 */
+.reg-box {
+  text-align: center;
+  width: 100%;
+  flex-shrink: 0;
+  transition: transform 0.5s ease-in-out; /* 부드러운 움직임 */
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 공통 카드 영역 시작 */
+.reg-box-card {
+  width: fit-content;
+  display: flex;
+  background-color: #ededed;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.25);
+}
+
+/* 버튼 영역 */
+.next-button {
+  margin-top: 40px;
+}
+
+/* 설명영역 */
+.reg-info {
+  display: flex;
+  background-color: #a2c6dd;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  width: 400px;
+  height: 550px;
+}
+.desc-title,
+.reg-tip > p {
+  color: white;
+}
+.desc-title {
+  font-size: 25px;
+  font-weight: bolder;
+}
+.reg-desc {
+  margin-top: 25px;
+}
+.reg-tip {
+  font-weight: 400;
+  margin-top: 15px;
+}
+
+/*얼굴 사진 등록 css*/
+.input-pic-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 90%;
+  height: 90%;
+}
+
+/*드래그앤 드롭 css*/
+.input-pic-box-dragndrop {
+  background-color: #707070;
+  border-radius: 10px;
+  #upload-btn-label {
+    display: none;
+  }
+  #face-pic-name {
+    color: #eeeeee;
+    font-size: 25px;
+    transition: 0.3s;
+  }
+}
+
+/*이미지 업로드 영역*/
+.img-upload-area {
+  position: absolute;
+  height: 90%;
+  width: 90%;
+  z-index: 99;
+}
+
+/* 입력 영역 */
+.stress-input-area {
+  width: 540px;
+  height: 550px;
+  background-color: #ededed;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.input-area-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 90%;
+  height: 90%;
+}
+
+/* 공통영역 끝 */
+
+/* 얼굴 등록 css */
+/* 사진 업로드 테두리 */
+.upload-grid {
+  border: dashed 2px #818181;
+  border-radius: 20px;
+}
+.upload-area-box2,
+.upload-area-box3 {
+  margin-top: 20px;
+}
+
+.upload-area-box3 {
+  z-index: 100;
+}
+/* 사진 업로드 버튼 */
+#upload-btn-label {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 20px;
+  color: white;
+  font-size: 20px;
+  background-color: #a2c6dd;
+  width: 170px;
+  height: 40px;
+  cursor: pointer;
+  text-align: center;
+}
+#upload-btn-label:hover {
+  background-color: #7fa9c4;
+}
+#upload-btn[type="file"] {
+  width: 0;
+  height: 0;
+  padding: 0;
+  border: none;
+  overflow: hidden;
+}
+.upload-area-box3 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* 척도 등록 css */
+.mood-scale {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.mood-scale-2 {
+  width: 90%;
+  height: 60px;
+  background-color: #fcfafa;
+  margin-top: 20px;
+  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.mood-scale-2 > input[type="range"] {
+  -webkit-appearance: none;
+  background-color: #fcfafa;
+  width: 85%;
+  height: 100%;
+  outline: none;
+}
+
+/*핸들 크기*/
+.mood-scale-2 > input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  /*background-image: url("@/img/FaceRegistration/mood_img/sad.png");*/
+  background-size: cover;
+  cursor: pointer;
+  margin-top: -20px;
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+}
+/*핸들러 이미지*/
+.facebgicon1::-webkit-slider-thumb {
+  background-image: url("@/img/FaceRegistration/mood_img/verysad.png");
+}
+.facebgicon2::-webkit-slider-thumb {
+  background-image: url("@/img/FaceRegistration/mood_img/sad.png");
+}
+.facebgicon3::-webkit-slider-thumb {
+  background-image: url("@/img/FaceRegistration/mood_img/normal.png");
+}
+.facebgicon4::-webkit-slider-thumb {
+  background-image: url("@/img/FaceRegistration/mood_img/happy.png");
+}
+.facebgicon5::-webkit-slider-thumb {
+  background-image: url("@/img/FaceRegistration/mood_img/veryhappy.png");
+}
+
+/* 트랙 스타일링 (WebKit 기반 브라우저) */
+.mood-scale-2 > input[type="range"]::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 20%;
+  background: #ffc6c6; /* 여기서 트랙의 배경색을 설정 */
+  border-radius: 10px; /* 트랙의 모서리 둥글게 */
+}
+
+/* 기분 폰트 사이즈 */
+.mood-scale-1 {
+  font-size: 25px;
+  display: flex;
+  align-items: center;
+}
+
+/*
+  기분 컬러코드 동적으로 변경
+  나쁨 D27373
+  조금나쁨 ED8220
+  보통 73AAD2
+  좋음 73C6D2
+  매우좋음 73D282
+  */
+
+/* 기분 뱃지 */
+.mood-bad {
+  background-color: #d27373;
+}
+.mood-little-bad {
+  background-color: #ed8220;
+}
+.mood-normal {
+  background-color: #73aad2;
+}
+.mood-good {
+  background-color: #73c6d2;
+}
+.mood-very-good {
+  background-color: #73d282;
+}
+
+/* 일기 등록 css */
+.input-diary {
+  width: 100%;
+}
+
+/* 일기 css */
+/* "@/css/client/myPlace/myDiary.css" 참고 */
+
+/* 모달 css */
+.warn-modal-wrap {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  justify-content: center;
+  z-index: 20;
+}
+
+/* modal or popup */
+.modal-container1 {
+  position: relative;
+  width: 660px;
+  height: 685px;
+  background: #dadada;
+  border-radius: 20px;
+  padding: 40px;
+  box-sizing: border-box;
+}
+/* X 버튼 */
+#warn_modal_close {
+  position: relative;
+  display: block;
+  width: 39px;
+  height: 36px;
+  float: right;
+  background: url("@/img/FaceRegistration/image-74.png");
+  border: none;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.warn-info {
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+/* 모달 내용 */
+.warn-info-box {
+  display: flex;
+  justify-content: center;
+}
+.card {
+  width: 100%;
+  height: 265px;
+  border-radius: 10px;
+  background: #fff;
+}
+.bcard {
+  width: 100%;
+  height: 265px;
+  border-radius: 10px;
+  background: #5a5a5a;
+}
+
+.info-cards-container {
+  justify-content: center;
+  align-items: center;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: 10px;
+  padding: 20px; /* 컨테이너 가장자리와 아이템 사이의 패딩 추가 */
+}
+
+.info-cards-1,
+.info-cards-2,
+.info-cards-3,
+.info-cards-4 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.info-coment {
+  margin-top: 5px;
+}
+.card > img:first-child,
+.bcard > img:first-child {
+  margin-right: 150px;
+}
+.warn-title {
+  margin-left: 20px;
+  font-size: 21px;
+  font-weight: 600;
+}
+.warn-info-box-1 > img {
+  margin-top: -10px;
+}
+
+/* 로딩화면 */
+.object {
+  position: inherit;
+  top: -240px;
+  left: 30px;
+  z-index: -10;
+  transform: rotate(-5deg);
+  animation: sail 2s infinite linear;
+}
+
+.boat {
+  width: 50px;
+  height: 40px;
+  background-color: rgb(255, 255, 255);
+  transform: perspective(50px) rotateX(-60deg);
+}
+
+.flag {
+  background-color: rgb(255, 255, 255);
+  width: 20px;
+  height: 15px;
+  transform: rotate(70deg) skew(45deg);
+  position: relative;
+  top: -43px;
+  left: 13px;
+}
+.wave {
+  position: relative;
+  width: 40px;
+  height: 37px;
+  border-radius: 50%;
+  border: 4px solid transparent;
+}
+
+#wave1,
+#wave3,
+#wave5,
+#wave7 {
+  background-color: rgb(0, 0, 0);
+  border-top: 4px solid rgb(255, 255, 255);
+  animation: flow 1s infinite linear;
+}
+#wave2,
+#wave4,
+#wave6,
+#wave8 {
+  border-bottom: 4px solid rgb(255, 255, 255);
+  animation: flow 1s infinite linear;
+}
+
+#wave1 {
+  top: 76px;
+  left: 13px;
+}
+#wave2 {
+  z-index: 1;
+  top: 7px;
+  left: -10px;
+}
+#wave3 {
+  top: -5px;
+  left: 13px;
+}
+#wave4 {
+  z-index: 2;
+  top: -66px;
+  left: 38px;
+}
+#wave5 {
+  top: -77px;
+  left: 60px;
+}
+#wave6 {
+  z-index: 3;
+  top: -138px;
+  left: 85px;
+}
+#wave7 {
+  top: -151px;
+  left: 110px;
+}
+#wave8 {
+  top: -214px;
+  left: 132px;
+}
+#analyzing,
+#almost-end {
+  color: white;
+  position: relative;
+  top: 35vh;
+}
+@keyframes flow {
+  0% {
+    transform: translate(0px);
+  }
+  100% {
+    transform: translate(-44px);
+  }
+}
+@keyframes sail {
+  0% {
+    transform: rotate(-5deg);
+  }
+  50% {
+    transform: rotate(5deg);
+  }
+}
+
+/*진행바 CSS */
+.pro-bar-box {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.row {
+  width: 100%;
+}
+
+/* 진행바 */
+.progressbar {
+  margin-bottom: 50px;
+  counter-reset: step;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+}
+.progressbar li {
+  list-style-type: none;
+  width: 15%;
+  float: left;
+  position: relative;
+  text-align: center;
+  text-transform: uppercase;
+  color: #7d7d7d;
+}
+.progressbar > li > span {
+  font-size: 17px;
+  color: #fbfbfb;
+}
+.progressbar li:before {
+  width: 20px;
+  height: 20px;
+  content: "";
+  line-height: 30px;
+  border: 2px solid #e5e5e5;
+  background-color: #e5e5e5;
+  display: block;
+  text-align: center;
+  margin: 0 auto 10px auto;
+  border-radius: 50%;
+  transition: all 0.8s;
+  position: relative;
+  z-index: 4;
+}
+.progressbar li:after {
+  width: 100%;
+  height: 2px;
+  content: "";
+  position: absolute;
+  background-color: #efefef;
+  top: 9px;
+  left: -50%;
+  z-index: 3;
+  transition: all 0.8s;
+}
+.progressbar li:first-child:after {
+  content: none;
+}
+.progressbar li.active:before {
+  border-color: #157eb7;
+  background-color: #157eb7;
+  transition: all 0.8s;
+}
+.progressbar li.active:after {
+  background-color: #157eb7;
+  transition: all 0.8s;
+}
+.progressbar li.active > .span-bold {
+  color: #157eb7;
+  font-weight: bold;
+  transition: 0.8s;
+}
+
+.progressbar li > .span-thin {
+  font-weight: 300;
+  transition: 0.8s;
+}

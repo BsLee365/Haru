@@ -19,7 +19,7 @@
               placeholder="제목"
               maxlength="30"
               ref="d_title"
-              :value="selectedDiary.diary_title"
+              :value="myDiary.diary_title"
               :readonly="dStatus === 'read'"
             />
           </div>
@@ -30,7 +30,7 @@
               placeholder="어떤 일이 있었나요?"
               maxlength="1000"
               ref="d_context"
-              :value="selectedDiary.diary_context"
+              :value="myDiary.diary_context"
               :readonly="dStatus === 'read'"
             ></textarea>
           </div>
@@ -56,7 +56,7 @@
           >
             수정완료
           </button>
-          <button class="big-ctlbtn delete-btn" @click="$emit('delete-diary', this.selectedDiary.diary_num)">
+          <button class="big-ctlbtn delete-btn" @click="$emit('delete-diary', this.myDiary.diary_num)">
             삭제하기
           </button>
         </div>
@@ -74,12 +74,17 @@ export default {
   data() {
     return {
       formData: new FormData(),
+      myDiary: {},
     };
   },
   props: {
     selectedDiary: Object,
     rDate: String,
     dStatus: String,
+  },
+  created() {
+    // 초기 설정
+    this.myDiary = this.selectedDiary;
   },
   methods: {
     // 수정하기 눌렀을 때
@@ -92,19 +97,21 @@ export default {
     // 일기 수정하기
     updateSumit() {
       const newDiaryData = {
-        diary_num: this.selectedDiary.diary_num,
+        diary_num: this.myDiary.diary_num,
         user_id: this.data.id,
         diary_title: this.$refs.d_title.value,
         diary_context: this.$refs.d_context.value,
-        diary_cdate: this.selectedDiary.diary_cdate
+        diary_cdate: this.myDiary.diary_cdate
       }
 
       axios.post(`http://${process.env.VUE_APP_BACK_END_URL}/diary/updateDiary`, newDiaryData)
           .then(() => {
             alert("일기가 수정되었습니다.");
-            // 일기 수정하면 새로운 데이터로 가져와지게 수정해야 됨
-            // this.$router.push("/MyPlaceDiary");
-            this.updateDStatus('read');
+            // this.$router.push("/MyPlaceDiary"); -> router에 사용하는 컴포넌트에서 등록이 되어있어야 사용 가능
+            this.updateDStatus('read'); // 읽기 모드로 변경
+            this.myDiary = newDiaryData; // 새 데이터로 변경
+            // MyPlaceDiary 목록 업데이트
+            this.$emit('update-all-list');
           })
           .catch(error => {
             console.log(error);

@@ -74,14 +74,16 @@
             :sendSelectedDate="sendSelectedDate"
             :isBtnHeartNone="isBtnHeartNone"
             class="rlist-container"
-            v-if="isTabRecList === true"
+            v-show="isTabRecList === true"
             ref="recList"
           />
           <MyDiaryList
+            @updateAllList="updateAllListMain"
+            @close-modal="closeModal"
             :diaryList="FinMyDiaryList"
-            class="rlist-container"
             :sendSelectedDate="sendSelectedDate"
-            v-if="isTabRecList === false"
+            class="rlist-container"
+            v-show="isTabRecList === false"
           />
         </div>
       </div>
@@ -105,25 +107,23 @@ export default {
     const allDateList = new Set(); // 추천리스트, 일기 받은 날짜 담는 곳
 
     return {
-      // 달력 외 관련
-      activeTab: "recommend", // 기본값으로 추천 리스트를 활성화
+      // 달력 외 관련 --------------------------------------
       isBtnHeartNone: false, // 하트버튼이 안보여야되는지
-      isTabRecList: true, // 추천 리스트 탭 활성화
+      isTabRecList: false, // 추천 리스트 탭 활성화 여부 (true -> 추천리스트, false -> 일기)
       RecommendList: [], // controller 에서 넘어온 월별 추천리스트 + 일기 data
       RecPlace: [], // 추천리스트로 넘길 데이터 담는 배열
       FinMyDiaryList: [], // 일기 탭으로 넘길 데이터 담는 배열
       sendSelectedDate: "", // 추천리스트로 넘길 날짜
-      // 일기 리스트
-      diaryList: [],
-      // 달력 관련 데이터
+      diaryList: [], // 일기 리스트
+      // 달력 관련 데이터 --------------------------------------
       today: today,
       sDate: sDate,
       myDate: myDate,
       week: ["일", "월", "화", "수", "목", "금", "토"],
-      calendarHeader: "",
+      calendarHeader: "", // 년도, 월 표시
       days: [], // 해당 월의 일 담은 배열
       isSelectedtoday: false, // 한 번 이라도 선택된게 있는지
-      allDateList: allDateList,
+      allDateList: allDateList, // 추천리스트, 일기 받은 날짜 담는 곳
       miniDotDates: [], // 달력에 작은 점 => 추천리스트 / 일기 있으면 찍힘
     };
   },
@@ -173,6 +173,10 @@ export default {
     return { logout, data }; // Return data in the setup function
   },
   methods: {
+    closeModal() {
+      this.modal_Check = false;
+    },
+
     // 추천리스트, 추천받은 날짜, 일기 ... 가져오기----------------------------------------------------------------
     getMyRecPlace() {
       // 달력의 첫번째 표시 날짜와 마지막 표시 날짜 가져오기
@@ -307,7 +311,6 @@ export default {
 
     // 탭 전환하기----------------------------------
     changeTab(tab) {
-      this.activeTab = tab;
       if (tab === "recommend") {
         this.isTabRecList = true;
       } else {
@@ -351,6 +354,7 @@ export default {
 
     // 날짜 클릭했을 때---------------------------------------------------------------------------------
     dayClick(i, day) {
+      // console.log('!!!! : ' + i + day);
       // 한 번 클릭된 이후엔 오늘 날짜 자동으로 선택 안되게
       if (this.isSelectedtoday == false)
         this.isSelectedtoday = !this.isSelectedtoday;
@@ -369,7 +373,11 @@ export default {
         // 다음 달 클릭 시
         this.changeMonth(1);
         this.sDate = [this.myDate[0], this.myDate[1], day, 0];
+      } else if (i == this.sDate[3] && day == this.sDate[2]) {
+        // 현재 선택된 날짜 재 선택 시
+        // console.log('같은 날짜 선택함');
       } else {
+        // 현재 Month의 다른 날짜 선택 시
         this.sDate = [this.myDate[0], this.myDate[1], day, i];
       }
 
@@ -396,6 +404,7 @@ export default {
       });
 
       this.diaryList.forEach(item => {
+        // console.log(item);
         // 가져온 데이터
         const diaryCdate = moment(item.diary_cdate).format("YYYY-MM-DD");
         // 선택한 날짜
@@ -404,7 +413,7 @@ export default {
         );
 
         if (diaryCdate == selectedDate) {
-          // console.log('!!!!!! : ' + item.diary_title)
+          console.log('!!!!!! : ' + item.diary_title)
           this.FinMyDiaryList.push(item);
         }
       });
@@ -443,6 +452,14 @@ export default {
         (i == this.days.length - 1 && index < 7)
       );
     },
+
+    // 모든 목록 업데이트
+    updateAllListMain() {
+      this.getMyRecPlace();
+      // this.dayClick(this.sDate[3], this.sDate[2]-1);
+      this.dayClick(this.sDate[3], this.sDate[2]);
+      // this.$router.push('/MyPlaceDiary');
+    }
   },
   components: {
     RecommendList,

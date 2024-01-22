@@ -5,6 +5,7 @@
       @close-modal="closeModal"
       @delete-diary="deleteDiary"
       @update-d-status="changeStatus"
+      @update-all-list="$emit('updateAllList')"
       v-if="modal_Check"
       :selectedDiary="selectedDiary"
       :rDate="sendSelectedDate"
@@ -85,16 +86,18 @@ export default {
 
     // 일기 삭제
     deleteDiary(diaryNum) {
-      axios.post(`http://${process.env.VUE_APP_BACK_END_URL}/diary/deleteDiary/${diaryNum}`)
-          .then(() => {
-            alert("일기가 삭제되었습니다.");
-            // this.$emit('close-modal');
-            if (this.modal_Check==true) {this.closeModal();}
-          })
-          .catch(error => {
-            console.log(error);
-          })
-    }
+      if (confirm('일기를 삭제할까요?')) {
+        axios.post(`http://${process.env.VUE_APP_BACK_END_URL}/diary/deleteDiary/${diaryNum}`)
+            .then(() => {
+              alert("일기가 삭제되었습니다.");
+              if (this.modal_Check==true) {this.closeModal();}
+              this.$emit('updateAllList');
+            })
+            .catch(error => {
+              console.log(error);
+            })
+      }
+    },
   },
 };
 </script>

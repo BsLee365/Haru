@@ -111,7 +111,6 @@ const routes = [
     path: "/Total_stress",
     name: "Total_stress",
     component: Total_stress,
-    props: true,
   },
   {
     path: "/MyFavoritePlace",

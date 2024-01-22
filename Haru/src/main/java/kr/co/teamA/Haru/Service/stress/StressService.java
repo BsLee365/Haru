@@ -79,7 +79,7 @@ public class StressService {
             List<RecommendPlaceDTO> save = recommendList.subList(0, Math.min(5, recommendList.size()));
 
             //DB 저장
-            //saveRecommendPlace(save);
+            saveRecommendPlace(save);
 
             return save;
         }
@@ -90,7 +90,7 @@ public class StressService {
             List<RecommendPlaceDTO> save = filterList.subList(0, Math.min(5, filterList.size()));
 
             //DB 저장
-            //saveRecommendPlace(save);
+            saveRecommendPlace(save);
 
             return save;
         }

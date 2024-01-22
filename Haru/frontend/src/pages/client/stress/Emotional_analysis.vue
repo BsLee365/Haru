@@ -475,11 +475,11 @@ export default {
                         console.log("추천 받은 장소");
                         console.log(recommend);
 
+                        // 로컬에 저장
+                        localStorage.setItem("recommendPlace", JSON.stringify(recommend));
+                        localStorage.setItem("stressScore", this.stressScore * 10);
 
-
-
-
-                        //this.$router.push("/Total_stress");
+                        this.$router.push("/Total_stress");
                       });
                   });
                 //최종 스트레스로 이동.

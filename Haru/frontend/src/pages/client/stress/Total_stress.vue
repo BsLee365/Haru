@@ -109,7 +109,7 @@
           <!-- 장소보여주기 -->
           <div class="recommend-place">
             <!--장소 카드 시작-->
-            <div class="place-card">
+            <div class="place-card" v-for="(item) in recommendPlace.data">
               <div class="'food-img">
                 <img
                   class="heart-img"
@@ -168,18 +168,27 @@
 </template>
 <script>
 export default {
-  props : ['recommendPlace', 'stressScore'],
   name: "total_stress",
   data() {
     return {
       gaugeWidth: "0%", // 초기 게이지
       ratNumber: [10, 20, 30, 40, 50, 60, 70, 80, 90],
       stressRate: 0,
+
+      // 장소
+      recommendPlace : null,
+
+      // 스트레스 수치
+      stressScore : null
+
     };
   },
   created() {
     // background-image 설정
     this.bgImage();
+
+    this.recommendPlace = JSON.parse(localStorage.getItem("recommendPlace"));
+    this.stressScore = localStorage.getItem("stressScore");
   },
   methods: {
     // background-image 설정
@@ -210,15 +219,11 @@ export default {
   },
   mounted() {
     let currentWidth = 0;
-    const targetWidth = 78; // 목표 값 추후 변경
+    const targetWidth = this.stressScore; // 목표 값 추후 변경
     this.stressRate = targetWidth;
 
     const animationDuration = 5000;
     const interval = 25;
-
-    console.log("값?");
-    console.log(this.$route.params.name);
-    console.log(this.stressScore);
 
     const step = (targetWidth - currentWidth) / (animationDuration / interval);
 
@@ -234,6 +239,18 @@ export default {
       }
     };
     animate();
+
+    this.recommendPlace.data.forEach((place, index) => {
+      // Accessing properties of each place
+      const userId = place.user_id;
+      const placeNum = place.place_num;
+      const placeScore = place.place_score;
+      const placeImg = place.place_img;
+      const placeName = place.place_name;
+
+      console.log(`Place ${index + 1}: User ID - ${userId}, Place Num - ${placeNum}, Place Score - ${placeScore}, Place Img - ${placeImg}, Place Name - ${placeName}`);
+    });
+
   },
 };
 </script>

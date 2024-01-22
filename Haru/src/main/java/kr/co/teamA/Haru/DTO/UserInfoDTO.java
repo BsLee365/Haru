@@ -9,7 +9,10 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-// 유저 아이디 중복체크를 위한 DTO
-public class UserIdDTO {
-    private String userId;
+// 유저 정보를 위한 DTO
+public class UserInfoDTO {
+    private String id;
+    private String nickname;
+    private String email;
+    private String name;
 }

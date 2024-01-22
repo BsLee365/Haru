@@ -1,5 +1,6 @@
 package kr.co.teamA.Haru.DTO;
 
+import kr.co.teamA.Haru.Entity.Place;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -7,10 +8,9 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
+// 위시리스트를 위한 DTO
 public class WishListDTO {
-    private Long wishListNum;
     private String userId;
-    private String placeNumber;
+    private Place place;
 }

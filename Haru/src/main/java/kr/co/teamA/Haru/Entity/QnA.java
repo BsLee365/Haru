@@ -8,7 +8,6 @@ import lombok.NoArgsConstructor;
 
 import java.sql.Date;
 
-
 @Data
 @Entity
 @NoArgsConstructor
@@ -21,7 +20,6 @@ public class QnA {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "QNA_SEQ")
     @SequenceGenerator(name = "QNA_SEQ", sequenceName = "QNA_SEQ", allocationSize = 1)
     private Long QNANUM;
-
 
     @ManyToOne
     @JoinColumn(name = "userId", referencedColumnName = "userId")

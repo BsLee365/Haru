@@ -24,7 +24,7 @@ public class RedisAuthConfig {
         return lettuceConnectionFactory;
     }
 
-    @Bean(name="redisTemplate")
+    @Bean(name = "redisTemplate")
     public StringRedisTemplate redisTemplate() {
         StringRedisTemplate redisTemplate = new StringRedisTemplate(redisConnectionFactory());
         redisTemplate.setKeySerializer(new StringRedisSerializer());
@@ -32,4 +32,3 @@ public class RedisAuthConfig {
         return redisTemplate;
     }
 }
-

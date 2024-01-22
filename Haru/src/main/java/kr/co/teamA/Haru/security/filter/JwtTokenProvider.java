@@ -21,8 +21,7 @@ import java.util.Map;
 public class JwtTokenProvider {
     Key key = Keys.secretKeyFor(SignatureAlgorithm.HS512);
 
-
-    //인증된 사용자에 대한 JWT를 생성을 하고
+    // 인증된 사용자에 대한 JWT를 생성을 하고
     public String createToken(Authentication authentication) {
         System.out.println("createToken--------------------------");
         Member userDetails = (Member) authentication.getPrincipal();
@@ -30,33 +29,31 @@ public class JwtTokenProvider {
         Date expiryDate = new Date(now.getTime() + 3600000);
 
         Map<String, Object> claims = new HashMap<>();
-        System.out.println("userDetails.getUsername() =>"+userDetails.getUserId());
-        System.out.println("userDetails.getAuthorities() =>"+ userDetails.getUserId());
+        System.out.println("userDetails.getUsername() =>" + userDetails.getUserId());
+        System.out.println("userDetails.getAuthorities() =>" + userDetails.getUserId());
         claims.put("username", userDetails.getName());
         claims.put("id", userDetails.getUserId());
         claims.put("nickname", userDetails.getNickname());
 
-        System.out.println("key =>"+key);
+        System.out.println("key =>" + key);
 
         return Jwts.builder()
                 .setClaims(claims)
                 .setIssuedAt(new Date())
                 .setExpiration(expiryDate)
-                .signWith(key,SignatureAlgorithm.HS512)
+                .signWith(key, SignatureAlgorithm.HS512)
                 .compact();
     }
 
-
     public String resolveToken(HttpServletRequest request) {
         System.out.println("resolveToken--------------------------");
-        System.out.println("request.getHeader(\"Authorization\") =>"+request.getHeader("Authorization"));
+        System.out.println("request.getHeader(\"Authorization\") =>" + request.getHeader("Authorization"));
         String bearerToken = request.getHeader("Authorization");
         if (StringUtils.hasText(bearerToken) && bearerToken.startsWith("Bearer ")) {
             return bearerToken.substring(7);
         }
         return null;
     }
-
 
     public boolean validateToken(String token) {
         try {
@@ -88,4 +85,3 @@ public class JwtTokenProvider {
         return claims.get("id").toString();
     }
 }
-

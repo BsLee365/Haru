@@ -9,6 +9,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+// 마이페이지를 위한 DTO
 public class MyPageDTO {
     private String userId;
     private String name;

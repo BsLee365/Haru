@@ -9,6 +9,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+// 닉네임 중복체크를 위한 DTO
 public class NicknameDTO {
     private String nickname;
 }

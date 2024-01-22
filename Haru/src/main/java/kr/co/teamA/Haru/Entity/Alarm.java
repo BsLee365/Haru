@@ -1,12 +1,10 @@
 package kr.co.teamA.Haru.Entity;
 
-
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 
 @Data
 @Entity
@@ -32,7 +30,6 @@ public class Alarm {
     @ManyToOne
     @JoinColumn(name = "commentNum", referencedColumnName = "commentNum")
     private FeedComment feedComment;
-
 
     @Column(nullable = false)
     private Long alarmTypes;

@@ -120,6 +120,8 @@ export default {
       console.log("비밀번호 찾기 모달");
       this.isPwdModalOpen = !this.isPwdModalOpen;
     },
+
+    // 로그인 메소드
     loginSubmit() {
       axios
         .post(
@@ -139,9 +141,8 @@ export default {
         .then((res) => {
           console.log(res);
           if (!res.data.access_token == "") {
-            alert("로그인 성공");
             localStorage.setItem("jwtToken", res.data.access_token);
-            window.location.href = "/";
+            this.$router.replace("/");
           } else {
             alert("로그인 실패");
           }

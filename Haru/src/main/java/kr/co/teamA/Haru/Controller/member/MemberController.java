@@ -1,65 +1,43 @@
 package kr.co.teamA.Haru.Controller.member;
 
-import kr.co.teamA.Haru.DTO.MemberDTO;
-import kr.co.teamA.Haru.Service.member.EmailSenderService;
+import kr.co.teamA.Haru.DTO.UserInfoDTO;
 import kr.co.teamA.Haru.Service.member.MemberService;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
-import java.io.FileOutputStream;
-import java.util.List;
-import java.util.UUID;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import java.util.Map;
 
 @RestController
+@RequestMapping("/member")
 public class MemberController {
 
-    @Value("${profile-img-path}")
-    private String imageDirctory;
+    @Autowired
+    private MemberService memberService;
 
-    private final MemberService memberService;
+    // 개인 정보 수정 시 비밀번호 확인
+    @PostMapping("/userConfirm")
+    public int userConfirm(@RequestBody Map<String, String> userData) {
+        System.out.println(userData.get("userId"));
+        System.out.println(userData.get("password"));
 
-    public MemberController(MemberService memberService, EmailSenderService mailSender) {
-        this.memberService = memberService;
+
+        int check = memberService.checkPassword(userData.get("userId"), userData.get("password"));
+        return check;
     }
 
-    @GetMapping("/{userId}/userId")
-    public int getUserId(@PathVariable("userId") String userId) {
-        return memberService.checkDuplicateNickname(userId);
+    // 개인 정보 수정
+    @PostMapping("/userData")
+    public UserInfoDTO getUserData(@RequestBody Map<String, String> userData) {
+        System.out.println(userData.get("id"));
+        UserInfoDTO memberDTO = memberService.getMemberByUserId(userData.get("id"));
+        return memberDTO;
     }
 
-    @GetMapping("/{nickname}/nicknameCheck")
-    public int getNickname(@PathVariable("nickname") String nickname) {
-        int returnVal = memberService.checkDuplicateNickname(nickname);
-        return returnVal;
+    // 개인 정보 삭제
+    @DeleteMapping("/delete/{userId}")
+    public int deleteMember(@PathVariable String userId) {
+        System.out.println(userId);
+        int result = memberService.deleteMember(userId);
+        return result;
     }
-
-    @PostMapping("/signup")
-    public ResponseEntity<?> handleFileUpload(@ModelAttribute MemberDTO memberDTO,
-            @RequestParam("files") List<MultipartFile> files) {
-
-        String imgName = null;
-        for (MultipartFile multipartFile : files) {
-            imgName = UUID.randomUUID() + getExtension(multipartFile.getOriginalFilename());
-            String filePath = imageDirctory + imgName;
-            try (FileOutputStream writer = new FileOutputStream(filePath)) {
-                writer.write(multipartFile.getBytes());
-            } catch (Exception e) {
-                throw new RuntimeException("Fail to upload files.");
-            }
-        }
-        memberDTO.setProfileImg(imgName);
-        memberService.create(memberDTO);
-        return ResponseEntity.ok().build();
-    }
-
-    private String getExtension(String fileName) {
-        return fileName.substring(fileName.lastIndexOf("."));
-    }
-
 }

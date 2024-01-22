@@ -10,10 +10,9 @@ public class MypageController {
 
     MyPageService myPageService;
 
+    // 마이페이지 데이터
     @PostMapping("/myPageData")
     public String myPageData(@RequestBody String token) {
-        System.out.println("test");
-        System.out.println("token => " + token);
         return myPageService.myPageData(token);
     }
 }

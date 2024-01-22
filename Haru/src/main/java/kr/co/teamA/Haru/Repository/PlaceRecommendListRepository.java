@@ -13,9 +13,11 @@ import java.util.List;
 
 @Repository
 public interface PlaceRecommendListRepository extends JpaRepository<PlaceRecommendList, Long> {
-    @Query("SELECT new kr.co.teamA.Haru.DTO.ShowMyRecommendPlaceDTO(prl.place, prl.member.userId, prl.placeCdate, prl.recommendNum) " +
+    @Query("SELECT new kr.co.teamA.Haru.DTO.ShowMyRecommendPlaceDTO(prl.place, prl.member.userId, prl.placeCdate, prl.recommendNum) "
+            +
             "from PlaceRecommendList prl WHERE prl.member.userId = :userId " +
             "and prl.placeCdate between :startDate and :endDate")
 
-    List<ShowMyRecommendPlaceDTO> getMyRecommendPlace(@Param("userId") String userId,@Param("startDate") Date startDate, @Param("endDate") Date endDate);
+    List<ShowMyRecommendPlaceDTO> getMyRecommendPlace(@Param("userId") String userId,
+            @Param("startDate") Date startDate, @Param("endDate") Date endDate);
 }

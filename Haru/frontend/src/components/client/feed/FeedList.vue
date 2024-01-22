@@ -1,14 +1,18 @@
 <template>
   <!-- 피드 리스트 화면 - 카드 하나  -->
   <div>
+    <div v-if="this.$route.query.nickname || selectedNickname" class="page-title-area">
+        <h1 class="page-upload-title">{{ this.$route.query.nickname }}{{ selectedNickname }}님의 피드</h1>
+    </div>
     <div class="feed-card" v-for="(i, idx) in cardList" :key="idx">
+      
       <div class="feed-card-header">
         <!-- 프로필 사진, 닉네임 -->
         <div class="feed-profile-area">
           <div class="feed-profile-img">
-            <a href="#"><img :src="i.profileImage" /></a>
+            <a href="#" @click="getMyFeedList(i.nickname)"><img :src="i.profileImage" /></a>
           </div>
-          <a href="#"
+          <a href="#" @click="getMyFeedList(i.nickname)"
             ><span class="feed-nickname">{{ i.nickname }}</span></a
           >
         </div>
@@ -107,7 +111,7 @@
         <div class="card-btn">
           <div>
             <div class="heart">
-              <img class="cursor-p" src="@/img/Feed/heart.png" id="heart" />
+              <img class="cursor-p" src="@/img/Feed/heart.png" id="heart"  @click=""/>
               <span>{{ i.likes }}</span>
             </div>
             <div class="comment">
@@ -135,10 +139,22 @@ export default {
   data() {
     return {
       modal_Check: false,
+      selectedNickname: "",
     };
   },
   props: {
     cardList: Object, // 부모로부터 받은 데이터
   },
+  methods: {
+    getMyFeedList(nickname) {
+      this.$emit("getMyFeedList", nickname);
+      this.selectedNickname = nickname;
+    },
+  },
 };
 </script>
+<style scoped>
+.page-upload-title {
+  margin-left: 43px;
+}
+</style>

@@ -141,7 +141,7 @@ export default {
           if (!res.data.access_token == "") {
             alert("로그인 성공");
             localStorage.setItem("jwtToken", res.data.access_token);
-            this.$router.replace("/");
+            window.location.href = "/";
           } else {
             alert("로그인 실패");
           }

@@ -23,8 +23,8 @@
         <div class="dropdown">
           <button class="dropbtn">피드</button>
           <div class="dropdown-content">
-            <a href="/feed">피드</a>
-            <a href="/MyFeed">내 피드</a>
+            <a @click="toFeed" style="cursor: pointer;">피드</a>
+            <a @click="toMyFeed(data.nickname)" style="cursor: pointer;">내 피드</a>
             <a href="insertFeed">피드 작성하기</a>
           </div>
         </div>
@@ -72,6 +72,14 @@ export default {
   name: "Header",
   data() {
     return {};
+  },
+  methods: {
+    toFeed() {
+      window.location.href = "/feed";
+    },
+    toMyFeed(nickname) {
+      window.location.href = '/feed?nickname=' + nickname;
+    },
   },
   setup() {
     const isLoggedIn = ref(false);

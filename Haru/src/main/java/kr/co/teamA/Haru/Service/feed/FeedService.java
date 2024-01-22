@@ -185,4 +185,27 @@ public class FeedService {
         feedRepository.delete(feed);
     }
 
+    public Map<String, Object> getMyFeedList(String nickname) {
+        List<Feed> feed = feedRepository.findByMember_Nickname(nickname);
+        List<FeedComment> feedComment = new ArrayList<>();
+        List<FeedHashTag> feedHashTag = new ArrayList<>();
+        List<FeedImg> feedImg = new ArrayList<>();
+        List<Integer> feedLike = new ArrayList<>();
+        for (Feed f : feed) {
+            feedComment.addAll(feedCommentRepository.findByFeedNum_FeedNum(f.getFeedNum()));
+            feedHashTag.addAll(feedHashTagRepository.findByFeedNum_FeedNum(f.getFeedNum()));
+            feedImg.addAll(feedImgRepository.findByFeedNum_FeedNum(f.getFeedNum()));
+            feedLike.add(feedLikeRepository.countByFeedNum_FeedNum(f.getFeedNum()));
+        }
+        Map<String, Object> feedList = new HashMap<String, Object>();
+
+        feedList.put("feed", feed);
+        feedList.put("feedComment", feedComment);
+        feedList.put("feedHashTag", feedHashTag);
+        feedList.put("feedImg", feedImg);
+        feedList.put("feedLike", feedLike);
+
+        return feedList;
+    }
+
 }

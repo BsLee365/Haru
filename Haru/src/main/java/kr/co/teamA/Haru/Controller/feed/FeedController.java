@@ -8,9 +8,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
 
 import kr.co.teamA.Haru.Entity.Feed;
 import kr.co.teamA.Haru.Entity.FeedComment;
@@ -22,7 +19,6 @@ import java.io.File;
 import java.util.List;
 import java.util.ArrayList;
 import org.springframework.web.bind.annotation.RequestBody;
-
 
 @RestController
 public class FeedController {
@@ -80,7 +76,9 @@ public class FeedController {
 
     private void saveFile(MultipartFile file) {
         try {
-            String uploadDir = "E:\\git\\final\\Haru\\Haru\\src\\main\\resources\\static\\FeedImg";
+            String rootPath = System.getProperty("user.dir");
+            System.out.println(rootPath);
+            String uploadDir = rootPath + "\\Haru\\src\\main\\resources\\static\\FeedImg";
             String fileName = file.getOriginalFilename();
 
             file.transferTo(new File(uploadDir + File.separator + fileName));
@@ -125,5 +123,13 @@ public class FeedController {
     public void feedDelete(@RequestParam("feedNum") String feedNum) {
         feedService.feedDelete(feedNum);
     }
-    
+
+    @PostMapping("/myFeedList")
+    public Map<String, Object> myFeedList(@RequestParam("nickname") String nickname) {
+
+        Map<String, Object> myFeedList = feedService.getMyFeedList(nickname);
+
+        return myFeedList;
+    }
+
 }

@@ -13,7 +13,7 @@
 			</form>
 
 			<!-- 피드 Start -->
-			<FeedList :cardList="cardList" @open-modal="openModal" @getMyFeedList="getMyFeedList" ref="feedList" />
+			<FeedList :userData="this.data" :cardList="cardList" @open-modal="openModal" @getMyFeedList="getMyFeedList" @getFeedList="getFeedList" ref="feedList" />
 		</div>
 	</div>
 </template>
@@ -23,7 +23,6 @@ import FeedDetail from "@/components/client/feed/FeedDetail.vue";
 import axios from "axios";
 import { ref, onMounted } from "vue";
 import { jwtDecode } from "jwt-decode";
-export const EventBus = new Vue();
 
 export default {
 	name: "feedMain",

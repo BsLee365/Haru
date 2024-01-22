@@ -19,7 +19,7 @@ public class Like {
     @SequenceGenerator(name = "LIKE_SEQ_", sequenceName = "LIKE_SEQ_", allocationSize = 1)
     private Long likeNum;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.REMOVE)
     @JoinColumn(name = "feedNum")
     private Feed feed;
 

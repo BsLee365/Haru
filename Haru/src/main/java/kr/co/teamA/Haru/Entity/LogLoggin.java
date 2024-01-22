@@ -24,11 +24,11 @@ public class LogLoggin {
     @Column(nullable = false)
     private Long accessInfo;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.REMOVE)
     @JoinColumn(name = "adminId", referencedColumnName = "adminId")
     private ADMIN admin;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.REMOVE)
     @JoinColumn(name = "userId", referencedColumnName = "userId")
     private Member member;
 

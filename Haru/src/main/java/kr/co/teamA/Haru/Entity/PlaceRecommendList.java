@@ -19,11 +19,11 @@ public class PlaceRecommendList {
     @SequenceGenerator(name = "PLACERECOMMENDLIST_SEQ_", sequenceName = "PLACERECOMMENDLIST_SEQ_", allocationSize = 1)
     private Long recommendNum;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.REMOVE)
     @JoinColumn(name = "placeNumber")
     private Place place;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.REMOVE)
     @JoinColumn(name = "userId")
     private Member member;
 

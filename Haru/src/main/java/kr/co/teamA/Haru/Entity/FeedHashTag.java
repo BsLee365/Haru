@@ -21,7 +21,7 @@ public class FeedHashTag {
 
     private String feedHashTag;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.REMOVE)
     @JoinColumn(name = "feedNum")
     private Feed feed_num;
 }

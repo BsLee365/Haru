@@ -43,7 +43,7 @@ public class Member implements UserDetails {
     private String cDate;
 
     @Column(length = 10)
-    private String role = "ROLE_USER";
+    private String role;
 
     public void setUserId(String userId) {
         this.userId = userId;

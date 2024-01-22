@@ -19,11 +19,11 @@ public class WishList {
     @SequenceGenerator(name = "WISHLIST_SEQ_", sequenceName = "WISHLIST_SEQ_", allocationSize = 1)
     private Long wishListNum;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.REMOVE)
     @JoinColumn(name = "userId")
     private Member member;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.REMOVE)
     @JoinColumn(name = "placeNumber")
     private Place place;
 }

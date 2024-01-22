@@ -242,6 +242,7 @@ export default {
   },
   created() {
     this.previewImageUrls = ['default'];
+    this.imageList = ['default'];
     const feedData = history.state.feedData;
     var formData = new FormData();
     formData.append("feedNum", feedData.feed_num);
@@ -276,6 +277,11 @@ export default {
     this.upimage = feedData.feedImg;
     
     this.bgImage();
+    console.log("이미지 리스트", this.imageList);
+    console.log("이미지 이름 리스트", this.imageNameList)
+    console.log("미리보기 리스트", this.previewImageUrls);
+    console.log("기존 이미지 리스트", this.originImage);
+    console.log("기존 이미지 미리보기 리스트", this.originImagePreview)
   },
   methods: {
     bgImage() {
@@ -373,7 +379,7 @@ export default {
         this.originImage.splice(idx - 1, 1);
         this.originImagePreview.splice(idx - 1, 1);
       }
-      this.imageList.splice(idx - 1, 1);
+      this.imageList.splice(idx, 1);
       console.log("이미지 리스트", this.imageList);
       this.imageNameList.splice(idx - 1, 1);
       console.log("이미지 이름 리스트", this.imageNameList)
@@ -399,11 +405,13 @@ export default {
         }
       }
       console.log(this.writeHashtag)
-      for (const [index, image] of this.imageList.entries()) {
+      for (const image of this.imageList) {
         if (typeof image !== "string") {
           formData.append("file", image);
-          formData.append("imageName", this.imageNameList[index]);
         }
+      }
+      for (const name of this.imageNameList) {
+        formData.append("imageName", name);
       }
       formData.append("feedNum", history.state.feedData.feed_num);
       formData.append("contents", document.getElementById("contents").value);

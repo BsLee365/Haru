@@ -184,7 +184,7 @@
             <!-- 수정하기, 삭제하기 버튼 => 본인 게시글일 경우 -->
             <div class="card-ctrl-btn-area">
               <button class="card-ctrl-btn update" @click="feedUpdate">수정</button>
-              <button class="card-ctrl-btn delete">삭제</button>
+              <button class="card-ctrl-btn delete" @click="feedDelete">삭제</button>
             </div>
           </div>
         </div>
@@ -323,6 +323,16 @@ export default {
             feedData: feedData,
           },
         });
+      })
+    },
+    feedDelete() {
+      var formData = new FormData();
+      formData.append("feedNum", this.card.feedNum);
+      axios.post(`http://${process.env.VUE_APP_BACK_END_URL}/feedDelete`, formData)
+      .then(() => {
+        alert("삭제되었습니다.");
+        this.$emit("getFeedList");
+        this.$emit("close-modal");
       })
     },
   },

@@ -21,6 +21,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.io.File;
 import java.util.List;
 import java.util.ArrayList;
+import org.springframework.web.bind.annotation.RequestBody;
+
 
 @RestController
 public class FeedController {
@@ -78,7 +80,7 @@ public class FeedController {
 
     private void saveFile(MultipartFile file) {
         try {
-            String uploadDir = "E:\\ICT\\final\\Haru\\Haru\\src\\main\\resources\\static\\FeedImg";
+            String uploadDir = "E:\\git\\final\\Haru\\Haru\\src\\main\\resources\\static\\FeedImg";
             String fileName = file.getOriginalFilename();
 
             file.transferTo(new File(uploadDir + File.separator + fileName));
@@ -104,7 +106,8 @@ public class FeedController {
     @PostMapping("/updateFeed")
     public void feedUpdate(@RequestParam Map<String, Object> data,
             @RequestParam(value = "file", required = false) List<MultipartFile> files,
-            @RequestParam("hashTag") List<String> hashTag) {
+            @RequestParam("hashTag") List<String> hashTag,
+            @RequestParam(value = "imageName", required = false) List<String> imageName) {
         System.out.println(data);
         List<String> feedImgs = new ArrayList<>();
         if (files != null) {
@@ -112,13 +115,15 @@ public class FeedController {
                 saveFile(file);
             }
         }
-        if (data.get("imageName").getClass() == String.class) {
-            feedImgs.add((String) data.get("imageName"));
-        } else {
-            for (String file : (List<String>) data.get("imageName")) {
-                feedImgs.add(file);
-            }
+        for (String file : imageName) {
+            feedImgs.add(file);
         }
         feedService.feedUpdate(data, feedImgs, hashTag);
     }
+
+    @PostMapping("/feedDelete")
+    public void feedDelete(@RequestParam("feedNum") String feedNum) {
+        feedService.feedDelete(feedNum);
+    }
+    
 }

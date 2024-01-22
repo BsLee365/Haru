@@ -97,7 +97,7 @@
               v-if="i.content.length > 100"
               class="more cursor-p"
               id="more"
-              @click="$emit('open-modal')"
+              @click="$emit('open-modal', i, idx)"
             >
               ... 더보기
             </span>

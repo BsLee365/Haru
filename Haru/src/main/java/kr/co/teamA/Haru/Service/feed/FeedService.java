@@ -156,6 +156,7 @@ public class FeedService {
         for (FeedImg img : feedImg) {
             feedImgRepository.delete(img);
         }
+        System.out.println(feedImgs);
         for (String feedImg2 : feedImgs) {
             FeedImg img = FeedImg.builder()
                     .feedNum(feed)
@@ -176,6 +177,12 @@ public class FeedService {
                     .build();
             feedHashTagRepository.save(feedHashTag2);
         }
+    }
+
+    @Transactional
+    public void feedDelete(String feedNum) {
+        Feed feed = feedRepository.findByFeedNum(Integer.parseInt(feedNum));
+        feedRepository.delete(feed);
     }
 
 }

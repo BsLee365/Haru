@@ -2,7 +2,8 @@ package kr.co.teamA.Haru.Entity;
 
 import java.util.Date;
 
-import org.springframework.format.annotation.DateTimeFormat;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -13,8 +14,6 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
-import jakarta.persistence.Temporal;
-import jakarta.persistence.TemporalType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -35,6 +34,7 @@ public class FeedComment {
 
     @ManyToOne
     @JoinColumn(name = "feedNum")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Feed feedNum;
 
     @ManyToOne

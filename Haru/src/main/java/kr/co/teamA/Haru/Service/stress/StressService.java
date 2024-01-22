@@ -27,7 +27,6 @@ public class StressService {
     private MemberRepository memberRepository;
 
     JwtTokenProvider jwtTokenProvider;
-
     public String tokenValidation(String token) {
         boolean verification = jwtTokenProvider.validateToken(token);
         if (verification) {
@@ -57,24 +56,24 @@ public class StressService {
 
     // 스트레스 데이터 저장
     @Transactional
-    public void saveStressData(StressSaveDTO stressData) {
+    public void saveStressData(StressSaveDTO stressData){
 
         System.out.println(stressData.toString());
         StressData vo = new StressData();
 
         Optional<Member> mem = memberRepository.findByUserId(stressData.getUserid());
 
-        // 유저 아이디
+        //유저 아이디
         mem.ifPresent(vo::setMember);
-        // 얼굴
+        //얼굴
         vo.setFaceData(stressData.getFacefigure());
-        // 일기
+        //일기
         vo.setDiaryData(stressData.getDiaryfigure());
-        // 총 점수
+        //총 점수
         vo.setStressScore(stressData.getStressscore());
-        // 날짜
+        //날짜
         vo.setStressCdate(new Date());
-        // DB에 저장
+        //DB에 저장
         stressRepository.save(vo);
     }
 

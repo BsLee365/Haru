@@ -23,12 +23,13 @@ public class EmailSenderService {
 
     private String authCode;
 
+
     public int duplicateEmail(String email) {
         int checkEmail = memberRepository.findUserEmailByEmail(email);
         return checkEmail > 0 ? 1 : 0;
     }
 
-    public void createAuthCode() {
+    public void createAuthCode () {
         int length = 6;
         StringBuilder authCode = new StringBuilder();
         Random random = new Random();
@@ -36,7 +37,7 @@ public class EmailSenderService {
         for (int i = 0; i < length; i++) {
             int type = random.nextInt(3);
 
-            switch (type) {
+            switch(type) {
                 case 0:
                     authCode.append(random.nextInt(10));
                     break;
@@ -73,13 +74,13 @@ public class EmailSenderService {
             helper.setText(body, true);
             mailSender.send(message);
             certificationNumberDAO.saveCertificationNumber(toEmail, authCode);
-
+            
         } catch (MessagingException e) {
             throw new RuntimeException(e);
         }
-    }
+     }
 
-    public boolean isVerify(String email, String authCode) {
+     public boolean isVerify(String email, String authCode) {
         System.out.println(certificationNumberDAO.hasKey(email));
         System.out.println(authCode);
         System.out.println(certificationNumberDAO.getCertificationNumber(email));
@@ -87,8 +88,9 @@ public class EmailSenderService {
                 .getCertificationNumber(email).equals(authCode)) {
             certificationNumberDAO.deleteCertificationNumber(email);
             return true;
-        } else {
+        }
+        else {
             return false;
         }
-    }
+     }
 }

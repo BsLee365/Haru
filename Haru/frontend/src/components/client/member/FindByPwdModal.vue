@@ -61,7 +61,11 @@
                 id="email"
                 placeholder="이메일 입력"
               />
-              <button class="input-in-btn" id="email-ckeck" @click="findByPwd">
+              <button
+                class="input-in-btn"
+                id="email-ckeck"
+                @click.prevent="submit"
+              >
                 인증
               </button>
               <div class="error-msg-area">
@@ -89,7 +93,7 @@
           </div>
 
           <div class="btn-area">
-            <button class="big-ctlbtn insert-btn" @click="submit">
+            <button class="big-ctlbtn insert-btn" @click="findIdToggleModal">
               비밀번호 재설정
             </button>
           </div>
@@ -99,8 +103,6 @@
   </div>
 </template>
 <script>
-import axios from "axios";
-
 export default {
   name: "FindByIdModal",
   data() {
@@ -108,114 +110,6 @@ export default {
   },
   props: {
     modalOpen: Boolean,
-  },
-  methods: {
-    // 아이디 찾기 메소드
-    findByPwd(event) {
-      event.preventDefault();
-      if (document.getElementById("id").value == "") {
-        alert("아이디를 입력해주세요.");
-        event.preventDefault();
-        event.stopPropagation();
-        return;
-      } else if (document.getElementById("name").value == "") {
-        alert("이름을 입력해주세요.");
-        event.preventDefault();
-        event.stopPropagation();
-        return;
-      } else if (document.getElementById("email").value == "") {
-        alert("이메일을 입력해주세요.");
-        event.preventDefault();
-        event.stopPropagation();
-        return;
-      }
-      // 이름, 이메일, 유저 아이디 값 가져오기
-      const name = document.getElementById("name").value;
-      const email = document.getElementById("email").value;
-      const userId = document.getElementById("id").value;
-
-      this.formData = new FormData();
-
-      // FormData에 값 추가
-      this.formData.append("userId", userId);
-      this.formData.append("username", name);
-      this.formData.append("email", email);
-
-      // 이메일 인증 메서드
-      axios
-        .post(
-          `http://${process.env.VUE_APP_BACK_END_URL}/api/auth/findByPwd`,
-          this.formData,
-          {
-            headers: {
-              "Content-Type": "application/json",
-              Accept: "application/json",
-            },
-          }
-        )
-        .then((res) => {
-          console.log(res);
-          if (res.data == 1) {
-            alert("이메일로 아이디를 전송하였습니다.");
-          } else {
-            alert("이메일을 다시 확인해주세요.");
-          }
-        });
-    },
-
-    // 인증번호 확인 메소드
-    submit(event) {
-      event.preventDefault();
-      if (document.getElementById("id").value == "") {
-        document.getElementById("id").focus();
-        event.preventDefault();
-        event.stopPropagation();
-        alert("아이디를 입력해주세요.");
-        return;
-      } else if (document.getElementById("name").value == "") {
-        document.getElementById("name").focus();
-        event.preventDefault();
-        event.stopPropagation();
-        alert("이름을 입력해주세요.");
-        return;
-      } else if (document.getElementById("email").value == "") {
-        document.getElementById("email").focus();
-        event.preventDefault();
-        event.stopPropagation();
-        alert("이메일을 입력해주세요.");
-        return;
-      } else if (document.getElementById("emailCheck").value == "") {
-        document.getElementById("emailCheck").focus();
-        event.preventDefault();
-        event.stopPropagation();
-        alert("인증번호를 입력해주세요.");
-        return;
-      }
-
-      const code = document.getElementById("emailCheck").value;
-      this.formData.append("code", code);
-      axios
-        .post(
-          `http://${process.env.VUE_APP_BACK_END_URL}/api/auth/findById/certification`,
-          this.formData,
-          {
-            headers: {
-              "Content-Type": "application/json",
-              Accept: "application/json",
-            },
-          }
-        )
-        .then((res) => {
-          console.log("res" + res);
-          if (res.data != 0) {
-            alert("인증되었습니다.");
-            localStorage.setItem("userId", res.data);
-            this.$router.push("/ChangeMyPwd");
-          } else {
-            alert("인증번호를 다시 확인해주세요.");
-          }
-        });
-    },
   },
 };
 </script>

@@ -42,8 +42,7 @@ public class PlaceRecommendListService {
 
         RecommendItemsDTO recItemDto = new RecommendItemsDTO();
 
-        List<ShowMyRecommendPlaceDTO> recList = placeRecListRepository
-                .getMyRecommendPlace(getRecommendListDto.getUserid(), startDate, endDate);
+        List<ShowMyRecommendPlaceDTO> recList = placeRecListRepository.getMyRecommendPlace(getRecommendListDto.getUserid(), startDate, endDate);
         List<DiaryDTO> diaryList = diaryRepository.getMyDiaryList(getRecommendListDto.getUserid(), startDate, endDate);
 
         recItemDto.setRec_list(recList);

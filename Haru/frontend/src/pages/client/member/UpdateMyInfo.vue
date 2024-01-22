@@ -4,7 +4,6 @@
       <DeleteMyInfoModal
         :deleteMyInfoModal="deleteMyInfoModal"
         @modalClose="toggleDeleteMyInfoModal"
-        :userId="userId"
       />
     </div>
     <div>
@@ -31,9 +30,8 @@
               type="text"
               id="userId"
               readonly
-              :value="userId"
+              value="rhdudwnd82"
             />
-            <input type="hidden" id="userId-v" :value="userId" />
           </div>
         </div>
 
@@ -49,7 +47,7 @@
               name="nickname"
               id="nickname"
               placeholder="한글, 영문 대소문자, 숫자만 사용 가능"
-              :value="nickname"
+              value="개구쟁이"
             />
             <button
               class="input-in-btn"
@@ -76,7 +74,7 @@
               name="name"
               id="name"
               placeholder="이름 입력"
-              :value="name"
+              value="고영중"
             />
           </div>
           <div class="error-msg-area">
@@ -96,7 +94,7 @@
               @keydown.enter.prevent="handleEnter"
               id="email"
               placeholder="이메일 입력"
-              :value="email"
+              value="rhdudwnd82@naver.com"
             />
             <button class="input-in-btn" id="email-ckeck" @click="emailCheck">
               중복확인
@@ -137,7 +135,7 @@
           <input
             type="button"
             id="update-my-info"
-            @click="submit"
+            @click="updateMyInfo"
             value="정보수정"
             class="big-ctlbtn select-btn"
           />
@@ -157,17 +155,18 @@
 <script>
 import axios from "axios";
 import DeleteMyInfoModal from "@/components/client/member/DeleteUserModal.vue";
-import { ref, onMounted } from "vue";
-import { jwtDecode } from "jwt-decode";
 
 export default {
   name: "UpdateMyInfo",
   data() {
     return {
+      userId: "",
+      nickname: "",
+      email: "",
+      name: "",
       deleteMyInfoModal: false,
       isLoggedIn: false,
       AccessToken: "",
-      formData: new FormData(),
     };
   },
   components: {
@@ -175,80 +174,13 @@ export default {
   },
   created() {
     this.bgImage();
-  },
-  setup() {
-    const isLoggedIn = ref(false);
-    const data = ref([]);
-    const userId = ref("");
-    const nickname = ref("");
-    const email = ref("");
-    const name = ref("");
-
-    // 토큰 가져오기
-    const getToken = () => {
-      const token = localStorage.getItem("jwtToken");
-      isLoggedIn.value = token ? true : false;
-    };
-    // 로그아웃 메서드
-    const logout = () => {
-      axios
-        .get(`http://${process.env.VUE_APP_BACK_END_URL}/api/auth/logout`)
-        .then((res) => {
-          if (res.data == "Logout") {
-            localStorage.removeItem("jwtToken");
-            window.location.href = "/login";
-          }
-        });
-    };
-    // 토큰 디코딩
-    const decodeToken = (token) => {
-      if (token == null) return false;
-      const decoded = jwtDecode(token);
-      data.value = decoded; // Use data.value to set the value of the ref
-      return decoded;
-    };
-
-    onMounted(() => {
-      getToken();
-      const token = localStorage.getItem("jwtToken");
-      decodeToken(token);
-      getUserData();
-    });
-    // 유저 정보 가져오기
-    const getUserData = () => {
-      const userIdData = {
-        id: data.value.id,
-      };
-
-      axios
-        .post(
-          `http://${process.env.VUE_APP_BACK_END_URL}/member/userData`,
-          userIdData,
-          {
-            headers: {
-              "Content-Type": "application/json",
-              Accept: "application/json",
-            },
-          }
-        )
-        .then((res) => {
-          console.log(res);
-
-          userId.value = res.data.id;
-          nickname.value = res.data.nickname;
-          email.value = res.data.email;
-          name.value = res.data.name;
-        });
-    };
-
-    return { logout, data, getUserData, userId, nickname, email, name }; // Return data in the setup function
+    this.getToken();
   },
   methods: {
     bgImage() {
       var newImage = "type1";
       this.$emit("bgImage", newImage);
     },
-    // 토큰 가져오기
     getToken() {
       this.AccessToken = localStorage.getItem("jwtToken");
       console.log(this.AccessToken);
@@ -259,44 +191,24 @@ export default {
         this.$router.push("/login");
       }
     },
-    // 닉네임 중복확인
     nicknameCheck() {
       const nickname = document.getElementById("nickname").value;
-
       if (nickname === "") {
         document.getElementById("nicknameCheck-msg").innerHTML =
           "닉네임은 필수 입력 사항입니다.";
         document.getElementById("nicknameCheck-msg").style.display = "block";
         return false;
-      } else {
-        document.getElementById("nicknameCheck-msg").style.display = "none";
       }
-      if (nickname >= 20) {
-        document.getElementById("nicknameCheck-msg").innerHTML =
-          "닉네임은 20자리 이하로 입력해주세요.";
-        document.getElementById("nicknameCheck-msg").style.display = "block";
-        return false;
-      } else {
-        document.getElementById("nicknameCheck-msg").style.display = "none";
-      }
-      // 닉네임 중복확인 API 호출
+
       axios
-        .get(
-          `http://${process.env.VUE_APP_BACK_END_URL}/api/auth/${nickname}/nicknameCheck`
-        )
+        .post(`http://${process.env.BACK_END_URL}/Haru/nicknameCheck`, {
+          nickname: nickname,
+        })
         .then((res) => {
-          if (res.data == 0) {
-            document.getElementById("nicknameCheck-msg").innerHTML =
-              "사용 가능한 닉네임입니다.";
-            document.getElementById("nicknameCheck-msg").style.display =
-              "block";
-            document.getElementById("nicknameCheck-msg").style.color = "green";
-            this.nicknameCheckBoolean = true;
+          if (res.data) {
+            alert("사용 가능한 닉네임입니다.");
           } else {
-            document.getElementById("nicknameCheck-msg").innerHTML =
-              "이미 사용중인 닉네임입니다.";
-            document.getElementById("nicknameCheck-msg").style.display =
-              "block";
+            alert("이미 사용중인 닉네임입니다.");
           }
         })
         .catch((error) => {
@@ -304,24 +216,19 @@ export default {
           return false;
         });
     },
-    // 이메일 중복확인 및 인증번호 발송
-    emailCheck() {
+
+    async emailCheck() {
       const email = document.getElementById("email").value;
+      console.log(process.env);
       axios
-        .post(
-          `http://${process.env.VUE_APP_BACK_END_URL}/api/auth/emailCheck`,
-          {
-            email: email,
-          }
-        )
+        .post(`${process.env.VUE_APP_BACK_END_URL}/emailCheck`, {
+          email: email,
+        })
         .then((res) => {
-          if (res.data == 1) {
+          if (res == 1) {
             alert("인증 번호가 발송되었습니다.");
-            document.getElementById("emailCheck-msg").style.display = "none";
           } else {
-            document.getElementById("emailCheck-msg").innerHTML =
-              "이미 사용중인 이메일입니다.";
-            document.getElementById("emailCheck-msg").style.display = "block";
+            alert("이미 등록된 이메일입니다.");
           }
         })
         .catch((error) => {
@@ -334,31 +241,21 @@ export default {
     handleEnter(event) {
       event.preventDefault();
     },
-
-    // 내 정보 수정
     submit() {
-      // FormData에 값 초기화
-      this.formData.delete("nickname", "");
-      this.formData.delete("email", "");
-      this.formData.delete("name", "");
-
-      // 값 가져오기
-      const userId = document.getElementById("userId-v").value;
+      const userId = document.getElementById("userId").value;
       const nickname = document.getElementById("nickname").value;
       const email = document.getElementById("email").value;
       const name = document.getElementById("name").value;
 
-      // FormData에 값 추가
-      this.formData.append("id", userId);
-      this.formData.append("nickname", nickname);
-      this.formData.append("email", email);
-      this.formData.append("name", name);
-
-      // 정규식
+      var idRegex = /^[a-zA-Z0-9_]+$/;
       var nicknameRegex = /^[a-zA-Z0-9ㄱ-ㅎ가-힣]+$/;
       var emailRegex = /^[\w-.]+@([\w-]+\.)+[\w-]{2,5}$/;
 
-      // 값 유효성 검사
+      if (userId === "") {
+        document.getElementById("idCheck-msg").innerText =
+          "아이디는 필수 입력 사항입니다.";
+        document.getElementById("idCheck-msg").style.display = "block";
+      }
       if (nickname === "") {
         document.getElementById("nicknameCheck-msg").innerHTML =
           "닉네임은 필수 입력 사항입니다.";
@@ -385,69 +282,40 @@ export default {
         return false;
       }
 
-      if (nicknameRegex.test(nickname) === false) {
+      if (idRegex.test(userId) === false) {
+        document.getElementById("userId").focus();
+        document.getElementById("idCheck-msg").innerText =
+          "아이디는 영문 대소문자와 숫자, _만 사용 가능합니다.";
+        document.getElementById("idCheck-msg").style.display = "block";
+      } else if (nicknameRegex.test(nickname) === false) {
         alert("닉네임은 한글, 영문 대소문자, 숫자만 사용 가능합니다.");
         document.getElementById("nickname").focus();
       } else if (emailRegex.test(email) === false) {
         alert("이메일 형식이 올바르지 않습니다.");
         document.getElementById("email").focus();
-      } else if (this.idCheckBoolean === false) {
-        document.getElementById("idCheck-msg").innerText =
-          "아이디 중복확인을 해주세요.";
-        document.getElementById("idCheck-msg").style.display = "block";
-        document.getElementById("userId").focus();
-      } else if (this.idCheckBoolean === true) {
-        document.getElementById("idCheck-msg").style.display = "none";
-      } else if (this.nicknameCheckBoolean === false) {
-        document.getElementById("nickname").focus();
-      } else if (this.nicknameCheckBoolean === true) {
-        document.getElementById("nicknameCheck-msg").style.display = "none";
-      }
-      // 인증코드 확인 메서드 호출
-      axios
-        .post(
-          `http://${process.env.VUE_APP_BACK_END_URL}/api/auth/emailCheck/certification`,
-          {
+      } else {
+        axios
+          .post("http://localhost:8090/api/user/signup", {
+            userId: userId,
+            nickname: nickname,
             email: email,
-            code: document.getElementById("code").value,
-          }
-        )
-        .then((res) => {
-          console.log(res);
-          if (res.data == 1) {
-            document.getElementById("Code-msg").innerText =
-              "인증번호가 일치합니다.";
-            document.getElementById("Code-msg").style.color = "green";
-            document.getElementById("Code-msg").style.display = "block";
-            // 내 정보 수정 API 호출
-            axios
-              .post(
-                `http://${process.env.VUE_APP_BACK_END_URL}/api/auth/updateMyInfo`,
-                this.formData,
-                {
-                  headers: {
-                    "Content-Type": "application/json",
-                  },
-                }
-              )
-              .then((res) => {
-                alert(res);
-                if (res.data == 1) {
-                  this.$router.push("/");
-                }
-              })
-              .catch((error) => {
-                console.error("API 호출 에러:", error);
-                return false;
-              });
-          } else {
-            document.getElementById("Code-msg").innerText =
-              "인증번호가 일치하지 않습니다.";
-            document.getElementById("Code-msg").style.display = "block";
-          }
-        });
+            name: name,
+          })
+          .then((res) => {
+            if (res.data === 1) {
+              alert("회원정보가 변경되어습니다.");
+              this.$router.push("/login");
+            } else {
+              alert("회원정보 변경에 실패했습니다.");
+              return false;
+            }
+          })
+          .catch((error) => {
+            console.error("API 호출 에러:", error);
+            return false;
+          });
+      }
     },
-    // 뒤로가기
     backbtn() {
       this.$router.push("/Mypage");
     },

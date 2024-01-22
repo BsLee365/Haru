@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 
 import java.util.Date;
 
+
 @Data
 @Entity
 @NoArgsConstructor
@@ -31,9 +32,9 @@ public class StressData {
     @Column(nullable = false)
     private Double diaryData;
 
-    // 척도 안받아옴.
-    // @Column(nullable = false)
-    // private Long measureData;
+      // 척도 안받아옴.
+//    @Column(nullable = false)
+//    private Long measureData;
 
     @Column(nullable = false)
     private Double stressScore;

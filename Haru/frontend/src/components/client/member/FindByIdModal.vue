@@ -45,7 +45,11 @@
                 id="email"
                 placeholder="이메일 입력"
               />
-              <button class="input-in-btn" id="email-ckeck" @click="findById">
+              <button
+                class="input-in-btn"
+                id="email-ckeck"
+                @click.prevent="submit"
+              >
                 인증
               </button>
               <div class="error-msg-area">
@@ -78,13 +82,7 @@
               <label for="emailCheck" id="findMyIdLabel">찾은 아이디</label>
             </div>
             <div class="input-area">
-              <input
-                class="input-text"
-                type="text"
-                id="findMyId"
-                :value="this.findUserId"
-                readonly
-              />
+              <input class="input-text" type="text" id="findMyId" readonly />
             </div>
             <div class="error-msg-area">
               <p style="display: none" id="Code-msg" class="msg"></p>
@@ -92,7 +90,7 @@
           </div>
 
           <div class="btn-area">
-            <button class="big-ctlbtn insert-btn" @click="submit">
+            <button class="big-ctlbtn insert-btn" @click="findIdToggleModal">
               아이디 찾기
             </button>
           </div>
@@ -102,78 +100,13 @@
   </div>
 </template>
 <script>
-import axios from "axios";
-
 export default {
   name: "FindByIdModal",
   data() {
-    return {
-      formData: new FormData(),
-      findUserId: "",
-    };
+    return {};
   },
   props: {
     modalOpen: Boolean,
-  },
-  methods: {
-    // 아이디 찾기 메소드
-    findById(event) {
-      event.preventDefault();
-
-      // 이름, 이메일 값 가져오기
-      const name = document.getElementById("name").value;
-      const email = document.getElementById("email").value;
-
-      // formData에 값 넣기
-      this.formData.append("username", name);
-      this.formData.append("email", email);
-
-      // 이메일 인증번호 전송
-      axios
-        .post(
-          `http://${process.env.VUE_APP_BACK_END_URL}/api/auth/findById`,
-          this.formData,
-          {
-            headers: {
-              "Content-Type": "application/json",
-              Accept: "application/json",
-            },
-          }
-        )
-        .then((res) => {
-          if (res.data == 1) {
-            alert("이메일로 아이디를 전송하였습니다.");
-          } else {
-            alert("이메일을 다시 확인해주세요.");
-          }
-        });
-    },
-
-    // 인증번호 확인 메소드
-    submit(event) {
-      event.preventDefault();
-      const code = document.getElementById("emailCheck").value;
-      this.formData.append("code", code);
-      axios
-        .post(
-          `http://${process.env.VUE_APP_BACK_END_URL}/api/auth/findById/certification`,
-          this.formData,
-          {
-            headers: {
-              "Content-Type": "application/json",
-              Accept: "application/json",
-            },
-          }
-        )
-        .then((res) => {
-          if (res.data != 0) {
-            alert("인증되었습니다.");
-            this.findUserId = res.data;
-          } else {
-            alert("인증번호를 다시 확인해주세요.");
-          }
-        });
-    },
   },
 };
 </script>

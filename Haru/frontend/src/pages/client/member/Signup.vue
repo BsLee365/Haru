@@ -306,8 +306,6 @@ export default {
   created() {
     this.bgImage();
   },
-
-  // 입력값이 바뀔 때마다 정규식 검사
   watch: {
     userId() {
       var idRegex = /^[a-zA-Z0-9_]+$/;
@@ -369,41 +367,35 @@ export default {
       var newImage = "type1";
       this.$emit("bgImage", newImage);
     },
-    // 뒤로가기
     back() {
       this.$router.push("/login");
     },
-    // 모달창 열기
     termsOfUseModal() {
       this.termsOfUseModalOpen = true;
     },
-    // 모달창 닫기
     closeTermsOfUseModal() {
       this.termsOfUseModalOpen = false;
     },
-    // 모달창 열기
     privacyPolicyModal() {
       this.modalOpen = true;
     },
-    // 모달창 닫기
     closePrivacyPolicyModal() {
       this.modalOpen = false;
     },
-    // 파일 업로드
     fileChanged(event) {
       this.fileName = event.target.files[0].name;
     },
-    // 드래그앤 드롭
     dragover(event) {
       event.preventDefault();
       this.isDrag = true;
     },
-    // 파일 업로드
     handleFileChange(event) {
       if (event.dataTransfer) {
         this.dropInputTag(event);
+        console.log("test1");
       } else {
         this.selectFile(event);
+        console.log("test2");
       }
     },
 
@@ -424,21 +416,17 @@ export default {
 
         this.formData.append("faceImage", file1);
         this.formData.append("files", file1);
-
-        console.log(this.formData.get("faceImage"));
       }
 
       event.preventDefault();
       this.isDrag = false;
     },
-    // 파일 삭제
     clearFiles() {
       this.files = [];
       this.fileName = "";
       this.formData.delete("files");
       this.formData.delete("faceImage");
     },
-    // 파일 선택
     selectFile(event) {
       this.clearFiles(); // 기존 파일 정보 초기화
 
@@ -459,12 +447,9 @@ export default {
 
         this.formData.append("faceImage", file);
         this.formData.append("files", file);
-
-        console.log(this.formData.get("faceImage"));
-        console.log(this.formData.get("files"));
       }
     },
-    // 아이디 중복 체크
+
     async idCheck() {
       var idRegex = /^[a-zA-Z0-9_]+$/;
       const userId = document.getElementById("userId").value;
@@ -506,7 +491,7 @@ export default {
           return false;
         });
     },
-    // 닉네임 중복 체크
+
     nicknameCheck() {
       const nickname = document.getElementById("nickname").value;
 
@@ -551,7 +536,7 @@ export default {
           return false;
         });
     },
-    // 이메일 중복 체크
+
     emailCheck() {
       const email = document.getElementById("email").value;
       axios
@@ -581,21 +566,17 @@ export default {
     handleEnter(event) {
       event.preventDefault();
     },
-    // 회원가입
     submit() {
-      // 이용약관 및 개인정보처리방침 체크 여부
       const termsOfUse = document.getElementById("termsOfUse");
       const termsOfUseMsg = document.getElementById("termsOfUse-msg");
       const privacyPolicy = document.getElementById("privacyPolicy");
 
-      // FormData에 값 초기화
-      this.formData.delete("id", "");
+      this.formData.delete("userId", "");
       this.formData.delete("pwd", "");
       this.formData.delete("nickname", "");
       this.formData.delete("email", "");
       this.formData.delete("name", "");
 
-      // 입력값 가져오기
       const userId = document.getElementById("userId").value;
       const pwd = document.getElementById("pwd").value;
       const pwd_chk = document.getElementById("pwd_chk").value;
@@ -603,20 +584,16 @@ export default {
       const email = document.getElementById("email").value;
       const name = document.getElementById("name").value;
 
-      // FormData에 값 추가
-      this.formData.append("id", userId);
+      this.formData.append("userId", userId);
       this.formData.append("pwd", pwd);
       this.formData.append("nickname", nickname);
       this.formData.append("email", email);
       this.formData.append("name", name);
-
-      // 정규식
       var idRegex = /^[a-zA-Z0-9_]+$/;
       var pwdRegex = /^(?=.*[A-Z])(?=.*[!@#$%^&*])(?=.*[a-zA-Z]).{8,}$/;
       var nicknameRegex = /^[a-zA-Z0-9ㄱ-ㅎ가-힣]+$/;
       var emailRegex = /^[\w-.]+@([\w-]+\.)+[\w-]{2,5}$/;
 
-      // 입력값 유효성 검사
       if (userId === "") {
         document.getElementById("idCheck-msg").innerText =
           "아이디는 필수 입력 사항입니다.";
@@ -713,8 +690,10 @@ export default {
         document.getElementById("pwdCheck-msg").style.display = "block";
         document.getElementById("pwd_chk").focus();
       } else if (nicknameRegex.test(nickname) === false) {
+        alert("닉네임은 한글, 영문 대소문자, 숫자만 사용 가능합니다.");
         document.getElementById("nickname").focus();
       } else if (emailRegex.test(email) === false) {
+        alert("이메일 형식이 올바르지 않습니다.");
         document.getElementById("email").focus();
       } else if (this.idCheckBoolean === false) {
         document.getElementById("idCheck-msg").innerText =
@@ -728,7 +707,6 @@ export default {
       } else if (this.nicknameCheckBoolean === true) {
         document.getElementById("nicknameCheck-msg").style.display = "none";
       }
-      // 이메일 인증번호 확인
       axios
         .post(
           `http://${process.env.VUE_APP_BACK_END_URL}/api/auth/emailCheck/certification`,
@@ -739,7 +717,6 @@ export default {
         )
         .then((res) => {
           console.log(res);
-          console.log(this.formData.get("files"));
           if (res.data == 1) {
             document.getElementById("Code-msg").innerText =
               "인증번호가 일치합니다.";
@@ -756,6 +733,7 @@ export default {
                 }
               )
               .then((res) => {
+                alert(res);
                 if (res.status == 200) {
                   alert("회원가입이 완료되었습니다.");
                   this.$router.push("/Login");
@@ -772,8 +750,6 @@ export default {
           }
         });
     },
-
-    // 이미지 미리보기
     previewImage(event) {
       const reader = new FileReader();
       const image = event.target.files[0];

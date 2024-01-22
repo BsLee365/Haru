@@ -3,31 +3,32 @@
     <!-- 장소보여주기 -->
     <div>
       <div class="main-title">
-        <h2>{{ data.nickname }} 님이 찜한 장소</h2>
+        <h2>닉네임 님이 찜한 장소</h2>
       </div>
       <div class="myFavorite-place">
         <div
           class="myFavorite-place-card"
-          v-for="(item, idx) in this.placeData"
+          v-for="(item, idx) in myFaboritePlace"
           :key="idx"
         >
-          <div class="'food-img">
+          {{ item }}
+          <!-- <div class="'food-img">
             <img class="heart-img" src="@/img/Total_stress/img/image 47.png" />
-            <img :src="item" alt="" class="place-card" />
+            <img :src="item.place_img" alt="" class="place-card" />
           </div>
           <div class="food-desc">
             <div class="food-desc-box">
               <div class="food-title">
-                <h4>{{ item[2] }}</h4>
+                <h4>{{ item }}</h4>
               </div>
               <div class="hash-tag">
-                <span class="review-score">★ {{ item[3] }}</span>
+                <span class="review-score">★ {{ item.place_score }}</span>
               </div>
               <div class="food-detail">
-                <span class="food-address">주소: {{ item[4] }}</span>
+                <span class="food-address">주소: {{ item.place_address }}</span>
               </div>
             </div>
-          </div>
+          </div> -->
         </div>
       </div>
     </div>
@@ -48,19 +49,17 @@ export default {
   },
   created() {
     this.bgImage();
-    this.getToken();
   },
   setup() {
     const isLoggedIn = ref(false);
     const data = ref([]);
     const myFaboritePlace = ref({});
-    const placeData = ref([]);
-    // 토큰 가져오기
+
     const getToken = () => {
       const token = localStorage.getItem("jwtToken");
       isLoggedIn.value = token ? true : false;
     };
-    // 로그아웃 메서드
+
     const logout = () => {
       axios
         .get(`http://${process.env.VUE_APP_BACK_END_URL}/api/auth/logout`)
@@ -71,7 +70,7 @@ export default {
           }
         });
     };
-    //  토큰 디코딩
+
     const decodeToken = (token) => {
       if (token == null) return false;
       const decoded = jwtDecode(token);
@@ -85,8 +84,6 @@ export default {
       decodeToken(token);
       getData();
     });
-
-    // 찜한 장소 가져오기
     const getData = () => {
       const token = localStorage.getItem("jwtToken");
       axios
@@ -103,9 +100,6 @@ export default {
         .then((res) => {
           // 요청 성공 시 처리 로직
           myFaboritePlace.value = res.data.place;
-          res.data[0].forEach((element) => {
-            placeData.value.push(element);
-          });
         })
         .catch((error) => {
           // 요청 실패 시 처리 로직
@@ -113,24 +107,13 @@ export default {
         });
     };
 
-    return { logout, data, getData, placeData };
+    return { logout, data, getData, myFaboritePlace }; // Return data in the setup function
   },
 
   methods: {
     bgImage() {
       var newImage = "type5";
       this.$emit("bgImage", newImage);
-    },
-    //  토큰 가져오기
-    getToken() {
-      this.AccessToken = localStorage.getItem("jwtToken");
-      console.log(this.AccessToken);
-      if (this.AccessToken != null) {
-        this.isLoggedIn = true;
-      } else {
-        this.isLoggedIn = false;
-        this.$router.push("/login");
-      }
     },
   },
 };

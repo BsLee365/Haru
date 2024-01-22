@@ -43,11 +43,7 @@
         >
           뒤로가기
         </button>
-        <button
-          class="big-ctlbtn delete-btn"
-          id="deleteMyInfo-submit"
-          @click="deleteUser"
-        >
+        <button class="big-ctlbtn delete-btn" id="deleteMyInfo-submit">
           탈퇴하기
         </button>
       </div>
@@ -55,8 +51,6 @@
   </div>
 </template>
 <script>
-import axios from "axios";
-
 export default {
   name: "DeleteMyInfoModal",
   data() {
@@ -64,28 +58,6 @@ export default {
   },
   props: {
     deleteMyInfoModal: Boolean,
-    userId: String,
-  },
-  methods: {
-    // 탈퇴하기 메소드
-    deleteUser() {
-      const userId = document.getElementById("delete-id").value;
-      if (userId == this.userId) {
-        axios
-          .delete(
-            `http://${process.env.VUE_APP_BACK_END_URL}/member/delete/${userId}`
-          )
-          .then((res) => {
-            console.log(res);
-            if (res.data == 1) {
-              localStorage.removeItem("jwtToken");
-              this.$router.push("/login");
-            }
-          });
-      } else {
-        alert("아이디를 확인해주세요.");
-      }
-    },
   },
 };
 </script>

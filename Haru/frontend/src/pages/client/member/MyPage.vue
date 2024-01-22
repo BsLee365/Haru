@@ -2,8 +2,8 @@
   <div class="container1">
     <!-- 프로필 사진 업데이트 모달 창 -->
     <UpdateProfileImgModal
-      :mStatus="profileModalStatus"
-      @modalClose="closeModal"
+        :mStatus="profileModalStatus"
+        @modalClose="closeModal"
     />
 
     <!-- 컨텐츠 -->
@@ -54,10 +54,10 @@
             </li>
             <div class="update-mydata-box">
               <a
-                class="big-ctlbtn update-btn"
-                href="/userConfirmation"
-                id="updateMyDataBtn"
-                >내 정보 수정</a
+                  class="big-ctlbtn update-btn"
+                  href="/userConfirmation"
+                  id="updateMyDataBtn"
+              >내 정보 수정</a
               >
             </div>
           </ul>
@@ -70,38 +70,38 @@
                 <li>
                   <div>
                     <img
-                      class="alarm-img"
-                      src="@/assets/icon/alarm/alarm_heart_icon.png"
+                        class="alarm-img"
+                        src="@/assets/icon/alarm/alarm_heart_icon.png"
                     />
                     <span id="comment-content">댓글 내용</span>
                     <span class="alarm-time"
-                      ><img
+                    ><img
                         src="@/assets/icon/time_icon.png"
                         alt=""
-                      />10분전</span
+                    />10분전</span
                     >
                   </div>
                 </li>
                 <li>
                   <div>
                     <img
-                      class="alarm-img"
-                      src="@/assets/icon/login/kakao_login_icon.png"
+                        class="alarm-img"
+                        src="@/assets/icon/login/kakao_login_icon.png"
                     />
                     <span id="comment-content">댓글 내용</span>
                     <span class="alarm-time"
-                      ><img
+                    ><img
                         src="@/assets/icon/time_icon.png"
                         alt=""
-                      />40분전</span
+                    />40분전</span
                     >
                   </div>
                 </li>
                 <li>
                   <div>
                     <img
-                      class="alarm-img"
-                      src="@/assets/icon/alarm/alarm_basic_icon.png"
+                        class="alarm-img"
+                        src="@/assets/icon/alarm/alarm_basic_icon.png"
                     />
                     <span id="comment-content">댓글 내용</span>
                     <span class="alarm-time">23.12.27 1:03</span>
@@ -110,8 +110,8 @@
                 <li>
                   <div>
                     <img
-                      class="alarm-img"
-                      src="@/assets/icon/alarm/alarm_heart_icon.png"
+                        class="alarm-img"
+                        src="@/assets/icon/alarm/alarm_heart_icon.png"
                     />
                     <span id="comment-content">댓글 내용</span>
                     <span class="alarm-time">23.12.26 1:03</span>
@@ -120,8 +120,8 @@
                 <li>
                   <div>
                     <img
-                      class="alarm-img"
-                      src="@/assets/icon/alarm/alarm_comment_icon.png"
+                        class="alarm-img"
+                        src="@/assets/icon/alarm/alarm_comment_icon.png"
                     />
                     <span id="comment-content">댓글 내용</span>
                     <span class="alarm-time">23.12.25 1:03</span>
@@ -130,8 +130,8 @@
                 <li>
                   <div>
                     <img
-                      class="alarm-img"
-                      src="@/assets/icon/alarm/alarm_comment_icon.png"
+                        class="alarm-img"
+                        src="@/assets/icon/alarm/alarm_comment_icon.png"
                     />
                     <span id="comment-content">댓글 내용</span>
                     <span class="alarm-time">23.12.24 1:03</span>
@@ -140,8 +140,8 @@
                 <li>
                   <div>
                     <img
-                      class="alarm-img"
-                      src="@/assets/icon/alarm/alarm_basic_icon.png"
+                        class="alarm-img"
+                        src="@/assets/icon/alarm/alarm_basic_icon.png"
                     />
                     <span id="comment-content">댓글 내용</span>
                     <span class="alarm-time">23.12.23 1:03</span>
@@ -192,41 +192,39 @@ export default {
     },
   },
   setup() {
-    const isLoggedIn = ref(false);
-    const data = ref([]);
+    const isLoggedIn = ref(false); // Use ref to create reactive isLoggedIn
+    const data = ref([]); // Use ref to create reactive data
+
     const getToken = () => {
       const token = localStorage.getItem("jwtToken");
       isLoggedIn.value = token ? true : false;
     };
 
-    // 로그아웃 메서드
     const logout = () => {
       axios
-        .get(`http://${process.env.VUE_APP_BACK_END_URL}/api/auth/logout`)
-        .then((res) => {
-          if (res.data == "Logout") {
-            localStorage.removeItem("jwtToken");
-            window.location.href = "/login";
-          }
-        });
+          .get(`http://${process.env.VUE_APP_BACK_END_URL}/api/auth/logout`)
+          .then((res) => {
+            if (res.data == "Logout") {
+              localStorage.removeItem("jwtToken");
+              window.location.href = "/login";
+            }
+          });
     };
 
-    // 토큰 디코딩 메서드
     const decodeToken = (token) => {
       if (token == null) return false;
       const decoded = jwtDecode(token);
-      data.value = decoded;
+      data.value = decoded; // Use data.value to set the value of the ref
       return decoded;
     };
 
-    // 페이지가 로드될 때 실행되는 함수
     onMounted(() => {
       getToken();
       const token = localStorage.getItem("jwtToken");
       decodeToken(token);
     });
 
-    return { logout, data };
+    return { logout, data }; // Return data in the setup function
   },
 };
 </script>

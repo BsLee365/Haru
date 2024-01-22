@@ -1,13 +1,15 @@
 <template>
   <!-- 추천 리스트 - 내장소(추천리스트), 피드생성/수정(추천리스트 모달창) -->
   <div>
-    <div
-      v-for="(rlist, idx) in RecommendList"
-      :key="idx"
-      class="rlist-day-area"
-    >
-      <p>{{ rlist.rdate }}</p>
-      <div v-for="(item, i) in rlist.recList" :key="i" @mouseleave="FeedBtnOff">
+    <!-- 추천받은 날짜-->
+    <p class="reclist-date-text" v-if="RecPlace.length > 0">
+      {{ sendSelectedDate }}
+    </p>
+    <p class="reclist-date-text" v-if="RecPlace.length == 0">
+      추천 받은 장소가 없어요!
+    </p>
+    <div v-for="(item, idx) in RecPlace" :key="idx" class="rlist-day-area">
+      <div @mouseleave="FeedBtnOff">
         <div class="rlist-card-area">
           <div
             class="rlist-content-area"
@@ -16,25 +18,24 @@
           >
             <div class="all-info">
               <div class="rlist-img-area">
-                <a :href="item.link"
-                  ><img class="rec-detail-img" :src="item.img" alt=""
+                <a :href="item.place_link" target="_blank"
+                  ><img class="rec-detail-img" :src="item.place_img" alt=""
                 /></a>
               </div>
               <div class="content">
                 <div class="stname-address">
                   <!-- 가게 명 -->
-                  <h5 class="stName">{{ item.storeName }}</h5>
-                  <!-- 가게 주소 -->
-                  <p class="stAddress">{{ item.stAddress }}</p>
-                </div>
-                <!-- 해시태그 -->
-                <p class="rlist-rec-hash-area">
-                  <span
-                    class="rlist-rec-hash cursor-p"
-                    v-for="(hash, hidx) in item.hashtag"
-                    :key="hidx"
-                    >#{{ hash }}</span
+                  <a :href="'https://map.naver.com/p/search/' + item.place_name" target="_blank"
+                    ><h5 class="stName">{{ item.place_name }}</h5></a
                   >
+                  <!-- 가게 주소 -->
+                  <a :href="item.place_link" target="_blank"
+                    ><p class="stAddress">{{ item.place_address }}</p></a
+                  >
+                </div>
+                <!-- 별점 -->
+                <p class="rlist-score-area">
+                  <span class="rlist-score">★ {{ item.place_score / 10 }}</span>
                 </p>
               </div>
             </div>
@@ -92,8 +93,9 @@ export default {
     };
   },
   props: {
-    RecommendList: Object, // 추천 리스트 목록
+    RecPlace: Object, // 추천 리스트 목록
     isBtnHeartNone: Boolean, //
+    sendSelectedDate: String, // 추천 받은 날짜
   },
   methods: {
     FeedBtnOn(num) {

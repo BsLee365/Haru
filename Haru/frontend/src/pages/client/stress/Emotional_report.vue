@@ -2,7 +2,7 @@
   <div class="container1">
     <div class="report-container">
       <div class="report-title">
-        <span>{{ UserName }}의 스트레스 종합 보고서 😊</span>
+        <span>{{ UserName }}의 스트레스 추이 😊</span>
       </div>
       <div class="total_report_card">
         <div class="select-date-area">
@@ -70,7 +70,7 @@
             </select>
           </div>
           <div class="date-input-area">
-            <button class="big-ctlbtn else-btn">검색</button>
+            <button class="big-ctlbtn else-btn" @click="sendStressData">검색</button>
           </div>
         </div>
         <div class="report-contents">
@@ -115,8 +115,6 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
-import { Line } from "vue-chartjs";
-
 ChartJS.register(
   CategoryScale,
   LinearScale,
@@ -126,7 +124,10 @@ ChartJS.register(
   Tooltip,
   Legend
 );
-
+import { Line } from "vue-chartjs";
+import { onMounted, ref } from "vue";
+import axios from "axios";
+import { jwtDecode } from "jwt-decode";
 export default {
   name: "Emotional_report",
   components: {
@@ -135,7 +136,10 @@ export default {
   data() {
     return {
       SelectDate: "day",
-      UserName: "이범석",
+      UserName: "",
+
+      // 현재 클라이언트 주소
+      ipAddress : window.location.host.split(':')[0],
 
       // 현재 날짜
       nowDate: new Date().toISOString().slice(0, 10),
@@ -183,9 +187,23 @@ export default {
             data: [10, 7.8, 2.1, 3.4, 5.6, 7.8, 9.1, 8.7, 6.5, 4.3, 2.1, 1.2],
             tension: 0.1,
           },
+          {
+            label: "일기 수치",
+            backgroundColor: "#51b4bd",
+            // 바뀌어야 될 부분
+            data: [43, 53, 53, 53, 34, 23, 23, 45, 24, 45, 34],
+            tension: 0.1,
+          },
+          {
+            label: "얼굴 수치",
+            backgroundColor: "#d337c8",
+            // 바뀌어야 될 부분
+            data: [24, 34, 23, 12, 32, 43, 45, 34, 32, 34, 56],
+            tension: 0.1,
+          },
         ],
       },
-      chartOptions: {
+        chartOptions: {
         responsive: false,
         pointStyle: "circle",
         lineWidth: 5,
@@ -235,7 +253,64 @@ export default {
 
       console.log(this.minEndMonth, this.maxEndMonth);
     },
+    // 날짜 보내기
+    sendStressData() {
+      const sendDate = new FormData();
+      sendDate.append("oneday", this.Oneday);
+      sendDate.append("days", [this.Startdays, this.Enddays]);
+      sendDate.append("month", [this.Startmonth, this.Endmonth]);
+      sendDate.append("selectYear", this.SelectYear);
+      sendDate.append("userId", this.data.id)
+      sendDate.append("flag", this.SelectDate);
+
+      axios.post(`http://${this.ipAddress}/Haru/report/oneday`, sendDate)
+          .then((res)=> {
+            console.log(res);
+            console.log("성공!");
+          })
+    }
   },
+  // 로그인 토큰
+  setup() {
+    const isLoggedIn = ref(false); // Use ref to create reactive isLoggedIn
+    const data = ref([]); // Use ref to create reactive data
+
+    const getToken = () => {
+      const token = localStorage.getItem("jwtToken");
+      isLoggedIn.value = token ? true : false;
+    };
+
+    const logout = () => {
+      axios
+          .get(`http://${process.env.VUE_APP_BACK_END_URL}/api/auth/logout`)
+          .then((res) => {
+            if (res.data === "Logout") {
+              localStorage.removeItem("jwtToken");
+              window.location.href = "/login";
+            }
+          });
+    };
+
+    const decodeToken = (token) => {
+      console.log(token);
+      if (token == null) return false;
+      const decoded = jwtDecode(token);
+      console.log(JSON.stringify(decoded));
+      data.value = decoded; // Use data.value to set the value of the ref
+      return decoded;
+    };
+
+    onMounted(() => {
+      getToken();
+      const token = localStorage.getItem("jwtToken");
+      decodeToken(token);
+    });
+
+    return { logout, data }; // Return data in the setup function
+  },
+  mounted() {
+    this.UserName = this.data.username;
+  }
 };
 </script>
 <script setup></script>

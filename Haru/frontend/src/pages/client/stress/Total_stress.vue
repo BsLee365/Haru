@@ -109,14 +109,21 @@
           <!-- 장소보여주기 -->
           <div class="recommend-place">
             <!--장소 카드 시작-->
-            <div class="place-card" v-for="(item) in recommendPlace.data">
+            <div class="place-card" v-for="(item, index) in recommendPlace.data" :key="index">
               <div class="'food-img">
                 <img
                   class="heart-img"
                   src="@/img/Total_stress/img/image 47.png"
                 />
                 <img
-                  src="@/img/Total_stress/food/buger.jpg"
+                    v-show="item.place_img === null"
+                    src="@/img/Total_stress/img/no_img.png"
+                    alt="버거킹"
+                    class="place-card"
+                />
+                <img
+                    v-show="item.place_img != null"
+                  :src="item.place_img"
                   alt="버거킹"
                   class="place-card"
                 />
@@ -124,16 +131,13 @@
               <div class="food-desc">
                 <div class="food-desc-box">
                   <div class="food-title">
-                    <h4>버거킹 신논현역점</h4>
+                    <h4>{{item.place_name}}</h4>
                   </div>
                   <div class="hash-tag">
-                    <span class="review-score">★ 4.58</span>
+                    <span class="review-score">★ {{item.place_score/10}}점</span>
                   </div>
                   <div class="food-detail">
-                    <span class="food-address"
-                      >주소: 부산광역시 강서구 녹산산단382로14번가길
-                      10~29번지(송정동)</span
-                    >
+                    <span class="food-address">{{item.place_address}}</span>
                   </div>
                 </div>
               </div>
@@ -235,21 +239,14 @@ export default {
         requestAnimationFrame(animate);
       } else {
         this.gaugeWidth = targetWidth + "%"; // 애니메이션이 완료되면 정확한 값으로 설정
-        this.stressRate = targetWidth;
+        this.stressRate = targetWidth.toFixed(1);
       }
     };
     animate();
 
-    this.recommendPlace.data.forEach((place, index) => {
-      // Accessing properties of each place
-      const userId = place.user_id;
-      const placeNum = place.place_num;
-      const placeScore = place.place_score;
-      const placeImg = place.place_img;
-      const placeName = place.place_name;
-
-      console.log(`Place ${index + 1}: User ID - ${userId}, Place Num - ${placeNum}, Place Score - ${placeScore}, Place Img - ${placeImg}, Place Name - ${placeName}`);
-    });
+    // 로컬 스토리지 삭제
+    localStorage.removeItem("recommendPlace");
+    localStorage.removeItem("stressScore");
 
   },
 };

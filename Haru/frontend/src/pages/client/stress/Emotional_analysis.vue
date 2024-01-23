@@ -238,9 +238,9 @@
     <div class="loading" v-show="activeLoading">
       <div class="loading-box">
         <h1 v-if="loadingParam === 1">
-          얼굴 분석중입니다... <span class="emoticon">{{ currentEmoji }}</span>
+          얼굴 분석중입니다... <span class="emoticon">얼굴 분석중입니다...</span>
         </h1>
-        <h1 v-else-if="loadingParam === 2">일기 분석중입니다... 📖</h1>
+        <h1 v-else-if="loadingParam === 2">일기 분석중입니다...{{ currentEmoji }}</h1>
         <h1 v-else-if="loadingParam === 3">
           거의 다 됐어요! <span class="emoticon">{{ currentEmoji }}</span>
         </h1>
@@ -279,7 +279,7 @@ export default {
       file: null,
 
       //이모티콘
-      emoticon: ["😛", "🙂", "😕", "😧", "😭", "😲", "🫨"],
+      emoticon: ["📖", "✏️", "💌", "🖍️", "📒", "📔", "✒️"],
       currentEmot: 0,
 
       //로딩

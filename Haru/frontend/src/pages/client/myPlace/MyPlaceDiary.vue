@@ -457,8 +457,9 @@ export default {
     updateAllListMain() {
       this.getMyRecPlace();
       // this.dayClick(this.sDate[3], this.sDate[2]-1);
-      this.dayClick(this.sDate[3], this.sDate[2]);
+      // this.dayClick(this.sDate[3], this.sDate[2]);
       // this.$router.push('/MyPlaceDiary');
+      this.$router.go(0);
     }
   },
   components: {

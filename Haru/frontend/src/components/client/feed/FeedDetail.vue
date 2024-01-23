@@ -183,7 +183,7 @@
             </div>
 
             <!-- 수정하기, 삭제하기 버튼 => 본인 게시글일 경우 -->
-            <div class="card-ctrl-btn-area">
+            <div class="card-ctrl-btn-area" v-if="this.userData.id == card.uid">
               <button class="card-ctrl-btn update" @click="feedUpdate">수정</button>
               <button class="card-ctrl-btn delete" @click="feedDelete">삭제</button>
             </div>
@@ -199,7 +199,7 @@
 import axios from "axios";
 export default {
   name: "feedDetail",
-  props: ["cardList", "userData", "index"],
+  props: ["cardOrigin", "userData", "index"],
   data() {
     return {
       commentload: 0,
@@ -212,28 +212,19 @@ export default {
   },
   methods: {
     getComments() {
-      const card = this.cardList[this.index];
-      this.card = card;
+      const card = this.card
+      console.log(card);
       this.comments = [];
       this.recommend = {};
-      console.log(card);
       for (const comment in card.feedComments) {
-        const date = new Date(card.feedComments[comment].feed_cdate);
-
-        const year = date.getFullYear().toString().slice(2);
-        const month = (date.getMonth() + 1).toString().padStart(2, "0");
-        const day = date.getDate().toString().padStart(2, "0");
-        const hours = date.getHours().toString().padStart(2, "0");
-        const minutes = date.getMinutes().toString().padStart(2, "0");
-
-        const formattedDateString = `${year}-${month}-${day} ${hours}시${minutes}분`;
+        const date = this.getTimeString(card.feedComments[comment].feed_cdate);
 
         const commentMap = {
           // profileImage: require("@/img/Feed/" + card.feedComments[comment].member.profile_img),
           profileImage: require("@/img/Feed/no_profile.png"),
           uid: card.feedComments[comment].user_id.user_id,
           nickname: card.feedComments[comment].user_id.nickname,
-          cDate: formattedDateString,
+          cDate: date,
           comment: card.feedComments[comment].feed_comment_content,
         };
         this.comments.push(commentMap);
@@ -254,6 +245,7 @@ export default {
         document.getElementById("commentText").value
       );
       this.formData.append("userId", this.userData.id);
+      this.formData.append("feedUserId", this.card.uid);
       console.log(this.formData);
       axios
         .post(
@@ -266,22 +258,14 @@ export default {
           console.log("갱신된 댓글", res);
           this.comments = [];
           for (const comment of res.data) {
-            const date = new Date(comment.feed_cdate);
-
-            const year = date.getFullYear().toString().slice(2);
-            const month = (date.getMonth() + 1).toString().padStart(2, "0");
-            const day = date.getDate().toString().padStart(2, "0");
-            const hours = date.getHours().toString().padStart(2, "0");
-            const minutes = date.getMinutes().toString().padStart(2, "0");
-
-            const formattedDateString = `${year}-${month}-${day} ${hours}시${minutes}분`;
+            const date = this.getTimeString(comment.feed_cdate);
 
             const commentMap = {
               // profileImage: require("@/img/Feed/" + card.feedComments[comment].member.profile_img),
               profileImage: require("@/img/Feed/no_profile.png"),
               uid: comment.user_id.user_id,
               nickname: comment.user_id.nickname,
-              cDate: formattedDateString,
+              cDate: date,
               comment: comment.feed_comment_content,
             };
             this.comments.push(commentMap);
@@ -296,6 +280,7 @@ export default {
       this.formData = new FormData();
       this.formData.append("feedNum", this.card.feedNum);
       this.formData.append("userId", this.userData.id);
+      this.formData.append("feedUserId", this.card.uid);
       await axios
         .post(
           `http://${process.env.VUE_APP_BACK_END_URL}/modifyFeedLike`,
@@ -304,10 +289,8 @@ export default {
         .then((res) => {
           console.log("modifyFeedLike");
           this.$emit("getFeedList");
-          console.log("before", this.card.likes);
           console.log(res);
           this.card.likes = res.data;
-          console.log("after", this.card.likes);
           console.log("좋아요 갱신");
           this.likeload += 1;
         });
@@ -336,8 +319,28 @@ export default {
         this.$emit("close-modal");
       })
     },
+    getTimeString(isoTimeString) {
+			const currentTime = new Date();
+			const targetTime = new Date(isoTimeString);
+			const timeDifference = currentTime - targetTime;
+
+			const minutes = Math.floor(timeDifference / (1000 * 60));
+
+			if (minutes < 1) {
+				return "방금 전";
+			} else if (minutes < 60) {
+				return `${minutes}분 전`;
+			} else if (minutes < 24 * 60) {
+				const hours = Math.floor(minutes / 60);
+				return `${hours}시간 전`;
+			} else {
+				const options = { year: "numeric", month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit" };
+				return targetTime.toLocaleString("ko-KR", options);
+			}
+		},
   },
   created() {
+    this.card = this.cardOrigin;
     this.getComments();
   },
 };

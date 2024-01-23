@@ -14,4 +14,6 @@ public interface FeedLikeRepository extends JpaRepository<Like, Long> {
 
     void deleteByFeedNum_FeedNumAndFeedLikeBy_UserId(int feedNum, String userId);
 
+    int countByFeedNum_FeedNum(int feedNum);
+
 }

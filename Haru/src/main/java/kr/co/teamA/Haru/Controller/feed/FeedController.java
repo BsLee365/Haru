@@ -41,8 +41,9 @@ public class FeedController {
         int feedNum = Integer.parseInt(data.get("feedNum"));
         String userId = data.get("userId");
         String feedCommentContent = data.get("feedCommentContent");
+        String feedUserId = data.get("feedUserId");
 
-        List<FeedComment> commentList = feedService.addFeedComment(feedNum, userId, feedCommentContent);
+        List<FeedComment> commentList = feedService.addFeedComment(feedNum, userId, feedCommentContent, feedUserId);
 
         return commentList;
     }
@@ -52,8 +53,9 @@ public class FeedController {
     public int modifyFeedLike(@RequestParam Map<String, String> data) {
         int feedNum = Integer.parseInt(data.get("feedNum"));
         String userId = data.get("userId");
+        String feedUserId = data.get("feedUserId");
 
-        int likes = feedService.modifyFeedLike(feedNum, userId);
+        int likes = feedService.modifyFeedLike(feedNum, userId, feedUserId);
 
         return likes;
     }
@@ -77,7 +79,7 @@ public class FeedController {
         try {
             String rootPath = System.getProperty("user.dir");
             System.out.println(rootPath);
-            String uploadDir = rootPath + "\\Haru\\src\\main\\resources\\static\\FeedImg";
+            String uploadDir = rootPath + "\\Haru\\src\\main\\resources\\static\\img\\Feed";
             String fileName = file.getOriginalFilename();
 
             file.transferTo(new File(uploadDir + File.separator + fileName));

@@ -8,6 +8,7 @@ import java.util.Map;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import kr.co.teamA.Haru.Entity.Alarm;
 import kr.co.teamA.Haru.Entity.Feed;
 import kr.co.teamA.Haru.Entity.FeedComment;
 import kr.co.teamA.Haru.Entity.FeedHashTag;
@@ -21,6 +22,7 @@ import kr.co.teamA.Haru.Repository.feed.FeedHashTagRepository;
 import kr.co.teamA.Haru.Repository.feed.FeedImgRepository;
 import kr.co.teamA.Haru.Repository.feed.FeedLikeRepository;
 import kr.co.teamA.Haru.Repository.feed.FeedRepository;
+import kr.co.teamA.Haru.Repository.member.AlarmRepository;
 import kr.co.teamA.Haru.Repository.place.PlaceRepository;
 
 @Service
@@ -33,10 +35,12 @@ public class FeedService {
     public final FeedLikeRepository feedLikeRepository;
     public final MemberRepository memberRepository;
     public final PlaceRepository placeRepository;
+    public final AlarmRepository alarmRepository;
 
     public FeedService(FeedRepository feedRepository, FeedCommentRepository feedCommentRepository,
             FeedHashTagRepository feedHashTagRepository, FeedImgRepository feedImgRepository,
-            FeedLikeRepository feedLikeRepository, MemberRepository memberRepository, PlaceRepository placeRepository) {
+            FeedLikeRepository feedLikeRepository, MemberRepository memberRepository, PlaceRepository placeRepository,
+            AlarmRepository alarmRepository) {
         this.feedRepository = feedRepository;
         this.feedCommentRepository = feedCommentRepository;
         this.feedHashTagRepository = feedHashTagRepository;
@@ -44,6 +48,7 @@ public class FeedService {
         this.feedLikeRepository = feedLikeRepository;
         this.memberRepository = memberRepository;
         this.placeRepository = placeRepository;
+        this.alarmRepository = alarmRepository;
     }
 
     public Map<String, Object> getFeedList() {
@@ -69,9 +74,11 @@ public class FeedService {
         return feedList;
     }
 
-    public List<FeedComment> addFeedComment(int feedNum, String userId, String feedCommentContent) {
+    @Transactional
+    public List<FeedComment> addFeedComment(int feedNum, String userId, String feedCommentContent, String feedUserId) {
         Feed feed = feedRepository.findByFeedNum(feedNum);
         Member member = memberRepository.findMemberByuserId(userId);
+        Member feedUser = memberRepository.findMemberByuserId(feedUserId);
         FeedComment feedComment = FeedComment.builder()
                 .feedNum(feed)
                 .userId(member)
@@ -79,25 +86,41 @@ public class FeedService {
                 .build();
         feedCommentRepository.save(feedComment);
 
+        Alarm alarm = Alarm.builder()
+                .member(feedUser)
+                .feedComment(feedComment)
+                .alarmTypes((long) 2)
+                .build();
+        alarmRepository.save(alarm);
+
         List<FeedComment> feedCommentList = feedCommentRepository.findByFeedNum_FeedNum((long) feedNum);
 
         return feedCommentList;
     }
 
-    public int modifyFeedLike(int feedNum, String userId) {
+    @Transactional
+    public int modifyFeedLike(int feedNum, String userId, String feedUserId) {
         Feed feed = feedRepository.findByFeedNum(feedNum);
         Member member = memberRepository.findMemberByuserId(userId);
+        Member feedUser = memberRepository.findMemberByuserId(feedUserId);
         if (feedLikeRepository.countByFeedNum_FeedNumAndFeedLikeBy_UserId(feedNum, userId) == 0) {
             Like like = Like.builder()
                     .feedNum(feed)
                     .feedLikeBy(member)
                     .build();
             feedLikeRepository.save(like);
+
+            Alarm alarm = Alarm.builder()
+                    .member(feedUser)
+                    .like(like)
+                    .alarmTypes((long) 1)
+                    .build();
+            alarmRepository.save(alarm);
         } else {
             feedLikeRepository.deleteByFeedNum_FeedNumAndFeedLikeBy_UserId(feedNum, userId);
         }
 
-        int likes = feedLikeRepository.countByFeedNum_FeedNumAndFeedLikeBy_UserId(feedNum, userId);
+        int likes = feedLikeRepository.countByFeedNum_FeedNum(feedNum);
         return likes;
     }
 

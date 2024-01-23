@@ -48,7 +48,6 @@ def feedKeyword(request):
     nounkeyword = getNoun(sentence)
     nounsentence = ' '.join(nounkeyword)
     keyword = okt.morphs(nounsentence)
-    print(stopwords)
     print(keyword)
     filteredkeyword = [word for word in keyword if word not in stopwords]
 

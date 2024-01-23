@@ -1,6 +1,6 @@
 <template>
 	<div class="container1">
-		<FeedDetail v-if="modal_Check" @close-modal="closeModal" @openModal="openModal" :cardList="cardList" :userData="userData" @getFeedList="getFeedList" :index="index" ref="feedDetail" />
+		<FeedDetail v-if="modal_Check" @close-modal="closeModal" @openModal="openModal" :cardOrigin="card" :userData="userData" @getFeedList="getFeedList" :index="index" ref="feedDetail" />
 		<div class="feed-card-area" id="card-area">
 			<!-- 해시태그 검색 -->
 			<form v-if="!this.$route.query.nickname" action="" id="search-form">
@@ -43,20 +43,27 @@ export default {
 			],
 			allCardList: [],
 			listCnt: 6,
-			card: null,
+			card: {},
 			modal_Check: false,
 			userData: null,
 			index: 0,
 			imagePath: null,
 		};
 	},
-	created() {
+	async created() {
 		// 페이지가 로드될 때 초기 이미지 설정
 		this.bgImage();
-
-		// 페이지 로드하면서 리스트 불러오기
 		if (this.$route.query.nickname) {
-			this.getMyFeedList(this.$route.query.nickname);
+			await this.getMyFeedList(this.$route.query.nickname);
+			if (this.$route.query.feedNum) {
+				for (const card of this.allCardList) {
+					if (card.feedNum == this.$route.query.feedNum) {
+						console.log("찾았다", card);
+						this.card = card;
+					}
+				}
+				this.openModal(this.card, this.allCardList.indexOf(this.card));
+			}
 		} else {
 			this.getFeedList();
 		}
@@ -68,7 +75,7 @@ export default {
 			this.$emit("bgImage", newImage);
 		},
 		async getFeedList() {
-      this.allCardList = [];
+			this.allCardList = [];
 			this.cardList = [];
 			await axios.get(`http://${process.env.VUE_APP_BACK_END_URL}/feedList`).then((res) => {
 				const data = res.data;
@@ -79,7 +86,7 @@ export default {
 						const images = [];
 						for (const img of data.feedImg) {
 							if (img.feed_num.feed_num === feedNum) {
-								images.push(require("@/img/Feed/" + img.feed_img));
+								images.push(require("E:/git/final/Haru/Haru/src/main/resources/static/img/Feed/" + img.feed_img));
 							}
 						}
 						return images;
@@ -90,12 +97,12 @@ export default {
 							comments.push(comment);
 						}
 					}
-          const hashTag = [];
-          for (const tag of data.feedHashTag) {
-            if (tag.feed_num.feed_num === feedNum) {
-              hashTag.push("#" + tag.feed_hash_tag);
-            }
-          }
+					const hashTag = [];
+					for (const tag of data.feedHashTag) {
+						if (tag.feed_num.feed_num === feedNum) {
+							hashTag.push("#" + tag.feed_hash_tag);
+						}
+					}
 					const cardList = {
 						profileImage: require("@/img/Feed/no_profile.png"), //data.feed[index].member.profile_img,
 						uid: data.feed[index].member.user_id,
@@ -105,12 +112,12 @@ export default {
 						images: images(data),
 						content: data.feed[index].feed_content,
 						likes: data.feedLike[index],
-						rDate: data.feed[index].feed_cdate.substring(0, 16),
+						rDate: data.feed[index].feed_cdate,
 						comments: comments.length,
 						feedComments: comments,
 						recommend: data.feed[index].place_num,
 						feedNum: data.feed[index].feed_num,
-            hashTag: hashTag,
+						hashTag: hashTag,
 					};
 					this.allCardList.push(cardList);
 					this.allCardList.sort((a, b) => {
@@ -121,13 +128,16 @@ export default {
 					});
 					index++;
 				}
+				for (let i = 0; i < this.allCardList.length; i++) {
+					this.allCardList[i].rDate = this.getTimeString(this.allCardList[i].rDate);
+				}
 				this.cardList = this.allCardList.slice(0, this.listCnt);
 				console.log(data);
 			});
 		},
 		async getMyFeedList(nickname) {
-      this.allCardList = [];
-      this.cardList = [];
+			this.allCardList = [];
+			this.cardList = [];
 			var formData = new FormData();
 			formData.append("nickname", nickname);
 			this.cardList = [];
@@ -140,7 +150,7 @@ export default {
 						const images = [];
 						for (const img of data.feedImg) {
 							if (img.feed_num.feed_num === feedNum) {
-								images.push(require("@/img/Feed/" + img.feed_img));
+								images.push(require("E:/git/final/Haru/Haru/src/main/resources/static/img/Feed/" + img.feed_img));
 							}
 						}
 						return images;
@@ -151,12 +161,12 @@ export default {
 							comments.push(comment);
 						}
 					}
-          const hashTag = [];
-          for (const tag of data.feedHashTag) {
-            if (tag.feed_num.feed_num === feedNum) {
-              hashTag.push("#" + tag.feed_hash_tag);
-            }
-          }
+					const hashTag = [];
+					for (const tag of data.feedHashTag) {
+						if (tag.feed_num.feed_num === feedNum) {
+							hashTag.push("#" + tag.feed_hash_tag);
+						}
+					}
 					const cardList = {
 						profileImage: require("@/img/Feed/no_profile.png"), //data.feed[index].member.profile_img,
 						uid: data.feed[index].member.user_id,
@@ -166,12 +176,12 @@ export default {
 						images: images(data),
 						content: data.feed[index].feed_content,
 						likes: data.feedLike[index],
-						rDate: data.feed[index].feed_cdate.substring(0, 16),
+						rDate: data.feed[index].feed_cdate,
 						comments: comments.length,
 						feedComments: comments,
 						recommend: data.feed[index].place_num,
 						feedNum: data.feed[index].feed_num,
-            hashTag: hashTag,
+						hashTag: hashTag,
 					};
 					this.allCardList.push(cardList);
 					this.allCardList.sort((a, b) => {
@@ -182,13 +192,16 @@ export default {
 					});
 					index++;
 				}
-        this.cardList = this.allCardList.slice(0, this.listCnt);
+				for (let i = 0; i < this.allCardList.length; i++) {
+					this.allCardList[i].rDate = this.getTimeString(this.allCardList[i].rDate);
+				}
+				this.cardList = this.allCardList.slice(0, this.listCnt);
 				console.log(data);
 			});
 		},
 		searchFeed() {
-      this.allCardList = [];
-      this.cardList = [];
+			this.allCardList = [];
+			this.cardList = [];
 			const search = document.querySelector(".hashtag-search-input").value;
 			if (search === "") {
 				alert("검색어를 입력해주세요");
@@ -204,7 +217,7 @@ export default {
 							const images = [];
 							for (const img of data.feedImg) {
 								if (img.feed_num.feed_num === feedNum) {
-									images.push(require("@/img/Feed/" + img.feed_img));
+									images.push(require("E:/git/final/Haru/Haru/src/main/resources/static/img/Feed/" + img.feed_img));
 								}
 							}
 							return images;
@@ -215,12 +228,12 @@ export default {
 								comments.push(comment);
 							}
 						}
-            const hashTag = [];
-            for (const tag of data.feedHashTag) {
-              if (tag.feed_num.feed_num === feedNum) {
-                hashTag.push("#" + tag.feed_hash_tag);
-              }
-            }
+						const hashTag = [];
+						for (const tag of data.feedHashTag) {
+							if (tag.feed_num.feed_num === feedNum) {
+								hashTag.push("#" + tag.feed_hash_tag);
+							}
+						}
 						const cardList = {
 							profileImage: require("@/img/Feed/no_profile.png"), //data.feed[index].member.profile_img,
 							uid: data.feed[index].member.user_id,
@@ -230,19 +243,29 @@ export default {
 							images: images(data),
 							content: data.feed[index].feed_content,
 							likes: data.feedLike[index],
-							rDate: data.feed[index].feed_cdate.substring(0, 16),
+							rDate: data.feed[index].feed_cdate,
 							comments: comments.length,
 							feedComments: comments,
 							recommend: data.feed[index].place_num,
 							feedNum: data.feed[index].feed_num,
-              hashTag: hashTag,
+							hashTag: hashTag,
 						};
 						if (cardList.content.includes(search)) {
 							this.allCardList.push(cardList);
 						}
+						this.allCardList.sort((a, b) => {
+							const dateA = new Date(a.rDate);
+							const dateB = new Date(b.rDate);
+
+							return dateB - dateA;
+						});
+
 						index++;
 					}
-          this.cardList = this.allCardList.slice(0, this.listCnt);
+					for (let i = 0; i < this.allCardList.length; i++) {
+						this.allCardList[i].rDate = this.getTimeString(this.allCardList[i].rDate);
+					}
+					this.cardList = this.allCardList.slice(0, this.listCnt);
 					console.log(data);
 				});
 				const feedList = this.$refs.feedList;
@@ -250,63 +273,85 @@ export default {
 			}
 		},
 		openModal(card, idx) {
+			console.log(card, idx);
 			this.modal_Check = !this.modal_Check;
 			this.userData = this.data;
 			this.index = idx;
+			this.card = card;
 		},
 		closeModal() {
 			this.modal_Check = false;
 		},
-    getNextFeedList() {
-      this.listCnt += 3;
-      this.cardList = this.allCardList.slice(0, this.listCnt);
-    },
-    handleScroll() {
-      if (window.innerHeight + window.scrollY + 400 >= document.body.offsetHeight) {
-        this.getNextFeedList();
-      }
-    },
+		getNextFeedList() {
+			this.listCnt += 3;
+			this.cardList = this.allCardList.slice(0, this.listCnt);
+		},
+		handleScroll() {
+			if (window.innerHeight + window.scrollY + 400 >= document.body.offsetHeight) {
+				this.getNextFeedList();
+			}
+		},
+		getTimeString(isoTimeString) {
+			const currentTime = new Date();
+			const targetTime = new Date(isoTimeString);
+			const timeDifference = currentTime - targetTime;
+
+			const minutes = Math.floor(timeDifference / (1000 * 60));
+
+			if (minutes < 1) {
+				return "방금 전";
+			} else if (minutes < 60) {
+				return `${minutes}분 전`;
+			} else if (minutes < 24 * 60) {
+				const hours = Math.floor(minutes / 60);
+				return `${hours}시간 전`;
+			} else {
+				const options = { year: "numeric", month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit" };
+				return targetTime.toLocaleString("ko-KR", options);
+			}
+		},
 	},
 	setup() {
-    const isLoggedIn = ref(false); // Use ref to create reactive isLoggedIn
+		const isLoggedIn = ref(false); // Use ref to create reactive isLoggedIn
 		const data = ref([]); // Use ref to create reactive data
-    
+
 		const getToken = () => {
-      const token = localStorage.getItem("jwtToken");
+			const token = localStorage.getItem("jwtToken");
 			isLoggedIn.value = token ? true : false;
 		};
-    
+
 		const logout = () => {
-      axios.get(`http://${process.env.VUE_APP_BACK_END_URL}/api/auth/logout`).then((res) => {
-        if (res.data == "Logout") {
-          localStorage.removeItem("jwtToken");
+			axios.get(`http://${process.env.VUE_APP_BACK_END_URL}/api/auth/logout`).then((res) => {
+				if (res.data == "Logout") {
+					localStorage.removeItem("jwtToken");
 					window.location.href = "/login";
 				}
 			});
 		};
-    
+
 		const decodeToken = (token) => {
 			if (token == null) return false;
 			const decoded = jwtDecode(token);
 			data.value = decoded; // Use data.value to set the value of the ref
 			return decoded;
 		};
-    
+
 		onMounted(() => {
-      getToken();
+			getToken();
 			const token = localStorage.getItem("jwtToken");
 			decodeToken(token);
 		});
-    
-		return { logout, data}; // Return data in the setup function
+
+		return { logout, data }; // Return data in the setup function
 	},
-  mounted() {
-    window.addEventListener('scroll', this.handleScroll, true);
-  },
-  components: {
-    FeedDetail,
-    FeedList,
-  },
+	mounted() {
+		window.addEventListener("scroll", this.handleScroll, true);
+		// 페이지 로드하면서 리스트 불러오기
+	},
+	components: {
+		FeedDetail,
+		FeedList,
+	},
 };
 </script>
 <style scoped>

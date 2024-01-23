@@ -112,7 +112,7 @@
         <div class="card-btn">
           <div>
             <div class="heart">
-              <img class="cursor-p" src="@/img/Feed/heart.png" id="heart"  @click="sendLikeInFeed(this.data.id, i.feedNum)"/>
+              <img class="cursor-p" src="@/img/Feed/heart.png" id="heart"  @click="sendLikeInFeed(this.data.id, i.feedNum, i.uid)"/>
               <span>{{ i.likes }}</span>
             </div>
             <div class="comment">
@@ -122,7 +122,7 @@
                 id="comment"
                 @click="$emit('open-modal', i, idx)"
               />
-              <span @click="$emit('open-modal')" class="cursor-p">{{
+              <span @click="$emit('open-modal', i, idx)" class="cursor-p">{{
                 i.comments
               }}</span>
             </div>
@@ -154,11 +154,12 @@ export default {
       this.$emit("getMyFeedList", nickname);
       this.selectedNickname = nickname;
     },
-    sendLikeInFeed(uid, feedNum) {
-      console.log("uid : ", uid,"feedNum : ", feedNum);
+    sendLikeInFeed(uid, feedNum, feedUserId) {
+      console.log("uid : ", uid,"feedNum : ", feedNum, "feedUserId : ", feedUserId);
       this.formData = new FormData();
       this.formData.append("feedNum", feedNum);
       this.formData.append("userId", uid);
+      this.formData.append("feedUserId", feedUserId);
       axios
         .post(
           `http://${process.env.VUE_APP_BACK_END_URL}/modifyFeedLike`,

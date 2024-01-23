@@ -243,7 +243,7 @@
 /* 알림 내용 span 태그 */
 #comment-content {
   display: inline-block;
-  width: 485px;
+  width: 415px;
   padding-right: 10px;
   font-weight: 500;
   font-size: 18px;
@@ -252,8 +252,8 @@
 /* 시간 아이콘, 작성일 */
 .alarm-time {
   display: inline-block;
-  width: 110px;
-  text-align: center;
+  width: 200px;
+  text-align: right;
 }
 
 /* 시간 아이콘 */

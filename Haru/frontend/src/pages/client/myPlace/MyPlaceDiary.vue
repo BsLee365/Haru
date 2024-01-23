@@ -109,7 +109,7 @@ export default {
     return {
       // 달력 외 관련 --------------------------------------
       isBtnHeartNone: false, // 하트버튼이 안보여야되는지
-      isTabRecList: false, // 추천 리스트 탭 활성화 여부 (true -> 추천리스트, false -> 일기)
+      isTabRecList: true, // 추천 리스트 탭 활성화 여부 (true -> 추천리스트, false -> 일기)
       RecommendList: [], // controller 에서 넘어온 월별 추천리스트 + 일기 data
       RecPlace: [], // 추천리스트로 넘길 데이터 담는 배열
       FinMyDiaryList: [], // 일기 탭으로 넘길 데이터 담는 배열

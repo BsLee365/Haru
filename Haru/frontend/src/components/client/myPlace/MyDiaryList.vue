@@ -6,6 +6,7 @@
       @delete-diary="deleteDiary"
       @update-d-status="changeStatus"
       @update-all-list="$emit('updateAllList')"
+      @format-cdate="formatCDate"
       v-if="modal_Check"
       :selectedDiary="selectedDiary"
       :rDate="sendSelectedDate"
@@ -13,9 +14,13 @@
     /> <!-- dStatus : 수정, 읽기 인지 판별 -->
 
     <!-- 날짜 -->
-    <div class="myplace-diary-date">
-      <p>{{ sendSelectedDate }}</p>
-    </div>
+<!--    <div class="reclist-date-text myplace-diary-date">-->
+<!--      <p>{{ sendSelectedDate }}</p>-->
+<!--    </div>-->
+    <p class="reclist-date-text" style="margin-bottom: 20px;" v-show="diaryList.length > 0">
+      {{ sendSelectedDate }}
+    </p>
+
 
     <!-- 일기 하나씩 -->
     <div
@@ -23,6 +28,7 @@
       v-for="(diary) in diaryList"
       :key="diary.diary_num"
     >
+
       <!-- 아이콘 -->
       <div class="myplace-diary-icon-bg">
         <img src="@/img/myPlace/diaryicon.png" alt="" />
@@ -35,6 +41,16 @@
           @click="changeStatus('read'); openModal(); openDiaryUpdate(diary);"
         >
           {{ diary.diary_title }}
+        </p>
+      </div>
+
+      <!-- 작성 시간 -->
+      <div class="myplace-diary-rtime-area">
+        <p
+            class="cursor-p"
+            @click="changeStatus('read'); openModal(); openDiaryUpdate(diary);"
+        >
+          {{ this.formatCDate(diary.diary_cdate) }}
         </p>
       </div>
 
@@ -53,6 +69,7 @@
 <script>
 import MyDiaryDetail from "@/components/client/myPlace/MyDiaryDetail.vue";
 import axios from "axios";
+import moment from "moment";
 
 export default {
   data() {
@@ -82,6 +99,11 @@ export default {
     },
     changeStatus(status) {
       this.dStatus = status;
+    },
+
+    // 날짜(시간) 포맷
+    formatCDate(cdate) {
+      return moment(cdate).format("HH:mm");
     },
 
     // 일기 삭제

@@ -6,7 +6,7 @@
       <div class="mydiary-modal-container mydiary-rec-modal" @click.stop>
         <!-- 일기 날짜 -->
         <div class="diary-date-area">
-          <h2 id="diary-date-h2">{{ rDate }}</h2>
+          <h2 id="diary-date-h2">{{ formatCDate(myDiary.diary_cdate) }}</h2>
         </div>
 
         <!-- 일기 제목, 내용 -->
@@ -69,6 +69,7 @@
 import {onMounted, ref} from "vue";
 import axios from "axios";
 import {jwtDecode} from "jwt-decode";
+import moment from "moment/moment";
 
 export default {
   data() {
@@ -87,6 +88,11 @@ export default {
     this.myDiary = this.selectedDiary;
   },
   methods: {
+    // 날짜(시간) 포맷
+    formatCDate(cdate) {
+      return moment(cdate).format("MM월 DD일 (dddd) HH:mm");
+    },
+
     // 수정하기 눌렀을 때
     updateDStatus(status) {
       this.$emit("update-d-status", status);

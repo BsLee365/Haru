@@ -65,7 +65,7 @@ public class MemberService {
     }
 
     public int checkFindUserPwd(FindUserPwdDTO dto) {
-        Optional checkFindUserPwd = memberRepository.findUserIdByEmailAndName(dto.getEmail(), dto.getUserName());
+        Optional checkFindUserPwd = memberRepository.findUserIdByEmailAndNameAndUserId(dto.getEmail(), dto.getUserName(), dto.getUserId());
         return checkFindUserPwd != null ? 1 : 0;
     }
 

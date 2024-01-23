@@ -42,6 +42,9 @@ public interface MemberRepository extends JpaRepository<Member, String> {
     // 이메일과 이름으로 회원 아이디 찾기
     Optional findUserIdByEmailAndName(String email, String name);
 
+    // 이메일과 이름과 아이디로 회원 아이디 찾기
+    Optional findUserIdByEmailAndNameAndUserId(String email, String name, String userId);
+
     // 비밀번호 수정
     @Modifying
     @Query("UPDATE Member u SET u.pwd = :pwd WHERE u.userId = :id")

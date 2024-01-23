@@ -70,7 +70,7 @@
         <!-- 컴포넌트로 토글되는 영역 (추천리스트, 일기 리스트) -->
         <div class="tab-content-area">
           <RecommendList
-            :RecPlace="RecPlace"
+            :AllRecList="RecPlace"
             :sendSelectedDate="sendSelectedDate"
             :isBtnHeartNone="isBtnHeartNone"
             class="rlist-container"
@@ -207,14 +207,15 @@ export default {
           enddate: endSdate,
         })
         .then((res) => {
-          // console.log(res.data);
+          // console.log(res.data.rec_list); // place, place_recommend_list, wish_list 가져옴
           this.RecommendList = res.data.rec_list;
           this.diaryList = res.data.diary_list;
 
           this.allDateList = new Set();
 
           this.RecommendList.forEach((item) => {
-            this.allDateList.add(moment(item.place_cdate).format("YYYY-MM-DD"));
+            // console.log(item.place_recommend_list.place_cdate);
+            this.allDateList.add(moment(item.place_recommend_list.place_cdate).format("YYYY-MM-DD"));
           });
 
           this.diaryList.forEach(item => {
@@ -387,8 +388,9 @@ export default {
 
       // 데이터 가져오기
       this.RecommendList.forEach((item) => {
+        // console.log(item.place_recommend_list.place_cdate);
         // 가져온 데이터
-        const placeCdate = moment(item.place_cdate).format("YYYY-MM-DD");
+        const placeCdate = moment(item.place_recommend_list.place_cdate).format("YYYY-MM-DD");
         // 선택한 날짜
         var selectedDate = moment([this.sDate[0], this.sDate[1], day]).format(
           "YYYY-MM-DD"
@@ -398,8 +400,13 @@ export default {
         // 날짜가 같은거만 리스트로 출력
         // if (placeCdate.includes(selectedDate)) {
         if (placeCdate == selectedDate) {
-          // console.log(item.place);
-          this.RecPlace.push(item.place);
+          // console.log(item);
+          var jsonlist = {
+            place: item.place,
+            recList: item.place_recommend_list,
+            wishList: item.wish_list
+          };
+          this.RecPlace.push(jsonlist);
         }
       });
 
@@ -413,7 +420,7 @@ export default {
         );
 
         if (diaryCdate == selectedDate) {
-          console.log('!!!!!! : ' + item.diary_title)
+          // console.log('!!!!!! : ' + item.diary_title)
           this.FinMyDiaryList.push(item);
         }
       });

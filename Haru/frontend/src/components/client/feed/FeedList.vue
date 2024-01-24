@@ -106,7 +106,6 @@ export default {
 		getMyFeedList(nickname) {
 			this.$emit("getMyFeedList", nickname);
 			this.selectedNickname = nickname;
-      this.searchKeyword = "";
 		},
 		sendLikeInFeed(uid, feedNum, feedUserId) {
 			console.log("uid : ", uid, "feedNum : ", feedNum, "feedUserId : ", feedUserId);

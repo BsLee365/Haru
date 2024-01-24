@@ -20,7 +20,7 @@
                 <img src="@/img/FaceRegistration/camera.png" alt="" />
                 <p>프로필 수정</p>
               </div>
-              <img src="@/assets/bgImage/type3.png" class="profileImg" />
+              <img src="@/img/assets/bgImage/type3.png" class="profileImg" />
             </li>
             <li>
               <div class="nickname-box">
@@ -76,14 +76,14 @@
                   >
                     <img
                       class="alarm-img"
-                      src="@/assets/icon/alarm/alarm_heart_icon.png"
+                      src="@/img/assets/icon/alarm/alarm_heart_icon.png"
                     />
                     <span id="comment-content"
                       >{{ alarm.like.feed_like_by.nickname }}님이 좋아요를
                       눌렀습니다.</span
                     >
                     <span class="alarm-time">
-                      <img src="@/assets/icon/time_icon.png" alt="" />
+                      <img src="@/img/assets/icon/time_icon.png" alt="" />
                       {{ this.getTimeString(alarm.alarm_cdate) }}
                     </span>
                   </div>
@@ -98,28 +98,28 @@
                   >
                     <img
                       class="alarm-img"
-                      src="@/assets/icon/alarm/alarm_comment_icon.png"
+                      src="@/img/assets/icon/alarm/alarm_comment_icon.png"
                     />
                     <span id="comment-content"
                       >{{ alarm.feed_comment.user_id.nickname }}님이 게시물에
                       댓글을 작성하였습니다.</span
                     >
                     <span class="alarm-time">
-                      <img src="@/assets/icon/time_icon.png" alt="" />
+                      <img src="@/img/assets/icon/time_icon.png" alt="" />
                       {{ this.getTimeString(alarm.alarm_cdate) }}
                     </span>
                   </div>
                   <div v-else>
                     <img
                       class="alarm-img"
-                      src="@/assets/icon/alarm/alarm_basic_icon.png"
+                      src="@/img/assets/icon/alarm/alarm_basic_icon.png"
                     />
                     <span id="comment-content"
                       >{{ alarm.like.feed_like_by.nickname }}님이 Qna에 답변을
                       작성하였습니다.</span
                     >
                     <span class="alarm-time">
-                      <img src="@/assets/icon/time_icon.png" alt="" />
+                      <img src="@/img/assets/icon/time_icon.png" alt="" />
                       {{ this.getTimeString(alarm.alarm_cdate) }}
                     </span>
                   </div>

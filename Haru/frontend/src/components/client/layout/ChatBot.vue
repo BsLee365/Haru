@@ -1,10 +1,10 @@
 <template>
 	
     <div class="chatbot">
-        <button type="button" @click="toggleChatBot" id="chatBotToggle">
-            <i class="fa"
-        </button>
-		<iframe v-if="isChatBotOpen" allow="microphone;" width="400" height="520" src="https://console.dialogflow.com/api-client/demo/embedded/cfbe19c0-8dee-4ca6-ac06-95027bd77799"> </iframe>
+<!--        <button type="button" @click="toggleChatBot" id="chatBotToggle">-->
+<!--            <i class="fa"-->
+<!--        </button>-->
+<!--		<iframe v-if="isChatBotOpen" allow="microphone;" width="400" height="520" src="https://console.dialogflow.com/api-client/demo/embedded/cfbe19c0-8dee-4ca6-ac06-95027bd77799"> </iframe>-->
 	</div>
 </template>
 <script>

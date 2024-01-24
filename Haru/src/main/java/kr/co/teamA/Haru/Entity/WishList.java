@@ -23,6 +23,6 @@ public class WishList {
     private Member member;
 
     @ManyToOne
-    @JoinColumn(name = "placeNumber")
+    @JoinColumn(name = "placeNum")
     private Place place;
 }

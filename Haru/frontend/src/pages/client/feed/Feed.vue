@@ -75,7 +75,9 @@ export default {
 						const images = [];
 						for (const img of data.feedImg) {
 							if (img.feed_num.feed_num === feedNum) {
-								images.push(require("E:/git/final/Haru/Haru/src/main/resources/static/img/Feed/" + img.feed_img));
+                // E:/git/final/Haru/Haru/src/main/resources/static/img/Feed/
+								images.push(require("E:/900_팀 프로젝트/최종 프로젝트/Haru/Haru/src/main/resources/static/img/Feed/" + img.feed_img));
+
 							}
 						}
 						return images;
@@ -137,7 +139,6 @@ export default {
 			formData.append("userId", this.data.id);
 			this.allCardList = [];
 			this.searchKeyword = "";
-			var formData = new FormData();
 			formData.append("nickname", nickname);
 			this.cardList = [];
 			await axios.post(`http://${process.env.VUE_APP_BACK_END_URL}/myFeedList`, formData).then((res) => {
@@ -149,7 +150,8 @@ export default {
 						const images = [];
 						for (const img of data.feedImg) {
 							if (img.feed_num.feed_num === feedNum) {
-								images.push(require("E:/git/final/Haru/Haru/src/main/resources/static/img/Feed/" + img.feed_img));
+                // E:/git/final/Haru/Haru/src/main/resources/static/img/Feed/
+								images.push(require("E:/900_팀 프로젝트/최종 프로젝트/Haru/Haru/src/main/resources/static/img/Feed/" + img.feed_img));
 							}
 						}
 						return images;
@@ -205,6 +207,7 @@ export default {
 				this.cardList = this.allCardList.slice(0, this.listCnt);
 				console.log(data);
 			});
+      this.searchKeyword = "";
 		},
 		searchFeed() {
 			var formData = new FormData();
@@ -226,7 +229,8 @@ export default {
 							const images = [];
 							for (const img of data.feedImg) {
 								if (img.feed_num.feed_num === feedNum) {
-									images.push(require("E:/git/final/Haru/Haru/src/main/resources/static/img/Feed/" + img.feed_img));
+                  // E:/git/final/Haru/Haru/src/main/resources/static/img/Feed/
+									images.push(require("E:/900_팀 프로젝트/최종 프로젝트/Haru/Haru/src/main/resources/static/img/Feed/" + img.feed_img));
 								}
 							}
 							return images;

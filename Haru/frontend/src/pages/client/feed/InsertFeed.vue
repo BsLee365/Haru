@@ -287,7 +287,8 @@ export default {
       this.modal_Check = false;
     },
     getHashTag() {
-      axios.get(`http://${process.env.VUE_APP_DJANGO_CROSS_URL}/text/feedKeyword`, {
+      // axios.get(`http://${process.env.VUE_APP_DJANGO_CROSS_URL}/text/feedKeyword`, { // 경로 직접 작성해야 오류가 안남... 0124 AI 머지
+      axios.get(`http://192.168.0.215:8000/text/feedKeyword`, {
         params: {
           contents: document.getElementById("contents").value,
         },

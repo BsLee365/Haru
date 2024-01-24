@@ -89,11 +89,11 @@
                 placeholder="직접 입력"
                 :value="wHash"
                 :ref="'writeHashtagInput' + whIdx"
+                @change="addHashTag"
               />
             </div>
             <div class="add-hashtag-area">
               <button
-                @click.prevent="addHashTag"
                 class="add-hashtag-btn big-ctlbtn insert-btn"
               >
                 추가
@@ -134,15 +134,7 @@ export default {
       isLoggedIn: false,
       AccessToken: "",
       uid: "abc",
-      hashtag: [
-        // "고기",
-        // "돼지고기",
-        // "목살",
-        // "삼겹살",
-        // "소고기",
-        // "무한리필",
-        // "생고기",
-      ],
+      hashtag: [],
       writeHashtag: [""], // 직접 입력 해시태그
       activeTags: [], // 활성화된 해시태그
       RecommendList: [
@@ -273,10 +265,10 @@ export default {
       // 배열의 길이가 5개 이하면 입력하는 항목란 추가
       if (this.writeHashtag.length < 5) {
         this.writeHashtag.length = this.writeHashtag.length + 1;
-
       } else {
         alert("해시태그는 5개 이하로 입력 가능합니다.");
       }
+      console.log(this.writeHashtag);
     },
 
     openModal() {

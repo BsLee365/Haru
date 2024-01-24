@@ -2,7 +2,7 @@
 	<!-- 피드 리스트 화면 - 카드 하나  -->
 	<div>
 		<div v-if="this.$route.query.nickname || selectedNickname" class="page-title-area">
-			<h1 class="page-upload-title">{{ this.$route.query.nickname }}{{ selectedNickname }}님의 피드</h1>
+			<h1 class="page-upload-title">{{ selectedNickname }}님의 피드</h1>
 		</div>
 		<div class="feed-card" v-for="(i, idx) in cardList" :key="idx">
 			<div class="feed-card-header">
@@ -106,7 +106,6 @@ export default {
 		getMyFeedList(nickname) {
 			this.$emit("getMyFeedList", nickname);
 			this.selectedNickname = nickname;
-      this.searchKeyword = "";
 		},
 		sendLikeInFeed(uid, feedNum, feedUserId) {
 			console.log("uid : ", uid, "feedNum : ", feedNum, "feedUserId : ", feedUserId);

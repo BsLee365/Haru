@@ -137,9 +137,7 @@ export default {
 			formData.append("userId", this.data.id);
 			this.allCardList = [];
 			this.searchKeyword = "";
-			var formData = new FormData();
 			formData.append("nickname", nickname);
-			this.cardList = [];
 			await axios.post(`http://${process.env.VUE_APP_BACK_END_URL}/myFeedList`, formData).then((res) => {
 				const data = res.data;
 				var index = 0;
@@ -204,6 +202,7 @@ export default {
 				this.cardList = [];
 				this.cardList = this.allCardList.slice(0, this.listCnt);
 				console.log(data);
+				this.searchKeyword = "";
 			});
 		},
 		searchFeed() {
@@ -216,10 +215,9 @@ export default {
 				alert("검색어를 입력해주세요");
 				return false;
 			} else {
-				axios.get(`http://${process.env.VUE_APP_BACK_END_URL}/feedList`, formData).then((res) => {
+				axios.post(`http://${process.env.VUE_APP_BACK_END_URL}/feedList`, formData).then((res) => {
 					const data = res.data;
 					var index = 0;
-					this.cardList = [];
 					for (const feed in data.feed) {
 						const feedNum = data.feed[feed].feed_num;
 						const images = function (data) {
@@ -365,7 +363,7 @@ export default {
 		window.addEventListener("scroll", this.handleScroll, true);
 		// 페이지 로드하면서 리스트 불러오기
 		if (this.$route.query.nickname) {
-			await this.getMyFeedList(this.$route.query.nickname);
+			await this.$refs.feedList.getMyFeedList(this.$route.query.nickname);
 			if (this.$route.query.feedNum) {
 				for (const card of this.allCardList) {
 					if (card.feedNum == this.$route.query.feedNum) {

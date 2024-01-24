@@ -140,7 +140,7 @@ export default {
           console.log(res);
           if (!res.data.access_token == "") {
             localStorage.setItem("jwtToken", res.data.access_token);
-            this.$router.replace("/");
+            window.location.href = "/";
           } else {
             alert("로그인 실패");
           }

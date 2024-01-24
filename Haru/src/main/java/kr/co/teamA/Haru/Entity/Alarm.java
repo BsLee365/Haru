@@ -1,12 +1,15 @@
 package kr.co.teamA.Haru.Entity;
 
+import java.util.Date;
+
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 
 @Data
 @Entity
@@ -19,8 +22,9 @@ public class Alarm {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ALARM_SEQ")
     @SequenceGenerator(name = "ALARM_SEQ", sequenceName = "ALARM_SEQ", allocationSize = 1)
-    private Long alarmType;
+    private Long alarmNum;
 
+<<<<<<< HEAD
     @OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "qnaNum", referencedColumnName = "qnaNum")
     private QnA qna;
@@ -30,11 +34,31 @@ public class Alarm {
     private Member member;
 
     @ManyToOne(cascade = CascadeType.PERSIST)
+=======
+    @OneToOne
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JoinColumn(name = "qnaNum", referencedColumnName = "qnaNum")
+    private QnA qna;
+
+    @ManyToOne
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JoinColumn(name = "userId", referencedColumnName = "userId")
+    private Member member;
+
+    @ManyToOne
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JoinColumn(name = "likeNum", referencedColumnName = "likeNum")
+    private Like like;
+
+    @ManyToOne
+    @OnDelete(action = OnDeleteAction.CASCADE)
+>>>>>>> origin/junghyoun
     @JoinColumn(name = "commentNum", referencedColumnName = "commentNum")
     private FeedComment feedComment;
-
 
     @Column(nullable = false)
     private Long alarmTypes;
 
+    @Column(columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP", insertable = false)
+    private Date alarmCdate;
 }

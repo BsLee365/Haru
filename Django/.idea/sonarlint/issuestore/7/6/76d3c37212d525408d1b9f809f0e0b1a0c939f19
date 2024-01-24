@@ -1,0 +1,13 @@
+
+hpython:S1192S"PDefine a constant instead of duplicating this literal 'ìŠ¤í¬ì¸ ì‹œì„¤' 5 times.(Õ…“‘
+mpython:S1192!"PDefine a constant instead of duplicating this literal 'ë°°ë“œë¯¼í„´ì¥' 3 times.(à†ü¿ıÿÿÿÿ
+Lpython:S1172"/Remove the unused function parameter "request".(àŞŸÎúÿÿÿÿ
+mpython:S1542"PRename function "placeCrawl" to match the regular expression ^[a-z_][a-z0-9_]*$.(àŞŸÎúÿÿÿÿ
+npython:S1542"QRename function "getLinkList" to match the regular expression ^[a-z_][a-z0-9_]*$.(ö‚µ»ÿÿÿÿÿ
+Hpython:S1481+"+Remove the unused local variable "element".(úà’ûúÿÿÿÿ
+Dpython:S1481)"'Remove the unused local variable "req".(áÂÊÜøÿÿÿÿ
+qpython:S3776"TRefactor this function to reduce its Cognitive Complexity from 20 to the 15 allowed.(ö‚µ»ÿÿÿÿÿ
+6python:S125 "Remove this commented out code.(éÍÔÖ
+Cpython:S5806%"+Rename this variable; it shadows a builtin.(Ú¸ë
+;python:S125F"Remove this commented out code.(Ôî–Æùÿÿÿÿ
+tpython:S1542O"WRename function "filteringLinkList" to match the regular expression ^[a-z_][a-z0-9_]*$.(ÏØ‚áşÿÿÿÿ

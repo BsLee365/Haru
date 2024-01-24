@@ -5,26 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5faa275d-21d6-4b51-aa5b-be500dedc38e" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.vscode/launch.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Haru/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/Haru/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Haru/src/main/java/kr/co/teamA/Haru/Entity/Alarm.java" beforeDir="false" afterPath="$PROJECT_DIR$/Haru/src/main/java/kr/co/teamA/Haru/Entity/Alarm.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Haru/src/main/java/kr/co/teamA/Haru/Entity/Answer.java" beforeDir="false" afterPath="$PROJECT_DIR$/Haru/src/main/java/kr/co/teamA/Haru/Entity/Answer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Haru/src/main/java/kr/co/teamA/Haru/Entity/Diary.java" beforeDir="false" afterPath="$PROJECT_DIR$/Haru/src/main/java/kr/co/teamA/Haru/Entity/Diary.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Haru/src/main/java/kr/co/teamA/Haru/Entity/Feed.java" beforeDir="false" afterPath="$PROJECT_DIR$/Haru/src/main/java/kr/co/teamA/Haru/Entity/Feed.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Haru/src/main/java/kr/co/teamA/Haru/Entity/FeedComment.java" beforeDir="false" afterPath="$PROJECT_DIR$/Haru/src/main/java/kr/co/teamA/Haru/Entity/FeedComment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Haru/src/main/java/kr/co/teamA/Haru/Entity/FeedHashTag.java" beforeDir="false" afterPath="$PROJECT_DIR$/Haru/src/main/java/kr/co/teamA/Haru/Entity/FeedHashTag.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Haru/src/main/java/kr/co/teamA/Haru/Entity/FeedImg.java" beforeDir="false" afterPath="$PROJECT_DIR$/Haru/src/main/java/kr/co/teamA/Haru/Entity/FeedImg.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Haru/src/main/java/kr/co/teamA/Haru/Entity/Like.java" beforeDir="false" afterPath="$PROJECT_DIR$/Haru/src/main/java/kr/co/teamA/Haru/Entity/Like.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Haru/src/main/java/kr/co/teamA/Haru/Entity/LogLoggin.java" beforeDir="false" afterPath="$PROJECT_DIR$/Haru/src/main/java/kr/co/teamA/Haru/Entity/LogLoggin.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Haru/src/main/java/kr/co/teamA/Haru/Entity/Member.java" beforeDir="false" afterPath="$PROJECT_DIR$/Haru/src/main/java/kr/co/teamA/Haru/Entity/Member.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Haru/src/main/java/kr/co/teamA/Haru/Entity/Place.java" beforeDir="false" afterPath="$PROJECT_DIR$/Haru/src/main/java/kr/co/teamA/Haru/Entity/Place.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Haru/src/main/java/kr/co/teamA/Haru/Entity/PlaceRecommendList.java" beforeDir="false" afterPath="$PROJECT_DIR$/Haru/src/main/java/kr/co/teamA/Haru/Entity/PlaceRecommendList.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Haru/src/main/java/kr/co/teamA/Haru/Entity/QnA.java" beforeDir="false" afterPath="$PROJECT_DIR$/Haru/src/main/java/kr/co/teamA/Haru/Entity/QnA.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Haru/src/main/java/kr/co/teamA/Haru/Entity/SubCategory.java" beforeDir="false" afterPath="$PROJECT_DIR$/Haru/src/main/java/kr/co/teamA/Haru/Entity/SubCategory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Haru/src/main/java/kr/co/teamA/Haru/Entity/UserInterestCategory.java" beforeDir="false" afterPath="$PROJECT_DIR$/Haru/src/main/java/kr/co/teamA/Haru/Entity/UserInterestCategory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Haru/src/main/java/kr/co/teamA/Haru/Entity/WishList.java" beforeDir="false" afterPath="$PROJECT_DIR$/Haru/src/main/java/kr/co/teamA/Haru/Entity/WishList.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Haru/src/main/java/kr/co/teamA/Haru/Service/member/MemberService.java" beforeDir="false" afterPath="$PROJECT_DIR$/Haru/src/main/java/kr/co/teamA/Haru/Service/member/MemberService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Haru/src/main/java/kr/co/teamA/Haru/Controller/member/MemberController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Haru/src/main/java/kr/co/teamA/Haru/Controller/member/MemberController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -60,7 +43,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "devback",
+    "git-widget-placeholder": "jy__0122__01",
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/user/Desktop/git/Haru",
@@ -69,6 +52,7 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
+    "ts.external.directory.path": "C:\\Program Files\\JetBrains\\IntelliJ IDEA 2023.3.2\\plugins\\javascript-impl\\jsLanguageServicesImpl\\external",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -90,7 +74,7 @@
       <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
       <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
       <DebugAllEnabled>false</DebugAllEnabled>
-      <ForceTestExec>false</ForceTestExec>
+      <RunAsTest>false</RunAsTest>
       <method v="2" />
     </configuration>
     <recent_temporary>

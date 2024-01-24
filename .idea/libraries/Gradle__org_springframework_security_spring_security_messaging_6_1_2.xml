@@ -1,0 +1,14 @@
+<component name="libraryTable">
+  <library name="Gradle: org.springframework.security:spring-security-messaging:6.1.2" type="java-imported" external-system-id="GRADLE">
+    <properties groupId="org.springframework.security" artifactId="spring-security-messaging" version="6.1.2" />
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework.security/spring-security-messaging/6.1.2/d662710da9ab0be30c9a00b9ae68fa517f0e89b/spring-security-messaging-6.1.2.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework.security/spring-security-messaging/6.1.2/b19c7145111ea302f85f1a5911ec8b8c987e4f8c/spring-security-messaging-6.1.2-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework.security/spring-security-messaging/6.1.2/caa7163cc8f81ce7085b0e9cf33c0ab700eb00af/spring-security-messaging-6.1.2-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

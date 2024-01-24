@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" external-system-id="GRADLE" name="Gradle : kr.co.teamA : Haru-0.0.1-SNAPSHOT.war">
+    <output-path>$PROJECT_DIR$/Haru/build/libs</output-path>
+    <properties id="gradle-properties">
+      <options external-project-path="$PROJECT_DIR$/Haru">
+        <buildTaskPath>:war</buildTaskPath>
+        <cleanTaskPath>:cleanWar</cleanTaskPath>
+      </options>
+    </properties>
+    <root id="archive" name="Haru-0.0.1-SNAPSHOT.war">
+      <element id="artifact" artifact-name="Gradle : kr.co.teamA : Haru-0.0.1-SNAPSHOT.war (exploded)" />
+    </root>
+  </artifact>
+</component>

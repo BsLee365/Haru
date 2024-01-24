@@ -1,6 +1,7 @@
 <template>
   <!-- 추천 리스트 - 내장소(추천리스트), 피드생성/수정(추천리스트 모달창) -->
   <div>
+<<<<<<< HEAD
 
     <!--
       recList: {}, // 추천받은 리스트
@@ -30,11 +31,31 @@
               <div class="rlist-img-area">
                 <a :href="'https://map.naver.com/p/search/' + item.place.place_name" target="_blank"
                 ><img class="rec-detail-img" :src="item.place.place_img" alt=""
+=======
+    <div
+      v-for="(rlist, idx) in RecommendList"
+      :key="idx"
+      class="rlist-day-area"
+    >
+      <p>{{ rlist.rdate }}</p>
+      <div v-for="(item, i) in rlist.recList" :key="i" @mouseleave="FeedBtnOff">
+        <div class="rlist-card-area">
+          <div
+            class="rlist-content-area"
+            :id="'contentArea' + idx + '-' + i"
+            @mouseover="FeedBtnOn(idx + '-' + i)"
+          >
+            <div class="all-info">
+              <div class="rlist-img-area">
+                <a :href="item.link"
+                  ><img class="rec-detail-img" :src="item.img" alt=""
+>>>>>>> yj_base
                 /></a>
               </div>
               <div class="content">
                 <div class="stname-address">
                   <!-- 가게 명 -->
+<<<<<<< HEAD
                   <a :href="'https://map.naver.com/p/search/' + item.place.place_name" target="_blank"
                   ><h5 class="stName">{{ item.place.place_name }}</h5></a
                   >
@@ -46,10 +67,25 @@
                 <!-- 별점 -->
                 <p class="rlist-score-area">
                   <span class="rlist-score">★ {{ item.place.place_score / 10 }}</span>
+=======
+                  <h5 class="stName">{{ item.storeName }}</h5>
+                  <!-- 가게 주소 -->
+                  <p class="stAddress">{{ item.stAddress }}</p>
+                </div>
+                <!-- 해시태그 -->
+                <p class="rlist-rec-hash-area">
+                  <span
+                    class="rlist-rec-hash cursor-p"
+                    v-for="(hash, hidx) in item.hashtag"
+                    :key="hidx"
+                    >#{{ hash }}</span
+                  >
+>>>>>>> yj_base
                 </p>
               </div>
             </div>
 
+<<<<<<< HEAD
             <!-- 찜 - 하트 버튼 (isBtnHeartNone) -->
             <div
                 class="rlist-heart"
@@ -68,10 +104,19 @@
                    @click="toggleWish(item)"
                    v-else
               />
+=======
+            <!-- 하트 버튼 -->
+            <div
+              class="rlist-heart"
+              :class="{ recBtnDisplayNone: isBtnHeartNone === true }"
+            >
+              <img class="cursor-p" src="@/img/Feed/heart.png" id="heart" />
+>>>>>>> yj_base
             </div>
 
             <!-- 라디오 버튼 -> 추천리스트 선택 -->
             <div
+<<<<<<< HEAD
                 class="rlist-checkbox"
                 :class="{ recBtnDisplayNone: isBtnHeartNone === false }"
             >
@@ -83,11 +128,25 @@
                   @click="sendRecList(item)"
               />
               <label :for="'recCheckbox' + idx"></label>
+=======
+              class="rlist-checkbox"
+              :class="{ recBtnDisplayNone: isBtnHeartNone === false }"
+            >
+              <input
+                type="radio"
+                class="recCheckbox"
+                :id="'recCheckbox' + idx + '-' + i"
+                name="recRadio"
+                @click="sendRecList(item)"
+              />
+              <label :for="'recCheckbox' + idx + '-' + i"></label>
+>>>>>>> yj_base
             </div>
           </div>
 
           <transition name="fade">
             <div
+<<<<<<< HEAD
                 v-if="myNum === idx"
                 @mouseover="FeedBtnOn(idx)"
                 @mouseleave="FeedBtnOff()"
@@ -97,6 +156,17 @@
                 :class="{
                 recBtnDisplayNone: isBtnHeartNone === true,
                 feedBtnon: myNum === idx,
+=======
+              v-if="myNum === idx + '-' + i"
+              @mouseover="FeedBtnOn(idx + '-' + i)"
+              @mouseleave="FeedBtnOff()"
+              @click="gotoWriteFeed"
+              class="upload-btn-area cursor-p"
+              :id="'uploadBtn' + idx + '-' + i"
+              :class="{
+                recBtnDisplayNone: isBtnHeartNone === true,
+                feedBtnon: myNum === idx + '-' + i,
+>>>>>>> yj_base
               }"
             >
               <span>피드 올리기</span>
@@ -108,14 +178,18 @@
   </div>
 </template>
 <script>
+<<<<<<< HEAD
 import {onMounted, ref} from "vue";
 import axios from "axios";
 import {jwtDecode} from "jwt-decode";
 
+=======
+>>>>>>> yj_base
 export default {
   data() {
     return {
       myNum: "",
+<<<<<<< HEAD
       // recList: {}, // 추천받은 리스트
       // wish: {}, // 위시 리스트 (찜 목록)
       // allPlace: {}, // 각 장소별 detail 정보
@@ -125,17 +199,29 @@ export default {
     AllRecList: Object, // 추천 리스트 목록
     isBtnHeartNone: Boolean, // 하트 버튼이 눌리는 화면인지 추천 리스트 선택 버튼이 나와야되는 화면인지
     sendSelectedDate: String, // 추천 받은 날짜
+=======
+    };
+  },
+  props: {
+    RecommendList: Object, // 추천 리스트 목록
+    isBtnHeartNone: Boolean, //
+>>>>>>> yj_base
   },
   methods: {
     FeedBtnOn(num) {
       this.myNum = num;
     },
     FeedBtnOff() {
+<<<<<<< HEAD
       this.myNum = -1;
+=======
+      this.myNum = 0;
+>>>>>>> yj_base
     },
     gotoWriteFeed() {
       this.$router.push("/insertFeed");
     },
+<<<<<<< HEAD
     // 선택한 항목 부모에게 전달 --------------------------------------------------------
     sendRecList(recItem) {
       this.$emit("send-rec-List", recItem);
@@ -223,6 +309,12 @@ export default {
     });
 
     return { logout, data }; // Return data in the setup function
+=======
+    // 선택한 항목 부모에게 전달
+    sendRecList(recItem) {
+      this.$emit("send-rec-List", recItem);
+    },
+>>>>>>> yj_base
   },
 };
 </script>

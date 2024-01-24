@@ -1,7 +1,11 @@
 <template>
   <div class="home-container">
     <video muted autoplay loop class="home">
+<<<<<<< HEAD
       <source src="@/img/assets/bgImage/main_bg.mp4" type="video/mp4" />
+=======
+      <source src="@/assets/bgImage/main_bg.mp4" type="video/mp4" />
+>>>>>>> yj_base
     </video>
     <div class="main-section" id="main-section"></div>
 
@@ -102,9 +106,13 @@
                 <img src="@/img/main/logo.png" width="250" />
               </div>
               <div class="last-page-channel">
+<<<<<<< HEAD
                 <button id="channel-btn">
                   <img src="@/img/main/channelBtn.png" width="250" />
                 </button>
+=======
+                <button id="channel-btn"><img src="@/img/main/channelBtn.png" width="250" /></button>
+>>>>>>> yj_base
               </div>
             </div>
             <div class="last-page-right-box">
@@ -116,7 +124,11 @@
           <!--          푸터 영역-->
           <div class="main-footer">
             <div class="img-area">
+<<<<<<< HEAD
               <img src="@/img/assets/logo/logo_white.png" alt="" />
+=======
+              <img src="@/assets/logo/logo_white.png" alt="" />
+>>>>>>> yj_base
             </div>
 
             <div class="info-area">
@@ -147,7 +159,10 @@
 </template>
 
 <script>
+<<<<<<< HEAD
 import axios from 'axios';
+=======
+>>>>>>> yj_base
 export default {
   name: "Home",
   data() {
@@ -187,7 +202,10 @@ export default {
   created() {
     // 메인일 경우
     this.$emit("jasic", true);
+<<<<<<< HEAD
     this.getHomeData();
+=======
+>>>>>>> yj_base
   },
   methods: {
     init() {
@@ -206,6 +224,7 @@ export default {
       // 초기 버튼 활성화
       this.btns[0].classList.add("active");
     },
+<<<<<<< HEAD
     getHomeData() {
       axios
         .get(`http://${process.env.VUE_APP_BACK_END_URL}/getHomeData`)
@@ -219,6 +238,8 @@ export default {
           console.log(err);
         });
     },
+=======
+>>>>>>> yj_base
     gotoNum(index) {
       console.log(this.current, index); //0, 1
       console.log(this.slides[1]);

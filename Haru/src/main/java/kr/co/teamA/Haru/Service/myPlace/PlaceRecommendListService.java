@@ -1,23 +1,32 @@
 package kr.co.teamA.Haru.Service.myPlace;
 
+<<<<<<< HEAD
 import kr.co.teamA.Haru.DTO.DiaryDTO;
 import kr.co.teamA.Haru.DTO.GetRecommendListDTO;
 import kr.co.teamA.Haru.DTO.RecommendItemsDTO;
 import kr.co.teamA.Haru.DTO.ShowMyRecommendPlaceDTO;
 import kr.co.teamA.Haru.Repository.DiaryRepository;
+=======
+>>>>>>> yj_base
 import kr.co.teamA.Haru.Repository.PlaceRecommendListRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+<<<<<<< HEAD
 import org.springframework.transaction.annotation.Transactional;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+=======
+
+import java.util.Date;
+>>>>>>> yj_base
 
 @Service
 @AllArgsConstructor
 public class PlaceRecommendListService {
+<<<<<<< HEAD
     @Autowired
     private PlaceRecommendListRepository placeRecListRepository;
 
@@ -53,4 +62,17 @@ public class PlaceRecommendListService {
 
         return recItemDto;
     }
+=======
+
+    @Autowired
+    private final PlaceRecommendListRepository placeRecommendList;
+
+//    public Long getData(String userId, Date startDate, Date endDate) {
+//        return placeRecommendList.findByUserIdAndPlaceCdateBetween(userId, startDate, endDate);
+//    }
+
+//    public WishList<WishListDTO> getWishListData(String userId) {
+//        return wishListRepository.findByUserId(userId);
+//    }
+>>>>>>> yj_base
 }

@@ -20,11 +20,17 @@
                 <label :for="'file' + (idx + 1)">
                   <div class="file" :class="{ upfile: idx === 0 }">
                     <img v-if="idx === 0" src="@/img/Feed/camera.png" alt="" />
+<<<<<<< HEAD
                     <img @click="removeImg(idx)" v-if="idx > 0 && previewImageUrls[idx]" :src="previewImageUrls[idx]" alt="" style="object-fit: cover; width: 100%; height: 100%; border-radius: 15px;"/>
                   </div>
                 </label>
                 <input
                   @change="addImage"
+=======
+                  </div>
+                </label>
+                <input
+>>>>>>> yj_base
                   v-if="idx === 0"
                   type="file"
                   :id="'file' + (idx + 1)"
@@ -38,7 +44,10 @@
           <div class="part-area">
             <p class="part-title">피드</p>
             <textarea
+<<<<<<< HEAD
               @change="getHashTag()"
+=======
+>>>>>>> yj_base
               id="contents"
               cols="68"
               rows="7"
@@ -80,6 +89,7 @@
                 #{{ hash }}
               </span>
             </div>
+<<<<<<< HEAD
             <div class="hashtag-area-two">
               <div
                 class="write-down-hash-area"
@@ -104,6 +114,8 @@
                 </button>
               </div>
             </div>
+=======
+>>>>>>> yj_base
           </div>
 
           <!-- 추천 장소 선택 -->
@@ -118,7 +130,11 @@
           </div>
 
           <div class="updateFeed-btn-area">
+<<<<<<< HEAD
             <button type="button" id="uploadFeed" @click="updateFeed">피드 수정하기</button>
+=======
+            <button id="uploadFeed">피드 수정하기</button>
+>>>>>>> yj_base
           </div>
         </div>
       </form>
@@ -127,9 +143,12 @@
 </template>
 <script>
 import FeedRecommend from "@/components/client/feed/FeedRecommendModal.vue";
+<<<<<<< HEAD
 import axios from "axios";
 import { ref, onMounted } from "vue";
 import { jwtDecode } from "jwt-decode";
+=======
+>>>>>>> yj_base
 
 export default {
   name: "UpdateFeed",
@@ -137,12 +156,17 @@ export default {
     return {
       myFeed: {
         uid: "abc",
+<<<<<<< HEAD
         originHashtag: [],
+=======
+        originHashtag: ["고기", "돼지고기", "목살"],
+>>>>>>> yj_base
         upimage: ["feed1.png", "feed2.jpg", "feed2.jpg"],
         contents:
           "고기 무한리필집 가고싶어서 집 근처에 뭐있나 봤는데 없길래 사진이나 찍자해서 스트레스 분석을 했거든요. 근데 고기집을 추천해주더라구요. 가서 먹었는데 진짜 걍 맛있어서 우왕굿",
       },
       hashtag: [
+<<<<<<< HEAD
         // "삼겹살",
         // "소고기",
         // "무한리필",
@@ -158,6 +182,17 @@ export default {
       previewImageUrls: [],
       activeTags: [[], []],
       writeHashtag: [""],
+=======
+        "삼겹살",
+        "소고기",
+        "무한리필",
+        "생고기",
+        "소고기",
+        "무한리필",
+        "생고기",
+      ],
+      activeTags: [[], []],
+>>>>>>> yj_base
       modal_Check: false,
       RecommendList: [
         {
@@ -241,6 +276,7 @@ export default {
     };
   },
   created() {
+<<<<<<< HEAD
     this.previewImageUrls = ['default'];
     this.imageList = ['default'];
     const feedData = history.state.feedData;
@@ -283,6 +319,12 @@ export default {
     console.log("미리보기 리스트", this.previewImageUrls);
     console.log("기존 이미지 리스트", this.originImage);
     console.log("기존 이미지 미리보기 리스트", this.originImagePreview)
+=======
+    for (var i = 0; i < this.myFeed.originHashtag.length; i++) {
+      this.activeTags[0][i] = i;
+    }
+    this.bgImage();
+>>>>>>> yj_base
   },
   methods: {
     bgImage() {
@@ -297,9 +339,12 @@ export default {
       } else {
         this.activeTags[num].splice(indexOfTag, 1);
       }
+<<<<<<< HEAD
       console.log(this.activeTags)
       console.log(this.myFeed.originHashtag)
       console.log(this.hashtag)
+=======
+>>>>>>> yj_base
     },
 
     getTagClasses(index, num) {
@@ -317,6 +362,7 @@ export default {
     closeModal() {
       this.modal_Check = false;
     },
+<<<<<<< HEAD
     getHashTag() {
       axios.get(`http://${process.env.VUE_APP_DJANGO_CROSS_URL}/text/feedKeyword`, {
         params: {
@@ -475,6 +521,8 @@ export default {
     });
 
     return { logout, data }; // Return data in the setup function
+=======
+>>>>>>> yj_base
   },
   components: { FeedRecommend },
 };
@@ -497,6 +545,7 @@ export default {
 #uploadFeed:hover {
   background-color: #ffa83f;
 }
+<<<<<<< HEAD
 .big-ctlbtn {
   width: 75px;
   height: 42px;
@@ -504,4 +553,6 @@ export default {
   font-weight: 500;
   margin-top: 5px;
 }
+=======
+>>>>>>> yj_base
 </style>

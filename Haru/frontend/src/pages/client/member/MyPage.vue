@@ -20,6 +20,7 @@
                 <img src="@/img/FaceRegistration/camera.png" alt="" />
                 <p>프로필 수정</p>
               </div>
+<<<<<<< HEAD
               <img src="@/img/assets/bgImage/type3.png" class="profileImg" />
             </li>
             <li>
@@ -29,25 +30,50 @@
               <div class="username-box">
                 <span>별명을 가진</span
                 ><span id="username-tag">{{ userName }} 님</span>
+=======
+              <img src="@/assets/bgImage/type3.png" class="profileImg" />
+            </li>
+            <li>
+              <div class="nickname-box">
+                <span id="nickname-tag">{{ data.nickname }}</span>
+              </div>
+              <div class="username-box">
+                <span>별명을 가진</span
+                ><span id="username-tag">{{ data.username }} 님</span>
+>>>>>>> yj_base
               </div>
             </li>
             <li class="user-activity-info">
               <div class="commentCnt-box">
                 <ul>
+<<<<<<< HEAD
                   <div>작성된 댓글 개수</div>
                   <div class="div-tag">
                     <span><img src="@/img/mypage/image 95.png" /></span>
                     <span>{{ commentCount }}</span>
+=======
+                  <div>누적 댓글 개수</div>
+                  <div class="div-tag">
+                    <span><img src="@/img/mypage/image 95.png" /></span>
+                    <span>123</span>
+>>>>>>> yj_base
                   </div>
                 </ul>
               </div>
 
               <div class="commentCnt-box">
                 <ul>
+<<<<<<< HEAD
                   <div>받은 좋아요 개수</div>
                   <div class="div-tag">
                     <span><img src="@/img/mypage/image 94.png" /></span>
                     <span>{{ likeCount }}</span>
+=======
+                  <div>누적 좋아요 개수</div>
+                  <div class="div-tag">
+                    <span><img src="@/img/mypage/image 94.png" /></span>
+                    <span>12</span>
+>>>>>>> yj_base
                   </div>
                 </ul>
               </div>
@@ -66,6 +92,7 @@
           <div class="alarm-area">
             <h3>알림</h3>
             <div class="alarm-container">
+<<<<<<< HEAD
               <ul v-for="(alarm, i) in alarmList" :key="i">
                 <li>
                   <div
@@ -122,6 +149,87 @@
                       <img src="@/img/assets/icon/time_icon.png" alt="" />
                       {{ this.getTimeString(alarm.alarm_cdate) }}
                     </span>
+=======
+              <ul>
+                <li>
+                  <div>
+                    <img
+                      class="alarm-img"
+                      src="@/assets/icon/alarm/alarm_heart_icon.png"
+                    />
+                    <span id="comment-content">댓글 내용</span>
+                    <span class="alarm-time"
+                      ><img
+                        src="@/assets/icon/time_icon.png"
+                        alt=""
+                      />10분전</span
+                    >
+                  </div>
+                </li>
+                <li>
+                  <div>
+                    <img
+                      class="alarm-img"
+                      src="@/assets/icon/login/kakao_login_icon.png"
+                    />
+                    <span id="comment-content">댓글 내용</span>
+                    <span class="alarm-time"
+                      ><img
+                        src="@/assets/icon/time_icon.png"
+                        alt=""
+                      />40분전</span
+                    >
+                  </div>
+                </li>
+                <li>
+                  <div>
+                    <img
+                      class="alarm-img"
+                      src="@/assets/icon/alarm/alarm_basic_icon.png"
+                    />
+                    <span id="comment-content">댓글 내용</span>
+                    <span class="alarm-time">23.12.27 1:03</span>
+                  </div>
+                </li>
+                <li>
+                  <div>
+                    <img
+                      class="alarm-img"
+                      src="@/assets/icon/alarm/alarm_heart_icon.png"
+                    />
+                    <span id="comment-content">댓글 내용</span>
+                    <span class="alarm-time">23.12.26 1:03</span>
+                  </div>
+                </li>
+                <li>
+                  <div>
+                    <img
+                      class="alarm-img"
+                      src="@/assets/icon/alarm/alarm_comment_icon.png"
+                    />
+                    <span id="comment-content">댓글 내용</span>
+                    <span class="alarm-time">23.12.25 1:03</span>
+                  </div>
+                </li>
+                <li>
+                  <div>
+                    <img
+                      class="alarm-img"
+                      src="@/assets/icon/alarm/alarm_comment_icon.png"
+                    />
+                    <span id="comment-content">댓글 내용</span>
+                    <span class="alarm-time">23.12.24 1:03</span>
+                  </div>
+                </li>
+                <li>
+                  <div>
+                    <img
+                      class="alarm-img"
+                      src="@/assets/icon/alarm/alarm_basic_icon.png"
+                    />
+                    <span id="comment-content">댓글 내용</span>
+                    <span class="alarm-time">23.12.23 1:03</span>
+>>>>>>> yj_base
                   </div>
                 </li>
               </ul>
@@ -145,22 +253,28 @@ export default {
       isLoggedIn: false,
       AccessToken: "",
       profileModalStatus: false,
+<<<<<<< HEAD
       userId: "",
       userName: "",
       userNickname: "",
       alarmList: [],
       likeCount: 0,
       commentCount: 0,
+=======
+>>>>>>> yj_base
     };
   },
   created() {
     // 페이지가 로드될 때 초기 이미지 설정
     this.bgImage();
   },
+<<<<<<< HEAD
   mounted() {
     console.log(this.data.id);
     this.getMyPageData();
   },
+=======
+>>>>>>> yj_base
   components: {
     UpdateProfileImgModal,
   },
@@ -177,6 +291,7 @@ export default {
     closeModal() {
       this.profileModalStatus = false;
     },
+<<<<<<< HEAD
     getMyPageData() {
       var formData = new FormData();
       const userId = this.data.id;
@@ -238,11 +353,21 @@ export default {
     const isLoggedIn = ref(false); // Use ref to create reactive isLoggedIn
     const data = ref([]); // Use ref to create reactive data
 
+=======
+  },
+  setup() {
+    const isLoggedIn = ref(false);
+    const data = ref([]);
+>>>>>>> yj_base
     const getToken = () => {
       const token = localStorage.getItem("jwtToken");
       isLoggedIn.value = token ? true : false;
     };
 
+<<<<<<< HEAD
+=======
+    // 로그아웃 메서드
+>>>>>>> yj_base
     const logout = () => {
       axios
         .get(`http://${process.env.VUE_APP_BACK_END_URL}/api/auth/logout`)
@@ -254,6 +379,7 @@ export default {
         });
     };
 
+<<<<<<< HEAD
     const decodeToken = (token) => {
       if (token == null) return false;
       const decoded = jwtDecode(token);
@@ -261,13 +387,28 @@ export default {
       return decoded;
     };
 
+=======
+    // 토큰 디코딩 메서드
+    const decodeToken = (token) => {
+      if (token == null) return false;
+      const decoded = jwtDecode(token);
+      data.value = decoded;
+      return decoded;
+    };
+
+    // 페이지가 로드될 때 실행되는 함수
+>>>>>>> yj_base
     onMounted(() => {
       getToken();
       const token = localStorage.getItem("jwtToken");
       decodeToken(token);
     });
 
+<<<<<<< HEAD
     return { logout, data }; // Return data in the setup function
+=======
+    return { logout, data };
+>>>>>>> yj_base
   },
 };
 </script>

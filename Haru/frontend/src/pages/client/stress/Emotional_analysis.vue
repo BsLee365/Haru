@@ -73,11 +73,15 @@
                     @dragleave="isDrag = false"
                     >얼굴 등록하기</label
                   >
+<<<<<<< HEAD
                   <input
                     type="file"
                     id="upload-btn"
                     @change="fileChanged($event)"
                   />
+=======
+                  <input type="file" id="upload-btn" @change="fileChanged" />
+>>>>>>> yj_base
                 </div>
               </div>
             </div>
@@ -192,7 +196,11 @@
               <!-- 일기 시작 -->
               <div class="input-diary">
                 <div class="diary-date-area">
+<<<<<<< HEAD
                   <h2 id="diary-date-h2">{{ today }}</h2>
+=======
+                  <h2 id="diary-date-h2">2024년 01월 07일</h2>
+>>>>>>> yj_base
                 </div>
                 <div class="diary-title-box">
                   <input
@@ -225,15 +233,45 @@
           <button class="big-ctlbtn select-btn" @click="submitCard">
             분석하기
           </button>
+<<<<<<< HEAD
+=======
+          <button class="big-ctlbtn else-btn" @click="modal_click">
+            모달 임시버튼
+          </button>
+>>>>>>> yj_base
         </div>
         <div>
           <!-- <button @click="loadingOpen()">로딩 임시버튼</button> -->
         </div>
+<<<<<<< HEAD
+=======
+
+        <!-- 로딩화면 1 -->
+        <div class="loading" style="display: none">
+          <div class="container-3">
+            <div class="wave" id="wave1"></div>
+            <div class="wave" id="wave2"></div>
+            <div class="wave" id="wave3"></div>
+            <div class="wave" id="wave4"></div>
+            <div class="wave" id="wave5"></div>
+            <div class="wave" id="wave6"></div>
+            <div class="wave" id="wave7"></div>
+            <div class="wave" id="wave8"></div>
+            <div class="object">
+              <div class="boat"></div>
+              <div class="flag"></div>
+            </div>
+          </div>
+          <h3 id="analyzing">분석중입니다.</h3>
+          <h3 id="almost-end">거의 다 왔어요!</h3>
+        </div>
+>>>>>>> yj_base
       </div>
       <!-- 카드 영역 끝 3-->
     </div>
     <!-- 모달 영역-------------------->
     <WarnFaceModal v-if="modal_Check" @hideModal="modal_click" />
+<<<<<<< HEAD
     <!-- 로딩화면 1 -->
     <div class="loading" v-show="activeLoading">
       <div class="loading-box">
@@ -249,6 +287,8 @@
         </h1>
       </div>
     </div>
+=======
+>>>>>>> yj_base
   </div>
   <!-- 카드 전체 영역 끝 -->
   <!-- 최종 결과화면 들어올 자리 -->
@@ -257,9 +297,12 @@
 
 <script>
 import WarnFaceModal from "@/components/client/stress/WarnFaceModal.vue";
+<<<<<<< HEAD
 import { onMounted, ref } from "vue";
 import axios from "axios";
 import { jwtDecode } from "jwt-decode";
+=======
+>>>>>>> yj_base
 export default {
   name: "EmotionalAnalysis",
   data() {
@@ -274,6 +317,7 @@ export default {
       //진행바
       steps: ["얼굴 등록하기", "척도 등록하기", "일기 쓰기", "완료!"],
       activeStep: 1,
+<<<<<<< HEAD
       today: null,
       // 전송할 폼 정보들
       formData: new FormData(),
@@ -302,16 +346,23 @@ export default {
 
       // 현재 클라이언트 주소
       ipAddress: window.location.host.split(":")[0],
+=======
+      // 전송할 폼 정보들
+      formData: new FormData(),
+>>>>>>> yj_base
     };
   },
   created() {
     this.bgImage();
+<<<<<<< HEAD
 
     var today = new Date();
     var year = today.getFullYear();
     var month = ("0" + (today.getMonth() + 1)).slice(-2);
     var day = ("0" + today.getDate()).slice(-2);
     this.today = year + "년 " + month + "월 " + day + "일";
+=======
+>>>>>>> yj_base
   },
   methods: {
     bgImage() {
@@ -320,6 +371,7 @@ export default {
     },
     //분석하기 버튼
     submitCard() {
+<<<<<<< HEAD
       // 일기 제목, 내용
       this.dirayTitle = document.getElementById("diary-title").value;
       this.diaryContent = document.getElementById("diary-content").value;
@@ -495,6 +547,31 @@ export default {
               });
           }
         });
+=======
+      this.$router.push("/Total_stress");
+
+      // 기분 척도
+      // this.formData.append("mood", this.changeMood);
+      // 일기
+      // this.formData.append(
+      //   "title",
+      //   document.getElementById("diary-title").value
+      // );
+      // 일기 내용
+      // this.formData.append(
+      //   "content",
+      //   document.getElementById("diary-content").value
+      // );
+      // 일기 날짜
+      // this.formData.append(
+      //   "date",
+      //   document.getElementById("diary-date-h1").innerText
+      // );
+      // for (let value of this.formData.values()) {
+      //   console.log(value);
+      // }
+      // 분석하기 버튼 클릭시 로딩화면 들어갈 자리
+>>>>>>> yj_base
     },
     dragover(event) {
       event.preventDefault();
@@ -503,6 +580,7 @@ export default {
     //이미지 파일 드래그앤 드롭
     dropInputTag(event) {
       // 유사 배열을 배열로 변환
+<<<<<<< HEAD
       this.file = Array.from(event.dataTransfer.files, (v) => v)[0];
       this.fileName = this.file.name;
       //파일 유효성 검사
@@ -514,6 +592,12 @@ export default {
         this.isDrag = false;
         return false;
       }
+=======
+      let file = Array.from(event.dataTransfer.files, (v) => v)[0];
+      this.fileName = file.name;
+      // 사진 파일을 formData에 추가
+      this.formData.append("faceImage", file);
+>>>>>>> yj_base
       event.preventDefault();
       this.isDrag = false;
     },
@@ -533,6 +617,7 @@ export default {
       this.modal_Check = !this.modal_Check;
     },
     fileChanged(event) {
+<<<<<<< HEAD
       this.file = event.target.files[0];
       this.fileName = this.file.name;
 
@@ -545,6 +630,9 @@ export default {
         this.isDrag = false;
         return false;
       }
+=======
+      this.fileName = event.target.files[0].name;
+>>>>>>> yj_base
     },
     slideCard() {
       const cards = document.querySelectorAll(".reg-box");
@@ -585,6 +673,7 @@ export default {
         this.moodColor = "mood-very-good";
       }
     },
+<<<<<<< HEAD
 
     // 이모티콘 변경 메소드
     changeEmoji() {
@@ -640,6 +729,8 @@ export default {
   mounted() {
     // 1초 주기로 이모티콘 변경
     setInterval(this.changeEmoji, 1000);
+=======
+>>>>>>> yj_base
   },
   components: {
     WarnFaceModal,
@@ -670,7 +761,10 @@ export default {
 ::-webkit-scrollbar {
   display: none;
 }
+<<<<<<< HEAD
 .emoticon {
   font-size: 2.5rem;
 }
+=======
+>>>>>>> yj_base
 </style>

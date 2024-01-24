@@ -3,6 +3,7 @@
   <div class="">
     <MyDiaryDetail
       @close-modal="closeModal"
+<<<<<<< HEAD
       @delete-diary="deleteDiary"
       @update-d-status="changeStatus"
       @update-all-list="$emit('updateAllList')"
@@ -21,14 +22,32 @@
       {{ sendSelectedDate }}
     </p>
 
+=======
+      @update-d-status="changeStatus"
+      v-if="modal_Check"
+      :selectedDiary="selectedDiary"
+      :rDate="diaryList.rdate"
+      :dStatus="dStatus"
+    />
+    <!-- 날짜 -->
+    <div class="myplace-diary-date">
+      <p>{{ diaryList.rdate }}</p>
+    </div>
+>>>>>>> yj_base
 
     <!-- 일기 하나씩 -->
     <div
       class="myplace-diary-area"
+<<<<<<< HEAD
       v-for="(diary) in diaryList"
       :key="diary.diary_num"
     >
 
+=======
+      v-for="(diary, idx) in diaryList.dList"
+      :key="idx"
+    >
+>>>>>>> yj_base
       <!-- 아이콘 -->
       <div class="myplace-diary-icon-bg">
         <img src="@/img/myPlace/diaryicon.png" alt="" />
@@ -38,6 +57,7 @@
       <div class="myplace-diary-title-area">
         <p
           class="cursor-p"
+<<<<<<< HEAD
           @click="changeStatus('read'); openModal(); openDiaryUpdate(diary);"
         >
           {{ diary.diary_title }}
@@ -51,16 +71,28 @@
             @click="changeStatus('read'); openModal(); openDiaryUpdate(diary);"
         >
           {{ this.formatCDate(diary.diary_cdate) }}
+=======
+          @click="changeStatus('read'), openModal(), openDiaryUpdate(diary)"
+        >
+          {{ diary.diaryName }}
+>>>>>>> yj_base
         </p>
       </div>
 
       <!-- 버튼 (수정, 삭제) -->
       <div class="myplace-diary-btn-area">
         <button
+<<<<<<< HEAD
           @click="changeStatus('update'); openModal(); openDiaryUpdate(diary);"
           class="diary-update-btn"
         ></button>
         <button class="diary-delete-btn" @click="deleteDiary(diary.diary_num)"></button>
+=======
+          @click="changeStatus('update'), openModal(), openDiaryUpdate(diary)"
+          class="diary-update-btn"
+        ></button>
+        <button class="diary-delete-btn"></button>
+>>>>>>> yj_base
       </div>
     </div>
   </div>
@@ -68,8 +100,11 @@
 
 <script>
 import MyDiaryDetail from "@/components/client/myPlace/MyDiaryDetail.vue";
+<<<<<<< HEAD
 import axios from "axios";
 import moment from "moment";
+=======
+>>>>>>> yj_base
 
 export default {
   data() {
@@ -77,12 +112,18 @@ export default {
       selectedDiary: null,
       modal_Check: false,
       dStatus: "",
+<<<<<<< HEAD
       // sendSelectedDate: String,
+=======
+>>>>>>> yj_base
     };
   },
   props: {
     diaryList: Object,
+<<<<<<< HEAD
     sendSelectedDate: String,
+=======
+>>>>>>> yj_base
   },
   components: { MyDiaryDetail },
   methods: {
@@ -100,6 +141,7 @@ export default {
     changeStatus(status) {
       this.dStatus = status;
     },
+<<<<<<< HEAD
 
     // 날짜(시간) 포맷
     formatCDate(cdate) {
@@ -120,6 +162,8 @@ export default {
             })
       }
     },
+=======
+>>>>>>> yj_base
   },
 };
 </script>

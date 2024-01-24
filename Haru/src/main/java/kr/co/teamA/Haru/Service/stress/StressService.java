@@ -1,5 +1,6 @@
 package kr.co.teamA.Haru.Service.stress;
 
+<<<<<<< HEAD
 import kr.co.teamA.Haru.DTO.RecommendPlaceDTO;
 import kr.co.teamA.Haru.DTO.StressDataDTO;
 import kr.co.teamA.Haru.DTO.StressSaveDTO;
@@ -15,10 +16,16 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
 import java.util.stream.Collectors;
+=======
+import kr.co.teamA.Haru.security.filter.JwtTokenProvider;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+>>>>>>> yj_base
 
 @Service
 public class StressService {
 
+<<<<<<< HEAD
     @Autowired
     private RecommendPlaceRepository recommendPlaceRepository;
 
@@ -34,6 +41,8 @@ public class StressService {
     @Autowired
     StressDataRepository stressDataRepository;
 
+=======
+>>>>>>> yj_base
     JwtTokenProvider jwtTokenProvider;
     public String tokenValidation(String token) {
         boolean verification = jwtTokenProvider.validateToken(token);
@@ -43,6 +52,7 @@ public class StressService {
             return "fail";
         }
     }
+<<<<<<< HEAD
 
     // 회원이 추천 알고리즘
     public List<RecommendPlaceDTO> getRecommendPlaces(String userId, Double stressScore) {
@@ -205,3 +215,6 @@ public class StressService {
     }
 
 }
+=======
+}
+>>>>>>> yj_base

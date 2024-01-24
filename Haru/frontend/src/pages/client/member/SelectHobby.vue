@@ -183,16 +183,23 @@ export default {
       activity: [
         {
           name: "골프",
+<<<<<<< HEAD
           category: "골프",
+=======
+>>>>>>> yj_base
           image: require("@/img/selectHobbyImg/액티비티/골프.png"),
         },
         {
           name: "농구",
+<<<<<<< HEAD
           category: "농구장",
+=======
+>>>>>>> yj_base
           image: require("@/img/selectHobbyImg/액티비티/농구.png"),
         },
         {
           name: "등산",
+<<<<<<< HEAD
           category: "등산로",
           image: require("@/img/selectHobbyImg/액티비티/등산.png"),
         },
@@ -204,15 +211,25 @@ export default {
         {
           name: "볼링",
           category: "볼링장",
+=======
+          image: require("@/img/selectHobbyImg/액티비티/등산.png"),
+        },
+        {
+          name: "볼링",
+>>>>>>> yj_base
           image: require("@/img/selectHobbyImg/액티비티/볼링.png"),
         },
         {
           name: "산책",
+<<<<<<< HEAD
           category: "공원",
+=======
+>>>>>>> yj_base
           image: require("@/img/selectHobbyImg/액티비티/산책.png"),
         },
         {
           name: "수영",
+<<<<<<< HEAD
           category: "수영장",
           image: require("@/img/selectHobbyImg/액티비티/수영.png"),
         },
@@ -229,57 +246,88 @@ export default {
         {
           name: "요가",
           category: "요가",
+=======
+          image: require("@/img/selectHobbyImg/액티비티/수영.png"),
+        },
+        {
+          name: "요가",
+>>>>>>> yj_base
           image: require("@/img/selectHobbyImg/액티비티/요가.png"),
         },
         {
           name: "자전거",
+<<<<<<< HEAD
           category: "자전거",
+=======
+>>>>>>> yj_base
           image: require("@/img/selectHobbyImg/액티비티/자전거.png"),
         },
         {
           name: "클라이밍",
+<<<<<<< HEAD
           category: "클라이밍",
           image: require("@/img/selectHobbyImg/액티비티/클라이밍.png"),
         },
         {
           name: "테니스",
           category: "테니스",
+=======
+>>>>>>> yj_base
           image: require("@/img/selectHobbyImg/액티비티/클라이밍.png"),
         },
         {
           name: "헬스",
+<<<<<<< HEAD
           category: "헬스",
+=======
+>>>>>>> yj_base
           image: require("@/img/selectHobbyImg/액티비티/헬스.png"),
         },
       ],
       culture: [
         {
           name: "공연",
+<<<<<<< HEAD
           category: "공연장",
+=======
+>>>>>>> yj_base
           image: require("@/img/selectHobbyImg/문화_예술/공연.png"),
         },
         {
           name: "뮤지컬",
+<<<<<<< HEAD
           category: "공연장",
+=======
+>>>>>>> yj_base
           image: require("@/img/selectHobbyImg/문화_예술/뮤지컬.png"),
         },
         {
           name: "영화",
+<<<<<<< HEAD
           category: "영화관",
+=======
+>>>>>>> yj_base
           image: require("@/img/selectHobbyImg/문화_예술/영화.png"),
         },
         {
           name: "전시",
+<<<<<<< HEAD
           category: "전시",
+=======
+>>>>>>> yj_base
           image: require("@/img/selectHobbyImg/문화_예술/전시.png"),
         },
         {
           name: "콘서트",
+<<<<<<< HEAD
           category: "공연장",
+=======
+>>>>>>> yj_base
           image: require("@/img/selectHobbyImg/문화_예술/콘서트.png"),
         },
       ],
       travel: [
+<<<<<<< HEAD
         {
           name: "바다",
           category: "해수욕장",
@@ -288,15 +336,24 @@ export default {
         {
           name: "캠핑 글램핑",
           category: "캠핑장",
+=======
+        { name: "바다", image: require("@/img/selectHobbyImg/여행/바다.png") },
+        {
+          name: "캠핑 글램핑",
+>>>>>>> yj_base
           image: require("@/img/selectHobbyImg/여행/캠핑_글램핑.png"),
         },
         {
           name: "테마파크",
+<<<<<<< HEAD
           category: "테마파크",
+=======
+>>>>>>> yj_base
           image: require("@/img/selectHobbyImg/여행/테마파크.png"),
         },
       ],
       hobby: [
+<<<<<<< HEAD
         {
           name: "게임",
           category: "pc방",
@@ -320,10 +377,18 @@ export default {
         {
           name: "방탈출",
           category: "방탈출",
+=======
+        { name: "게임", image: require("@/img/selectHobbyImg/취미/게임.png") },
+        { name: "공예", image: require("@/img/selectHobbyImg/취미/공예.png") },
+        { name: "댄스", image: require("@/img/selectHobbyImg/취미/댄스.png") },
+        {
+          name: "방탈출",
+>>>>>>> yj_base
           image: require("@/img/selectHobbyImg/취미/방탈출.png"),
         },
         {
           name: "보드게임",
+<<<<<<< HEAD
           category: "보드게임",
           image: require("@/img/selectHobbyImg/취미/보드게임.png"),
         },
@@ -354,18 +419,37 @@ export default {
         {
           name: "스터디",
           category: "스터디",
+=======
+          image: require("@/img/selectHobbyImg/취미/보드게임.png"),
+        },
+        { name: "사진", image: require("@/img/selectHobbyImg/취미/사진.png") },
+      ],
+      food: [
+        { name: "맛집", image: require("@/img/selectHobbyImg/푸드/맛집.png") },
+        { name: "카페", image: require("@/img/selectHobbyImg/푸드/카페.png") },
+      ],
+      selfDevelopment: [
+        {
+          name: "독서 스터디",
+>>>>>>> yj_base
           image: require("@/img/selectHobbyImg/자기계발/독서_스터디.png"),
         },
         {
           name: "외국어",
+<<<<<<< HEAD
           category: "외국어학원",
+=======
+>>>>>>> yj_base
           image: require("@/img/selectHobbyImg/자기계발/외국어.png"),
         },
       ],
       shopping: [
         {
           name: "쇼핑",
+<<<<<<< HEAD
           category: "쇼핑",
+=======
+>>>>>>> yj_base
           image: require("@/img/selectHobbyImg/쇼핑/쇼핑.png"),
         },
       ],
@@ -380,7 +464,11 @@ export default {
       this.$emit("bgImage", newImage);
     },
     selectActivity(index) {
+<<<<<<< HEAD
       // this.printSelect();
+=======
+      this.printSelect();
+>>>>>>> yj_base
       const selectedIndex = this.selectedActivity.indexOf(index);
       if (selectedIndex > -1) {
         this.selectedActivity.splice(selectedIndex, 1);
@@ -440,6 +528,7 @@ export default {
     hobbySet() {
       this.formData.append("id", this.data.id);
 
+<<<<<<< HEAD
       var selectedList = [];
 
       for (const i of this.selectedActivity) {
@@ -469,11 +558,39 @@ export default {
       console.log(selectedList);
       const token = localStorage.getItem("jwtToken");
       const data = ref([]);
+=======
+      const selectedList = [];
+
+      for (const i of this.selectedActivity) {
+        selectedList.push(this.activity[i].name);
+      }
+      for (const i of this.selectedCulture) {
+        selectedList.push(this.culture[i].name);
+      }
+      for (const i of this.selectedHobby) {
+        selectedList.push(this.hobby[i].name);
+      }
+      for (const i of this.selectedTravel) {
+        selectedList.push(this.travel[i].name);
+      }
+      for (const i of this.selectedFood) {
+        selectedList.push(this.food[i].name);
+      }
+      for (const i of this.selectedSelfDevelopment) {
+        selectedList.push(this.selfDevelopment[i].name);
+      }
+      for (const i of this.selectedShopping) {
+        selectedList.push(this.shopping[i].name);
+      }
+
+      console.log(selectedList);
+>>>>>>> yj_base
 
       this.formData.append("hobbyList", selectedList);
       axios
         .post(
           `http://${process.env.VUE_APP_BACK_END_URL}/setHobby`,
+<<<<<<< HEAD
           this.formData,
           data.value,
           {
@@ -482,6 +599,9 @@ export default {
               "Content-Type": "application/json",
             },
           }
+=======
+          this.formData
+>>>>>>> yj_base
         )
         .then((res) => {
           console.log(res);

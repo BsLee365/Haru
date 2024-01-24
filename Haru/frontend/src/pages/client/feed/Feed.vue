@@ -13,7 +13,7 @@
 			</form>
 
 			<!-- 피드 Start -->
-			<FeedList :userData="this.data" :cardList="cardList" :listCnt="listCnt" :allCardList="allCardList" @open-modal="openModal" @getMyFeedList="getMyFeedList" @getFeedList="getFeedList" @getNextFeedList="getNextFeedList" ref="feedList" />
+			<FeedList :userData="this.data" :cardList="cardList" :listCnt="listCnt" :allCardList="allCardList" :searchKeyword="searchKeyword" @open-modal="openModal" @getMyFeedList="getMyFeedList" @getFeedList="getFeedList" @getNextFeedList="getNextFeedList" :searchFeed="searchFeed" ref="feedList" />
 		</div>
 	</div>
 </template>
@@ -42,6 +42,7 @@ export default {
 				// },
 			],
 			allCardList: [],
+			searchKeyword: "",
 			listCnt: 6,
 			card: {},
 			modal_Check: false,
@@ -53,20 +54,6 @@ export default {
 	async created() {
 		// 페이지가 로드될 때 초기 이미지 설정
 		this.bgImage();
-		if (this.$route.query.nickname) {
-			await this.getMyFeedList(this.$route.query.nickname);
-			if (this.$route.query.feedNum) {
-				for (const card of this.allCardList) {
-					if (card.feedNum == this.$route.query.feedNum) {
-						console.log("찾았다", card);
-						this.card = card;
-					}
-				}
-				this.openModal(this.card, this.allCardList.indexOf(this.card));
-			}
-		} else {
-			this.getFeedList();
-		}
 	},
 	methods: {
 		// 해당 화면 Background 이미지 설정
@@ -75,9 +62,11 @@ export default {
 			this.$emit("bgImage", newImage);
 		},
 		async getFeedList() {
+			var formData = new FormData();
+			formData.append("userId", this.data.id);
 			this.allCardList = [];
-			this.cardList = [];
-			await axios.get(`http://${process.env.VUE_APP_BACK_END_URL}/feedList`).then((res) => {
+			this.searchKeyword = "";
+			await axios.post(`http://${process.env.VUE_APP_BACK_END_URL}/feedList`, formData).then((res) => {
 				const data = res.data;
 				var index = 0;
 				for (const feed in data.feed) {
@@ -103,6 +92,12 @@ export default {
 							hashTag.push("#" + tag.feed_hash_tag);
 						}
 					}
+					var myFeedLike = false;
+					for (const myLike of data.myFeedLikes) {
+						if (myLike.feed_num.feed_num === feedNum) {
+							myFeedLike = true;
+						}
+					}
 					const cardList = {
 						profileImage: require("@/img/Feed/no_profile.png"), //data.feed[index].member.profile_img,
 						uid: data.feed[index].member.user_id,
@@ -118,6 +113,7 @@ export default {
 						recommend: data.feed[index].place_num,
 						feedNum: data.feed[index].feed_num,
 						hashTag: hashTag,
+						myFeedLike: myFeedLike,
 					};
 					this.allCardList.push(cardList);
 					this.allCardList.sort((a, b) => {
@@ -131,13 +127,16 @@ export default {
 				for (let i = 0; i < this.allCardList.length; i++) {
 					this.allCardList[i].rDate = this.getTimeString(this.allCardList[i].rDate);
 				}
+				this.cardList = [];
 				this.cardList = this.allCardList.slice(0, this.listCnt);
 				console.log(data);
 			});
 		},
 		async getMyFeedList(nickname) {
+			var formData = new FormData();
+			formData.append("userId", this.data.id);
 			this.allCardList = [];
-			this.cardList = [];
+			this.searchKeyword = "";
 			var formData = new FormData();
 			formData.append("nickname", nickname);
 			this.cardList = [];
@@ -167,6 +166,12 @@ export default {
 							hashTag.push("#" + tag.feed_hash_tag);
 						}
 					}
+					var myFeedLike = false;
+					for (const myLike of data.myFeedLikes) {
+						if (myLike.feed_num.feed_num === feedNum) {
+							myFeedLike = true;
+						}
+					}
 					const cardList = {
 						profileImage: require("@/img/Feed/no_profile.png"), //data.feed[index].member.profile_img,
 						uid: data.feed[index].member.user_id,
@@ -182,6 +187,7 @@ export default {
 						recommend: data.feed[index].place_num,
 						feedNum: data.feed[index].feed_num,
 						hashTag: hashTag,
+						myFeedLike: myFeedLike,
 					};
 					this.allCardList.push(cardList);
 					this.allCardList.sort((a, b) => {
@@ -195,19 +201,22 @@ export default {
 				for (let i = 0; i < this.allCardList.length; i++) {
 					this.allCardList[i].rDate = this.getTimeString(this.allCardList[i].rDate);
 				}
+				this.cardList = [];
 				this.cardList = this.allCardList.slice(0, this.listCnt);
 				console.log(data);
 			});
 		},
 		searchFeed() {
+			var formData = new FormData();
+			formData.append("userId", this.data.id);
 			this.allCardList = [];
-			this.cardList = [];
 			const search = document.querySelector(".hashtag-search-input").value;
+			this.searchKeyword = search;
 			if (search === "") {
 				alert("검색어를 입력해주세요");
 				return false;
 			} else {
-				axios.get(`http://${process.env.VUE_APP_BACK_END_URL}/feedList`).then((res) => {
+				axios.get(`http://${process.env.VUE_APP_BACK_END_URL}/feedList`, formData).then((res) => {
 					const data = res.data;
 					var index = 0;
 					this.cardList = [];
@@ -234,6 +243,12 @@ export default {
 								hashTag.push("#" + tag.feed_hash_tag);
 							}
 						}
+						var myFeedLike = false;
+						for (const myLike of data.myFeedLikes) {
+							if (myLike.feed_num.feed_num === feedNum) {
+								myFeedLike = true;
+							}
+						}
 						const cardList = {
 							profileImage: require("@/img/Feed/no_profile.png"), //data.feed[index].member.profile_img,
 							uid: data.feed[index].member.user_id,
@@ -249,6 +264,7 @@ export default {
 							recommend: data.feed[index].place_num,
 							feedNum: data.feed[index].feed_num,
 							hashTag: hashTag,
+							myFeedLike: myFeedLike,
 						};
 						if (cardList.content.includes(search)) {
 							this.allCardList.push(cardList);
@@ -265,6 +281,7 @@ export default {
 					for (let i = 0; i < this.allCardList.length; i++) {
 						this.allCardList[i].rDate = this.getTimeString(this.allCardList[i].rDate);
 					}
+					this.cardList = [];
 					this.cardList = this.allCardList.slice(0, this.listCnt);
 					console.log(data);
 				});
@@ -344,9 +361,23 @@ export default {
 
 		return { logout, data }; // Return data in the setup function
 	},
-	mounted() {
+	async mounted() {
 		window.addEventListener("scroll", this.handleScroll, true);
 		// 페이지 로드하면서 리스트 불러오기
+		if (this.$route.query.nickname) {
+			await this.getMyFeedList(this.$route.query.nickname);
+			if (this.$route.query.feedNum) {
+				for (const card of this.allCardList) {
+					if (card.feedNum == this.$route.query.feedNum) {
+						console.log("찾았다", card);
+						this.card = card;
+					}
+				}
+				this.openModal(this.card, this.allCardList.indexOf(this.card));
+			}
+		} else {
+			await this.getFeedList();
+		}
 	},
 	components: {
 		FeedDetail,

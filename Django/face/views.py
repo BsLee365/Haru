@@ -13,10 +13,10 @@ model1.summary()
 def getFaceStress(img):  # 표정을 분석하여 스트레스 수치를 계산하는 함수
     img = np.frombuffer(img.read(), np.uint8)
     img = cv2.imdecode(img, cv2.IMREAD_COLOR)
-    img = getFace(img)
-    img = resizeImg(img)
+    img = getFace(img)  # img에서 안면부분을 추출하여 반환
+    img = resizeImg(img)  # img를 모델에 맞게 resizing 및 전처리
 
-    result = predict_emote(img)
+    result = predict_emote(img)  # 학습된 모델을 이용하여 이미지를 분석하여 7개의 감정을 각각 확률로 반환
 
     return result
 

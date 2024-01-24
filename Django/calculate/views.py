@@ -1,6 +1,5 @@
 import time
 
-import numpy as np
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 
@@ -8,10 +7,9 @@ import face.views
 import text.views
 
 
-# Create your views here.
 @csrf_exempt
 def getStress1(request):
-    img = request.FILES['faceImage']
+    img = request.FILES['faceImage']  # vue에서 입력받은 이미지를 img로 저장
     print(img)
     try:
         face_dict = face.views.getFaceStress(img)
@@ -83,17 +81,16 @@ def getStress2(request):  # 일기를 분석하여 일기 스트레스 수치 �
     slider_stress = int(request.POST['mood']) * 20
     userId = request.POST['memberId']
 
-
-        # predict_load_data 함수를 사용하여 감정 분석을 수행하고, 결과를 diary_stress_results에 저장합니다.
+    # predict_load_data 함수를 사용하여 감정 분석을 수행하고, 결과를 diary_stress_results에 저장합니다.
     diary_stress_results = text.views.predict_load_data(diary_text)
-        # 결과값이 0과 1 사이의 점수로 나오므로, 이를 100점 만점으로 변환하여 스트레스 점수로 사용합니다.
-    diary_stress = round((1-diary_stress_results) * 100)  # 스트레스 점수 계산
-
-
+    # 결과값이 0과 1 사이의 점수로 나오므로, 이를 100점 만점으로 변환하여 스트레스 점수로 사용합니다.
+    diary_stress = round((1 - diary_stress_results) * 100)  # 스트레스 점수 계산
 
     print(diary_stress)
     diary_stress = int(diary_stress)
     print(face_stress, diary_stress, slider_stress)
+
+    # 세가지의 스트레스 수치를 각각 가중치를 두고 합산하여 100점 만점으로 반환
     total_stress = round((face_stress * 0.3 + diary_stress * 0.6 + slider_stress * 0.1) / 10, 2)
     print(total_stress)
 

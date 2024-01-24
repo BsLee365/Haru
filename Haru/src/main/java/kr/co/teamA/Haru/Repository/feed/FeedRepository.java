@@ -15,4 +15,6 @@ public interface FeedRepository extends JpaRepository<Feed, Long> {
     Feed findByFeedNum(int feedNum);
 
     List<Feed> findByMember_Nickname(String nickname);
+
+    int countByFeedNumIsNotNull();
 }

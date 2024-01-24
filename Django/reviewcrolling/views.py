@@ -1,10 +1,7 @@
 import math
-import datetime
 import time
 from django.http import HttpResponse
 
-import numpy as np
-import pandas as pd
 from selenium import webdriver
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.edge.service import Service
@@ -12,15 +9,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
-from keras.models import load_model
-from keras.utils import custom_object_scope
-from tensorflow_addons.optimizers import RectifiedAdam
-from tqdm import tqdm
-from transformers import BertTokenizer
-from transformers import TFBertModel
-import cx_Oracle
 from sqlalchemy import create_engine
-import pandas as pd
 
 from text.views import model, predict_load_data
 

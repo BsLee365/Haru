@@ -145,6 +145,7 @@
 </template>
 
 <script>
+import axios from 'axios';
 export default {
   name: "Home",
   data() {
@@ -184,6 +185,7 @@ export default {
   created() {
     // 메인일 경우
     this.$emit("jasic", true);
+    this.getHomeData();
   },
   methods: {
     init() {
@@ -201,6 +203,19 @@ export default {
       }
       // 초기 버튼 활성화
       this.btns[0].classList.add("active");
+    },
+    getHomeData() {
+      axios
+        .get(`http://${process.env.VUE_APP_BACK_END_URL}/getHomeData`)
+        .then((res) => {
+          console.log(res.data);
+          this.count_data.count_member.max = res.data.memberCount;
+          this.count_data.count_feed.max = res.data.feedCount;
+          this.count_data.count_like.max = res.data.likeCount;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     },
     gotoNum(index) {
       console.log(this.current, index); //0, 1

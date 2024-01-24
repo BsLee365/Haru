@@ -51,18 +51,20 @@ public class FeedService {
         this.alarmRepository = alarmRepository;
     }
 
-    public Map<String, Object> getFeedList() {
+    public Map<String, Object> getFeedList(String userId) {
         List<Feed> feed = feedRepository.findAll();
         List<FeedComment> feedComment = new ArrayList<>();
         List<FeedHashTag> feedHashTag = new ArrayList<>();
         List<FeedImg> feedImg = new ArrayList<>();
         List<Integer> feedLike = new ArrayList<>();
+        List<Like> myFeedLikes = new ArrayList<>();
         for (Feed f : feed) {
             feedComment.addAll(feedCommentRepository.findByFeedNum_FeedNum(f.getFeedNum()));
             feedHashTag.addAll(feedHashTagRepository.findByFeedNum_FeedNum(f.getFeedNum()));
             feedImg.addAll(feedImgRepository.findByFeedNum_FeedNum(f.getFeedNum()));
             feedLike.add(feedLikeRepository.countByFeedNum_FeedNum(f.getFeedNum()));
         }
+        myFeedLikes.addAll(feedLikeRepository.findByFeedLikeBy_UserId(userId));
         Map<String, Object> feedList = new HashMap<String, Object>();
 
         feedList.put("feed", feed);
@@ -70,6 +72,7 @@ public class FeedService {
         feedList.put("feedHashTag", feedHashTag);
         feedList.put("feedImg", feedImg);
         feedList.put("feedLike", feedLike);
+        feedList.put("myFeedLikes", myFeedLikes);
 
         return feedList;
     }

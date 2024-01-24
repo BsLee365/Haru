@@ -23,14 +23,13 @@ def placeCrawl(request):
 
 
 def getLinkList():
-
     service = Service(executable_path='reviewcrolling/data/msedgedriver.exe')
     driver = webdriver.Edge(service=service)
     wait = WebDriverWait(driver, 5)
 
     location = ['강남', '명동', '성수', '홍대']
     # activities = ['해수욕장']
-    activities = ['공원', '배드민턴장', '클라이밍', '요가', '헬스', '볼링장', '수영장', '농구장', '야구장', '자전거', '골프', '테니스', '전시', '영화관', \
+    activities = ['식당', '등산로', '공원', '배드민턴장', '클라이밍', '요가', '헬스', '볼링장', '수영장', '농구장', '야구장', '자전거', '골프', '테니스', '전시', '영화관', \
                   '공연장', '사진', '보드게임', '공예', '댄스', '노래방', '방탈출', 'pc방', '도서관', '스터디', '외국어학원']
 
     for location in tqdm(location):
@@ -67,9 +66,6 @@ def getLinkList():
                     dicta['location'] = location
                     element = wait.until(EC.presence_of_element_located((By.CLASS_NAME, "P7gyV")))
                     dicta['link'] = i.find_element(By.CLASS_NAME, 'P7gyV').get_attribute('href')
-                    # print('이름 :', dicta['name'])
-                    # print('카테고리 :', dicta['category_s'])
-                    # print('링크 :', dicta['link'])
 
                     list.append(dicta)
             df = pd.DataFrame(list)

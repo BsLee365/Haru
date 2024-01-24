@@ -1,13 +1,13 @@
 <template>
 	<div class="container1">
-    <!-- 프로필 사진 업데이트 모달 창 -->
+		<!-- 프로필 사진 업데이트 모달 창 -->
 		<UpdateProfileImgModal :mStatus="profileModalStatus" @modalClose="closeModal" />
-    
+
 		<!-- 컨텐츠 -->
 		<div class="mypage-box">
-      <!-- title -->
+			<!-- title -->
 			<div class="main-title">
-        <h2>마이페이지</h2>
+				<h2>마이페이지</h2>
 			</div>
 			<div class="mypage-two-box">
 				<div class="mypage-left-box">
@@ -63,25 +63,25 @@
 										<img class="alarm-img" src="@/assets/icon/alarm/alarm_heart_icon.png" />
 										<span id="comment-content">{{ alarm.like.feed_like_by.nickname }}님이 좋아요를 눌렀습니다.</span>
 										<span class="alarm-time">
-                      <img src="@/assets/icon/time_icon.png" alt="" />
-                      {{ this.getTimeString(alarm.alarm_cdate) }}
-                    </span>
+											<img src="@/assets/icon/time_icon.png" alt="" />
+											{{ this.getTimeString(alarm.alarm_cdate) }}
+										</span>
 									</div>
 									<div v-else-if="alarm.feed_comment != null" @click="toMyFeed(data.nickname, alarm.feed_comment.feed_num.feed_num)">
 										<img class="alarm-img" src="@/assets/icon/alarm/alarm_comment_icon.png" />
 										<span id="comment-content">{{ alarm.feed_comment.user_id.nickname }}님이 게시물에 댓글을 작성하였습니다.</span>
 										<span class="alarm-time">
-                      <img src="@/assets/icon/time_icon.png" alt="" />
-                      {{ this.getTimeString(alarm.alarm_cdate) }}
-                    </span>
+											<img src="@/assets/icon/time_icon.png" alt="" />
+											{{ this.getTimeString(alarm.alarm_cdate) }}
+										</span>
 									</div>
 									<div v-else>
 										<img class="alarm-img" src="@/assets/icon/alarm/alarm_basic_icon.png" />
 										<span id="comment-content">{{ alarm.like.feed_like_by.nickname }}님이 Qna에 답변을 작성하였습니다.</span>
 										<span class="alarm-time">
-                      <img src="@/assets/icon/time_icon.png" alt="" />
-                      {{ this.getTimeString(alarm.alarm_cdate) }}
-                    </span>
+											<img src="@/assets/icon/time_icon.png" alt="" />
+											{{ this.getTimeString(alarm.alarm_cdate) }}
+										</span>
 									</div>
 								</li>
 							</ul>
@@ -90,6 +90,7 @@
 				</div>
 			</div>
 		</div>
+    <ChatBot/>
 	</div>
 </template>
 <script>
@@ -97,6 +98,7 @@ import axios from "axios";
 import { ref, onMounted } from "vue";
 import { jwtDecode } from "jwt-decode";
 import UpdateProfileImgModal from "@/components/client/member/UpdateProfileImgModal.vue";
+import ChatBot from "@/components/client/layout/ChatBot.vue";
 
 export default {
 	name: "MyPage",
@@ -123,6 +125,7 @@ export default {
 	},
 	components: {
 		UpdateProfileImgModal,
+		ChatBot,
 	},
 	methods: {
 		// 해당 화면 Background 이미지 설정
@@ -151,12 +154,12 @@ export default {
 				this.commentCount = res.data.commentCount;
 				this.alarmList = res.data.alarmList;
 
-        this.alarmList.sort((a, b) => {
-						const dateA = new Date(a.alarm_cdate);
-						const dateB = new Date(b.alarm_cdate);
+				this.alarmList.sort((a, b) => {
+					const dateA = new Date(a.alarm_cdate);
+					const dateB = new Date(b.alarm_cdate);
 
-						return dateB - dateA;
-					});
+					return dateB - dateA;
+				});
 			});
 		},
 		getTimeString(isoTimeString) {
@@ -178,9 +181,9 @@ export default {
 				return targetTime.toLocaleString("ko-KR", options);
 			}
 		},
-    toMyFeed(nickname, feedNum) {
-      window.location.href = '/feed?nickname=' + nickname + '&feedNum=' + feedNum;
-    },
+		toMyFeed(nickname, feedNum) {
+			window.location.href = "/feed?nickname=" + nickname + "&feedNum=" + feedNum;
+		},
 	},
 	setup() {
 		const isLoggedIn = ref(false); // Use ref to create reactive isLoggedIn

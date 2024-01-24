@@ -12,14 +12,14 @@
 				<input v-model="userInput" @keyup.enter="sendMessage" placeholder="Type your message..." />
 				<button @click="sendMessage">Send</button>
 			</div>
-		</div> -->
+		</div>
 		<df-messenger 
             intent="" 
             chat-title="Haru" 
             agent-id="05b8509c-074f-43f2-873d-c21558194987" 
             language-code="ko" 
             chat-icon="https://lh3.google.com/u/0/d/1Dr_Rh5uQcnIY2ZnP4jsqMLdW5nKh_ija=w965-h914-iv1"
-        ></df-messenger>
+        ></df-messenger> -->
 	</div>
 </template>
 <script>

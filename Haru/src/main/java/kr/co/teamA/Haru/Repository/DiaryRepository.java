@@ -13,6 +13,6 @@ import java.util.List;
 public interface DiaryRepository extends JpaRepository<Diary, Long> {
     @Query("SELECT new kr.co.teamA.Haru.DTO.DiaryDTO(diary.diaryNum, diary.member.userId, diary.diaryTitle, diary.diaryContext, diary.diaryCdate) " +
             "from Diary diary WHERE diary.member.userId = :userId " +
-            "and diary.diaryCdate between :startDate and :endDate")
+            "and diary.diaryCdate between :startDate and :endDate order by diary.diaryCdate")
     List<DiaryDTO> getMyDiaryList(@Param("userId") String userId, @Param("startDate") Date startDate, @Param("endDate") Date endDate);
 }

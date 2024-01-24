@@ -416,6 +416,8 @@ export default {
 
         this.formData.append("faceImage", file1);
         this.formData.append("files", file1);
+
+        console.log(this.formData.get("faceImage"));
       }
 
       event.preventDefault();
@@ -447,6 +449,9 @@ export default {
 
         this.formData.append("faceImage", file);
         this.formData.append("files", file);
+
+        console.log(this.formData.get("faceImage"));
+        console.log(this.formData.get("files"));
       }
     },
 
@@ -717,6 +722,7 @@ export default {
         )
         .then((res) => {
           console.log(res);
+          console.log(this.formData.get("files"));
           if (res.data == 1) {
             document.getElementById("Code-msg").innerText =
               "인증번호가 일치합니다.";

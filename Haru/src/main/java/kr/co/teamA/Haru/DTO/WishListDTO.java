@@ -1,16 +1,15 @@
 package kr.co.teamA.Haru.DTO;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import kr.co.teamA.Haru.Entity.Place;
+import lombok.*;
 
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
+@ToString
 public class WishListDTO {
     private Long wishListNum;
-    private String userId;
-    private String placeNumber;
+    private String userid;
+    private Place place;
 }

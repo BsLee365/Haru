@@ -29,9 +29,10 @@ public class StressController {
     public List<RecommendPlaceDTO> recommendPlace(@RequestBody PersonalStressDTO stressDTO){
         System.out.println(stressDTO.getUserid());
         System.out.println("스트레스 수치 받음.");
+        System.out.println("스트레스 수치:" + stressDTO.getStresssocre());
 
         //스트레스 저장 비즈니스 로직
-        return stressService.getRecommendPlaces(stressDTO.getUserid());
+        return stressService.getRecommendPlaces(stressDTO.getUserid(), stressDTO.getStresssocre());
     }
 
     // 스트레스 저장 컨트롤러

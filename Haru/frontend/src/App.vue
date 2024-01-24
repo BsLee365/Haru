@@ -10,7 +10,7 @@
   >
     <Header class="custom-header" :class="{ mainAbsolute: isMain === true }" />
     <RouterView @bgImage="updateBgImage" @jasic="bumo" />
-    <ChatBot/>
+<!--    <ChatBot/>-->
     <Footer :class="{ mainFooter: isMain === true }" />
   </div>
 </template>
@@ -18,7 +18,7 @@
 <script>
 import Header from "@/components/client/layout/Header.vue";
 import Footer from "@/components/client/layout/Footer.vue";
-import ChatBot from "@/components/client/layout/ChatBot.vue";
+// import ChatBot from "@/components/client/layout/ChatBot.vue";
 
 export default {
   name: "App",
@@ -31,7 +31,7 @@ export default {
   components: {
     Header,
     Footer,
-    ChatBot,
+    // ChatBot,
   },
   methods: {
     updateBgImage(bg) {

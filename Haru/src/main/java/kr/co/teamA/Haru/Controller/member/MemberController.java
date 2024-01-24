@@ -13,16 +13,23 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.FileOutputStream;
 import java.util.List;
 import java.util.UUID;
+import kr.co.teamA.Haru.DTO.UserInfoDTO;
+import kr.co.teamA.Haru.Service.member.MemberService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Map;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 @RestController
 public class MemberController {
+    
+    @Autowired
+    private MemberService memberService;
 
     @Value("${profile-img-path}")
     private String imageDirctory;
-
-    private final MemberService memberService;
 
     public MemberController(MemberService memberService, EmailSenderService mailSender) {
         this.memberService = memberService;
@@ -62,4 +69,26 @@ public class MemberController {
         return fileName.substring(fileName.lastIndexOf("."));
     }
 
+    @PostMapping("/userConfirm")
+    public int userConfirm(@RequestBody Map<String, String> userData) {
+        System.out.println(userData.get("userId"));
+        System.out.println(userData.get("password"));
+
+        int check = memberService.checkPassword(userData.get("userId"), userData.get("password"));
+        return check;
+    }
+
+    @PostMapping("/userData")
+    public UserInfoDTO getUserData(@RequestBody Map<String, String> userData) {
+        System.out.println(userData.get("id"));
+        UserInfoDTO memberDTO = memberService.getMemberByUserId(userData.get("id"));
+        return memberDTO;
+    }
+
+    @DeleteMapping("/delete/{userId}")
+    public int deleteMember(@PathVariable String userId) {
+        System.out.println(userId);
+        int result = memberService.deleteMember(userId);
+        return result;
+    }
 }

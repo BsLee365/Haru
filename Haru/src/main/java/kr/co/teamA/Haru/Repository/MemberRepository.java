@@ -1,8 +1,11 @@
 package kr.co.teamA.Haru.Repository;
 
 import kr.co.teamA.Haru.DTO.MemberDTO;
+import kr.co.teamA.Haru.DTO.UserInfoDTO;
 import kr.co.teamA.Haru.Entity.Member;
+import org.hibernate.sql.Update;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -31,6 +34,25 @@ public interface MemberRepository extends JpaRepository<Member, String> {
 
     // 추가함. - 이범석
     Optional<Member> findByUserId(@Param("userId") String userId);
+
+    @Query("SELECT m.userId FROM Member m WHERE m.email = :email")
+    String findByMemberId(String email);
+
+    @Query("SELECT new kr.co.teamA.Haru.DTO.UserInfoDTO(u.id, u.nickname, u.email, u.name) FROM Member u WHERE u.userId = :userId")
+    UserInfoDTO findByUserId2(@Param("userId") String userId);
+
+    Optional findUserIdByEmailAndName(String email, String name);
+
+    @Modifying
+    @Query("UPDATE Member u SET u.pwd = :pwd WHERE u.userId = :id")
+    void updateByPassword(@Param("id") String userId, @Param("pwd") String password);
+
+    @Query("select m from Member m where m.userId = :userId")
+    String checkPassword(@Param("userId") String userId);
+
+    @Modifying
+    @Query("UPDATE Member u SET u.nickname= :nickname, u.email= :email, u.name= :name WHERE u.userId = :id")
+    void updateByMember(@Param("id") String userId, @Param("nickname") String nickname, @Param("email") String email, @Param("name") String name);
 
     int countByUserIdIsNotNull();
 }

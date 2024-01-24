@@ -75,7 +75,9 @@ export default {
 						const images = [];
 						for (const img of data.feedImg) {
 							if (img.feed_num.feed_num === feedNum) {
-								images.push(require("E:/git/final/Haru/Haru/src/main/resources/static/img/Feed/" + img.feed_img));
+                // E:/git/final/Haru/Haru/src/main/resources/static/img/Feed/
+								images.push(require("E:/900_팀 프로젝트/최종 프로젝트/Haru/Haru/src/main/resources/static/img/Feed/" + img.feed_img));
+
 							}
 						}
 						return images;
@@ -147,7 +149,8 @@ export default {
 						const images = [];
 						for (const img of data.feedImg) {
 							if (img.feed_num.feed_num === feedNum) {
-								images.push(require("E:/git/final/Haru/Haru/src/main/resources/static/img/Feed/" + img.feed_img));
+                // E:/git/final/Haru/Haru/src/main/resources/static/img/Feed/
+								images.push(require("E:/900_팀 프로젝트/최종 프로젝트/Haru/Haru/src/main/resources/static/img/Feed/" + img.feed_img));
 							}
 						}
 						return images;
@@ -204,6 +207,7 @@ export default {
 				console.log(data);
 				this.searchKeyword = "";
 			});
+      this.searchKeyword = "";
 		},
 		searchFeed() {
 			var formData = new FormData();
@@ -212,8 +216,8 @@ export default {
 			const search = document.querySelector(".hashtag-search-input").value;
 			this.searchKeyword = search;
 			if (search === "") {
-				alert("검색어를 입력해주세요");
-				return false;
+				// alert("검색어를 입력해주세요");
+				// return false;
 			} else {
 				axios.post(`http://${process.env.VUE_APP_BACK_END_URL}/feedList`, formData).then((res) => {
 					const data = res.data;
@@ -224,7 +228,8 @@ export default {
 							const images = [];
 							for (const img of data.feedImg) {
 								if (img.feed_num.feed_num === feedNum) {
-									images.push(require("E:/git/final/Haru/Haru/src/main/resources/static/img/Feed/" + img.feed_img));
+                  // E:/git/final/Haru/Haru/src/main/resources/static/img/Feed/
+									images.push(require("E:/900_팀 프로젝트/최종 프로젝트/Haru/Haru/src/main/resources/static/img/Feed/" + img.feed_img));
 								}
 							}
 							return images;

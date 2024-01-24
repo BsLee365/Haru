@@ -69,18 +69,22 @@
 
         <!-- 컴포넌트로 토글되는 영역 (추천리스트, 일기 리스트) -->
         <div class="tab-content-area">
-          <RecommendList
-            :RecPlace="RecPlace"
+          <RecommendListC
+            @update-all-rec-list="updateAllListMain"
+            :AllRecList="RecPlace"
             :sendSelectedDate="sendSelectedDate"
             :isBtnHeartNone="isBtnHeartNone"
             class="rlist-container"
-            v-if="isTabRecList === true"
+            v-show="isTabRecList === true"
             ref="recList"
           />
           <MyDiaryList
-            :diaryList="diaryList"
+            @updateAllList="updateAllListMain"
+            @close-modal="closeModal"
+            :diaryList="FinMyDiaryList"
+            :sendSelectedDate="sendSelectedDate"
             class="rlist-container"
-            v-if="isTabRecList === false"
+            v-show="isTabRecList === false"
           />
         </div>
       </div>
@@ -89,7 +93,7 @@
 </template>
 
 <script>
-import RecommendList from "@/components/client/myPlace/RecommendList.vue";
+import RecommendListC from "@/components/client/myPlace/RecommendList.vue";
 import MyDiaryList from "@/components/client/myPlace/MyDiaryList.vue";
 import moment from "moment";
 import { onMounted, ref } from "vue";
@@ -101,35 +105,43 @@ export default {
     const today = moment(); // moment 객체 생성
     const sDate = [today.year(), today.month(), today.date(), 0]; // 선택한 날짜 정보 (연도, 월, 일, index)
     const myDate = []; // 현재 화면에 보여지는 날짜 정보
+    const allDateList = new Set(); // 추천리스트, 일기 받은 날짜 담는 곳
 
     return {
-      // 달력 외 관련
-      activeTab: "recommend", // 기본값으로 추천 리스트를 활성화
+      // 달력 외 관련 --------------------------------------
       isBtnHeartNone: false, // 하트버튼이 안보여야되는지
-      isTabRecList: true, // 추천 리스트 탭 활성화
+      isTabRecList: true, // 추천 리스트 탭 활성화 여부 (true -> 추천리스트, false -> 일기)
       RecommendList: [], // controller 에서 넘어온 월별 추천리스트 + 일기 data
       RecPlace: [], // 추천리스트로 넘길 데이터 담는 배열
+      FinMyDiaryList: [], // 일기 탭으로 넘길 데이터 담는 배열
       sendSelectedDate: "", // 추천리스트로 넘길 날짜
-      // 일기 리스트
-      diaryList: [],
-      // 달력 관련 데이터
+      diaryList: [], // 일기 리스트
+      // 달력 관련 데이터 --------------------------------------
       today: today,
       sDate: sDate,
       myDate: myDate,
       week: ["일", "월", "화", "수", "목", "금", "토"],
-      calendarHeader: "",
+      calendarHeader: "", // 년도, 월 표시
       days: [], // 해당 월의 일 담은 배열
       isSelectedtoday: false, // 한 번 이라도 선택된게 있는지
+      allDateList: allDateList, // 추천리스트, 일기 받은 날짜 담는 곳
+      miniDotDates: [], // 달력에 작은 점 => 추천리스트 / 일기 있으면 찍힘
     };
   },
   mounted() {
     this.calendarImplementation();
     this.getMyRecPlace(this.sDate);
+    this.dayClick(3, this.sDate[2]);
+    console.log('오늘 ' + this.sDate);
+  },
+  beforeCreate() {
+
   },
   created() {
     // 페이지가 로드될 때 초기 이미지 설정
     this.bgImage();
     this.getToken();
+    moment.locale('ko');
   },
   setup() {
     const isLoggedIn = ref(false);
@@ -167,6 +179,52 @@ export default {
     return { logout, data }; // Return data in the setup function
   },
   methods: {
+    // 찜 선택 시 업데이트 ----------------------------------------------------------------------
+    // updateAllRecList(resData, allData) {
+      // var jsonlist = {
+      //   place: allData.place,
+      //   recList: allData.recList,
+      //   wishList: resData
+      // };
+      // this.RecPlace.push(jsonlist);
+      // place", "recList", "wishList
+      // console.log('place : ' + allData.place);
+      // console.log('recList : ' + allData.recList);
+      // console.log('resData : ' + resData);
+
+      // console.log(resData);
+    // },
+
+    // updateAllRecList() {
+    //   this.getMyRecPlace();
+    //   this.RecommendList.forEach((item) => {
+        // console.log(item.place_recommend_list.place_cdate);
+        // 가져온 데이터
+        // const placeCdate = moment(item.place_recommend_list.place_cdate).format("YYYY-MM-DD");
+        // 선택한 날짜
+        // var selectedDate = moment([this.sDate[0], this.sDate[1], this.sDate[2]]).format(
+        //     "YYYY-MM-DD"
+        // );
+        // console.log(placeCdate + " / selectedDate : " + selectedDate);
+
+        // 날짜가 같은거만 리스트로 출력
+        // if (placeCdate.includes(selectedDate)) {
+        // if (placeCdate == selectedDate) {
+          // console.log(item);
+      //     var jsonlist = {
+      //       place: item.place,
+      //       recList: item.place_recommend_list,
+      //       wishList: item.wish_list
+      //     };
+      //     this.RecPlace.push(jsonlist);
+      //   }
+      // });
+
+    // },
+    closeModal() {
+      this.modal_Check = false;
+    },
+
     // 추천리스트, 추천받은 날짜, 일기 ... 가져오기----------------------------------------------------------------
     getMyRecPlace() {
       // 달력의 첫번째 표시 날짜와 마지막 표시 날짜 가져오기
@@ -191,15 +249,28 @@ export default {
       // console.log(`${startSdate}, ${endSdate}`);
 
       axios
-        .post(`http://${process.env.VUE_APP_BACK_END_URL}/getRecommendList`, {
+        .post(`http://${process.env.VUE_APP_BACK_END_URL}/recommend/getRecommendList`, {
           userid: this.data.id,
           startdate: startSdate,
           enddate: endSdate,
         })
         .then((res) => {
-          console.log(res.data);
+          // console.log(res.data.rec_list); // place, place_recommend_list, wish_list 가져옴
           this.RecommendList = res.data.rec_list;
           this.diaryList = res.data.diary_list;
+
+          this.allDateList = new Set();
+
+          this.RecommendList.forEach((item) => {
+            // console.log(item.place_recommend_list.place_cdate);
+            this.allDateList.add(moment(item.place_recommend_list.place_cdate).format("YYYY-MM-DD"));
+          });
+
+          this.diaryList.forEach(item => {
+            this.allDateList.add(moment(item.diary_cdate).format("YYYY-MM-DD"));
+          });
+
+          this.miniDotDates = Array.from(this.allDateList);
         })
         .catch((error) => {
           console.error("error! " + error);
@@ -226,7 +297,7 @@ export default {
       // 시작날부터 마지막 날까지 채우기
       const basicDays = Array.from(
         { length: endDayOfTheMonth },
-        (v, i) => i + 1
+        (v, ii) => ii + 1
       );
 
       // 전달의 마지막 날 가져오기
@@ -266,7 +337,7 @@ export default {
       }
     },
 
-    // 날짜 변경----------------------------------
+    // 월(날짜) 변경----------------------------------
     changeMonth: function (val) {
       this.today = moment(this.today).add(val, "months").startOf("month");
       this.calendarImplementation();
@@ -289,7 +360,6 @@ export default {
 
     // 탭 전환하기----------------------------------
     changeTab(tab) {
-      this.activeTab = tab;
       if (tab === "recommend") {
         this.isTabRecList = true;
       } else {
@@ -309,8 +379,8 @@ export default {
 
       return indexDay == today.format("YYYY-MM-DD");
     },
-    // 선택됐는지 확인해서 css 적용
-    isSelected(i, day) {
+    // 선택됐는지 확인해서 css 적용 ----------------------------------------------------------------
+    isSelected(sIdx, day) {
       // 선택한 날짜
       var sdate = moment([this.sDate[0], this.sDate[1], this.sDate[2]]).format(
         "YYYY-MM-DD"
@@ -325,7 +395,7 @@ export default {
       // 화면 최초 진입 시 오늘 날짜면 오늘 날짜에 표시
       if (this.isToday(day) && sdate && !this.isSelectedtoday) {
         return true;
-      } else if (sdate == nowdate && i == this.sDate[3]) {
+      } else if (sdate == nowdate && sIdx == this.sDate[3]) {
         return true;
       }
       return false;
@@ -333,6 +403,7 @@ export default {
 
     // 날짜 클릭했을 때---------------------------------------------------------------------------------
     dayClick(i, day) {
+      console.log('!!!! : ' + i + day);
       // 한 번 클릭된 이후엔 오늘 날짜 자동으로 선택 안되게
       if (this.isSelectedtoday == false)
         this.isSelectedtoday = !this.isSelectedtoday;
@@ -351,17 +422,23 @@ export default {
         // 다음 달 클릭 시
         this.changeMonth(1);
         this.sDate = [this.myDate[0], this.myDate[1], day, 0];
+      } else if (i == this.sDate[3] && day == this.sDate[2]) {
+        // 현재 선택된 날짜 재 선택 시
+        // console.log('같은 날짜 선택함');
       } else {
+        // 현재 Month의 다른 날짜 선택 시
         this.sDate = [this.myDate[0], this.myDate[1], day, i];
       }
-
-      // 선택한 일자에 해당하는 추천리스트 목록 담는 배열
+      console.log(this.sDate)
+      // 선택한 일자에 해당하는 추천리스트, 일기 목록 담는 배열
       this.RecPlace = []; // 배열 초기화
+      this.FinMyDiaryList = [];
 
       // 데이터 가져오기
-      this.RecommendList.map((item) => {
+      this.RecommendList.forEach((item) => {
+        // console.log(item.place_recommend_list.place_cdate);
         // 가져온 데이터
-        const placeCdate = moment(item.place_cdate).format("YYYY-MM-DD");
+        const placeCdate = moment(item.place_recommend_list.place_cdate).format("YYYY-MM-DD");
         // 선택한 날짜
         var selectedDate = moment([this.sDate[0], this.sDate[1], day]).format(
           "YYYY-MM-DD"
@@ -371,26 +448,43 @@ export default {
         // 날짜가 같은거만 리스트로 출력
         // if (placeCdate.includes(selectedDate)) {
         if (placeCdate == selectedDate) {
-          // console.log(item.place);
-          this.RecPlace.push(item.place);
+          // console.log(item);
+          var jsonlist = {
+            place: item.place,
+            recList: item.place_recommend_list,
+            wishList: item.wish_list
+          };
+          this.RecPlace.push(jsonlist);
         }
       });
+
+      this.diaryList.forEach(item => {
+        // console.log(item);
+        // 가져온 데이터
+        const diaryCdate = moment(item.diary_cdate).format("YYYY-MM-DD");
+        // 선택한 날짜
+        var selectedDate = moment([this.sDate[0], this.sDate[1], day]).format(
+            "YYYY-MM-DD"
+        );
+
+        if (diaryCdate == selectedDate) {
+          // console.log('!!!!!! : ' + item.diary_title)
+          this.FinMyDiaryList.push(item);
+        }
+      });
+
+      // 선택한 날짜 변수에 담기 -> 화면에 띄우기 용
       this.sendSelectedDate = moment([
         this.sDate[0],
         this.sDate[1],
         this.sDate[2],
-      ]).format("MM월 DD일");
-      console.log(this.RecPlace);
+      ]).format("MM월 DD일 (dddd)");
+      // console.log(this.RecPlace);
     },
 
-    // 받아온 추천 리스트에 rDate를 화면에 점으로 표시하기----------------------------------
+    // 받아온 추천 리스트에 rDate를 화면에 점으로 표시하기--------------------------------------------------------
     isInRecList(idx, day) {
       // console.log(idx + ' / ' + day);
-      // 가져온 데이터
-      const rdates = this.RecommendList.map((item) => {
-        // console.log('rDate!! : ' + moment(item.place_cdate).format("YYYY-MM-DD"));
-        return moment(item.place_cdate).format("YYYY-MM-DD");
-      });
 
       // 달력에 표시된 각각 날짜
       var indexDay = moment([this.myDate[0], this.myDate[1], day]);
@@ -403,19 +497,28 @@ export default {
       }
       indexDay = indexDay.format("YYYY-MM-DD");
       // console.log('indexDay : ' + indexDay);
-      return rdates.includes(indexDay);
+      return this.miniDotDates.includes(indexDay);
     },
 
     // 이전달, 다음달 날짜면 회색 처리
-    isPrevNextDay(i, index) {
+    isPrevNextDay(i2, index) {
       return (
-        (i == 0 && index > this.days[i][this.days[i].length - 1]) ||
-        (i == this.days.length - 1 && index < 7)
+        (i2 == 0 && index > this.days[i2][this.days[i2].length - 1]) ||
+        (i2 == this.days.length - 1 && index < 7)
       );
     },
+
+    // 모든 목록 업데이트
+    updateAllListMain() {
+      this.getMyRecPlace();
+      // this.dayClick(this.sDate[3], this.sDate[2]-1);
+      // this.dayClick(this.sDate[3], this.sDate[2]);
+      // this.$router.push('/MyPlaceDiary');
+      this.$router.go(0);
+    }
   },
   components: {
-    RecommendList,
+    RecommendListC,
     MyDiaryList,
   },
 };

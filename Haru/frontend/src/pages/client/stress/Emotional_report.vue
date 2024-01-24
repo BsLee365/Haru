@@ -2,7 +2,7 @@
   <div class="container1">
     <div class="report-container">
       <div class="report-title">
-        <span>{{ UserName }}의 스트레스 종합 보고서 😊</span>
+        <span>{{ UserName }}의 스트레스 추이 😊</span>
       </div>
       <div class="total_report_card">
         <div class="select-date-area">
@@ -70,34 +70,25 @@
             </select>
           </div>
           <div class="date-input-area">
-            <button class="big-ctlbtn else-btn">검색</button>
+            <button class="big-ctlbtn else-btn" @click="sendStressData">검색</button>
           </div>
         </div>
         <div class="report-contents">
           <div v-if="SelectDate === 'day'">
             {{ Oneday }} 스트레스 수치
-            <span class="badge rounded-pill normal-badge">정상</span>
           </div>
           <div v-if="SelectDate === 'days'">
             {{ Startdays }} ~ {{ Enddays }} 스트레스 수치
-            <span class="badge rounded-pill warn-badge">위험</span>
           </div>
           <div v-if="SelectDate === 'month'">
             {{ Startmonth }}월 ~ {{ Endmonth }}월 스트레스 수치
-            <span class="badge rounded-pill normal-badge">정상</span>
           </div>
           <div v-if="SelectDate === 'year'">
             {{ SelectYear }}년 스트레스 수치
-            <span class="badge rounded-pill attention-badge">주의</span>
           </div>
         </div>
         <div class="report-chart-area">
-          <Line
-            ref="chart"
-            :options="chartOptions"
-            :data="chartData"
-            style="width: 100%; height: 100%"
-          ></Line>
+          <canvas ref="charts"></canvas>
         </div>
       </div>
     </div>
@@ -105,37 +96,50 @@
 </template>
 
 <script>
-import {
-  Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Title,
-  Tooltip,
-  Legend,
-} from "chart.js";
-import { Line } from "vue-chartjs";
 
-ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Title,
-  Tooltip,
-  Legend
-);
-
+import { onMounted, ref } from "vue";
+import axios from "axios";
+import { jwtDecode } from "jwt-decode";
+import {Chart, registerables} from 'chart.js';
+Chart.register(...registerables);
 export default {
   name: "Emotional_report",
   components: {
-    Line,
   },
   data() {
     return {
       SelectDate: "day",
-      UserName: "이범석",
+      UserName: "",
+      imsichart: null,
+      // 차트 시작
+      chartData: {
+
+        labels: [],
+
+        datasets: [
+          {
+            data: [0, 0], // 초기 값으로 0을 설정
+            backgroundColor: ['rgba(75, 192, 192, 0.5)', '#FFFFFF'],
+            borderColor: 'rgba(75, 192, 192, 0.5)', // 파란색 계열 테두리
+            borderWidth: 1,
+          },
+          {
+            data: [0, 0], // 초기 값으로 0을 설정
+            backgroundColor: ['rgba(75, 192, 192, 0.5)', '#FFFFFF'],
+            borderColor: 'rgba(75, 192, 192, 0.5)', // 파란색 계열 테두리
+            borderWidth: 1,
+          },
+          {
+            data: [0, 0], // 초기 값으로 0을 설정
+            backgroundColor: ['rgba(75, 192, 192, 0.5)', '#FFFFFF'],
+            borderColor: 'rgba(75, 192, 192, 0.5)', // 파란색 계열 테두리
+            borderWidth: 1,
+          },
+        ],
+      },
+
+      // 현재 클라이언트 주소
+      ipAddress : window.location.host.split(':')[0],
 
       // 현재 날짜
       nowDate: new Date().toISOString().slice(0, 10),
@@ -150,53 +154,25 @@ export default {
       maxEndDays: "",
 
       // 월간
-      Startmonth: new Date().toISOString().slice(0, 10),
-      Endmonth: new Date().toISOString().slice(0, 10),
+
+      Startmonth: new Date().toISOString().slice(0, 7),
+      Endmonth: new Date().toISOString().slice(0, 7),
       minEndMonth: "",
       maxEndMonth: "",
 
       // 연도별로
       SelectYear: new Date().toISOString().slice(0, 4),
 
-      //  차트 영역
-      chartData: {
-        //  바뀌어야 될 부분
-        labels: [
-          "1월",
-          "2월",
-          "3월",
-          "4월",
-          "5월",
-          "6월",
-          "7월",
-          "8월",
-          "9월",
-          "10월",
-          "11월",
-          "12월",
-        ],
-        datasets: [
-          {
-            label: this.UserName + "님 스트레스 수치",
-            backgroundColor: "#f87979",
-            // 바뀌어야 될 부분
-            data: [10, 7.8, 2.1, 3.4, 5.6, 7.8, 9.1, 8.7, 6.5, 4.3, 2.1, 1.2],
-            tension: 0.1,
-          },
-        ],
-      },
-      chartOptions: {
-        responsive: false,
-        pointStyle: "circle",
-        lineWidth: 5,
-        pointRadius: 8,
-        pointHoverRadius: 12,
-      },
+      // 차트에 뿌려질 데이터
+      stressData : [],
+      diaryScore : [],
+      faceScore : [],
+      stressLabel: [],
+
     };
   },
   created() {
     this.bgImage();
-    this.chartData.datasets[0].label = this.UserName + "님 스트레스 수치";
   },
   methods: {
     bgImage() {
@@ -235,7 +211,124 @@ export default {
 
       console.log(this.minEndMonth, this.maxEndMonth);
     },
+    // 날짜 보내기
+    sendStressData() {
+      const sendDate = new FormData();
+      sendDate.append("oneday", this.Oneday);
+      sendDate.append("days", [this.Startdays, this.Enddays]);
+      sendDate.append("month", [this.Startmonth, this.Endmonth]);
+      sendDate.append("selectYear", this.SelectYear);
+      sendDate.append("userId", this.data.id)
+      sendDate.append("flag", this.SelectDate);
+
+      axios.post(`http://${this.ipAddress}/Haru/report/oneday`, sendDate)
+          .then((res)=> {
+
+            // 스트레스 수치
+            this.stressScore = res.data.map(item => item.stress_score);
+            // 일기 수치
+            this.diaryScore = res.data.map(item => item.diary_data)
+            // 얼굴 수치
+            this.faceScore = res.data.map(item => item.face_data);
+            // 라벨
+            this.stressLabel = res.data.map(item=> item.stress_cdate);
+
+            // 차트 업데이트를 라이프사이클 훅으로 이동
+            console.log(res);
+
+            console.log("스트레스 점수 : " + this.stressScore);
+            console.log("일기 점수 : " + this.diaryScore);
+            console.log("얼굴 점수 : " + this.faceScore);
+            console.log("라벨들 : " + this.stressLabel);
+
+            // 차트 인스턴스를 다시 생성하여 업데이트된 데이터를 반영
+            console.log("성공!");
+            this.setupChart()
+          })
+    },
+    setupChart() {
+      const ctx = this.$refs.charts;
+      if (this.imsichart) this.imsichart.destroy(); // 차트가 있다면
+      this.imsichart = new Chart(ctx, {
+        type : 'line',
+        data: {
+          labels: this.stressLabel,
+          datasets: [
+            {
+              label: '일기',
+              data: this.diaryScore,
+              fill: false,
+              borderColor: 'rgb(255,0,0)',
+              tension: 0.3,
+            },
+            {
+              label: '얼굴',
+              data: this.faceScore,
+              fill: false,
+              borderColor: 'rgb(255,182,0)',
+              tension: 0.3,
+            },
+            {
+              label: '스트레스',
+              data: this.stressScore,
+              fill: false,
+              borderColor: 'rgb(131,255,0)',
+              tension: 0.3,
+            }
+          ]
+        },
+        options : {
+          maintainAspectRatio: false,
+        }
+      })
+
+    },
   },
+  // 로그인 토큰
+  setup() {
+    const isLoggedIn = ref(false); // Use ref to create reactive isLoggedIn
+    const data = ref([]); // Use ref to create reactive data
+
+    const getToken = () => {
+      const token = localStorage.getItem("jwtToken");
+      isLoggedIn.value = token ? true : false;
+    };
+
+    const logout = () => {
+      axios
+          .get(`http://${process.env.VUE_APP_BACK_END_URL}/api/auth/logout`)
+          .then((res) => {
+            if (res.data === "Logout") {
+              localStorage.removeItem("jwtToken");
+              window.location.href = "/login";
+            }
+          });
+    };
+
+    const decodeToken = (token) => {
+      console.log(token);
+      if (token == null) return false;
+      const decoded = jwtDecode(token);
+      console.log(JSON.stringify(decoded));
+      data.value = decoded; // Use data.value to set the value of the ref
+      return decoded;
+    };
+
+    onMounted(() => {
+      getToken();
+      const token = localStorage.getItem("jwtToken");
+      decodeToken(token);
+    });
+
+    return { logout, data }; // Return data in the setup function
+  },
+  mounted() {
+    //this.setupChart()
+    this.sendStressData()
+    this.UserName = this.data.username;
+
+
+  }
 };
 </script>
 <script setup></script>

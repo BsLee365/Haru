@@ -73,6 +73,7 @@ public class SecurityConfig {
                 .logout((logout) -> logout.disable());
         return http.build();
     }
+
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration corsConfiguration = new CorsConfiguration();

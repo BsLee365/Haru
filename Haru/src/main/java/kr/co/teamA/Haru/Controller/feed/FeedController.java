@@ -80,6 +80,7 @@ public class FeedController {
         String rootPath = System.getProperty("user.dir");
         System.out.println(rootPath);
         String uploadPath = rootPath + "\\Haru\\src\\main\\resources\\static\\img\\Feed\\" + imgName;
+        System.out.println(uploadPath);
         try (FileOutputStream writer = new FileOutputStream(uploadPath)) {
             writer.write(multipartFile.getBytes());
             return imgName;
@@ -127,7 +128,8 @@ public class FeedController {
     }
 
     @PostMapping("/myFeedList")
-    public Map<String, Object> myFeedList(@RequestParam("nickname") String nickname, @RequestParam("userId") String userId) {
+    public Map<String, Object> myFeedList(@RequestParam("nickname") String nickname,
+            @RequestParam("userId") String userId) {
 
         Map<String, Object> myFeedList = feedService.getMyFeedList(nickname, userId);
 

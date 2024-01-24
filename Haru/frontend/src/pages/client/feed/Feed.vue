@@ -76,7 +76,7 @@ export default {
 						for (const img of data.feedImg) {
 							if (img.feed_num.feed_num === feedNum) {
                 // E:/git/final/Haru/Haru/src/main/resources/static/img/Feed/
-								images.push(require("E:/900_팀 프로젝트/최종 프로젝트/Haru/Haru/src/main/resources/static/img/Feed/" + img.feed_img));
+								images.push(require(`E:/git/final/Haru/Haru/src/main/resources/static/img/Feed/` + img.feed_img));
 
 							}
 						}
@@ -150,7 +150,7 @@ export default {
 						for (const img of data.feedImg) {
 							if (img.feed_num.feed_num === feedNum) {
                 // E:/git/final/Haru/Haru/src/main/resources/static/img/Feed/
-								images.push(require("E:/900_팀 프로젝트/최종 프로젝트/Haru/Haru/src/main/resources/static/img/Feed/" + img.feed_img));
+								images.push(require("E:/git/final/Haru/Haru/src/main/resources/static/img/Feed/" + img.feed_img));
 							}
 						}
 						return images;
@@ -216,8 +216,7 @@ export default {
 			const search = document.querySelector(".hashtag-search-input").value;
 			this.searchKeyword = search;
 			if (search === "") {
-				// alert("검색어를 입력해주세요");
-				// return false;
+				this.getFeedList();
 			} else {
 				axios.post(`http://${process.env.VUE_APP_BACK_END_URL}/feedList`, formData).then((res) => {
 					const data = res.data;
@@ -228,8 +227,7 @@ export default {
 							const images = [];
 							for (const img of data.feedImg) {
 								if (img.feed_num.feed_num === feedNum) {
-                  // E:/git/final/Haru/Haru/src/main/resources/static/img/Feed/
-									images.push(require("E:/900_팀 프로젝트/최종 프로젝트/Haru/Haru/src/main/resources/static/img/Feed/" + img.feed_img));
+									images.push(require("E:/git/final/Haru/Haru/src/main/resources/static/img/Feed/" + img.feed_img));
 								}
 							}
 							return images;

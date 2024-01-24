@@ -73,7 +73,7 @@
 								</div>
 								<div class="comment">
 									<img src="@/img/Feed/comment.png" id="comment" />
-									<span >{{ card.comments }}</span>
+									<span>{{ card.comments }}</span>
 								</div>
 							</div>
 
@@ -154,6 +154,7 @@ export default {
 			recommend: {},
 			formData: new FormData(),
 			card: {},
+			cardLike: false,
 		};
 	},
 	methods: {
@@ -222,15 +223,16 @@ export default {
 				this.$emit("getFeedList");
 				console.log(res);
 				this.card.likes = res.data;
-        console.log(this.cardOrigin.myFeedLike);
-				if (this.cardOrigin.myFeedLike) {
+				this.cardLike = !this.cardLike;
+				if (this.cardLike === true) {
 					this.heartStyle = {
 						filter: "opacity(0.4) drop-shadow(0 0 0 red)",
 					};
 				} else {
-          this.heartStyle = {};
-        }
-        console.log(this.heartStyle);
+					this.heartStyle = {};
+				}
+				console.log(this.cardOrigin.myFeedLike)
+				console.log(this.heartStyle);
 			});
 		},
 		feedUpdate() {
@@ -278,12 +280,14 @@ export default {
 	created() {
 		this.card = this.cardOrigin;
 		this.getComments();
-		if (!this.card.myFeedLike) {
+		if (this.card.myFeedLike === false) {
 			this.heartStyle = {};
+			this.cardLike = false;
 		} else {
 			this.heartStyle = {
 				filter: "opacity(0.4) drop-shadow(0 0 0 red)",
 			};
+			this.cardLike = true;
 		}
 	},
 };

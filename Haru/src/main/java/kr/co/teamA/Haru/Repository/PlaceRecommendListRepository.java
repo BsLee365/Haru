@@ -14,6 +14,7 @@ import java.util.List;
 @Repository
 public interface PlaceRecommendListRepository extends JpaRepository<PlaceRecommendList, Long> {
 
+<<<<<<< HEAD
     // 추천 리스트 + 찜 목록
     @Query("select new kr.co.teamA.Haru.DTO.ShowMyRecommendPlaceDTO(w, p, rl) from Place p " +
             "left join WishList w on p.placeNum = w.place.placeNum " +
@@ -23,3 +24,9 @@ public interface PlaceRecommendListRepository extends JpaRepository<PlaceRecomme
             "order by rl.placeCdate ")
     List<ShowMyRecommendPlaceDTO> getMyRecommendPlace(@Param("userId") String userId, @Param("startDate") Date startDate, @Param("endDate") Date endDate);
 }
+=======
+    List<ShowMyRecommendPlaceDTO> getMyRecommendPlace(@Param("userId") String userId,@Param("startDate") Date startDate, @Param("endDate") Date endDate);
+
+
+}
+>>>>>>> origin/BeomSeok_ori

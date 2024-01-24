@@ -1,0 +1,271 @@
+/* 피드 상세 화면 모달창 ---------------------------------------------- */
+/* dimmed */
+.feed-modal-wrap {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  justify-content: center;
+  z-index: 20;
+}
+
+/* modal or popup */
+.feed-modal-container {
+  position: relative;
+  height: 850px;
+  /* height: 94vh; */
+  border-radius: 10px;
+  padding: 40px;
+  box-sizing: border-box;
+}
+
+/* 위에 모달 컨테이너 상세 속성 -> 피드 디테일 화면 */
+.feed-detail {
+  background: #fff2f2;
+  overflow: scroll;
+  overflow-x: hidden;
+  width: 1130px;
+}
+
+/* X 버튼 영역 */
+.common-modal-close {
+  width: 1050px;
+}
+
+/* X 버튼 */
+#common-modal-close {
+  width: 39px;
+  height: 36px;
+  float: right;
+  background: url("@/img/Feed/image-74.png");
+  border: none;
+}
+
+/* 헤더(프로필, 닉네임, 카테고리, 여기를 추천받았어요!) */
+.feed-card-content-area {
+  width: 740px;
+}
+
+/* 프로필사진, 닉네임, 카테고리 */
+.left-header {
+  width: 500px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* 본문 전체 영역(이미지, 댓글 영역) */
+.feed-modal {
+  width: 1050px;
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-between;
+}
+
+/* 좌측 영역 */
+.modal-contents {
+  width: 500px;
+}
+
+/* 추천 장소 */
+.feed-recommend-area {
+  padding: 11px 20px;
+  background-color: #fff;
+  margin-bottom: 15px;
+  border-radius: 35px;
+  display: flex;
+  align-items: center;
+}
+
+.rec-title {
+  font-size: 1.3rem;
+}
+
+.rec-detail-img-area {
+  width: fit-content;
+}
+
+.rec-detail-img {
+  width: 100px;
+  height: 100px;
+  border-radius: 30px;
+}
+
+.rec-detail {
+  margin-left: 30px;
+}
+
+.rec-detail-title {
+  font-size: 1.3rem;
+  font-weight: 600;
+}
+
+.rec-hash-area {
+  margin-top: 10px;
+}
+
+.rec-hash {
+  background-color: #fff;
+  padding: 3px 11px;
+  margin-right: 10px;
+  border-radius: 32px;
+  border: 1px solid #ffd1d1;
+  transition: box-shadow 0.15s ease-in 0s, background-color 0.15s ease-in 0s;
+}
+
+.rec-hash:hover {
+  box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.1);
+  background-color: #ffdede;
+}
+
+/* 우측 댓글 영역 */
+.modal-comment-bg {
+  width: 500px;
+  height: 505px;
+  padding: 30px;
+  background-color: #fff;
+  box-shadow: 0px 4px 9px -3px rgba(0, 0, 0, 0.15);
+}
+
+/* 댓글 리스트 */
+.comment-area1 {
+  height: 380px;
+  overflow: auto;
+}
+
+/* 댓글 input Area */
+.comment-area2 {
+  margin-top: 20px;
+}
+
+/* 댓글 하나하나 (프로필, 닉네임, 날짜, 내용, 신고 이미지) */
+.modal-comment {
+  margin-bottom: 30px;
+}
+
+/* 프로필 이미지 */
+.m-profile-img {
+  border-radius: 45px;
+  width: 45px;
+  height: 45px;
+  margin-right: 10px;
+}
+
+/* 닉네임 */
+.m-nickname {
+  font-weight: 500;
+  margin-right: 10px;
+}
+
+/* 댓글 내용, 신고 이미지 영역 */
+.m-comment-area {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+  margin-left: 30px;
+}
+
+/* 댓글 회색 박스 */
+.m-comment {
+  background: #f5f5f5;
+  padding: 10px 20px;
+  width: fit-content;
+  border-radius: 10px;
+}
+
+/* 댓글 날짜 */
+.m-cDate {
+  font-size: 13px;
+  color: #898989;
+  padding-right: 5px;
+}
+
+/* 댓글 */
+.m-comment > p {
+  font-size: 15px;
+}
+
+/* 신고하기 버튼 */
+.m-comment-area > img {
+  margin-left: 10px;
+}
+
+/* 댓글 입력 textarea */
+#commentText {
+  border-radius: 10px;
+  border: 1px solid #dbdbdb;
+  padding: 5px 10px;
+}
+
+/* 댓글 textarea, 전송 버튼 */
+#comment-form {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* 이미지 가로 길이 설정 */
+.carousel-inner-m {
+  width: 500px;
+}
+
+/* 전송 버튼 */
+.send-comment {
+  font-weight: 600;
+  background-color: #b0d8ff;
+  width: 60px;
+  height: 40px;
+  border: 0;
+  border-radius: 20px;
+  transition: box-shadow 0.15s ease-in 0s, background-color 0.15s ease-in 0s;
+  box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.1);
+}
+
+.send-comment:hover {
+  box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.2);
+  background-color: #5eb0ff;
+}
+
+/* 삭제, 수정 버튼 영역 */
+.card-ctrl-btn-area {
+  float: right;
+  margin-top: 20px;
+}
+
+/* 삭제, 수정 버튼 - 공통 */
+.card-ctrl-btn {
+  font-weight: 600;
+  width: 60px;
+  height: 40px;
+  border: 0;
+  border-radius: 20px;
+  transition: box-shadow 0.15s ease-in 0s, background-color 0.15s ease-in 0s;
+  box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.1);
+}
+
+/* 수정 버튼 */
+.update {
+  background-color: #ffceac;
+  margin-right: 10px;
+}
+
+/* 삭제 버튼 */
+.delete {
+  background-color: #ffb0b0;
+}
+
+.update:hover {
+  box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.2);
+  background-color: #ff9145;
+}
+
+.delete:hover {
+  box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.2);
+  background-color: #ff8383;
+}

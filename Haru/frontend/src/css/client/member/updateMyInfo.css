@@ -1,0 +1,59 @@
+/* 내 정보 수정 화면, 탈퇴하기 */
+/* 전체 영역 */
+.deleteUser-modal {
+  display: flex;
+  position: fixed;
+  z-index: 10;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  justify-content: center;
+}
+
+/* 흰색 영역 */
+.deleteUser-modal-content {
+  background-color: #f9f8f7;
+  margin: 3% auto;
+  padding: 40px 70px;
+  border: 1px solid #888;
+  border-radius: 40px;
+  width: 550px;
+}
+
+/* 제목 영역 */
+.deleteMyInfo-title-area {
+  margin: 10px 0 30px;
+  width: fit-content;
+}
+
+/* 제목 텍스트 */
+.deleteMyInfo-title-area > h2 {
+  width: fit-content;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+/* 탈퇴 안내 문구 */
+.delete-text-commend {
+  margin: 20px 0;
+}
+
+/* 문구 텍스트 */
+.delete-text-commend p {
+  font-weight: 700;
+}
+
+/* 아이디 입력 안내 영역 */
+.delete-commend-input-box {
+  margin-top: 10px;
+}
+
+/* 버튼 영역 */
+.deleteMyInfo-btn-area {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}

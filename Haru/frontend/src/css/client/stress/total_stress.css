@@ -1,0 +1,312 @@
+.result-container {
+  width: 100%;
+  text-align: center;
+}
+.result-card-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.result-card-box {
+  padding: 60px 0;
+  background-color: #f8f8f8;
+  border-radius: 10px;
+  width: 1200px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.25);
+}
+/* 스트레스 수치 뱃지 */
+.custom-bedge {
+  font-size: 25px !important;
+  background-color: #b8d9a3 !important;
+}
+.result-comment {
+  font-size: 30px;
+  font-weight: bold;
+  text-align: center;
+}
+
+/*수치영역 바 시작 */
+/*수치 영역 컨테이너*/
+.rating-bar-container {
+  margin-top: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+/*10% ~ 90% 수치 영역 박스*/
+.percentage-box {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+/*수치 영역 회색 박스  */
+.rating-bar {
+  width: 85%;
+  height: 45px;
+  background-color: #e2e2e2;
+  border-radius: 100px;
+  display: flex;
+  align-items: center;
+}
+/* 수치 영역 게이지 */
+.rating-bar-gauge {
+  height: 34px;
+  background: linear-gradient(to left, #ff7171 0%, #efc8c8 100%);
+  border-radius: 100px;
+  margin-left: 7px;
+  margin-right: 7px;
+}
+/* 숫자로 보여줄 div */
+.percentage-number {
+  line-height: 30px;
+  padding-top: 2px;
+  padding-right: 10px;
+  font-size: 17px;
+  float: right;
+  font-weight: bold;
+  color: white;
+}
+
+/*10% ~ 90% 수치 ul태그 */
+.rating-percent {
+  padding-left: 64px;
+}
+/*10% ~ 90% 수치 li태그 */
+.rating-number {
+  position: relative;
+  list-style: none;
+  float: left;
+  padding-left: 49px;
+  text-align: center;
+}
+/*10% ~ 90% 수치 숫자 */
+.percentage {
+  font-size: 20px;
+  font-weight: bold;
+  color: #707070;
+}
+/* 정상, 주의, 심각 수치 선 */
+.fourchette {
+  left: 45px;
+  position: absolute;
+  top: 75px;
+  padding-top: 40px;
+  width: 50%;
+}
+.fourchette:before {
+  content: "";
+  position: absolute;
+  width: 5px;
+  height: 30px;
+  top: 0;
+  left: 50%;
+  background: #ddd;
+}
+.fourchette:after {
+  content: "";
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #ddd;
+  top: 29px;
+  left: 56%;
+  transform: translateX(-50%);
+}
+/* 스트레스 수치 지표 */
+.stress-nomal {
+  color: #b8d9a3;
+  font-size: 20px;
+  font-weight: bold;
+}
+.stress-warning {
+  color: #f8d800;
+  font-size: 20px;
+  font-weight: bold;
+}
+.stress-danger {
+  color: #ff0000;
+  font-size: 20px;
+  font-weight: bold;
+}
+/* 스트레스 수치 지표 끝 */
+/*수치 영역 바 끝*/
+.stress-area {
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* 장소 추천 영역 시작 */
+.recommend-area {
+  margin-top: 140px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+.recommend-area-box {
+  width: 90%;
+  display: flex;
+  flex-direction: row;
+}
+.recommend-button {
+  margin-left: auto;
+  display: flex;
+  justify-content: space-between;
+}
+
+.recommend-button > .swiper-btn {
+  font-size: 30px;
+  padding: 0;
+  width: 55px;
+  border: 1px solid;
+  border-radius: 30px;
+  display: inline-block;
+  background-color: #fff;
+  height: 55px;
+  margin-left: 10px;
+  font-weight: 100;
+  transition: background-color 0.2s ease-in;
+}
+.recommend-button > .swiper-btn:hover {
+  background-color: #dce5eb;
+}
+
+/* 장소 추천 멘트 */
+.recommend-comment > span {
+  font-size: 25px;
+}
+
+/* 장소 카드 영역 */
+.recommend-place {
+  background-color: #f8f8f8;
+  overflow-x: auto;
+  margin-top: 20px;
+  width: 90%;
+  height: 310px;
+  display: flex;
+  overflow-x: hidden;
+  /* white-space: nowrap; */
+}
+
+/* 장소 추천 카드 시작 */
+/* 장소 카드 */
+.place-card {
+  position: relative;
+  flex: 0 0 auto;
+  width: 280px;
+  height: 280px;
+  /* background-color: #3b3b3b; */
+  margin-right: 20px;
+  border-radius: 10px;
+}
+
+/* 장소 이미지 */
+.food-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* 장소 세부정보 애니메이션 */
+/* 장소 설명 */
+.food-desc {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
+  color: white;
+  overflow: hidden;
+  height: 120px; /* 초기 높이 설정 */
+  transition: height 0.3s;
+  .food-detail {
+    display: none;
+  }
+}
+.food-desc:hover {
+  height: 210px; /* 호버 시 높이 변경 */
+  .food-detail {
+    display: block;
+  }
+}
+.food-desc-box {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: top;
+  width: 100%;
+  height: 100%;
+  padding: 20px;
+}
+
+/* 해시태그 */
+/*.hash-tag-bedge{*/
+/*    font-size: 15px!important;*/
+/*    background-color: #ffffff00!important;*/
+/*    border: 1px solid #ffffff!important;*/
+/*}*/
+
+/* 별점 css */
+.review-score {
+  font-size: 20px;
+  color: white;
+  font-weight: 300;
+}
+/* 장소 주소 */
+.food-address {
+  font-size: 16px;
+  color: white;
+}
+.food-detail {
+  margin-top: 20px;
+}
+.food-title h4 {
+  color: white;
+}
+
+/* 하트 버튼 */
+.heart-img {
+  width: 30px;
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  cursor: pointer;
+  z-index: 1;
+}
+
+/* 하단 버튼 */
+.step-btn {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 570px;
+  justify-content: space-between;
+  padding-top: 30px;
+}
+.step-btn > span {
+  padding: 5px 20px;
+}
+
+/* 진행바 시작 */
+pro-bar-box {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.row {
+  width: 100%;
+}
+
+/* 진행바 끝 */

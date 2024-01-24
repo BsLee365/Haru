@@ -2,18 +2,20 @@ const CopyWebpackPlugin = require("copy-webpack-plugin");
 const path = require("path");
 
 module.exports = {
-<<<<<<< HEAD
-  // devServer: {
-  //   proxy: {
-  //     "/api": {
-  //       target: "http://localhost:80",
-  //       changeOrigin: true,
-  //       pathRewrite: {
-  //         "^/api": "",
-  //       },
-  //     },
-  //   },
-  // },
+    // devServer: {
+    //   proxy: {
+    //       "/api": {
+    //         target: "http://localhost:80",
+    //         changeOrigin: true,
+    //         pathRewrite: {
+    //           "^/api": "",
+    //         },
+    //       },
+    //     },
+    //     client: {
+    //       overlay: false
+    //     }
+    // },
   configureWebpack: {
     plugins: [
       new CopyWebpackPlugin({
@@ -28,20 +30,5 @@ module.exports = {
         ],
       }),
     ],
-=======
-  devServer: {
-    proxy: {
-      "/api": {
-        target: "http://localhost:80",
-        changeOrigin: true,
-        pathRewrite: {
-          "^/api": "",
-        },
-      },
-    },
-    client: {
-      overlay: false
-    }
->>>>>>> origin/junghyoun
   },
 };

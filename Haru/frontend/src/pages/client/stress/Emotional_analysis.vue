@@ -238,9 +238,12 @@
     <div class="loading" v-show="activeLoading">
       <div class="loading-box">
         <h1 v-if="loadingParam === 1">
-          얼굴 분석중입니다... <span class="emoticon">얼굴 분석중입니다...</span>
+          얼굴 분석중입니다...
+          <span class="emoticon">얼굴 분석중입니다...</span>
         </h1>
-        <h1 v-else-if="loadingParam === 2">일기 분석중입니다...{{ currentEmoji }}</h1>
+        <h1 v-else-if="loadingParam === 2">
+          일기 분석중입니다...{{ currentEmoji }}
+        </h1>
         <h1 v-else-if="loadingParam === 3">
           거의 다 됐어요! <span class="emoticon">{{ currentEmoji }}</span>
         </h1>
@@ -298,7 +301,7 @@ export default {
       stressCdate: null,
 
       // 현재 클라이언트 주소
-      ipAddress : window.location.host.split(':')[0]
+      ipAddress: window.location.host.split(":")[0],
     };
   },
   created() {
@@ -364,11 +367,7 @@ export default {
       this.loadingParam = 1;
       // axios를 통해 장고모델에 전달 (출력 결과는 모두 console.log로 찍음.)
       axios
-<<<<<<< HEAD
         .post(`http://192.168.0.215:8000/calculate/getStress1`, this.formData, {
-=======
-        .post(`http://${process.env.VUE_APP_DJANGO_CROSS_URL}/calculate/getStress1`, this.formData, {
->>>>>>> origin/junghyoun
           headers: {
             "Content-Type": "multipart/form-data",
           },
@@ -429,11 +428,7 @@ export default {
                 //일기 저장
                 axios
                   .post(
-<<<<<<< HEAD
                     `http://${this.ipAddress}/Haru/diary/saveDiary`,
-=======
-                    `http://${process.env.VUE_APP_BACK_END_URL}/diary/saveDiary`,
->>>>>>> origin/junghyoun
                     {
                       user_id: this.data.id,
                       diary_title: this.dirayTitle,
@@ -452,11 +447,7 @@ export default {
 
                     // 스트레스 측정 저장
                     axios
-<<<<<<< HEAD
                       .post(`http://${this.ipAddress}/Haru/stress/saveStress`, {
-=======
-                      .post(`http://${process.env.VUE_APP_BACK_END_URL}/stress/saveStress`, {
->>>>>>> origin/junghyoun
                         diaryfigure: this.diaryFigure,
                         facefigure: this.faceFigure,
                         stressscore: this.stressScore,
@@ -470,11 +461,7 @@ export default {
                     // 장소추천 알고리즘 axios
                     axios
                       .post(
-<<<<<<< HEAD
                         `http://${this.ipAddress}/Haru/stress/recommend`,
-=======
-                        `http://${process.env.VUE_APP_BACK_END_URL}/stress/recommend`,
->>>>>>> origin/junghyoun
                         {
                           userid: this.data.id,
                           stresssocre: this.stressScore,
@@ -492,8 +479,14 @@ export default {
                         console.log(recommend);
 
                         // 로컬에 저장
-                        localStorage.setItem("recommendPlace", JSON.stringify(recommend));
-                        localStorage.setItem("stressScore", this.stressScore * 10);
+                        localStorage.setItem(
+                          "recommendPlace",
+                          JSON.stringify(recommend)
+                        );
+                        localStorage.setItem(
+                          "stressScore",
+                          this.stressScore * 10
+                        );
 
                         this.$router.push("/Total_stress");
                       });

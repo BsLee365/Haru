@@ -24,17 +24,6 @@ public class Alarm {
     @SequenceGenerator(name = "ALARM_SEQ", sequenceName = "ALARM_SEQ", allocationSize = 1)
     private Long alarmNum;
 
-<<<<<<< HEAD
-    @OneToOne(cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "qnaNum", referencedColumnName = "qnaNum")
-    private QnA qna;
-
-    @ManyToOne(cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "userId", referencedColumnName = "userId")
-    private Member member;
-
-    @ManyToOne(cascade = CascadeType.PERSIST)
-=======
     @OneToOne
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "qnaNum", referencedColumnName = "qnaNum")
@@ -52,7 +41,6 @@ public class Alarm {
 
     @ManyToOne
     @OnDelete(action = OnDeleteAction.CASCADE)
->>>>>>> origin/junghyoun
     @JoinColumn(name = "commentNum", referencedColumnName = "commentNum")
     private FeedComment feedComment;
 

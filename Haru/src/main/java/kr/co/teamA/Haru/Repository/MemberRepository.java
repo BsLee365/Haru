@@ -35,7 +35,6 @@ public interface MemberRepository extends JpaRepository<Member, String> {
     // 추가함. - 이범석
     Optional<Member> findByUserId(@Param("userId") String userId);
 
-<<<<<<< HEAD
     @Query("SELECT m.userId FROM Member m WHERE m.email = :email")
     String findByMemberId(String email);
 
@@ -55,8 +54,5 @@ public interface MemberRepository extends JpaRepository<Member, String> {
     @Query("UPDATE Member u SET u.nickname= :nickname, u.email= :email, u.name= :name WHERE u.userId = :id")
     void updateByMember(@Param("id") String userId, @Param("nickname") String nickname, @Param("email") String email, @Param("name") String name);
 
-}
-=======
     int countByUserIdIsNotNull();
 }
->>>>>>> origin/junghyoun

@@ -5,6 +5,7 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/Haru.iml" filepath="$PROJECT_DIR$/.idea/Haru.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/Haru.main.iml" filepath="$PROJECT_DIR$/.idea/modules/Haru.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/Haru.test.iml" filepath="$PROJECT_DIR$/.idea/modules/Haru.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/kr.co.teamA.Haru.main.iml" filepath="$PROJECT_DIR$/.idea/modules/kr.co.teamA.Haru.main.iml" />
     </modules>
   </component>
 </project>

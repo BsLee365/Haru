@@ -1,5 +1,6 @@
 package kr.co.teamA.Haru.Service.myPage;
 
+<<<<<<< HEAD
 import java.util.Map;
 
 import org.springframework.stereotype.Service;
@@ -25,10 +26,18 @@ public class MyPageService {
 
     JwtTokenProvider jwtTokenProvider;
 
+=======
+import kr.co.teamA.Haru.security.filter.JwtTokenProvider;
+
+public class MyPageService {
+
+    JwtTokenProvider jwtTokenProvider;
+>>>>>>> yj_base
     public String myPageData(String token) {
         if (jwtTokenProvider.validateToken(token)) {
             return "false";
         }
+<<<<<<< HEAD
         // String data = jwtTokenProvider.getUsername(token);
         // System.out.println(data);
         return "data";
@@ -59,4 +68,11 @@ public class MyPageService {
         }
         return myPageData;
     }
+=======
+//        String data = jwtTokenProvider.getUsername(token);
+//        System.out.println(data);
+        return "data";
+
+    }
+>>>>>>> yj_base
 }

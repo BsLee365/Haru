@@ -19,11 +19,19 @@ public class UserInterestCategory {
     @SequenceGenerator(name = "USERINTERESTCATEGORY_SEQ_", sequenceName = "USERINTERESTCATEGORY_SEQ_", allocationSize = 1)
     private Long interestCategoryNum;
 
+<<<<<<< HEAD
     @ManyToOne
     @JoinColumn(name = "userId")
     private Member userId;
 
     @ManyToOne
+=======
+    @ManyToOne(cascade = CascadeType.REMOVE)
+    @JoinColumn(name = "userId")
+    private Member userId;
+
+    @ManyToOne(cascade = CascadeType.REMOVE)
+>>>>>>> yj_base
     @JoinColumn(name = "mainCategory")
     private MainCategory mainCategory;
 }

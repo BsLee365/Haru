@@ -1,8 +1,11 @@
 package kr.co.teamA.Haru.Entity;
 
+<<<<<<< HEAD
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
+=======
+>>>>>>> yj_base
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -24,8 +27,14 @@ public class FeedHashTag {
 
     private String feedHashTag;
 
+<<<<<<< HEAD
     @ManyToOne
     @JoinColumn(name = "feedNum")
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Feed feedNum;
+=======
+    @ManyToOne(cascade = CascadeType.REMOVE)
+    @JoinColumn(name = "feedNum")
+    private Feed feed_num;
+>>>>>>> yj_base
 }

@@ -9,6 +9,10 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+<<<<<<< HEAD
+=======
+// 비밀번호 재설정을 위한 DTO
+>>>>>>> yj_base
 public class FindUserPwdDTO {
     private String userId;
     private String userName;

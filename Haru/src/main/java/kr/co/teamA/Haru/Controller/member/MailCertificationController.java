@@ -13,7 +13,11 @@ public class MailCertificationController {
 
     @Autowired
     private EmailSenderService emailSenderService;
+<<<<<<< HEAD
 
+=======
+    // 이메일 중복 확인
+>>>>>>> yj_base
     @PostMapping("/emailCheck")
     public int sendEmail(@RequestBody EmailCheckDTO email) {
         int checkEmail = emailSenderService.duplicateEmail(email.getEmail());
@@ -25,6 +29,10 @@ public class MailCertificationController {
             return 1;
         }
     }
+<<<<<<< HEAD
+=======
+    // 이메일 인증번호 확인
+>>>>>>> yj_base
     @PostMapping("/emailCheck/certification")
     public boolean verifyCertificationNumber(@RequestBody EmailCheckDTO dto) {
         return emailSenderService.isVerify(dto.getEmail(), dto.getCode());

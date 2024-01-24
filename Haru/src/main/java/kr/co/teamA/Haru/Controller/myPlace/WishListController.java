@@ -1,5 +1,6 @@
 package kr.co.teamA.Haru.Controller.myPlace;
 
+<<<<<<< HEAD
 import kr.co.teamA.Haru.DTO.WishListDTO;
 import kr.co.teamA.Haru.Entity.WishList;
 import kr.co.teamA.Haru.Service.myPlace.WishListService;
@@ -7,6 +8,15 @@ import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.parameters.P;
 import org.springframework.web.bind.annotation.*;
+=======
+import kr.co.teamA.Haru.Service.myPlace.WishListService;
+import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+>>>>>>> yj_base
 
 import java.util.Map;
 
@@ -18,6 +28,7 @@ public class WishListController {
     @Autowired
     private final WishListService wishListService;
 
+<<<<<<< HEAD
     @PostMapping("/getMyFavoritePlace")
     public Object[] getMyFavoritePlace(@RequestBody Map<String ,String> data) {
         String userId = data.get("id");
@@ -41,6 +52,16 @@ public class WishListController {
         Long wnum = requestBody.get("wishlistnum");
         wishListService.deleteWishPlace(wnum);
     }
+=======
+    // 찜하기
+    @PostMapping("/getMyFavoritePlace")
+    public Object[] getMyFavoritePlace(@RequestBody Map<String ,String> data) {
+        String userId = data.get("id");
+        wishListService.getWishListData(userId);
+
+        return wishListService.getWishListData(userId);
+    }
+>>>>>>> yj_base
 }
 
 

@@ -55,12 +55,20 @@ export default {
     const data = ref([]);
     const myFaboritePlace = ref({});
     const placeData = ref([]);
+<<<<<<< HEAD
 
+=======
+    // 토큰 가져오기
+>>>>>>> yj_base
     const getToken = () => {
       const token = localStorage.getItem("jwtToken");
       isLoggedIn.value = token ? true : false;
     };
+<<<<<<< HEAD
 
+=======
+    // 로그아웃 메서드
+>>>>>>> yj_base
     const logout = () => {
       axios
         .get(`http://${process.env.VUE_APP_BACK_END_URL}/api/auth/logout`)
@@ -71,7 +79,11 @@ export default {
           }
         });
     };
+<<<<<<< HEAD
 
+=======
+    //  토큰 디코딩
+>>>>>>> yj_base
     const decodeToken = (token) => {
       if (token == null) return false;
       const decoded = jwtDecode(token);
@@ -85,6 +97,11 @@ export default {
       decodeToken(token);
       getData();
     });
+<<<<<<< HEAD
+=======
+
+    // 찜한 장소 가져오기
+>>>>>>> yj_base
     const getData = () => {
       const token = localStorage.getItem("jwtToken");
       axios
@@ -111,7 +128,11 @@ export default {
         });
     };
 
+<<<<<<< HEAD
     return { logout, data, getData, placeData }; // Return data in the setup function
+=======
+    return { logout, data, getData, placeData };
+>>>>>>> yj_base
   },
 
   methods: {
@@ -119,6 +140,10 @@ export default {
       var newImage = "type5";
       this.$emit("bgImage", newImage);
     },
+<<<<<<< HEAD
+=======
+    //  토큰 가져오기
+>>>>>>> yj_base
     getToken() {
       this.AccessToken = localStorage.getItem("jwtToken");
       console.log(this.AccessToken);

@@ -1,5 +1,6 @@
 package kr.co.teamA.Haru.Entity;
 
+<<<<<<< HEAD
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
@@ -12,6 +13,9 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
+=======
+import jakarta.persistence.*;
+>>>>>>> yj_base
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -30,6 +34,7 @@ public class Feed {
     @SequenceGenerator(name = "FEED_SEQ_", sequenceName = "FEED_SEQ_", allocationSize = 1)
     private Long feedNum;
 
+<<<<<<< HEAD
     @ManyToOne
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "userId")
@@ -38,6 +43,15 @@ public class Feed {
     @ManyToOne
     @JoinColumn(name = "placeNum")
     private Place placeNum;
+=======
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
+    @JoinColumn(name = "userId")
+    private Member member;
+
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
+    @JoinColumn(name = "placeNum")
+    private Place place;
+>>>>>>> yj_base
 
     @Column(length = 500, nullable = false)
     private String feedContent;
@@ -45,7 +59,15 @@ public class Feed {
     @Column(length = 255, nullable = false)
     private String feedCategory;
 
+<<<<<<< HEAD
     @Column(columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP", insertable = false)
     private String feedCdate;
 
+=======
+    @Column(columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+    private String feedCdate;
+
+    @Column(length = 255)
+    private String feedHashTag;
+>>>>>>> yj_base
 }

@@ -49,7 +49,11 @@ export default {
       const token = localStorage.getItem("jwtToken");
       isLoggedIn.value = token ? true : false;
     };
+<<<<<<< HEAD
 
+=======
+    // 로그아웃 메서드
+>>>>>>> yj_base
     const logout = () => {
       axios
         .get(`http://${process.env.VUE_APP_BACK_END_URL}/api/auth/logout`)
@@ -60,11 +64,19 @@ export default {
           }
         });
     };
+<<<<<<< HEAD
 
     const decodeToken = (token) => {
       if (token == null) return false;
       const decoded = jwtDecode(token);
       data.value = decoded; // Use data.value to set the value of the ref
+=======
+    //  토큰 디코딩
+    const decodeToken = (token) => {
+      if (token == null) return false;
+      const decoded = jwtDecode(token);
+      data.value = decoded;
+>>>>>>> yj_base
       return decoded;
     };
 
@@ -74,22 +86,35 @@ export default {
       decodeToken(token);
     });
 
+<<<<<<< HEAD
     return { logout, data }; // Return data in the setup function
+=======
+    return { logout, data };
+>>>>>>> yj_base
   },
   methods: {
     bgImage() {
       var newImage = "type1";
       this.$emit("bgImage", newImage);
     },
+<<<<<<< HEAD
 
     userConfirmBtn() {
       this.$router.push("/updateMyInfo");
     },
+=======
+    // 개인 정보 수정 화면으로 이동
+    userConfirmBtn() {
+      this.$router.push("/updateMyInfo");
+    },
+    //  비밀번호 확인
+>>>>>>> yj_base
     confirmPwd(event) {
       event.preventDefault();
       const pwd = document.getElementById("password").value;
 
       const data = {
+<<<<<<< HEAD
         userId: this.data.id,
         password: pwd,
       };
@@ -97,6 +122,15 @@ export default {
       axios
         .post(
           `http://${process.env.VUE_APP_BACK_END_URL}/member/userConfirm`,
+=======
+        id: this.data.id,
+        pwd: pwd,
+      };
+      // 비밀번호 확인 API 호출
+      axios
+        .post(
+          `http://${process.env.VUE_APP_BACK_END_URL}/api/auth/login`,
+>>>>>>> yj_base
           data,
           {
             headers: {
@@ -107,7 +141,11 @@ export default {
         )
         .then((res) => {
           console.log(res);
+<<<<<<< HEAD
           if (res.data === 1) {
+=======
+          if (res.data != 0) {
+>>>>>>> yj_base
             this.$router.push("/updateMyInfo");
           } else {
             alert("비밀번호가 일치하지 않습니다.");

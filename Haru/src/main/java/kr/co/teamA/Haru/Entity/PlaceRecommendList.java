@@ -6,8 +6,11 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+<<<<<<< HEAD
 import java.util.Date;
 
+=======
+>>>>>>> yj_base
 @Data
 @Entity
 @NoArgsConstructor
@@ -21,15 +24,27 @@ public class PlaceRecommendList {
     @SequenceGenerator(name = "PLACERECOMMENDLIST_SEQ_", sequenceName = "PLACERECOMMENDLIST_SEQ_", allocationSize = 1)
     private Long recommendNum;
 
+<<<<<<< HEAD
     @ManyToOne
     @JoinColumn(name = "placeNumber")
     private Place place;
 
     @ManyToOne
+=======
+    @ManyToOne(cascade = CascadeType.REMOVE)
+    @JoinColumn(name = "placeNumber")
+    private Place place;
+
+    @ManyToOne(cascade = CascadeType.REMOVE)
+>>>>>>> yj_base
     @JoinColumn(name = "userId")
     private Member member;
 
     @Column(columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+<<<<<<< HEAD
     private Date placeCdate;
+=======
+    private String placeCdate;
+>>>>>>> yj_base
 
 }

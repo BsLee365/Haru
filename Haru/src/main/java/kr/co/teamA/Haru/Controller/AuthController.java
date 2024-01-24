@@ -49,6 +49,11 @@ public class AuthController {
 
     private Member Member;
 
+<<<<<<< HEAD
+=======
+
+    // 아이디 중복 확인
+>>>>>>> yj_base
     @GetMapping("/{userId}/userIdCheck")
     public ResponseEntity<?> duplicationUserIdCheck(@PathVariable String userId) {
         Optional dto = memberRepository.findUserIdById(userId);
@@ -59,6 +64,10 @@ public class AuthController {
         }
     }
 
+<<<<<<< HEAD
+=======
+    // 닉네임 중복 확인
+>>>>>>> yj_base
     @GetMapping("/{nickname}/nicknameCheck")
     public ResponseEntity<?> duplicationNicknameCheck(@PathVariable String nickname) {
         Optional dto = memberRepository.findNicknameByNickname(nickname);
@@ -68,7 +77,11 @@ public class AuthController {
             return ResponseEntity.ok(0);
         }
     }
+<<<<<<< HEAD
 
+=======
+    //  이메일 중복 확인
+>>>>>>> yj_base
     @PostMapping("emailCheck")
     public ResponseEntity<?> emailCheck(@RequestBody EmailCheckDTO dto) {
         int result = memberRepository.findUserEmailByEmail(dto.getEmail());
@@ -80,6 +93,10 @@ public class AuthController {
         }
     }
 
+<<<<<<< HEAD
+=======
+    // 이메일 인증번호 확인
+>>>>>>> yj_base
     @PostMapping("/emailCheck/certification")
     public ResponseEntity<?> certification(@RequestBody EmailCheckDTO dto) {
         boolean result = emailSenderService.isVerify(dto.getEmail(), dto.getCode());
@@ -90,6 +107,10 @@ public class AuthController {
         }
     }
 
+<<<<<<< HEAD
+=======
+    // 회원가입
+>>>>>>> yj_base
     @PostMapping("/signup")
     public ResponseEntity<?> signup(@ModelAttribute MemberDTO dto, @RequestPart("files") List<MultipartFile> files) {
         String imgName = null;
@@ -109,6 +130,10 @@ public class AuthController {
         return ResponseEntity.ok().build();
     }
 
+<<<<<<< HEAD
+=======
+    // 회원정보 수정
+>>>>>>> yj_base
     @PostMapping("/updateMyInfo")
     public ResponseEntity<?> updateMyInfo(@RequestBody MemberDTO dto) {
         System.out.println(dto.getEmail());
@@ -116,10 +141,20 @@ public class AuthController {
         return ResponseEntity.ok(1);
     }
 
+<<<<<<< HEAD
+=======
+    // 로그인
+>>>>>>> yj_base
     @PostMapping("/login")
     public ResponseEntity<?> authenticateUser(
             @RequestBody AuthenticationRequest authenticationRequest) {
 
+<<<<<<< HEAD
+=======
+        System.out.println("login " + authenticationRequest.getId());
+        System.out.println("password : "  + authenticationRequest.getPwd());
+
+>>>>>>> yj_base
         try {
             Authentication authentication = authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(authenticationRequest.getId(),
@@ -128,9 +163,13 @@ public class AuthController {
 
             // 인증 성공 시, SecurityContextHolder에 인증 정보를 설정한다.
             SecurityContextHolder.getContext().setAuthentication(authentication);
+<<<<<<< HEAD
 
             Member member = new Member();
             member.setUserId(authenticationRequest.getId());
+=======
+;
+>>>>>>> yj_base
             String jwt = jwtTokenProvider.createToken(authentication);
             System.out.print("jwt =>"+jwt);
             return ResponseEntity.ok(new AuthenticationResponse(jwt));
@@ -141,6 +180,10 @@ public class AuthController {
 
     }
 
+<<<<<<< HEAD
+=======
+    //  로그아웃
+>>>>>>> yj_base
     @GetMapping("/logout")
     public ResponseEntity<?> logoutUser() {
         // 실제로 JWT 토큰 기반 인증에서 로그아웃은 클라이언트 측에서 토큰을 삭제하는 것으로 처리되지만,
@@ -149,6 +192,10 @@ public class AuthController {
         return ResponseEntity.ok("Logout");
     }
 
+<<<<<<< HEAD
+=======
+    // 아이디 찾기
+>>>>>>> yj_base
     @PostMapping("/findById")
     public ResponseEntity<?> findById(@RequestBody FindUserIdDTO dto) {
         System.out.println(dto.getEmail());
@@ -164,6 +211,10 @@ public class AuthController {
         }
     }
 
+<<<<<<< HEAD
+=======
+    // 비밀번호 찾기
+>>>>>>> yj_base
     @PostMapping("findByPwd")
     public ResponseEntity<?> findByPwd(@RequestBody FindUserPwdDTO dto) {
         System.out.println(dto.getEmail());
@@ -172,13 +223,21 @@ public class AuthController {
 
         if (check == 1) {
             System.out.println("check" + check);
+<<<<<<< HEAD
             emailSenderService.sendFindByIdEmail(dto.getEmail());
+=======
+            emailSenderService.sendFindByPwdEmail(dto.getEmail());
+>>>>>>> yj_base
             return ResponseEntity.ok(1);
         } else {
             return ResponseEntity.ok(0);
         }
     }
 
+<<<<<<< HEAD
+=======
+    // 아이디 찾기 : 이메일 인증번호 확인
+>>>>>>> yj_base
     @PostMapping("/findById/certification")
     public ResponseEntity<?> findByIdCertification(@RequestBody EmailCheckDTO dto) {
         boolean result = emailSenderService.isVerify(dto.getEmail(), dto.getCode());
@@ -191,6 +250,10 @@ public class AuthController {
         }
     }
 
+<<<<<<< HEAD
+=======
+    // 비밀번호 찾기 : 이메일 인증번호 확인
+>>>>>>> yj_base
     @PostMapping("resetPwd")
     public ResponseEntity<?> resetPwd(@RequestBody ResetPwdDTO dto) {
         System.out.println(dto);

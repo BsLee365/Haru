@@ -116,6 +116,7 @@ export default {
     modalOpen: Boolean,
   },
   methods: {
+<<<<<<< HEAD
     findById(event) {
       event.preventDefault();
       const name = document.getElementById("name").value;
@@ -124,14 +125,34 @@ export default {
       this.formData.append("username", name);
       this.formData.append("email", email);
 
+=======
+    // 아이디 찾기 메소드
+    findById(event) {
+      event.preventDefault();
+
+      // 이름, 이메일 값 가져오기
+      const name = document.getElementById("name").value;
+      const email = document.getElementById("email").value;
+
+      // formData에 값 넣기
+      this.formData.append("username", name);
+      this.formData.append("email", email);
+
+      // 이메일 인증번호 전송
+>>>>>>> yj_base
       axios
         .post(
           `http://${process.env.VUE_APP_BACK_END_URL}/api/auth/findById`,
           this.formData,
           {
             headers: {
+<<<<<<< HEAD
               "Content-Type": "application/json", // 요청의 미디어 타입
               Accept: "application/json", // 서버에서 지원하는 미디어 타입
+=======
+              "Content-Type": "application/json",
+              Accept: "application/json",
+>>>>>>> yj_base
             },
           }
         )
@@ -143,6 +164,11 @@ export default {
           }
         });
     },
+<<<<<<< HEAD
+=======
+
+    // 인증번호 확인 메소드
+>>>>>>> yj_base
     submit(event) {
       event.preventDefault();
       const code = document.getElementById("emailCheck").value;

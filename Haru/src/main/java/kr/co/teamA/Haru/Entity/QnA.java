@@ -23,7 +23,11 @@ public class QnA {
     private Long QNANUM;
 
 
+<<<<<<< HEAD
     @ManyToOne
+=======
+    @ManyToOne(cascade = CascadeType.REMOVE)
+>>>>>>> yj_base
     @JoinColumn(name = "userId", referencedColumnName = "userId")
     private Member member;
 

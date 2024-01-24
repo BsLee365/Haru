@@ -52,15 +52,27 @@ export default {
       var newImage = "type1";
       this.$emit("bgImage", newImage);
     },
+<<<<<<< HEAD
+=======
+    // localStorage에 userId가 있는지 확인
+>>>>>>> yj_base
     checkTokenUserId() {
       if (localStorage.getItem("userId") === null) {
         this.$router.push("/login");
       }
     },
 
+<<<<<<< HEAD
     userConfirmBtn() {
       this.$router.push("/updateMyInfo");
     },
+=======
+    // 회원정보 수정 화면으로 이동
+    userConfirmBtn() {
+      this.$router.push("/updateMyInfo");
+    },
+    // 비밀번호 재설정
+>>>>>>> yj_base
     resetPwd() {
       const pwd = document.getElementById("password").value;
       const pwdCheck = document.getElementById("password-check").value;
@@ -87,15 +99,27 @@ export default {
           "none";
       }
 
+<<<<<<< HEAD
+=======
+      // FormData에 값 초기화
+>>>>>>> yj_base
       this.formData = new FormData();
 
       const userId = localStorage.getItem("userId");
 
+<<<<<<< HEAD
       this.formData.append("id", userId);
       this.formData.append("pwd", pwd);
 
       console.log(this.formData.get("userId"));
 
+=======
+      // FormData에 값 추가
+      this.formData.append("id", userId);
+      this.formData.append("pwd", pwd);
+
+      // 비밀번호 재설정 API 호출
+>>>>>>> yj_base
       axios
         .post(
           `http://${process.env.VUE_APP_BACK_END_URL}/api/auth/resetPwd`,

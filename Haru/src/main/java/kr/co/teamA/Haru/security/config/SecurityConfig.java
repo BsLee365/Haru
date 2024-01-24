@@ -25,6 +25,7 @@ import java.util.List;
 @EnableWebSecurity
 @Configuration
 public class SecurityConfig {
+<<<<<<< HEAD
     // JWT 토큰을 검증하는 필터
 
     @Value("${server-port-local-url}")
@@ -48,17 +49,56 @@ public class SecurityConfig {
     }
 
     @Bean // 사용자 비밀번호 안전하게 저장하기 위해
+=======
+
+    // 로컬에서 실행시 포트번호
+    @Value("${server-port-local-url}")
+    private String serverPortLocalUrl;
+
+    // 서버에서 실행시 포트번호
+    @Value("${server-port-url}")
+    private String serverPortUrl;
+
+    // JWT 토큰 필터
+    @Autowired
+    private JwtTokenFilter jwtAuthenticationFilter;
+
+    // 유저 정보
+    @Autowired
+    private UserDetailsService userDetailsService;
+
+    // 유저 정보를 가져오는 메소드
+    @Bean
+    public DaoAuthenticationProvider daoAuthenticationProvider() {
+        DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
+        provider.setUserDetailsService(userDetailsService);
+        provider.setPasswordEncoder(passwordEncoder());
+        return provider;
+    }
+
+    // 비밀번호 암호화
+    @Bean
+>>>>>>> yj_base
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
+<<<<<<< HEAD
     @Bean // Spring Security의 AuthenticationManager를 빈으로 등록
     // 인증(authentication)을 관리
+=======
+    // 토큰 인증 매니저
+    @Bean
+>>>>>>> yj_base
     AuthenticationManager authenticationManager(
             AuthenticationConfiguration authenticationConfiguration) throws Exception {
         return authenticationConfiguration.getAuthenticationManager();
     }
 
+<<<<<<< HEAD
+=======
+    // 보안 필터 체인
+>>>>>>> yj_base
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
@@ -74,6 +114,10 @@ public class SecurityConfig {
                 .logout((logout) -> logout.disable());
         return http.build();
     }
+<<<<<<< HEAD
+=======
+    // CORS 설정
+>>>>>>> yj_base
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration corsConfiguration = new CorsConfiguration();

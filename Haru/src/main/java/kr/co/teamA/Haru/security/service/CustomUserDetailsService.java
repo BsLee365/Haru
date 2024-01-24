@@ -15,6 +15,10 @@ public class CustomUserDetailsService implements UserDetailsService {
     @Autowired
     private MemberRepository memberRepository;
 
+<<<<<<< HEAD
+=======
+    // 유저 정보를 가져오는 메소드
+>>>>>>> yj_base
     @Override
     public UserDetails loadUserByUsername(String userId) throws UsernameNotFoundException {
         System.out.println("loadUserByUsername ----------------------");

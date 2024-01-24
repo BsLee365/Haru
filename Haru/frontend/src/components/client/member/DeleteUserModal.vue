@@ -67,7 +67,11 @@ export default {
     userId: String,
   },
   methods: {
+<<<<<<< HEAD
     // 탈퇴하기
+=======
+    // 탈퇴하기 메소드
+>>>>>>> yj_base
     deleteUser() {
       const userId = document.getElementById("delete-id").value;
       if (userId == this.userId) {
@@ -76,9 +80,16 @@ export default {
             `http://${process.env.VUE_APP_BACK_END_URL}/member/delete/${userId}`
           )
           .then((res) => {
+<<<<<<< HEAD
             if (res == 1) {
               localStorage.removeItem("jwtToken");
               window.location.href = "/login";
+=======
+            console.log(res);
+            if (res.data == 1) {
+              localStorage.removeItem("jwtToken");
+              this.$router.push("/login");
+>>>>>>> yj_base
             }
           });
       } else {

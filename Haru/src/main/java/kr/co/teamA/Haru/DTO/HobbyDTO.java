@@ -7,6 +7,10 @@ import lombok.*;
 @NoArgsConstructor
 @Builder
 @AllArgsConstructor
+<<<<<<< HEAD
+=======
+// 관심사를 위한 DTO
+>>>>>>> yj_base
 public class HobbyDTO {
     private Long interestCategoryNum;
     private String mainCategory;

@@ -25,7 +25,11 @@ public class Place {
     @Column(length = 255, nullable = false)
     private String placeAddress;
 
+<<<<<<< HEAD
     @ManyToOne
+=======
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
+>>>>>>> yj_base
     @JoinColumn(name = "subCategory")
     private SubCategory subCategory;
 

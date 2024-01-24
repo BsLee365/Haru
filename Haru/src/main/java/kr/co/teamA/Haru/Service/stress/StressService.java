@@ -166,32 +166,42 @@ public class StressService {
     }
 
     // 스트레스 추이 서비스
-    public List<StressDataDTO> getStressData(String userId, List<String> date){
-        System.out.println("스트레스 조회 비즈니스 로직 1");
-        System.out.println(date.get(0) + " " + date.get(1));
+    public List<StressDataDTO> getStressData(String userId, List<Object> list, String flag){
+        System.out.println("스트레스 조회 비즈니스 로직");
 
-        List<StressDataDTO> list = stressDataRepository.getStressData(userId, date.get(0), date.get(1));
+        String oneday = (String)list.get(0);
+        List<String> days = (List<String>) list.get(1);
+        List<String> month = (List<String>)list.get(2);
+        String selectYear = (String)list.get(3);
 
-        if(!list.isEmpty()){
-            for (StressDataDTO li : list){
-                System.out.println("날짜 : " + li.getStressCdate() + " " + li.getStressScore());
-            }
-            return list;
+        System.out.println(oneday);
+        System.out.println(days);
+        System.out.println(month);
+        System.out.println(selectYear);
+
+        System.out.println("플래그" + flag); //day, days, month, year
+
+        if(flag.equals("day")){
+            return stressDataRepository.getStressDatabyDay(userId, oneday, oneday);
         }
-        return null;
-    }
-    public List<StressDataDTO> getStressData(String userId, String date){
-        System.out.println("스트레스 조회 비즈니스 로직 2");
-
-        List<StressDataDTO> list = stressDataRepository.getStressData(userId, date, date);
-
-        if(!list.isEmpty()){
-            for (StressDataDTO li : list){
-                System.out.println("날짜 : " + li.getStressCdate() + " " + li.getStressScore());
-            }
-            return list;
+        else if(flag.equals("days")){
+            return stressDataRepository.getStressDatabyDay(userId, days.get(0), days.get(1));
         }
-        return null;
+        else if(flag.equals("month")){
+            return stressDataRepository.getStressDatabyMonth(userId, month.get(0), month.get(1));
+        }
+        else if(flag.equals("year")){
+            return stressDataRepository.getStressDatabyYear(userId, selectYear);
+        }
+        else {
+            return null;
+        }
+
+//        stressDataRepository.getStressDatabyDay();
+//        stressDataRepository.getStressDatabyDays();
+//        stressDataRepository.getStressDatabyMonth();
+//        stressDataRepository.getStressDatabyYear();
+
     }
 
 }

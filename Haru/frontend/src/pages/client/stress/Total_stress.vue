@@ -25,7 +25,9 @@
         <div class="stress-area">
           <div class="result-comment">
             이범석님의 스트레스 수치는
-            <span class="badge rounded-pill bg-danger custom-bedge">정상</span>
+            <span class="badge rounded-pill bg-danger custom-bedge" v-show="stressRate <= 60">정상</span>
+            <span class="badge rounded-pill bg-danger custom-bedge" v-show="61 <= stressRate && stressRate <= 80">주의</span>
+            <span class="badge rounded-pill bg-danger custom-bedge" v-show="81 <= stressRate ">심각</span>
             입니다.
           </div>
           <!-- 스트레스 수치 바 시작 -->
@@ -223,7 +225,7 @@ export default {
   },
   mounted() {
     let currentWidth = 0;
-    const targetWidth = this.stressScore; // 목표 값 추후 변경
+    const targetWidth = this.stressScore; // 목표 값
     this.stressRate = targetWidth;
 
     const animationDuration = 5000;
@@ -233,20 +235,20 @@ export default {
 
     const animate = () => {
       if (currentWidth < targetWidth) {
-        currentWidth += step;
+        currentWidth += step+0.2;
         this.gaugeWidth = currentWidth + "%";
         this.stressRate = Math.round(currentWidth);
         requestAnimationFrame(animate);
       } else {
-        this.gaugeWidth = targetWidth + "%"; // 애니메이션이 완료되면 정확한 값으로 설정
-        this.stressRate = targetWidth.toFixed(1);
+        this.gaugeWidth =targetWidth + "%"; // 애니메이션이 완료되면 정확한 값으로 설정
+        this.stressRate = Number(targetWidth).toFixed(2);
       }
     };
     animate();
 
     // 로컬 스토리지 삭제
-    localStorage.removeItem("recommendPlace");
-    localStorage.removeItem("stressScore");
+    // localStorage.removeItem("recommendPlace");
+    // localStorage.removeItem("stressScore");
 
   },
 };

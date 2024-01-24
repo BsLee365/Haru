@@ -13,13 +13,7 @@ public class DiaryController {
 
     // 일기 저장.
     @PostMapping("/saveDiary")
-<<<<<<< HEAD
     public DiaryDTO saveDiary(@RequestBody DiaryDTO diary){
-=======
-        public DiaryDTO saveDiary(@RequestBody DiaryDTO diary){
-        System.out.println("다이어리 컨트롤러 실행");
-        System.out.println(diary.toString());
->>>>>>> origin/BeomSeok_ori
         diaryService.saveDiary(diary);
         return diary;
     }

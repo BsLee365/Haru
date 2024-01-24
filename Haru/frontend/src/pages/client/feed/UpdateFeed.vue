@@ -251,8 +251,8 @@ export default {
         for (var i = 0; i < res.data.feedImg.length; i++) {
           this.imageList.push(res.data.feedImg[i].feed_img);
           this.originImage.push(res.data.feedImg[i].feed_img);
-          this.previewImageUrls.push(require("@/img/Feed/" + res.data.feedImg[i].feed_img));
-          this.originImagePreview.push(require("@/img/Feed/" + res.data.feedImg[i].feed_img));
+          this.previewImageUrls.push(require("E:/git/final/Haru/Haru/src/main/resources/static/img/Feed/" + res.data.feedImg[i].feed_img));
+          this.originImagePreview.push(require("E:/git/final/Haru/Haru/src/main/resources/static/img/Feed/" + res.data.feedImg[i].feed_img));
           this.imageNameList.push(res.data.feedImg[i].feed_img);
         }
         for (var j = 0; j < res.data.feedHashTag.length; j++) {

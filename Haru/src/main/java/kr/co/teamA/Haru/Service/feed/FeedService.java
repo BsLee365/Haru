@@ -132,7 +132,6 @@ public class FeedService {
         Member member = memberRepository.findMemberByuserId((String) data.get("userId"));
         Place place = placeRepository.findByPlaceNum(Long.parseLong((String) data.get("placeNum")));
         System.out.println(data.get("hashTag"));
-        Object hashtag = data.get("hashTag");
 
         Feed feed = Feed.builder()
                 .member(member)
@@ -211,17 +210,19 @@ public class FeedService {
         feedRepository.delete(feed);
     }
 
-    public Map<String, Object> getMyFeedList(String nickname) {
+    public Map<String, Object> getMyFeedList(String nickname, String userId) {
         List<Feed> feed = feedRepository.findByMember_Nickname(nickname);
         List<FeedComment> feedComment = new ArrayList<>();
         List<FeedHashTag> feedHashTag = new ArrayList<>();
         List<FeedImg> feedImg = new ArrayList<>();
         List<Integer> feedLike = new ArrayList<>();
+        List<Like> myFeedLikes = new ArrayList<>();
         for (Feed f : feed) {
             feedComment.addAll(feedCommentRepository.findByFeedNum_FeedNum(f.getFeedNum()));
             feedHashTag.addAll(feedHashTagRepository.findByFeedNum_FeedNum(f.getFeedNum()));
             feedImg.addAll(feedImgRepository.findByFeedNum_FeedNum(f.getFeedNum()));
             feedLike.add(feedLikeRepository.countByFeedNum_FeedNum(f.getFeedNum()));
+            myFeedLikes.addAll(feedLikeRepository.findByFeedLikeBy_UserId(userId));
         }
         Map<String, Object> feedList = new HashMap<String, Object>();
 
@@ -230,6 +231,7 @@ public class FeedService {
         feedList.put("feedHashTag", feedHashTag);
         feedList.put("feedImg", feedImg);
         feedList.put("feedLike", feedLike);
+        feedList.put("myFeedLikes", myFeedLikes);
 
         return feedList;
     }

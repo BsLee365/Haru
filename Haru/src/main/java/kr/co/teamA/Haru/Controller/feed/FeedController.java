@@ -127,9 +127,9 @@ public class FeedController {
     }
 
     @PostMapping("/myFeedList")
-    public Map<String, Object> myFeedList(@RequestParam("nickname") String nickname) {
+    public Map<String, Object> myFeedList(@RequestParam("nickname") String nickname, @RequestParam("userId") String userId) {
 
-        Map<String, Object> myFeedList = feedService.getMyFeedList(nickname);
+        Map<String, Object> myFeedList = feedService.getMyFeedList(nickname, userId);
 
         return myFeedList;
     }

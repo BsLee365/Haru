@@ -130,7 +130,6 @@
         </div>
       </div>
     </div>
-    <ChatBot />
   </div>
 </template>
 <script>
@@ -138,7 +137,6 @@ import axios from "axios";
 import { ref, onMounted } from "vue";
 import { jwtDecode } from "jwt-decode";
 import UpdateProfileImgModal from "@/components/client/member/UpdateProfileImgModal.vue";
-import ChatBot from "@/components/client/layout/ChatBot.vue";
 
 export default {
   name: "MyPage",
@@ -165,7 +163,6 @@ export default {
   },
   components: {
     UpdateProfileImgModal,
-    ChatBot,
   },
   methods: {
     // 해당 화면 Background 이미지 설정

@@ -216,8 +216,8 @@ export default {
 			const search = document.querySelector(".hashtag-search-input").value;
 			this.searchKeyword = search;
 			if (search === "") {
-				alert("검색어를 입력해주세요");
-				return false;
+				// alert("검색어를 입력해주세요");
+				// return false;
 			} else {
 				axios.post(`http://${process.env.VUE_APP_BACK_END_URL}/feedList`, formData).then((res) => {
 					const data = res.data;

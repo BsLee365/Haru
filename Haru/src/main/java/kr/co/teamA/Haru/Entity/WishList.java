@@ -13,7 +13,6 @@ import lombok.NoArgsConstructor;
 @Builder
 @Table(name = "WISHLIST")
 public class WishList {
-
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "WISHLIST_SEQ_")
     @SequenceGenerator(name = "WISHLIST_SEQ_", sequenceName = "WISHLIST_SEQ_", allocationSize = 1)

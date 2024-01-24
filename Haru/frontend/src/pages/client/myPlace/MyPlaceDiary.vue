@@ -69,7 +69,8 @@
 
         <!-- 컴포넌트로 토글되는 영역 (추천리스트, 일기 리스트) -->
         <div class="tab-content-area">
-          <RecommendList
+          <RecommendListC
+            @update-all-rec-list="updateAllListMain"
             :AllRecList="RecPlace"
             :sendSelectedDate="sendSelectedDate"
             :isBtnHeartNone="isBtnHeartNone"
@@ -92,7 +93,7 @@
 </template>
 
 <script>
-import RecommendList from "@/components/client/myPlace/RecommendList.vue";
+import RecommendListC from "@/components/client/myPlace/RecommendList.vue";
 import MyDiaryList from "@/components/client/myPlace/MyDiaryList.vue";
 import moment from "moment";
 import { onMounted, ref } from "vue";
@@ -130,6 +131,11 @@ export default {
   mounted() {
     this.calendarImplementation();
     this.getMyRecPlace(this.sDate);
+    this.dayClick(3, this.sDate[2]);
+    console.log('오늘 ' + this.sDate);
+  },
+  beforeCreate() {
+
   },
   created() {
     // 페이지가 로드될 때 초기 이미지 설정
@@ -173,6 +179,48 @@ export default {
     return { logout, data }; // Return data in the setup function
   },
   methods: {
+    // 찜 선택 시 업데이트 ----------------------------------------------------------------------
+    // updateAllRecList(resData, allData) {
+      // var jsonlist = {
+      //   place: allData.place,
+      //   recList: allData.recList,
+      //   wishList: resData
+      // };
+      // this.RecPlace.push(jsonlist);
+      // place", "recList", "wishList
+      // console.log('place : ' + allData.place);
+      // console.log('recList : ' + allData.recList);
+      // console.log('resData : ' + resData);
+
+      // console.log(resData);
+    // },
+
+    // updateAllRecList() {
+    //   this.getMyRecPlace();
+    //   this.RecommendList.forEach((item) => {
+        // console.log(item.place_recommend_list.place_cdate);
+        // 가져온 데이터
+        // const placeCdate = moment(item.place_recommend_list.place_cdate).format("YYYY-MM-DD");
+        // 선택한 날짜
+        // var selectedDate = moment([this.sDate[0], this.sDate[1], this.sDate[2]]).format(
+        //     "YYYY-MM-DD"
+        // );
+        // console.log(placeCdate + " / selectedDate : " + selectedDate);
+
+        // 날짜가 같은거만 리스트로 출력
+        // if (placeCdate.includes(selectedDate)) {
+        // if (placeCdate == selectedDate) {
+          // console.log(item);
+      //     var jsonlist = {
+      //       place: item.place,
+      //       recList: item.place_recommend_list,
+      //       wishList: item.wish_list
+      //     };
+      //     this.RecPlace.push(jsonlist);
+      //   }
+      // });
+
+    // },
     closeModal() {
       this.modal_Check = false;
     },
@@ -249,7 +297,7 @@ export default {
       // 시작날부터 마지막 날까지 채우기
       const basicDays = Array.from(
         { length: endDayOfTheMonth },
-        (v, i) => i + 1
+        (v, ii) => ii + 1
       );
 
       // 전달의 마지막 날 가져오기
@@ -332,7 +380,7 @@ export default {
       return indexDay == today.format("YYYY-MM-DD");
     },
     // 선택됐는지 확인해서 css 적용 ----------------------------------------------------------------
-    isSelected(i, day) {
+    isSelected(sIdx, day) {
       // 선택한 날짜
       var sdate = moment([this.sDate[0], this.sDate[1], this.sDate[2]]).format(
         "YYYY-MM-DD"
@@ -347,7 +395,7 @@ export default {
       // 화면 최초 진입 시 오늘 날짜면 오늘 날짜에 표시
       if (this.isToday(day) && sdate && !this.isSelectedtoday) {
         return true;
-      } else if (sdate == nowdate && i == this.sDate[3]) {
+      } else if (sdate == nowdate && sIdx == this.sDate[3]) {
         return true;
       }
       return false;
@@ -355,7 +403,7 @@ export default {
 
     // 날짜 클릭했을 때---------------------------------------------------------------------------------
     dayClick(i, day) {
-      // console.log('!!!! : ' + i + day);
+      console.log('!!!! : ' + i + day);
       // 한 번 클릭된 이후엔 오늘 날짜 자동으로 선택 안되게
       if (this.isSelectedtoday == false)
         this.isSelectedtoday = !this.isSelectedtoday;
@@ -381,7 +429,7 @@ export default {
         // 현재 Month의 다른 날짜 선택 시
         this.sDate = [this.myDate[0], this.myDate[1], day, i];
       }
-
+      console.log(this.sDate)
       // 선택한 일자에 해당하는 추천리스트, 일기 목록 담는 배열
       this.RecPlace = []; // 배열 초기화
       this.FinMyDiaryList = [];
@@ -453,10 +501,10 @@ export default {
     },
 
     // 이전달, 다음달 날짜면 회색 처리
-    isPrevNextDay(i, index) {
+    isPrevNextDay(i2, index) {
       return (
-        (i == 0 && index > this.days[i][this.days[i].length - 1]) ||
-        (i == this.days.length - 1 && index < 7)
+        (i2 == 0 && index > this.days[i2][this.days[i2].length - 1]) ||
+        (i2 == this.days.length - 1 && index < 7)
       );
     },
 
@@ -470,7 +518,7 @@ export default {
     }
   },
   components: {
-    RecommendList,
+    RecommendListC,
     MyDiaryList,
   },
 };

@@ -19,6 +19,7 @@ public interface PlaceRecommendListRepository extends JpaRepository<PlaceRecomme
             "left join WishList w on p.placeNum = w.place.placeNum " +
             "left join PlaceRecommendList rl on p.placeNum=rl.place.placeNum " +
             "where rl.member.userId=:userId " +
-            "and rl.placeCdate between :startDate and :endDate ")
+            "and rl.placeCdate between :startDate and :endDate " +
+            "order by rl.placeCdate ")
     List<ShowMyRecommendPlaceDTO> getMyRecommendPlace(@Param("userId") String userId, @Param("startDate") Date startDate, @Param("endDate") Date endDate);
 }

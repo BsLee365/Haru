@@ -1,7 +1,7 @@
 package kr.co.teamA.Haru.Service.myPlace;
 
 import kr.co.teamA.Haru.DTO.DiaryDTO;
-import kr.co.teamA.Haru.DTO.GetRecommendList;
+import kr.co.teamA.Haru.DTO.GetRecommendListDTO;
 import kr.co.teamA.Haru.DTO.RecommendItemsDTO;
 import kr.co.teamA.Haru.DTO.ShowMyRecommendPlaceDTO;
 import kr.co.teamA.Haru.Repository.DiaryRepository;
@@ -38,7 +38,7 @@ public class PlaceRecommendListService {
 
     // 추천 리스트 항목 가져오기
     @Transactional
-    public RecommendItemsDTO getRecommendList(GetRecommendList getRecommendListDto) {
+    public RecommendItemsDTO getRecommendList(GetRecommendListDTO getRecommendListDto) {
         Date startDate = ReturnDate(getRecommendListDto.getStartdate());
         Date endDate = ReturnDate(getRecommendListDto.getEnddate());
 
@@ -47,7 +47,7 @@ public class PlaceRecommendListService {
         List<ShowMyRecommendPlaceDTO> recList = placeRecListRepository.getMyRecommendPlace(getRecommendListDto.getUserid(), startDate, endDate);
         List<DiaryDTO> diaryList = diaryRepository.getMyDiaryList(getRecommendListDto.getUserid(), startDate, endDate);
 
-        System.out.println("recList : " + recList);
+//        System.out.println("recList : " + recList);
         recItemDto.setRec_list(recList);
         recItemDto.setDiary_list(diaryList);
 

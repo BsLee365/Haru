@@ -37,4 +37,11 @@ public class WishListController {
         Long wnum = requestBody.get("wishlistnum");
         wishListService.deleteWishPlace(wnum);
     }
+
+    // 찜 목록 삭제 -> place num으로 - 이리수
+    @PostMapping("/deleteWishByPlaceNum")
+    public void deleteWishByPlaceNum(@RequestBody Map<String, Long> requestBody) {
+        Long pnum = requestBody.get("place_num");
+        wishListService.deleteWishByPlaceNum(pnum);
+    }
 }

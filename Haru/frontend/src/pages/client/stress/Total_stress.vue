@@ -119,27 +119,20 @@
 <!--                  src="@/img/Total_stress/img/image 47.png"-->
 <!--                />-->
                   <img class="heart-img cursor-p"
-                       src="@/img/Feed/heart.png"
-                       @click="toggleWish(item.place_num)"
-                       v-if="isInWishList(item)"
-                  />
-
-                  <img class="heart-img cursor-p"
-                       src="@/img/Total_stress/img/image 47.png"
+                       :src="isInWishList(item) ? existImage : noImage"
                        @click="toggleWish(item)"
-                       v-else
                   />
 
                 <!-- 장소 이미지 없는 경우 -->
                 <img
                     v-show="item.place_img === null"
-                    :src="@/img/Total_stress/img/no_img.png"
+                    src="@/img/Total_stress/img/no_img.png"
                     alt="no_image"
                     class="place-card"
                 />
                 <!-- 장소 이미지 있는 경우 -->
                 <img
-                    v-show="item.place_img != null"
+                  v-show="item.place_img != null"
                   :src="item.place_img"
                   alt="no_image"
                   class="place-card"
@@ -189,6 +182,10 @@
   </div>
 </template>
 <script>
+import axios from "axios";
+import {onMounted, ref} from "vue";
+import {jwtDecode} from "jwt-decode";
+
 export default {
   name: "total_stress",
   data() {
@@ -205,6 +202,10 @@ export default {
 
       // 찜 목록
       selectedWishList : [],
+
+      // 이미지
+      noImage : require("@/img/Total_stress/img/image 47.png"),
+      existImage: require("@/img/Total_stress/img/total_stress_heart.png"),
 
     };
   },
@@ -243,12 +244,47 @@ export default {
     },
     // 찜 기능 토글
     toggleWish(item) {
-      console.log('찜기능에 넣을 place : ' + item.place_num);
+      // console.log('찜기능에 넣을 place : ' + item.place_num);
+
+      if (this.selectedWishList.indexOf(item.place_num) < 0) {
+        this.selectedWishList.push(item.place_num);
+        // console.log('추가함 ! : ' + this.selectedWishList);
+
+        axios.post(`http://${process.env.VUE_APP_BACK_END_URL}/wishList/addWishPlace`, {
+          userid: this.data.id,
+          place: item
+        })
+            .then(() => {
+              // console.log(res.data);
+            })
+            .catch(err => {
+              console.log('등록 에러 ' + err);
+            })
+
+      } else {
+        this.selectedWishList.splice(this.selectedWishList.indexOf(item.place_num), 1);
+        // console.log('잘라냄 ! : ' + this.selectedWishList);
+
+        axios.post(`http://${process.env.VUE_APP_BACK_END_URL}/wishList/deleteWishByPlaceNum`,{
+          place_num: item.place_num
+        })
+            .then(() => {
+              console.log('삭제됨');
+              // this.$emit('update-all-rec-list');
+            })
+            .catch(err => {
+              console.log('삭제 에러 ' + err);
+            })
+
+      }
     },
+
+    // 화면에 띄우기 용
     isInWishList(item) {
       if (this.selectedWishList.indexOf(item.place_num) < 0) {
-        console.log('리스트에 없음');
+        return false;
       }
+      return true;
     }
   },
   mounted() {
@@ -278,6 +314,41 @@ export default {
     // localStorage.removeItem("recommendPlace");
     // localStorage.removeItem("stressScore");
 
+  },
+  setup() {
+    const isLoggedIn = ref(false);
+    const data = ref([]);
+
+    const getToken = () => {
+      const token = localStorage.getItem("jwtToken");
+      isLoggedIn.value = token ? true : false;
+    };
+
+    const logout = () => {
+      axios
+          .get(`http://${process.env.VUE_APP_BACK_END_URL}/api/auth/logout`)
+          .then((res) => {
+            if (res.data == "Logout") {
+              localStorage.removeItem("jwtToken");
+              window.location.href = "/login";
+            }
+          });
+    };
+
+    const decodeToken = (token) => {
+      if (token == null) return false;
+      const decoded = jwtDecode(token);
+      data.value = decoded; // Use data.value to set the value of the ref
+      return decoded;
+    };
+
+    onMounted(() => {
+      getToken();
+      const token = localStorage.getItem("jwtToken");
+      decodeToken(token);
+    });
+
+    return { logout, data }; // Return data in the setup function
   },
 };
 </script>

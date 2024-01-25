@@ -38,9 +38,9 @@ public class FeedService {
     public final AlarmRepository alarmRepository;
 
     public FeedService(FeedRepository feedRepository, FeedCommentRepository feedCommentRepository,
-                       FeedHashTagRepository feedHashTagRepository, FeedImgRepository feedImgRepository,
-                       FeedLikeRepository feedLikeRepository, MemberRepository memberRepository, PlaceRepository placeRepository,
-                       AlarmRepository alarmRepository) {
+            FeedHashTagRepository feedHashTagRepository, FeedImgRepository feedImgRepository,
+            FeedLikeRepository feedLikeRepository, MemberRepository memberRepository, PlaceRepository placeRepository,
+            AlarmRepository alarmRepository) {
         this.feedRepository = feedRepository;
         this.feedCommentRepository = feedCommentRepository;
         this.feedHashTagRepository = feedHashTagRepository;

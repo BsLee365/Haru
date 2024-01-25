@@ -8,6 +8,9 @@ import lombok.NoArgsConstructor;
 
 import java.sql.Date;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 
 @Data
 @Entity
@@ -23,7 +26,8 @@ public class QnA {
     private Long QNANUM;
 
 
-    @ManyToOne(cascade = CascadeType.REMOVE)
+    @ManyToOne
+    @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "userId", referencedColumnName = "userId")
     private Member member;
 

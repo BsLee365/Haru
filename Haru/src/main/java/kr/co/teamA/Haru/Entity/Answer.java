@@ -8,6 +8,9 @@ import lombok.NoArgsConstructor;
 
 import java.sql.Date;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 @Data
 @Entity
 @NoArgsConstructor
@@ -21,7 +24,8 @@ public class Answer {
     @SequenceGenerator(name = "ANSWER_SEQ", sequenceName = "ANSWER_SEQ_SEQ", allocationSize = 1)
     private Long answerNum;
 
-    @ManyToOne(cascade = CascadeType.REMOVE)
+    @ManyToOne
+    @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "qnaNum", referencedColumnName = "qnaNum")
     private QnA qnaNum;
 
@@ -31,7 +35,8 @@ public class Answer {
     @Column(nullable = false)
     private Date answerCdate;
 
-    @ManyToOne(cascade = CascadeType.REMOVE)
+    @ManyToOne
+    @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "adminId", referencedColumnName = "adminId")
     private ADMIN adminId;
 

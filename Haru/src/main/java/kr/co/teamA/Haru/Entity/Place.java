@@ -1,5 +1,8 @@
 package kr.co.teamA.Haru.Entity;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -25,7 +28,8 @@ public class Place {
     @Column(length = 255, nullable = false)
     private String placeAddress;
 
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
+    @ManyToOne
+    @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "subCategory")
     private SubCategory subCategory;
 

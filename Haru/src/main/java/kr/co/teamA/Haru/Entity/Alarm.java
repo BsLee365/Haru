@@ -1,6 +1,5 @@
 package kr.co.teamA.Haru.Entity;
 
-
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
@@ -46,5 +45,5 @@ public class Alarm {
     private Long alarmTypes;
 
     @Column(columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP", insertable = false)
-    private Date alarmCdate;
+    private String alarmCdate;
 }

@@ -5,13 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6d0870f0-66eb-40b4-a5ab-e66ef439dd61" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Haru/frontend/src/img/Total_stress/img/no-image.jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Haru/frontend/src/components/client/myPlace/RecommendList.vue" beforeDir="false" afterPath="$PROJECT_DIR$/Haru/frontend/src/components/client/myPlace/RecommendList.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Haru/frontend/src/pages/client/stress/Total_stress.vue" beforeDir="false" afterPath="$PROJECT_DIR$/Haru/frontend/src/pages/client/stress/Total_stress.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Haru/src/main/java/kr/co/teamA/Haru/Controller/myPlace/WishListController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Haru/src/main/java/kr/co/teamA/Haru/Controller/myPlace/WishListController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Haru/src/main/java/kr/co/teamA/Haru/Repository/WishListRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/Haru/src/main/java/kr/co/teamA/Haru/Repository/WishListRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Haru/src/main/java/kr/co/teamA/Haru/Service/myPlace/WishListService.java" beforeDir="false" afterPath="$PROJECT_DIR$/Haru/src/main/java/kr/co/teamA/Haru/Service/myPlace/WishListService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Haru/frontend/src/pages/client/myPlace/MyFavoritePlace.vue" beforeDir="false" afterPath="$PROJECT_DIR$/Haru/frontend/src/pages/client/myPlace/MyFavoritePlace.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

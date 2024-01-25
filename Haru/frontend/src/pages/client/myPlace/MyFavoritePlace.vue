@@ -12,15 +12,17 @@
           :key="idx"
         >
 <!--          {{item}}-->
-          <div class="'food-img">
-<!--            <img class="heart-img" src="@/img/Total_stress/img/image 47.png" />-->
-
+          <div class="food-img">
             <img class="heart-img cursor-p"
                  :src="existImage"
                  @click="toggleWish(item[0], item[3])"
             />
 
-            <img :src="item[1]" alt="" class="place-card" />
+            <a :href="getPlaceLink(item[2])">
+              <img v-if="item[1] != null" :src="item[1]" alt="" class="place-card" />
+              <img v-else src="@/img/Total_stress/img/no-image.jpg" class="place-card" alt=""/>
+            </a>
+
           </div>
           <div class="food-desc">
             <div class="food-desc-box">
@@ -161,6 +163,10 @@ export default {
             console.log('삭제 에러 ' + err);
           })
     },
+    getPlaceLink(link) {
+      var mylink = link.split("/");
+      console.log(mylink[mylink.length-1]);
+    }
   },
 };
 </script>

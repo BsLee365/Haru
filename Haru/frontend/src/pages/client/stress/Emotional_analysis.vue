@@ -367,7 +367,7 @@ export default {
       this.loadingParam = 1;
       // axios를 통해 장고모델에 전달 (출력 결과는 모두 console.log로 찍음.)
       axios
-        .post(`http://192.168.0.215:8000/calculate/getStress1`, this.formData, {
+        .post(`http://${process.env.VUE_APP_DJANGO_CROSS_URL}/calculate/getStress1`, this.formData, {
           headers: {
             "Content-Type": "multipart/form-data",
           },

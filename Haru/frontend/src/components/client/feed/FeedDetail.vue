@@ -86,10 +86,10 @@
 						<!-- 추천 받은 장소 -->
 						<div class="feed-recommend-area">
 							<div class="rec-detail-img-area">
-								<a href="{{recommend.url}}"><img class="rec-detail-img" :src="recommend.img" alt="" /></a>
+								<a :href="recommend.url"><img class="rec-detail-img" :src="recommend.img" alt="" /></a>
 							</div>
 							<div class="rec-detail">
-								<a href="{{recommend.url}}">
+								<a :href="recommend.url">
 									<p class="rec-detail-title">{{ recommend.name }}</p>
 									<p>{{ recommend.address }}</p>
 								</a>
@@ -231,7 +231,7 @@ export default {
 				} else {
 					this.heartStyle = {};
 				}
-				console.log(this.cardOrigin.myFeedLike)
+				console.log(this.cardOrigin.myFeedLike);
 				console.log(this.heartStyle);
 			});
 		},
@@ -249,13 +249,15 @@ export default {
 			});
 		},
 		feedDelete() {
-			var formData = new FormData();
-			formData.append("feedNum", this.card.feedNum);
-			axios.post(`http://${process.env.VUE_APP_BACK_END_URL}/feedDelete`, formData).then(() => {
-				alert("삭제되었습니다.");
-				this.$emit("getFeedList");
-				this.$emit("close-modal");
-			});
+			if(confirm("정말 삭제하시겠습니까?") === true) {
+				var formData = new FormData();
+				formData.append("feedNum", this.card.feedNum);
+				axios.post(`http://${process.env.VUE_APP_BACK_END_URL}/feedDelete`, formData).then(() => {
+					alert("삭제되었습니다.");
+					this.$emit("getFeedList");
+					this.$emit("close-modal");
+				});
+			}
 		},
 		getTimeString(isoTimeString) {
 			const currentTime = new Date();

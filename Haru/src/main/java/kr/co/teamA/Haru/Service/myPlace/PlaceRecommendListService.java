@@ -53,4 +53,13 @@ public class PlaceRecommendListService {
 
         return recItemDto;
     }
+
+    public List<ShowMyRecommendPlaceDTO> getMyRecList(GetRecommendListDTO getRecommendListDto) {
+        Date startDate = ReturnDate(getRecommendListDto.getStartdate());
+        Date endDate = ReturnDate(getRecommendListDto.getEnddate());
+
+        List<ShowMyRecommendPlaceDTO> list = placeRecListRepository.getMyRecommendPlace(getRecommendListDto.getUserid(), startDate, endDate);
+        System.out.println(list);
+        return list;
+    }
 }

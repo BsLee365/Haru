@@ -60,7 +60,7 @@
         <div>
           <p class="feed-rec-area-title">이전 추천 리스트</p>
           <RecList
-            :RecommendList="RecommendList"
+            :AllRecList="RecommendList"
             :isBtnHeartNone="isBtnHeartNone"
             class="feed-rec-recList"
             @send-rec-List="getRecList"
@@ -99,7 +99,7 @@ export default {
     RecList,
   },
   props: {
-    RecommendList: Array,
+    RecommendList: Object,
   },
 };
 </script>

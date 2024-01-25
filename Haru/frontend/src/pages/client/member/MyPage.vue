@@ -4,6 +4,7 @@
     <UpdateProfileImgModal
       :mStatus="profileModalStatus"
       @modalClose="closeModal"
+      :profileImg="profileImg"
     />
 
     <!-- 컨텐츠 -->
@@ -20,7 +21,7 @@
                 <img src="@/img/FaceRegistration/camera.png" alt="" />
                 <p>프로필 수정</p>
               </div>
-              <img src="@/img/assets/bgImage/type3.png" class="profileImg" />
+              <img :src="profileImg" class="profileImg" />
             </li>
             <li>
               <div class="nickname-box">
@@ -151,6 +152,7 @@ export default {
       alarmList: [],
       likeCount: 0,
       commentCount: 0,
+      profileImg: "",
     };
   },
   created() {
@@ -195,7 +197,7 @@ export default {
           this.likeCount = res.data.likeCount;
           this.commentCount = res.data.commentCount;
           this.alarmList = res.data.alarmList;
-
+          this.profileImg = require(`${process.env.VUE_APP_IMG_BASE_URL}/Haru/src/main/resources/static/img/profileImg/` + res.data.member.profile_img);
           this.alarmList.sort((a, b) => {
             const dateA = new Date(a.alarm_cdate);
             const dateB = new Date(b.alarm_cdate);

@@ -64,4 +64,5 @@ public interface MemberRepository extends JpaRepository<Member, String> {
 
     // 추가함. - 이범석
     Optional<Member> findByUserId(@Param("userId") String userId);
+
 }

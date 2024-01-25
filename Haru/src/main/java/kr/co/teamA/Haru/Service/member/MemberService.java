@@ -7,6 +7,7 @@ import kr.co.teamA.Haru.Repository.MemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
@@ -31,11 +32,10 @@ public class MemberService {
     public int checkPassword(String userId, String pwd) {
         String encodingPwd = passwordEncoder.encode(pwd);
         System.out.println("encodingPwd" + encodingPwd);
-       String checkPassword = memberRepository.checkPassword(userId);
+        String checkPassword = memberRepository.checkPassword(userId);
 
-       return 1;
+        return 1;
     }
-
 
     public Member create(MemberDTO dto) {
         LocalDateTime now = LocalDateTime.now();
@@ -66,7 +66,9 @@ public class MemberService {
 
     public int checkFindUserPwd(FindUserPwdDTO dto) {
         Optional checkFindUserPwd = memberRepository.findUserIdByEmailAndName(dto.getEmail(), dto.getUserName());
-        // Optional checkFindUserPwd = memberRepository.findUserIdByEmailAndNameAndUserId(dto.getEmail(), dto.getUserName(), dto.getUserId());
+        // Optional checkFindUserPwd =
+        // memberRepository.findUserIdByEmailAndNameAndUserId(dto.getEmail(),
+        // dto.getUserName(), dto.getUserId());
         return checkFindUserPwd != null ? 1 : 0;
     }
 
@@ -75,7 +77,6 @@ public class MemberService {
         memberRepository.updateByPassword(dto.getId(), encoderPassword);
         return 1;
     }
-
 
     public void updateMyInfo(MemberDTO dto) {
         memberRepository.updateByMember(dto.getId(), dto.getNickname(), dto.getEmail(), dto.getName());
@@ -86,5 +87,12 @@ public class MemberService {
         memberRepository.deleteById(member.getUserId());
         System.out.println("delete member");
         return 1;
+    }
+
+    public void updateProfileImg(String userId, String img) {
+        Member member = memberRepository.findMemberByuserId(userId);
+
+        member.setProfileImg(img);
+        memberRepository.save(member);
     }
 }

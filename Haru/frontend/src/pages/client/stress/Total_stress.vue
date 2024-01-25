@@ -144,14 +144,13 @@
                     <h4>{{item.place_name}}</h4>
                   </div>
                   <div class="hash-tag">
-                    <span class="review-score">★ {{item.place_score/10}}점</span>
+                    <span class="review-score">★ {{ (item.place_score/10).toFixed(1) }}점</span>
                   </div>
                   <div class="food-detail">
                     <span class="food-address">{{item.place_address}}</span>
                   </div>
                 </div>
               </div>
-
             </div>
           <!--  장소 카드 끝-->
           </div>

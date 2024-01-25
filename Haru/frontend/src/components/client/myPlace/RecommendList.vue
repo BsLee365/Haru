@@ -45,7 +45,7 @@
                 </div>
                 <!-- 별점 -->
                 <p class="rlist-score-area">
-                  <span class="rlist-score">★ {{ item.place.place_score / 10 }}</span>
+                  <span class="rlist-score">★ {{ (item.place.place_score / 10).toFixed(1) }}</span>
                 </p>
               </div>
             </div>

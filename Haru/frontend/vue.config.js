@@ -2,10 +2,11 @@ const CopyWebpackPlugin = require("copy-webpack-plugin");
 const path = require("path");
 
 module.exports = {
+  outputDir:'../src/main/resources/static',
   devServer: {
     proxy: {
       "/api": {
-        target: "http://localhost:80",
+        target: "http://13.209.4.24:3000",
         changeOrigin: true,
         pathRewrite: {
           "^/api": "",

@@ -1,0 +1,4 @@
+
+kpython:S1542"SRename function "getFaceStress" to match the regular expression ^[a-z_][a-z0-9_]*$.(‰†θω
+jpython:S1542"MRename function "getFace" to match the regular expression ^[a-z_][a-z0-9_]*$.(©Ϋ²ϋÿÿÿÿ
+lpython:S1542*"ORename function "resizeImg" to match the regular expression ^[a-z_][a-z0-9_]*$.(„Ό¦ωÿÿÿÿ

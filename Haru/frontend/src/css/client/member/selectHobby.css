@@ -1,0 +1,69 @@
+/* 취미 및 관심사 선택 화면 */
+/* 제목 아래 margin */
+.selectHobby-container .selectHobby-header-box {
+  margin-bottom: 100px;
+}
+
+/* 제목 */
+.selectHobby-container .selectHobby-header-box h3 {
+  font-size: 36px;
+  color: #efab90;
+}
+
+/* 취미 Area */
+.hobby-body {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: wrap;
+  margin-bottom: 50px;
+}
+
+/* 이미지 + 소카테고리 명 */
+.hobby-img-box {
+  display: flex;
+  flex-direction: column;
+  width: 150px;
+  align-items: center;
+  margin-right: 50px;
+  margin-bottom: 30px;
+}
+
+/* 카테고리명 */
+.hobby-img-box span {
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+/* 소카테고리 area */
+.selectHobby-container .hobby-header-box {
+  margin-bottom: 20px;
+}
+
+/* 활동 이미지 */
+.selectHobby-container .hobby-body img {
+  width: 150px;
+}
+
+/* 체크 아이콘 이미지 */
+.hobby-check-img {
+  position: absolute;
+  width: 50px !important;
+  height: 50px;
+  right: 0px;
+  float: right;
+  z-index: 5;
+}
+
+.selectHobby-container .hobby-body img:active {
+  transform: scale(0.9);
+}
+
+.selectHobby-container .hobby-body .hobby-check-img:active {
+  transform: none;
+}
+
+/* 버튼 area */
+.hobby-setting-container {
+  width: 100%;
+  text-align: center;
+}

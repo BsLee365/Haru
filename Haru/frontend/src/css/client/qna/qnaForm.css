@@ -1,0 +1,46 @@
+.qna-btn-group {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 50px;
+}
+.qna-btn-group > .cancle-btn {
+  margin-right: 20px;
+}
+.qna-write-container {
+  padding-left: 100px;
+  padding-right: 100px;
+  background-color: rgb(255 255 255 / 90%);
+  border: none;
+  border-radius: 27px;
+  width: 100%;
+  max-width: 1463px;
+  min-width: 900px;
+  height: 100%;
+  margin: 0 auto;
+}
+
+.qna-write-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.qna-write-form h2 {
+  margin-bottom: 30px;
+  text-align: center;
+  padding: 75px 0px 30px;
+}
+
+#qna-title {
+  height: 50px;
+  padding: 0 20px 0 20px;
+  margin-bottom: 20px;
+  border-radius: 20px;
+}
+
+#qna-content {
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 20px;
+  resize: none;
+}

@@ -2,7 +2,7 @@ const CopyWebpackPlugin = require("copy-webpack-plugin");
 const path = require("path");
 
 module.exports = {
-    // devServer: {
+    devServer: {
     //   proxy: {
     //       "/api": {
     //         target: "http://localhost:80",
@@ -12,10 +12,10 @@ module.exports = {
     //         },
     //       },
     //     },
-    //     client: {
-    //       overlay: false
-    //     }
-    // },
+        client: {
+          overlay: false
+        }
+    },
   configureWebpack: {
     plugins: [
       new CopyWebpackPlugin({

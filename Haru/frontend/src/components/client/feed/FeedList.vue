@@ -2,7 +2,7 @@
 	<!-- 피드 리스트 화면 - 카드 하나  -->
 	<div>
 		<div v-if="this.$route.query.nickname || selectedNickname" class="page-title-area">
-			<h1 class="page-upload-title">{{ selectedNickname }}님의 피드</h1>
+			<h1 class="page-upload-title">{{ myNickname }}님의 피드</h1>
 		</div>
 		<div class="feed-card" v-for="(i, idx) in cardList" :key="idx">
 			<div class="feed-card-header">
@@ -72,7 +72,7 @@
 					<div>
 						<div class="heart">
 							<img v-if="!i.myFeedLike" class="cursor-p" src="@/img/Feed/heart.png" id="heart" @click="sendLikeInFeed(this.data.id, i.feedNum, i.uid)" />
-							<img v-if="i.myFeedLike" class="cursor-p" src="@/img/Feed/heart.png" id="heart" @click="sendLikeInFeed(this.data.id, i.feedNum, i.uid)" style="filter: opacity(0.4) drop-shadow(0 0 0 red);"/>
+							<img v-if="i.myFeedLike" class="cursor-p" src="@/img/Feed/heart.png" id="heart" @click="sendLikeInFeed(this.data.id, i.feedNum, i.uid)" style="filter: opacity(0.4) drop-shadow(0 0 0 red)" />
 							<span>{{ i.likes }}</span>
 						</div>
 						<div class="comment">
@@ -97,15 +97,15 @@ export default {
 	data() {
 		return {
 			modal_Check: false,
-			selectedNickname: "",
+			myNickname: "",
 			hashTag: "",
 		};
 	},
-	props: ["cardList", "listCnt", "allCardList", "userData", "searchKeyword", "searchFeed"],
+	props: ["cardList", "listCnt", "allCardList", "userData", "searchKeyword", "searchFeed", "selectedNickname"],
 	methods: {
 		getMyFeedList(nickname) {
 			this.$emit("getMyFeedList", nickname);
-			this.selectedNickname = nickname;
+			this.myNickname = nickname;
 		},
 		sendLikeInFeed(uid, feedNum, feedUserId) {
 			console.log("uid : ", uid, "feedNum : ", feedNum, "feedUserId : ", feedUserId);
@@ -161,6 +161,9 @@ export default {
 		});
 
 		return { logout, data }; // Return data in the setup function
+	},
+	mounted() {
+		this.myNickname = this.selectedNickname;
 	},
 };
 </script>

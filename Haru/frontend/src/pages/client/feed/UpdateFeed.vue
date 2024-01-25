@@ -66,7 +66,7 @@
               <p class="part-title">
                 추천 해시태그<br />
                 <span style="color: #a7a7a7"
-                  >사진을 업로드하면 해시태그를 추천해드려요!</span
+                  >피드를 작성하면 해시태그를 추천해드려요!</span
                 >
               </p>
             </div>
@@ -94,6 +94,7 @@
                   :value="wHash"
                   :ref="'writeHashtagInput' + whIdx"
                 />
+                <img id="deleteIcon" src="@\img\Feed\X.png" @click="removeBox(whIdx)" />
               </div>
               <div class="add-hashtag-area">
                 <button
@@ -343,6 +344,9 @@ export default {
         alert("해시태그는 5개 이하로 입력 가능합니다.");
       }
     },
+    removeBox(whIdx) {
+			this.writeHashtag.splice(whIdx, 1);
+		},
     addImage(e) {
       const file = e.target.files[0];
       this.imageList.push(file);

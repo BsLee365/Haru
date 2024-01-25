@@ -13,7 +13,20 @@
 			</form>
 
 			<!-- 피드 Start -->
-			<FeedList :userData="this.data" :cardList="cardList" :listCnt="listCnt" :allCardList="allCardList" :searchKeyword="searchKeyword" @open-modal="openModal" @getMyFeedList="getMyFeedList" @getFeedList="getFeedList" @getNextFeedList="getNextFeedList" :searchFeed="searchFeed" ref="feedList" />
+			<FeedList
+				:userData="this.data"
+				:cardList="cardList"
+				:listCnt="listCnt"
+				:allCardList="allCardList"
+				:searchKeyword="searchKeyword"
+				:selectedNickname="selectedNickname"
+				@open-modal="openModal"
+				@getMyFeedList="getMyFeedList"
+				@getFeedList="getFeedList"
+				@getNextFeedList="getNextFeedList"
+				:searchFeed="searchFeed"
+				ref="feedList"
+			/>
 		</div>
 	</div>
 </template>
@@ -49,11 +62,32 @@ export default {
 			userData: null,
 			index: 0,
 			imagePath: null,
+			selectedNickname: "",
 		};
 	},
 	async created() {
 		// 페이지가 로드될 때 초기 이미지 설정
 		this.bgImage();
+		window.addEventListener("scroll", this.handleScroll, true);
+		// 페이지 로드하면서 리스트 불러오기
+		if (this.$route.query.nickname) {
+			// await this.$refs.feedList.getMyFeedList(this.$route.query.nickname);
+			await this.getMyFeedList(this.$route.query.nickname);
+			this.selectedNickname = this.$route.query.nickname;
+			if (this.$route.query.feedNum) {
+				console.log("allCardList", this.allCardList);
+				for (const card of this.allCardList) {
+					console.log("card", card);
+					if (card.feedNum == this.$route.query.feedNum) {
+						console.log("찾았다", card);
+						this.card = card;
+					}
+				}
+				this.openModal(this.card, this.allCardList.indexOf(this.card));
+			}
+		} else {
+			await this.getFeedList();
+		}
 	},
 	methods: {
 		// 해당 화면 Background 이미지 설정
@@ -75,10 +109,15 @@ export default {
 						const images = [];
 						for (const img of data.feedImg) {
 							if (img.feed_num.feed_num === feedNum) {
+<<<<<<< HEAD
                 // E:/git/final/Haru/Haru/src/main/resources/static/img/Feed/
                 // E:/900_팀 프로젝트/최종 프로젝트/Haru/Haru/src/main/resources/static/img/Feed/
 								images.push(require(`E:/900_팀 프로젝트/최종 프로젝트/Haru/Haru/src/main/resources/static/img/Feed/` + img.feed_img));
 
+=======
+								// E:/git/final/Haru/Haru/src/main/resources/static/img/Feed/
+								images.push(require(`E:/git/final/Haru/Haru/src/main/resources/static/img/Feed/` + img.feed_img));
+>>>>>>> junghyoun
 							}
 						}
 						return images;
@@ -138,6 +177,7 @@ export default {
 		async getMyFeedList(nickname) {
 			var formData = new FormData();
 			formData.append("userId", this.data.id);
+			console.log(nickname);
 			this.allCardList = [];
 			this.searchKeyword = "";
 			formData.append("nickname", nickname);
@@ -150,9 +190,14 @@ export default {
 						const images = [];
 						for (const img of data.feedImg) {
 							if (img.feed_num.feed_num === feedNum) {
+<<<<<<< HEAD
                 // E:/git/final/Haru/Haru/src/main/resources/static/img/Feed/
                 // E:/900_팀 프로젝트/최종 프로젝트/Haru/Haru/src/main/resources/static/img/Feed/
 								images.push(require("E:/900_팀 프로젝트/최종 프로젝트/Haru/Haru/src/main/resources/static/img/Feed/" + img.feed_img));
+=======
+								// E:/git/final/Haru/Haru/src/main/resources/static/img/Feed/
+								images.push(require("E:/git/final/Haru/Haru/src/main/resources/static/img/Feed/" + img.feed_img));
+>>>>>>> junghyoun
 							}
 						}
 						return images;
@@ -206,10 +251,12 @@ export default {
 				}
 				this.cardList = [];
 				this.cardList = this.allCardList.slice(0, this.listCnt);
-				console.log(data);
+				console.log(this.cardList);
+				console.log("data", data);
 				this.searchKeyword = "";
 			});
-      this.searchKeyword = "";
+			this.searchKeyword = "";
+			this.selectedNickname = nickname;
 		},
 		searchFeed() {
 			var formData = new FormData();
@@ -289,12 +336,11 @@ export default {
 					this.cardList = this.allCardList.slice(0, this.listCnt);
 					console.log(data);
 				});
-				const feedList = this.$refs.feedList;
-				feedList.selectedNickname = null;
+				this.selectedNickname = null;
 			}
 		},
 		openModal(card, idx) {
-			console.log(card, idx);
+			console.log("card", card, "idx", idx);
 			this.modal_Check = !this.modal_Check;
 			this.userData = this.data;
 			this.index = idx;
@@ -366,22 +412,28 @@ export default {
 		return { logout, data }; // Return data in the setup function
 	},
 	async mounted() {
-		window.addEventListener("scroll", this.handleScroll, true);
-		// 페이지 로드하면서 리스트 불러오기
-		if (this.$route.query.nickname) {
-			await this.$refs.feedList.getMyFeedList(this.$route.query.nickname);
-			if (this.$route.query.feedNum) {
-				for (const card of this.allCardList) {
-					if (card.feedNum == this.$route.query.feedNum) {
-						console.log("찾았다", card);
-						this.card = card;
-					}
-				}
-				this.openModal(this.card, this.allCardList.indexOf(this.card));
-			}
-		} else {
-			await this.getFeedList();
-		}
+		// window.addEventListener("scroll", this.handleScroll, true);
+		// // 페이지 로드하면서 리스트 불러오기
+		// if (this.$route.query.nickname) {
+		// 	await this.$refs.feedList.getMyFeedList(this.$route.query.nickname);
+		// 	if (this.$route.query.feedNum) {
+		// 		console.log("allCardList", this.allCardList)
+		// 		// for (const card of this.allCardList) {
+		// 		// 	console.log("card", card);
+		// 		// 	if (card.feedNum == this.$route.query.feedNum) {
+		// 		// 		console.log("찾았다", card);
+		// 		// 		this.card = card;
+		// 		// 	}
+		// 		// }
+		// 		this.card = this.allCardList.find(card => card.feedNum === this.$route.query.feedNum);
+		// 		this.openModal(this.card, this.allCardList.indexOf(this.card));
+		// 	}
+		// } else {
+		// 	await this.getFeedList();
+		// }
+		const feedList = this.$refs.feedList;
+		console.log("feedList", feedList);
+		feedList.myNickname = this.$route.query.nickname;
 	},
 	components: {
 		FeedDetail,

@@ -1,25 +1,12 @@
 <template>
 	<div class="chatbot">
-		<!-- <button type="button" @click="toggleChatBot" id="chatBotToggle" :class="{ chatBotOn: isChatBotOpen }"></button>
-		<iframe v-if="isChatBotOpen" ref="chatBot" allow="microphone;" width="400" height="520" src="https://console.dialogflow.com/api-client/demo/embedded/cfbe19c0-8dee-4ca6-ac06-95027bd77799"> </iframe> -->
-		<!-- <div class="chat-container">
-			<div class="chat-messages" ref="chatMessages">
-				<div v-for="(message, index) in chatMessages" :key="index" class="chat-message">
-					{{ message }}
-				</div>
-			</div>
-			<div class="user-input">
-				<input v-model="userInput" @keyup.enter="sendMessage" placeholder="Type your message..." />
-				<button @click="sendMessage">Send</button>
-			</div>
-		</div>
 		<df-messenger 
             intent="" 
             chat-title="Haru" 
             agent-id="05b8509c-074f-43f2-873d-c21558194987" 
             language-code="ko" 
             chat-icon="https://lh3.google.com/u/0/d/1Dr_Rh5uQcnIY2ZnP4jsqMLdW5nKh_ija=w965-h914-iv1"
-        ></df-messenger> -->
+        ></df-messenger>
 	</div>
 </template>
 <script>
@@ -33,21 +20,11 @@ export default {
 		};
 	},
 	mounted() {
-		// 페이지가 로드될 때마다 새로운 세션 ID 생성
-		this.generateSessionId();
 		const script = document.createElement("script");
 		script.src = "https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1";
 		document.head.appendChild(script);
 	},
 	methods: {
-		toggleChatBot() {
-			this.isChatBotOpen = !this.isChatBotOpen;
-			console.log(this.isChatBotOpen);
-		},
-		generateSessionId() {
-			// 세션 ID를 생성하는 로직
-			this.sessionId = "unique-session-id-" + Date.now();
-		},
 	},
 };
 </script>

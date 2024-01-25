@@ -6,7 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="6d0870f0-66eb-40b4-a5ab-e66ef439dd61" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Haru/frontend/src/pages/client/member/SelectHobby.vue" beforeDir="false" afterPath="$PROJECT_DIR$/Haru/frontend/src/pages/client/member/SelectHobby.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Haru/frontend/src/pages/client/stress/Emotional_report.vue" beforeDir="false" afterPath="$PROJECT_DIR$/Haru/frontend/src/pages/client/stress/Emotional_report.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Haru/frontend/src/pages/client/stress/Total_stress.vue" beforeDir="false" afterPath="$PROJECT_DIR$/Haru/frontend/src/pages/client/stress/Total_stress.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -100,7 +101,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1706164717850</updated>
-      <workItem from="1706164721185" duration="4770000" />
+      <workItem from="1706164721185" duration="7627000" />
     </task>
     <servers />
   </component>

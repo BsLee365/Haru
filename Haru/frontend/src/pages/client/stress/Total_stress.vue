@@ -113,20 +113,35 @@
             <!--장소 카드 시작-->
             <div class="place-card" v-for="(item, index) in recommendPlace.data" :key="index">
               <div class="'food-img">
-                <img
-                  class="heart-img"
-                  src="@/img/Total_stress/img/image 47.png"
-                />
+                <!-- 하트(찜) 하기 -->
+<!--                <img-->
+<!--                  class="heart-img"-->
+<!--                  src="@/img/Total_stress/img/image 47.png"-->
+<!--                />-->
+                  <img class="heart-img cursor-p"
+                       src="@/img/Feed/heart.png"
+                       @click="toggleWish(item.place_num)"
+                       v-if="isInWishList(item)"
+                  />
+
+                  <img class="heart-img cursor-p"
+                       src="@/img/Total_stress/img/image 47.png"
+                       @click="toggleWish(item)"
+                       v-else
+                  />
+
+                <!-- 장소 이미지 없는 경우 -->
                 <img
                     v-show="item.place_img === null"
-                    src="@/img/Total_stress/img/no_img.png"
-                    alt="버거킹"
+                    :src="@/img/Total_stress/img/no_img.png"
+                    alt="no_image"
                     class="place-card"
                 />
+                <!-- 장소 이미지 있는 경우 -->
                 <img
                     v-show="item.place_img != null"
                   :src="item.place_img"
-                  alt="버거킹"
+                  alt="no_image"
                   class="place-card"
                 />
               </div>
@@ -143,6 +158,7 @@
                   </div>
                 </div>
               </div>
+
             </div>
           <!--  장소 카드 끝-->
           </div>
@@ -156,16 +172,16 @@
           >
             이전 추천 리스트
           </button>
-          <button class="big-ctlbtn select-btn" id="next-button">
+          <button @click="toReport" class="big-ctlbtn select-btn" id="next-button">
             나의 스트레스 보고서
           </button>
-          <button
-            @click="toMain"
+          <a
+              href="/"
             class="big-ctlbtn insert-btn"
             id="main-button"
           >
             메인으로 이동
-          </button>
+          </a>
         </div>
         <!-- 장소추천 영역 끝 -->
       </div>
@@ -185,7 +201,10 @@ export default {
       recommendPlace : null,
 
       // 스트레스 수치
-      stressScore : null
+      stressScore : null,
+
+      // 찜 목록
+      selectedWishList : [],
 
     };
   },
@@ -219,9 +238,18 @@ export default {
     toMyPlaceDiary() {
       this.$router.push("/MyPlaceDiary");
     },
-    toMain() {
-      this.$router.push("/");
+    toReport() {
+      this.$router.push("/Emotional_report")
     },
+    // 찜 기능 토글
+    toggleWish(item) {
+      console.log('찜기능에 넣을 place : ' + item.place_num);
+    },
+    isInWishList(item) {
+      if (this.selectedWishList.indexOf(item.place_num) < 0) {
+        console.log('리스트에 없음');
+      }
+    }
   },
   mounted() {
     let currentWidth = 0;
@@ -256,4 +284,8 @@ export default {
 
 <style scoped>
 @import url("@/css/client/stress/total_stress.css");
+#main-button {
+  text-align: center;
+  line-height: 50px;
+}
 </style>

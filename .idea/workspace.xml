@@ -7,6 +7,38 @@
     <list default="true" id="6d0870f0-66eb-40b4-a5ab-e66ef439dd61" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Haru/frontend/src/pages/client/feed/Feed.vue" beforeDir="false" afterPath="$PROJECT_DIR$/Haru/frontend/src/pages/client/feed/Feed.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Haru/frontend/src/pages/client/feed/UpdateFeed.vue" beforeDir="false" afterPath="$PROJECT_DIR$/Haru/frontend/src/pages/client/feed/UpdateFeed.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Haru/src/main/resources/static/img/Feed/FeedImg1140396b-f866-4bc1-abfa-7fd6812adf94.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Haru/src/main/resources/static/img/Feed/FeedImg17b80242-0d95-40bf-8a61-abbf4d3a76aa.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Haru/src/main/resources/static/img/Feed/FeedImg3b2477ad-6b09-4255-b0d4-a82f11ccc356.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Haru/src/main/resources/static/img/Feed/FeedImg3f15f0f5-24a2-422a-9b9e-8a5845dc9d76.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Haru/src/main/resources/static/img/Feed/FeedImg4c940d3f-710e-4104-84fd-1d5a982200d0.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Haru/src/main/resources/static/img/Feed/FeedImg605894e5-9634-4cca-8fc1-cd1c54fcd7cc.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Haru/src/main/resources/static/img/Feed/FeedImg6c5e63ab-09bc-4697-8a22-51cda1e2fa05.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Haru/src/main/resources/static/img/Feed/FeedImg842ae900-b846-4c4c-8f64-437021491f2a.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Haru/src/main/resources/static/img/Feed/FeedImg8b65116b-1c90-47c3-9ffe-22b0c5199f6a.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Haru/src/main/resources/static/img/Feed/FeedImg8b8984c2-810d-46cd-97fe-21ffa72da057.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Haru/src/main/resources/static/img/Feed/FeedImg908762bd-5f15-4594-8b67-e29d802ab216.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Haru/src/main/resources/static/img/Feed/FeedImg90cf97a9-2907-4e29-adbd-5ad8cab76322.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Haru/src/main/resources/static/img/Feed/FeedImg98f42fae-e124-4910-b4d7-0f5fd2af14e0.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Haru/src/main/resources/static/img/Feed/FeedImg99ba7a94-c4ce-439a-82f7-52f7b87eda83.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Haru/src/main/resources/static/img/Feed/FeedImg9f208401-1dfa-48a8-82d0-9c615e9a91c9.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Haru/src/main/resources/static/img/Feed/FeedImga8f7a45b-18e0-4573-8e0a-42c247f78341.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Haru/src/main/resources/static/img/Feed/FeedImgb5f9fbd7-94f8-4cb0-9f42-708370818ee6.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Haru/src/main/resources/static/img/Feed/FeedImgb843dfc6-43e1-4855-b6fb-ab2f6f19a0e1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Haru/src/main/resources/static/img/Feed/FeedImgb930edc8-cb7e-4e28-8779-f4fef28fedfe.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Haru/src/main/resources/static/img/Feed/FeedImgd9d86467-80f2-478b-a102-03ef09a17121.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Haru/src/main/resources/static/img/Feed/FeedImgddc08aa1-1918-4186-9d28-cd96ad370509.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Haru/src/main/resources/static/img/Feed/FeedImge6b0a86f-6f70-4684-901e-8c68ff056db7.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Haru/src/main/resources/static/img/Feed/befe547a-9192-4934-9542-75d9e192a098.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Haru/src/main/resources/static/img/Feed/d9ff42f3-8569-41cd-85dc-05420a041966.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Haru/src/main/resources/static/img/Feed/스크린샷 2023-11-03 143345.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Haru/src/main/resources/static/img/Feed/스크린샷 2023-11-20 120637.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Haru/src/main/resources/static/img/Feed/스크린샷 2023-11-22 104432.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Haru/src/main/resources/static/img/Feed/스크린샷 2023-11-29 104950.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Haru/src/main/resources/static/img/Feed/스크린샷 2024-01-03 195046.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Haru/src/main/resources/static/img/Feed/스크린샷 2024-01-17 214051.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Haru/src/main/resources/static/placeImg/62fcd9fed2713b24ed9602b76357f109.jpg" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -107,7 +139,7 @@
       <option name="presentableId" value="Default" />
       <updated>1706164717850</updated>
       <workItem from="1706164721185" duration="12140000" />
-      <workItem from="1706196583852" duration="901000" />
+      <workItem from="1706196583852" duration="2630000" />
     </task>
     <servers />
   </component>

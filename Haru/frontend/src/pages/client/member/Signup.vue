@@ -306,11 +306,8 @@ export default {
   created() {
     this.bgImage();
   },
-<<<<<<< HEAD
-=======
 
   // 입력값이 바뀔 때마다 정규식 검사
->>>>>>> yj_base
   watch: {
     userId() {
       var idRegex = /^[a-zA-Z0-9_]+$/;
@@ -372,26 +369,6 @@ export default {
       var newImage = "type1";
       this.$emit("bgImage", newImage);
     },
-<<<<<<< HEAD
-    back() {
-      this.$router.push("/login");
-    },
-    termsOfUseModal() {
-      this.termsOfUseModalOpen = true;
-    },
-    closeTermsOfUseModal() {
-      this.termsOfUseModalOpen = false;
-    },
-    privacyPolicyModal() {
-      this.modalOpen = true;
-    },
-    closePrivacyPolicyModal() {
-      this.modalOpen = false;
-    },
-    fileChanged(event) {
-      this.fileName = event.target.files[0].name;
-    },
-=======
     // 뒤로가기
     back() {
       this.$router.push("/login");
@@ -417,27 +394,16 @@ export default {
       this.fileName = event.target.files[0].name;
     },
     // 드래그앤 드롭
->>>>>>> yj_base
     dragover(event) {
       event.preventDefault();
       this.isDrag = true;
     },
-<<<<<<< HEAD
-    handleFileChange(event) {
-      if (event.dataTransfer) {
-        this.dropInputTag(event);
-        console.log("test1");
-      } else {
-        this.selectFile(event);
-        console.log("test2");
-=======
     // 파일 업로드
     handleFileChange(event) {
       if (event.dataTransfer) {
         this.dropInputTag(event);
       } else {
         this.selectFile(event);
->>>>>>> yj_base
       }
     },
 
@@ -465,20 +431,14 @@ export default {
       event.preventDefault();
       this.isDrag = false;
     },
-<<<<<<< HEAD
-=======
     // 파일 삭제
->>>>>>> yj_base
     clearFiles() {
       this.files = [];
       this.fileName = "";
       this.formData.delete("files");
       this.formData.delete("faceImage");
     },
-<<<<<<< HEAD
-=======
     // 파일 선택
->>>>>>> yj_base
     selectFile(event) {
       this.clearFiles(); // 기존 파일 정보 초기화
 
@@ -504,11 +464,7 @@ export default {
         console.log(this.formData.get("files"));
       }
     },
-<<<<<<< HEAD
-
-=======
     // 아이디 중복 체크
->>>>>>> yj_base
     async idCheck() {
       var idRegex = /^[a-zA-Z0-9_]+$/;
       const userId = document.getElementById("userId").value;
@@ -550,11 +506,7 @@ export default {
           return false;
         });
     },
-<<<<<<< HEAD
-
-=======
     // 닉네임 중복 체크
->>>>>>> yj_base
     nicknameCheck() {
       const nickname = document.getElementById("nickname").value;
 
@@ -599,11 +551,7 @@ export default {
           return false;
         });
     },
-<<<<<<< HEAD
-
-=======
     // 이메일 중복 체크
->>>>>>> yj_base
     emailCheck() {
       const email = document.getElementById("email").value;
       axios
@@ -633,32 +581,21 @@ export default {
     handleEnter(event) {
       event.preventDefault();
     },
-<<<<<<< HEAD
-    submit() {
-=======
     // 회원가입
     submit() {
       // 이용약관 및 개인정보처리방침 체크 여부
->>>>>>> yj_base
       const termsOfUse = document.getElementById("termsOfUse");
       const termsOfUseMsg = document.getElementById("termsOfUse-msg");
       const privacyPolicy = document.getElementById("privacyPolicy");
 
-<<<<<<< HEAD
-      this.formData.delete("userId", "");
-=======
       // FormData에 값 초기화
       this.formData.delete("id", "");
->>>>>>> yj_base
       this.formData.delete("pwd", "");
       this.formData.delete("nickname", "");
       this.formData.delete("email", "");
       this.formData.delete("name", "");
 
-<<<<<<< HEAD
-=======
       // 입력값 가져오기
->>>>>>> yj_base
       const userId = document.getElementById("userId").value;
       const pwd = document.getElementById("pwd").value;
       const pwd_chk = document.getElementById("pwd_chk").value;
@@ -666,30 +603,20 @@ export default {
       const email = document.getElementById("email").value;
       const name = document.getElementById("name").value;
 
-<<<<<<< HEAD
-      this.formData.append("userId", userId);
-=======
       // FormData에 값 추가
       this.formData.append("id", userId);
->>>>>>> yj_base
       this.formData.append("pwd", pwd);
       this.formData.append("nickname", nickname);
       this.formData.append("email", email);
       this.formData.append("name", name);
-<<<<<<< HEAD
-=======
 
       // 정규식
->>>>>>> yj_base
       var idRegex = /^[a-zA-Z0-9_]+$/;
       var pwdRegex = /^(?=.*[A-Z])(?=.*[!@#$%^&*])(?=.*[a-zA-Z]).{8,}$/;
       var nicknameRegex = /^[a-zA-Z0-9ㄱ-ㅎ가-힣]+$/;
       var emailRegex = /^[\w-.]+@([\w-]+\.)+[\w-]{2,5}$/;
 
-<<<<<<< HEAD
-=======
       // 입력값 유효성 검사
->>>>>>> yj_base
       if (userId === "") {
         document.getElementById("idCheck-msg").innerText =
           "아이디는 필수 입력 사항입니다.";
@@ -786,15 +713,10 @@ export default {
         document.getElementById("pwdCheck-msg").style.display = "block";
         document.getElementById("pwd_chk").focus();
       } else if (nicknameRegex.test(nickname) === false) {
-<<<<<<< HEAD
         alert("닉네임은 한글, 영문 대소문자, 숫자만 사용 가능합니다.");
         document.getElementById("nickname").focus();
       } else if (emailRegex.test(email) === false) {
         alert("이메일 형식이 올바르지 않습니다.");
-=======
-        document.getElementById("nickname").focus();
-      } else if (emailRegex.test(email) === false) {
->>>>>>> yj_base
         document.getElementById("email").focus();
       } else if (this.idCheckBoolean === false) {
         document.getElementById("idCheck-msg").innerText =
@@ -808,10 +730,7 @@ export default {
       } else if (this.nicknameCheckBoolean === true) {
         document.getElementById("nicknameCheck-msg").style.display = "none";
       }
-<<<<<<< HEAD
-=======
       // 이메일 인증번호 확인
->>>>>>> yj_base
       axios
         .post(
           `http://${process.env.VUE_APP_BACK_END_URL}/api/auth/emailCheck/certification`,
@@ -839,10 +758,7 @@ export default {
                 }
               )
               .then((res) => {
-<<<<<<< HEAD
                 alert(res);
-=======
->>>>>>> yj_base
                 if (res.status == 200) {
                   alert("회원가입이 완료되었습니다.");
                   this.$router.push("/Login");
@@ -859,11 +775,8 @@ export default {
           }
         });
     },
-<<<<<<< HEAD
-=======
 
     // 이미지 미리보기
->>>>>>> yj_base
     previewImage(event) {
       const reader = new FileReader();
       const image = event.target.files[0];

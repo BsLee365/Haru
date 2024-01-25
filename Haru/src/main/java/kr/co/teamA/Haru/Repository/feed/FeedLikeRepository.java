@@ -13,11 +13,11 @@ public interface FeedLikeRepository extends JpaRepository<Like, Long> {
 
     Integer countByFeedNum_FeedNum(Long feedNum);
 
-    int countByFeedNum_FeedNumAndFeedLikeBy_UserId(Long feedNum, String userId);
+    int countByFeedNum_FeedNumAndFeedLikeBy_UserId(int feedNum, String userId);
 
-    void deleteByFeedNum_FeedNumAndFeedLikeBy_UserId(Long feedNum, String userId);
+    void deleteByFeedNum_FeedNumAndFeedLikeBy_UserId(int feedNum, String userId);
 
-    // int countByFeedNum_FeedNum(Long feedNum);
+    int countByFeedNum_FeedNum(int feedNum);
 
     int countByLikeNumIsNotNull();
 

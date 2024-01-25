@@ -28,7 +28,7 @@ public class Feed {
 
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
     @JoinColumn(name = "placeNum")
-    private Place place;
+    private Place placeNum;
 
     @Column(length = 500, nullable = false)
     private String feedContent;

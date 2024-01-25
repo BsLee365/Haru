@@ -5,11 +5,7 @@
         <!-- 좌측 박스 영역 -->
         <div class="left-box">
           <h2>하루의 여울</h2>
-<<<<<<< HEAD
           <img src="@/img/assets/icon/login/login_icon.png" />
-=======
-          <img src="@/assets/icon/login/login_icon.png" />
->>>>>>> yj_base
           <p>장소...추천 받으실래요?</p>
           <a href="/Signup" class="big-ctlbtn else-btn">회원가입</a>
         </div>
@@ -73,17 +69,10 @@
           </div>
           <div class="social-login-box">
             <a href="#"
-<<<<<<< HEAD
               ><img src="@/img/assets/icon/login/kakao_login_icon.png"
             /></a>
             <a href="#"
               ><img src="@/img/assets/icon/login/naver_login_icon.png"
-=======
-              ><img src="@/assets/icon/login/kakao_login_icon.png"
-            /></a>
-            <a href="#"
-              ><img src="@/assets/icon/login/naver_login_icon.png"
->>>>>>> yj_base
             /></a>
           </div>
         </div>
@@ -131,11 +120,8 @@ export default {
       console.log("비밀번호 찾기 모달");
       this.isPwdModalOpen = !this.isPwdModalOpen;
     },
-<<<<<<< HEAD
-=======
 
     // 로그인 메소드
->>>>>>> yj_base
     loginSubmit() {
       axios
         .post(
@@ -156,11 +142,8 @@ export default {
           console.log(res);
           if (!res.data.access_token == "") {
             localStorage.setItem("jwtToken", res.data.access_token);
-<<<<<<< HEAD
             window.location.href = "/";
-=======
-            this.$router.replace("/");
->>>>>>> yj_base
+            // this.$router.replace("/");
           } else {
             alert("로그인 실패");
           }

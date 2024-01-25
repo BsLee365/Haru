@@ -30,14 +30,10 @@
     "@vue/cli-plugin-babel": "~5.0.0",
     "@vue/cli-plugin-eslint": "~5.0.0",
     "@vue/cli-service": "~5.0.0",
-<<<<<<< HEAD
     "babel-eslint": "^10.1.0",
     "copy-webpack-plugin": "^12.0.2",
     "eslint": "^7.32.0",
     "eslint-config-prettier": "^9.1.0",
-=======
-    "eslint": "^7.32.0",
->>>>>>> yj_base
     "eslint-plugin-vue": "^8.0.3"
   },
   "eslintConfig": {

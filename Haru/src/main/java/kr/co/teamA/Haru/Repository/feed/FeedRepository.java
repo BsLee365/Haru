@@ -12,7 +12,7 @@ public interface FeedRepository extends JpaRepository<Feed, Long> {
 
     List<Feed> findAll();
 
-    Feed findByFeedNum(Long feedNum);
+    Feed findByFeedNum(int feedNum);
 
     List<Feed> findByMember_Nickname(String nickname);
 

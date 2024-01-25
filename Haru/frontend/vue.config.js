@@ -2,22 +2,6 @@ const CopyWebpackPlugin = require("copy-webpack-plugin");
 const path = require("path");
 
 module.exports = {
-<<<<<<< HEAD
-    // devServer: {
-    //   proxy: {
-    //       "/api": {
-    //         target: "http://localhost:80",
-    //         changeOrigin: true,
-    //         pathRewrite: {
-    //           "^/api": "",
-    //         },
-    //       },
-    //     },
-    //     client: {
-    //       overlay: false
-    //     }
-    // },
-=======
   devServer: {
     proxy: {
       "/api": {
@@ -29,7 +13,6 @@ module.exports = {
       },
     },
   },
->>>>>>> yj_base
   configureWebpack: {
     plugins: [
       new CopyWebpackPlugin({
@@ -45,8 +28,4 @@ module.exports = {
       }),
     ],
   },
-<<<<<<< HEAD
 };
-=======
-};
->>>>>>> yj_base

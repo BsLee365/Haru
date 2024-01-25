@@ -27,22 +27,15 @@ public class FeedComment {
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "feedNum")
-    private Feed feed;
+    private Feed feedNum;
 
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
     @JoinColumn(name = "userId")
-    private Member member;
+    private Member userId;
 
     @Column(length = 400, nullable = false)
     private String feedCommentContent;
 
     @Column(columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP", insertable = false)
     private Date feedCdate;
-
-    // public static class FeedCommentBuilder {
-    //     public FeedCommentBuilder feedNum(Feed feed) {
-    //         this.feed = feed;
-    //         return this;
-    //     }
-    // }
 }

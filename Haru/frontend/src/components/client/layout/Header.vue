@@ -4,11 +4,7 @@
     <header>
       <div class="left-side-area">
         <div class="logo">
-<<<<<<< HEAD
           <a href="/"><img src="@/img/assets/logo/logo_검정.png" /></a>
-=======
-          <a href="/"><img src="@/assets/logo/logo_검정.png" /></a>
->>>>>>> yj_base
         </div>
         <div class="dropdown">
           <button class="dropbtn dropbtn-1">나의 스트레스</button>
@@ -27,13 +23,10 @@
         <div class="dropdown">
           <button class="dropbtn">피드</button>
           <div class="dropdown-content">
-<<<<<<< HEAD
-            <a @click="toFeed" style="cursor: pointer;">피드</a>
-            <a @click="toMyFeed(data.nickname)" style="cursor: pointer;">내 피드</a>
-=======
-            <a href="/feed">피드</a>
-            <a href="/MyFeed">내 피드</a>
->>>>>>> yj_base
+            <a @click="toFeed" style="cursor: pointer">피드</a>
+            <a @click="toMyFeed(data.nickname)" style="cursor: pointer"
+              >내 피드</a
+            >
             <a href="insertFeed">피드 작성하기</a>
           </div>
         </div>
@@ -82,17 +75,14 @@ export default {
   data() {
     return {};
   },
-<<<<<<< HEAD
   methods: {
     toFeed() {
       window.location.href = "/feed";
     },
     toMyFeed(nickname) {
-      window.location.href = '/feed?nickname=' + nickname;
+      window.location.href = "/feed?nickname=" + nickname;
     },
   },
-=======
->>>>>>> yj_base
   setup() {
     const isLoggedIn = ref(false);
     const data = ref([]);

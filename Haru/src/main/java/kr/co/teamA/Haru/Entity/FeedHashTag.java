@@ -26,6 +26,5 @@ public class FeedHashTag {
 
     @JoinColumn(name = "feedNum")
     @ManyToOne(cascade = CascadeType.REMOVE)
-    // @OnDelete(action = OnDeleteAction.CASCADE)
     private Feed feedNum;
 }

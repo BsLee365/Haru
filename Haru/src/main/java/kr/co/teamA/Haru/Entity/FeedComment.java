@@ -38,5 +38,5 @@ public class FeedComment {
     private String feedCommentContent;
 
     @Column(columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP", insertable = false)
-    private Date feedCdate;
+    private String feedCdate;
 }

@@ -1,6 +1,5 @@
 package kr.co.teamA.Haru.Entity;
 
-
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 

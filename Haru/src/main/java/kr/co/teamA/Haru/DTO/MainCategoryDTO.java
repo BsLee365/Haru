@@ -11,10 +11,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Builder
 @AllArgsConstructor
-<<<<<<< HEAD
-=======
 // 메인 카테고리를 위한 DTO
->>>>>>> yj_base
 public class MainCategoryDTO {
     private String mainCategory;
     private Long placeSeasonInformation;

@@ -9,10 +9,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-<<<<<<< HEAD
-=======
 // 마이페이지를 위한 DTO
->>>>>>> yj_base
 public class MyPageDTO {
     private String userId;
     private String name;

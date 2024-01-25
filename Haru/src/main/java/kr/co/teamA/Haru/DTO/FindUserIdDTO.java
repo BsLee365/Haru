@@ -9,10 +9,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-<<<<<<< HEAD
-=======
 // 이메일 인증을 위한 DTO
->>>>>>> yj_base
 public class FindUserIdDTO {
     private String userName;
     private String email;

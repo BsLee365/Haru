@@ -25,31 +25,6 @@ import java.util.List;
 @EnableWebSecurity
 @Configuration
 public class SecurityConfig {
-<<<<<<< HEAD
-    // JWT 토큰을 검증하는 필터
-
-    @Value("${server-port-local-url}")
-    private String serverPortLocalUrl;
-
-    @Value("${server-port-url}")
-    private String serverPortUrl;
-
-    @Autowired
-    private JwtTokenFilter jwtAuthenticationFilter;
-
-    @Autowired
-    private UserDetailsService userDetailsService;
-
-    @Bean // 사용자 인증을 위한 DaoAuthenticationProvider를 빈으로 등록
-    public DaoAuthenticationProvider daoAuthenticationProvider() {
-        DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
-        provider.setUserDetailsService(userDetailsService); // 사용자 정보를 제공하는 'userDetailService'
-        provider.setPasswordEncoder(passwordEncoder()); // 비밀번호 인코딩 위한 passwordEncoder 설정
-        return provider;
-    }
-
-    @Bean // 사용자 비밀번호 안전하게 저장하기 위해
-=======
 
     // 로컬에서 실행시 포트번호
     @Value("${server-port-local-url}")
@@ -78,27 +53,19 @@ public class SecurityConfig {
 
     // 비밀번호 암호화
     @Bean
->>>>>>> yj_base
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
-<<<<<<< HEAD
     @Bean // Spring Security의 AuthenticationManager를 빈으로 등록
     // 인증(authentication)을 관리
-=======
     // 토큰 인증 매니저
-    @Bean
->>>>>>> yj_base
     AuthenticationManager authenticationManager(
             AuthenticationConfiguration authenticationConfiguration) throws Exception {
         return authenticationConfiguration.getAuthenticationManager();
     }
 
-<<<<<<< HEAD
-=======
     // 보안 필터 체인
->>>>>>> yj_base
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
@@ -114,10 +81,8 @@ public class SecurityConfig {
                 .logout((logout) -> logout.disable());
         return http.build();
     }
-<<<<<<< HEAD
-=======
+    
     // CORS 설정
->>>>>>> yj_base
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration corsConfiguration = new CorsConfiguration();

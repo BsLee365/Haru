@@ -253,8 +253,8 @@ export default {
           this.imageList.push(res.data.feedImg[i].feed_img);
           this.originImage.push(res.data.feedImg[i].feed_img);
           // E:/git/final/Haru/Haru/src/main/resources/static/img/Feed/
-          this.previewImageUrls.push(require("E:/900_팀 프로젝트/최종 프로젝트/Haru/Haru/src/main/resources/static/img/Feed/" + res.data.feedImg[i].feed_img));
-          this.originImagePreview.push(require("E:/900_팀 프로젝트/최종 프로젝트/Haru/Haru/src/main/resources/static/img/Feed/" + res.data.feedImg[i].feed_img));
+          this.previewImageUrls.push(require(`${process.env.VUE_APP_IMG_BASE_URL}/Haru/src/main/resources/static/img/Feed/` + res.data.feedImg[i].feed_img));
+          this.originImagePreview.push(require(`${process.env.VUE_APP_IMG_BASE_URL}/Haru/src/main/resources/static/img/Feed/` + res.data.feedImg[i].feed_img));
           this.imageNameList.push(res.data.feedImg[i].feed_img);
         }
         for (var j = 0; j < res.data.feedHashTag.length; j++) {

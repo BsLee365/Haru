@@ -42,12 +42,14 @@ public class MemberController {
 
     @PostMapping("/signup")
     public ResponseEntity<?> handleFileUpload(@ModelAttribute MemberDTO memberDTO,
-                                              @RequestParam("files") List<MultipartFile> files) {
+            @RequestParam("files") List<MultipartFile> files) {
 
+        String rootPath = System.getProperty("user.dir");
         String imgName = null;
         for (MultipartFile multipartFile : files) {
             imgName = UUID.randomUUID() + getExtension(multipartFile.getOriginalFilename());
-            String filePath = imageDirctory + imgName;
+            String filePath = rootPath + imageDirctory + imgName;
+            System.out.println("filePath : " + filePath);
             try (FileOutputStream writer = new FileOutputStream(filePath)) {
                 writer.write(multipartFile.getBytes());
             } catch (Exception e) {

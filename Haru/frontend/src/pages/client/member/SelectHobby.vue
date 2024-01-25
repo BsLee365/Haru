@@ -408,14 +408,14 @@ export default {
             this.selectedActivity.push(13);
           } else if (i.main_category.main_category == "공연장") {
             this.selectedCulture.push(0);
-          } else if (i.main_category.main_category == "공연장") {
-            this.selectedCulture.push(1);
+          // } else if (i.main_category.main_category == "공연장") { // 공연장 같은거 바꿔야됨
+          //   this.selectedCulture.push(1);
           } else if (i.main_category.main_category == "영화관") {
             this.selectedCulture.push(2);
           } else if (i.main_category.main_category == "전시") {
             this.selectedCulture.push(3);
-          } else if (i.main_category.main_category == "공연장") {
-            this.selectedCulture.push(4);
+          // } else if (i.main_category.main_category == "공연장") {
+          //   this.selectedCulture.push(4);
           } else if (i.main_category.main_category == "해수욕장") {
             this.selectedTravel.push(0);
           } else if (i.main_category.main_category == "캠핑장") {
@@ -438,8 +438,8 @@ export default {
             this.selectedHobby.push(6);
           } else if (i.main_category.main_category == "식당") {
             this.selectedFood.push(0);
-          } else if (i.main_category.main_category == "식당") {
-            this.selectedFood.push(1);
+          // } else if (i.main_category.main_category == "식당") {
+          //   this.selectedFood.push(1);
           } else if (i.main_category.main_category == "도서관") {
             this.selectedSelfDevelopment.push(0);
           } else if (i.main_category.main_category == "스터디") {

@@ -43,6 +43,11 @@ public class WishListService {
         wishListRepository.deleteById(wishlistnum);
     }
 
+    // 찜 목록 삭제 -> place num으로 - 이리수
+    public void deleteWishByPlaceNum(Long placenum) {
+        wishListRepository.deleteByPlace_PlaceNum(placenum);
+    }
+
 //    public Long getData(String userId) {
 //        return wishListRepository.findById(1L);
 //    }

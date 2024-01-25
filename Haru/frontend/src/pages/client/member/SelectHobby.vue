@@ -377,7 +377,6 @@ export default {
 			console.log(this.data.id);
 			axios.post(`http://${process.env.VUE_APP_BACK_END_URL}/getMyHobby`, formData).then((res) => {
 				console.log(res);
-<<<<<<< HEAD
 				for (const i of res.data) {
 					if (i.main_category.main_category == "골프") {
 						this.selectedActivity.push(0);
@@ -448,81 +447,6 @@ export default {
 						this.selectedShopping.push(0);
 					}
 				}
-=======
-        for (const i of res.data) {
-          if (i.main_category.main_category == "골프") {
-            this.selectedActivity.push(0);
-          } else if (i.main_category.main_category == "농구장") {
-            this.selectedActivity.push(1);
-          } else if (i.main_category.main_category == "등산로") {
-            this.selectedActivity.push(2);
-          } else if (i.main_category.main_category == "배드민턴장") {
-            this.selectedActivity.push(3);
-          } else if (i.main_category.main_category == "볼링장") {
-            this.selectedActivity.push(4);
-          } else if (i.main_category.main_category == "공원") {
-            this.selectedActivity.push(5);
-          } else if (i.main_category.main_category == "수영장") {
-            this.selectedActivity.push(6);
-          } else if (i.main_category.main_category == "스키장") {
-            this.selectedActivity.push(7);
-          } else if (i.main_category.main_category == "야구장") {
-            this.selectedActivity.push(8);
-          } else if (i.main_category.main_category == "요가") {
-            this.selectedActivity.push(9);
-          } else if (i.main_category.main_category == "자전거") {
-            this.selectedActivity.push(10);
-          } else if (i.main_category.main_category == "클라이밍") {
-            this.selectedActivity.push(11);
-          } else if (i.main_category.main_category == "테니스") {
-            this.selectedActivity.push(12);
-          } else if (i.main_category.main_category == "헬스") {
-            this.selectedActivity.push(13);
-          } else if (i.main_category.main_category == "공연장") {
-            this.selectedCulture.push(0);
-          // } else if (i.main_category.main_category == "공연장") { // 공연장 같은거 바꿔야됨
-          //   this.selectedCulture.push(1);
-          } else if (i.main_category.main_category == "영화관") {
-            this.selectedCulture.push(2);
-          } else if (i.main_category.main_category == "전시") {
-            this.selectedCulture.push(3);
-          // } else if (i.main_category.main_category == "공연장") {
-          //   this.selectedCulture.push(4);
-          } else if (i.main_category.main_category == "해수욕장") {
-            this.selectedTravel.push(0);
-          } else if (i.main_category.main_category == "캠핑장") {
-            this.selectedTravel.push(1);
-          } else if (i.main_category.main_category == "테마파크") {
-            this.selectedTravel.push(2);
-          } else if (i.main_category.main_category == "pc방") {
-            this.selectedHobby.push(0);
-          } else if (i.main_category.main_category == "노래방") {
-            this.selectedHobby.push(1);
-          } else if (i.main_category.main_category == "공예") {
-            this.selectedHobby.push(2);
-          } else if (i.main_category.main_category == "댄스") {
-            this.selectedHobby.push(3);
-          } else if (i.main_category.main_category == "방탈출") {
-            this.selectedHobby.push(4);
-          } else if (i.main_category.main_category == "보드게임") {
-            this.selectedHobby.push(5);
-          } else if (i.main_category.main_category == "사진") {
-            this.selectedHobby.push(6);
-          } else if (i.main_category.main_category == "식당") {
-            this.selectedFood.push(0);
-          // } else if (i.main_category.main_category == "식당") {
-          //   this.selectedFood.push(1);
-          } else if (i.main_category.main_category == "도서관") {
-            this.selectedSelfDevelopment.push(0);
-          } else if (i.main_category.main_category == "스터디") {
-            this.selectedSelfDevelopment.push(1);
-          } else if (i.main_category.main_category == "외국어학원") {
-            this.selectedSelfDevelopment.push(2);
-          } else if (i.main_category.main_category == "쇼핑") {
-            this.selectedShopping.push(0);
-          }
-        }
->>>>>>> merge_0125_LISU_AI_02
 			});
 		},
 		hobbySet() {

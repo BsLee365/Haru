@@ -113,20 +113,28 @@
             <!--장소 카드 시작-->
             <div class="place-card" v-for="(item, index) in recommendPlace.data" :key="index">
               <div class="'food-img">
-                <img
-                  class="heart-img"
-                  src="@/img/Total_stress/img/image 47.png"
-                />
+                <!-- 하트(찜) 하기 -->
+<!--                <img-->
+<!--                  class="heart-img"-->
+<!--                  src="@/img/Total_stress/img/image 47.png"-->
+<!--                />-->
+                  <img class="heart-img cursor-p"
+                       :src="isInWishList(item) ? existImage : noImage"
+                       @click="toggleWish(item)"
+                  />
+
+                <!-- 장소 이미지 없는 경우 -->
                 <img
                     v-show="item.place_img === null"
                     src="@/img/Total_stress/img/no_img.png"
-                    alt="버거킹"
+                    alt="no_image"
                     class="place-card"
                 />
+                <!-- 장소 이미지 있는 경우 -->
                 <img
-                    v-show="item.place_img != null"
+                  v-show="item.place_img != null"
                   :src="item.place_img"
-                  alt="버거킹"
+                  alt="no_image"
                   class="place-card"
                 />
               </div>
@@ -143,6 +151,7 @@
                   </div>
                 </div>
               </div>
+
             </div>
           <!--  장소 카드 끝-->
           </div>
@@ -156,16 +165,16 @@
           >
             이전 추천 리스트
           </button>
-          <button class="big-ctlbtn select-btn" id="next-button">
+          <button @click="toReport" class="big-ctlbtn select-btn" id="next-button">
             나의 스트레스 보고서
           </button>
-          <button
-            @click="toMain"
+          <a
+              href="/"
             class="big-ctlbtn insert-btn"
             id="main-button"
           >
             메인으로 이동
-          </button>
+          </a>
         </div>
         <!-- 장소추천 영역 끝 -->
       </div>
@@ -173,6 +182,10 @@
   </div>
 </template>
 <script>
+import axios from "axios";
+import {onMounted, ref} from "vue";
+import {jwtDecode} from "jwt-decode";
+
 export default {
   name: "total_stress",
   data() {
@@ -185,7 +198,14 @@ export default {
       recommendPlace : null,
 
       // 스트레스 수치
-      stressScore : null
+      stressScore : null,
+
+      // 찜 목록
+      selectedWishList : [],
+
+      // 이미지
+      noImage : require("@/img/Total_stress/img/image 47.png"),
+      existImage: require("@/img/Total_stress/img/total_stress_heart.png"),
 
     };
   },
@@ -219,9 +239,53 @@ export default {
     toMyPlaceDiary() {
       this.$router.push("/MyPlaceDiary");
     },
-    toMain() {
-      this.$router.push("/");
+    toReport() {
+      this.$router.push("/Emotional_report")
     },
+    // 찜 기능 토글
+    toggleWish(item) {
+      // console.log('찜기능에 넣을 place : ' + item.place_num);
+
+      if (this.selectedWishList.indexOf(item.place_num) < 0) {
+        this.selectedWishList.push(item.place_num);
+        // console.log('추가함 ! : ' + this.selectedWishList);
+
+        axios.post(`http://${process.env.VUE_APP_BACK_END_URL}/wishList/addWishPlace`, {
+          userid: this.data.id,
+          place: item
+        })
+            .then(() => {
+              // console.log(res.data);
+            })
+            .catch(err => {
+              console.log('등록 에러 ' + err);
+            })
+
+      } else {
+        this.selectedWishList.splice(this.selectedWishList.indexOf(item.place_num), 1);
+        // console.log('잘라냄 ! : ' + this.selectedWishList);
+
+        axios.post(`http://${process.env.VUE_APP_BACK_END_URL}/wishList/deleteWishByPlaceNum`,{
+          place_num: item.place_num
+        })
+            .then(() => {
+              console.log('삭제됨');
+              // this.$emit('update-all-rec-list');
+            })
+            .catch(err => {
+              console.log('삭제 에러 ' + err);
+            })
+
+      }
+    },
+
+    // 화면에 띄우기 용
+    isInWishList(item) {
+      if (this.selectedWishList.indexOf(item.place_num) < 0) {
+        return false;
+      }
+      return true;
+    }
   },
   mounted() {
     let currentWidth = 0;
@@ -251,9 +315,48 @@ export default {
     // localStorage.removeItem("stressScore");
 
   },
+  setup() {
+    const isLoggedIn = ref(false);
+    const data = ref([]);
+
+    const getToken = () => {
+      const token = localStorage.getItem("jwtToken");
+      isLoggedIn.value = token ? true : false;
+    };
+
+    const logout = () => {
+      axios
+          .get(`http://${process.env.VUE_APP_BACK_END_URL}/api/auth/logout`)
+          .then((res) => {
+            if (res.data == "Logout") {
+              localStorage.removeItem("jwtToken");
+              window.location.href = "/login";
+            }
+          });
+    };
+
+    const decodeToken = (token) => {
+      if (token == null) return false;
+      const decoded = jwtDecode(token);
+      data.value = decoded; // Use data.value to set the value of the ref
+      return decoded;
+    };
+
+    onMounted(() => {
+      getToken();
+      const token = localStorage.getItem("jwtToken");
+      decodeToken(token);
+    });
+
+    return { logout, data }; // Return data in the setup function
+  },
 };
 </script>
 
 <style scoped>
 @import url("@/css/client/stress/total_stress.css");
+#main-button {
+  text-align: center;
+  line-height: 50px;
+}
 </style>

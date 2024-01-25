@@ -6,7 +6,10 @@
   <component name="ChangeListManager">
     <list default="true" id="6d0870f0-66eb-40b4-a5ab-e66ef439dd61" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Haru/frontend/src/pages/client/member/Signup.vue" beforeDir="false" afterPath="$PROJECT_DIR$/Haru/frontend/src/pages/client/member/Signup.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Haru/frontend/src/pages/client/member/Login.vue" beforeDir="false" afterPath="$PROJECT_DIR$/Haru/frontend/src/pages/client/member/Login.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Haru/frontend/src/pages/client/myPlace/MyFavoritePlace.vue" beforeDir="false" afterPath="$PROJECT_DIR$/Haru/frontend/src/pages/client/myPlace/MyFavoritePlace.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Haru/src/main/java/kr/co/teamA/Haru/Controller/myPlace/WishListController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Haru/src/main/java/kr/co/teamA/Haru/Controller/myPlace/WishListController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Haru/src/main/java/kr/co/teamA/Haru/Repository/WishListRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/Haru/src/main/java/kr/co/teamA/Haru/Repository/WishListRepository.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,9 +47,9 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 2
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 2
+}</component>
   <component name="ProjectId" id="2bR4mQkzXzQmO6wUyGv78RqpKXz" />
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
@@ -65,8 +68,9 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "Spring Boot.HaruApplication.executor": "Run",
-    "git-widget-placeholder": "merge__0125__LISU__AI",
+    "git-widget-placeholder": "merge__0125__LISU__AI__02",
     "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "E:/900_팀 프로젝트/최종 프로젝트/Haru/Haru/frontend/src/img/Total_stress/img",
     "node.js.detected.package.eslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
@@ -75,6 +79,11 @@
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\900_팀 프로젝트\최종 프로젝트\Haru\Haru\frontend\src\img\Total_stress\img" />
+    </key>
+  </component>
   <component name="RunManager">
     <configuration name="HaruApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
@@ -100,7 +109,8 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1706164717850</updated>
-      <workItem from="1706164721185" duration="3376000" />
+      <workItem from="1706164721185" duration="12140000" />
+      <workItem from="1706186144131" duration="792000" />
     </task>
     <servers />
   </component>

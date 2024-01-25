@@ -16,8 +16,8 @@
 <!--            <img class="heart-img" src="@/img/Total_stress/img/image 47.png" />-->
 
             <img class="heart-img cursor-p"
-                 :src="isInWishList(item) ? existImage : noImage"
-                 @click="toggleWish(item)"
+                 :src="existImage"
+                 @click="toggleWish(item[0], item[3])"
             />
 
             <img :src="item[1]" alt="" class="place-card" />
@@ -52,10 +52,7 @@ export default {
     return {
       isLoggedIn: false,
       AccessToken: "",
-      // 찜 목록
-      selectedWishList : [],
       // 하트 이미지
-      noImage : require("@/img/Total_stress/img/image 47.png"),
       existImage: require("@/img/Total_stress/img/total_stress_heart.png"),
     };
   },
@@ -147,49 +144,23 @@ export default {
       }
     },
     // 찜 기능 토글
-    toggleWish(item) {
-      // console.log('찜기능에 넣을 place : ' + item.place_num);
+    toggleWish(item, place_name) {
+      // console.log('placeData!! : ' + this.placeData);
 
-      if (this.selectedWishList.indexOf(item.place_num) < 0) {
-        this.selectedWishList.push(item.place_num);
-        // console.log('추가함 ! : ' + this.selectedWishList);
-
-        axios.post(`http://${process.env.VUE_APP_BACK_END_URL}/wishList/addWishPlace`, {
-          userid: this.data.id,
-          place: item
-        })
-            .then(() => {
-              // console.log(res.data);
-            })
-            .catch(err => {
-              console.log('등록 에러 ' + err);
-            })
-
-      } else {
-        this.selectedWishList.splice(this.selectedWishList.indexOf(item.place_num), 1);
-        // console.log('잘라냄 ! : ' + this.selectedWishList);
-
-        axios.post(`http://${process.env.VUE_APP_BACK_END_URL}/wishList/deleteWishByPlaceNum`,{
-          place_num: item.place_num
-        })
-            .then(() => {
-              console.log('삭제됨');
-              // this.$emit('update-all-rec-list');
-            })
-            .catch(err => {
-              console.log('삭제 에러 ' + err);
-            })
-
-      }
+      if (confirm(`[${place_name}] 장소의 찜을 해제할까요?`))
+      axios.post(`http://${process.env.VUE_APP_BACK_END_URL}/wishList/deleteWishByPlaceNum`,{
+        place_num: item
+      })
+          .then(() => {
+            console.log('삭제됨');
+            // this.$emit('update-all-rec-list');
+            this.placeData=[];
+            this.getData();
+          })
+          .catch(err => {
+            console.log('삭제 에러 ' + err);
+          })
     },
-
-    // 화면에 띄우기 용
-    isInWishList(item) {
-      if (this.selectedWishList.indexOf(item.place_num) < 0) {
-        return false;
-      }
-      return true;
-    }
   },
 };
 </script>

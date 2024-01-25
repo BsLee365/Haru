@@ -7,7 +7,6 @@ import org.hibernate.annotations.OnDeleteAction;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.*;
-import java.sql.Date;
 
 @Data
 @Entity
@@ -46,5 +45,5 @@ public class Alarm {
     private Long alarmTypes;
 
     @Column(columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP", insertable = false)
-    private Date alarmCdate;
+    private String alarmCdate;
 }

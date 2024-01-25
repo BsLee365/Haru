@@ -139,8 +139,8 @@ export default {
           }
         )
         .then((res) => {
-          console.log(res);
           if (!res.data.access_token == "") {
+            console.log('로그인 성공 ' + res);
             localStorage.setItem("jwtToken", res.data.access_token);
             window.location.href = "/";
             // this.$router.replace("/");

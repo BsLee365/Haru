@@ -21,7 +21,7 @@ public class WishListController {
     @PostMapping("/getMyFavoritePlace")
     public Object[] getMyFavoritePlace(@RequestBody Map<String ,String> data) {
         String userId = data.get("id");
-        wishListService.getWishListData(userId);
+//        wishListService.getWishListData(userId);
         return wishListService.getWishListData(userId);
     }
 

@@ -11,20 +11,27 @@
           v-for="(item, idx) in this.placeData"
           :key="idx"
         >
+          {{item}}
           <div class="'food-img">
-            <img class="heart-img" src="@/img/Total_stress/img/image 47.png" />
+<!--            <img class="heart-img" src="@/img/Total_stress/img/image 47.png" />-->
+
+            <img class="heart-img cursor-p"
+                 :src="isInWishList(item) ? existImage : noImage"
+                 @click="toggleWish(item)"
+            />
+
             <img :src="item" alt="" class="place-card" />
           </div>
           <div class="food-desc">
             <div class="food-desc-box">
               <div class="food-title">
-                <h4>{{ item[2] }}</h4>
+                <h4>{{ item[3] }}</h4>
               </div>
               <div class="hash-tag">
-                <span class="review-score">★ {{ item[3] }}</span>
+                <span class="review-score">★ {{ item[4] / 10 }}</span>
               </div>
               <div class="food-detail">
-                <span class="food-address">주소: {{ item[4] }}</span>
+                <span class="food-address">주소: {{ item[5] }}</span>
               </div>
             </div>
           </div>
@@ -44,6 +51,13 @@ export default {
     return {
       isLoggedIn: false,
       AccessToken: "",
+      // 찜 목록
+      selectedWishList : [],
+      // 목록
+      wholeList:[],
+      // 하트 이미지
+      noImage : require("@/img/Total_stress/img/image 47.png"),
+      existImage: require("@/img/Total_stress/img/total_stress_heart.png"),
     };
   },
   created() {
@@ -103,9 +117,11 @@ export default {
         .then((res) => {
           // 요청 성공 시 처리 로직
           myFaboritePlace.value = res.data.place;
-          res.data[0].forEach((element) => {
-            placeData.value.push(element);
-          });
+          this.wholeList = res.data
+          console.log(myFaboritePlace)
+          // res.data[0].forEach((element) => {
+          //   placeData.value.push(element);
+          // });
         })
         .catch((error) => {
           // 요청 실패 시 처리 로직
@@ -132,6 +148,50 @@ export default {
         this.$router.push("/login");
       }
     },
+    // 찜 기능 토글
+    toggleWish(item) {
+      // console.log('찜기능에 넣을 place : ' + item.place_num);
+
+      if (this.selectedWishList.indexOf(item.place_num) < 0) {
+        this.selectedWishList.push(item.place_num);
+        // console.log('추가함 ! : ' + this.selectedWishList);
+
+        axios.post(`http://${process.env.VUE_APP_BACK_END_URL}/wishList/addWishPlace`, {
+          userid: this.data.id,
+          place: item
+        })
+            .then(() => {
+              // console.log(res.data);
+            })
+            .catch(err => {
+              console.log('등록 에러 ' + err);
+            })
+
+      } else {
+        this.selectedWishList.splice(this.selectedWishList.indexOf(item.place_num), 1);
+        // console.log('잘라냄 ! : ' + this.selectedWishList);
+
+        axios.post(`http://${process.env.VUE_APP_BACK_END_URL}/wishList/deleteWishByPlaceNum`,{
+          place_num: item.place_num
+        })
+            .then(() => {
+              console.log('삭제됨');
+              // this.$emit('update-all-rec-list');
+            })
+            .catch(err => {
+              console.log('삭제 에러 ' + err);
+            })
+
+      }
+    },
+
+    // 화면에 띄우기 용
+    isInWishList(item) {
+      if (this.selectedWishList.indexOf(item.place_num) < 0) {
+        return false;
+      }
+      return true;
+    }
   },
 };
 </script>

@@ -29,7 +29,7 @@
                   <div class="all-info">
                     <div class="rlist-img-area">
                       <a :href="recItemInfo.link"
-                        ><img
+                      ><img
                           class="rec-detail-img"
                           :src="recItemInfo.img"
                           alt=""
@@ -45,7 +45,7 @@
                       <!-- 별점 -->
                       <p class="rlist-score-area">
                         <span class="rlist-score"
-                          >★ {{ item.place_score / 10 }}</span
+                        >★ {{ item.place_score / 10 }}</span
                         >
                       </p>
                     </div>
@@ -60,10 +60,10 @@
         <div>
           <p class="feed-rec-area-title">이전 추천 리스트</p>
           <RecList
-            :AllRecList="RecommendList"
-            :isBtnHeartNone="isBtnHeartNone"
-            class="feed-rec-recList"
-            @send-rec-List="getRecList"
+              :AllRecList="RecommendList"
+              :isBtnHeartNone="isBtnHeartNone"
+              class="feed-rec-recList"
+              @send-rec-List="getRecList"
           />
         </div>
 
@@ -98,8 +98,11 @@ export default {
   components: {
     RecList,
   },
+  created() {
+    // console.log('this.RecommendList!!!! ' + this.RecommendList);
+  },
   props: {
-    RecommendList: Object,
+    RecommendList: Array,
   },
 };
 </script>

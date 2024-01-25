@@ -8,8 +8,6 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Haru/frontend/src/components/client/feed/FeedRecommendModal.vue" beforeDir="false" afterPath="$PROJECT_DIR$/Haru/frontend/src/components/client/feed/FeedRecommendModal.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Haru/frontend/src/pages/client/feed/InsertFeed.vue" beforeDir="false" afterPath="$PROJECT_DIR$/Haru/frontend/src/pages/client/feed/InsertFeed.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Haru/src/main/java/kr/co/teamA/Haru/Controller/myPlace/PlaceRecommendListController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Haru/src/main/java/kr/co/teamA/Haru/Controller/myPlace/PlaceRecommendListController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Haru/src/main/java/kr/co/teamA/Haru/Service/myPlace/PlaceRecommendListService.java" beforeDir="false" afterPath="$PROJECT_DIR$/Haru/src/main/java/kr/co/teamA/Haru/Service/myPlace/PlaceRecommendListService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

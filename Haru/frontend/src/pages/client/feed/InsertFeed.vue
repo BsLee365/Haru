@@ -1,6 +1,6 @@
 <template>
 	<div class="container1">
-		<FeedRecommend v-if="modal_Check" @close-modal="closeModal" :RecommendList="RecommendList" />
+		<FeedRecommend v-if="modal_Check" @close-modal="closeModal" :RecommendList="MyRecommendList" />
 		<form>
 			<div class="bg">
 				<div>
@@ -90,7 +90,7 @@ export default {
 			writeHashtag: [""], // 직접 입력 해시태그
 			activeTags: [], // 활성화된 해시태그
 			modal_Check: false,
-      MyRecommendList: {}, // 추천 리스트
+      MyRecommendList: [], // 추천 리스트
 		};
 	},
 	created() {
@@ -103,7 +103,7 @@ export default {
       var endRecDate = moment().add(1,"days").format("YYYY-MM-DD");
       var startRecDate = moment().subtract(1,"months").format("YYYY-MM-DD");
 
-      console.log(`시작~ 끝 날짜 !! : ${this.data.id} / ${startRecDate}, ${endRecDate}`);
+      // console.log(`시작~ 끝 날짜 !! : ${this.data.id} / ${startRecDate}, ${endRecDate}`);
 
       axios
           .post(`http://${process.env.VUE_APP_BACK_END_URL}/recommend/getMyRecList`, {
@@ -112,8 +112,9 @@ export default {
             enddate: endRecDate,
           })
           .then((res) => {
-            console.log(res.data); // place, place_recommend_list, wish_list 가져옴
-            this.RecommendList = res.data.rec_list;
+            // console.log(res.data); // place, place_recommend_list, wish_list 가져옴
+            this.MyRecommendList = res.data;
+            // console.log(this.MyRecommendList);
           })
           .catch((error) => {
             console.error("error! " + error);
@@ -125,7 +126,7 @@ export default {
 		},
 		getToken() {
 			this.AccessToken = localStorage.getItem("jwtToken");
-			console.log(this.AccessToken);
+			// console.log(this.AccessToken);
 			if (this.AccessToken != null) {
 				this.isLoggedIn = true;
 			} else {

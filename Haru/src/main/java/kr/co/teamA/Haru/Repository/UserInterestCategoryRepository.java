@@ -1,5 +1,7 @@
 package kr.co.teamA.Haru.Repository;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -20,4 +22,6 @@ public interface UserInterestCategoryRepository extends JpaRepository<UserIntere
     @Modifying
     @Query("delete from UserInterestCategory uic where uic.userId.userId = :userId")
     void deleteByUserId(@Param("userId") String userId);
+
+    List<UserInterestCategory> findByUserId_UserId(String userId);
 }

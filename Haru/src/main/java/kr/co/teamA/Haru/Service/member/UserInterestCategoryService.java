@@ -1,5 +1,7 @@
 package kr.co.teamA.Haru.Service.member;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import kr.co.teamA.Haru.Entity.MainCategory;
@@ -34,5 +36,9 @@ public class UserInterestCategoryService {
                 .build();
 
         return userInterestCategoryRepository.save(entity);
+    }
+
+    public List<UserInterestCategory> getMyHobby(String userId) {
+        return userInterestCategoryRepository.findByUserId_UserId(userId);
     }
 }

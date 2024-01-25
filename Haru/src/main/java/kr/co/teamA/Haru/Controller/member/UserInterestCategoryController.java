@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import kr.co.teamA.Haru.Entity.UserInterestCategory;
 import kr.co.teamA.Haru.Repository.UserInterestCategoryRepository;
 import kr.co.teamA.Haru.Service.member.UserInterestCategoryService;
 
@@ -19,6 +20,11 @@ public class UserInterestCategoryController {
             UserInterestCategoryRepository userInterestCategoryRepository) {
         this.userInterestCategoryRepository = userInterestCategoryRepository;
         this.userInterestCategoryService = userInterestCategoryService;
+    }
+
+    @PostMapping("/getMyHobby")
+    public List<UserInterestCategory> getMyHobby(@RequestParam("userId") String userId) {
+        return userInterestCategoryService.getMyHobby(userId);
     }
 
     @PostMapping("/setHobby")

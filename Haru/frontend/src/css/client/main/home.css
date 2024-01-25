@@ -13,10 +13,7 @@ video {
   top: -5px;
   z-index: -1;
 }
-<<<<<<< HEAD
 
-=======
->>>>>>> yj_base
 .main-container {
   position: absolute;
   width: 100%;
@@ -292,13 +289,8 @@ video {
 .main-footer > div {
   margin-right: 30px;
 }
-<<<<<<< HEAD
 #channel-btn {
   background-color: transparent;
-=======
-#channel-btn{
-  background-color:transparent;
->>>>>>> yj_base
   border: 0;
   outline: 0;
   border-radius: 50px;
@@ -306,7 +298,6 @@ video {
 #channel-btn > img:hover {
   border-radius: 50px;
   box-shadow: 1px 5px 5px 1px rgba(0, 0, 0, 0.2);
-<<<<<<< HEAD
 }
 
 /*.screen-1 {*/
@@ -323,6 +314,3 @@ video {
 /*.home .screen-1 h1 {*/
 /*  margin-bottom: 20px;*/
 /*}*/
-=======
-}
->>>>>>> yj_base

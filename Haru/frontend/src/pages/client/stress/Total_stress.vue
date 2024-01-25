@@ -25,13 +25,9 @@
         <div class="stress-area">
           <div class="result-comment">
             이범석님의 스트레스 수치는
-<<<<<<< HEAD
             <span class="badge rounded-pill bg-danger custom-bedge" v-show="stressRate <= 60">정상</span>
             <span class="badge rounded-pill bg-danger custom-bedge" v-show="61 <= stressRate && stressRate <= 80">주의</span>
             <span class="badge rounded-pill bg-danger custom-bedge" v-show="81 <= stressRate ">심각</span>
-=======
-            <span class="badge rounded-pill bg-danger custom-bedge">정상</span>
->>>>>>> yj_base
             입니다.
           </div>
           <!-- 스트레스 수치 바 시작 -->
@@ -114,19 +110,14 @@
           </div>
           <!-- 장소보여주기 -->
           <div class="recommend-place">
-<<<<<<< HEAD
             <!--장소 카드 시작-->
             <div class="place-card" v-for="(item, index) in recommendPlace.data" :key="index">
-=======
-            <div class="place-card">
->>>>>>> yj_base
               <div class="'food-img">
                 <img
                   class="heart-img"
                   src="@/img/Total_stress/img/image 47.png"
                 />
                 <img
-<<<<<<< HEAD
                     v-show="item.place_img === null"
                     src="@/img/Total_stress/img/no_img.png"
                     alt="버거킹"
@@ -135,9 +126,6 @@
                 <img
                     v-show="item.place_img != null"
                   :src="item.place_img"
-=======
-                  src="@/img/Total_stress/food/buger.jpg"
->>>>>>> yj_base
                   alt="버거킹"
                   class="place-card"
                 />
@@ -145,7 +133,6 @@
               <div class="food-desc">
                 <div class="food-desc-box">
                   <div class="food-title">
-<<<<<<< HEAD
                     <h4>{{item.place_name}}</h4>
                   </div>
                   <div class="hash-tag">
@@ -153,76 +140,11 @@
                   </div>
                   <div class="food-detail">
                     <span class="food-address">{{item.place_address}}</span>
-=======
-                    <h4>버거킹 신논현역점</h4>
-                  </div>
-                  <div class="hash-tag">
-                    <span class="review-score">★ 4.58</span>
-                  </div>
-                  <div class="food-detail">
-                    <span class="food-address"
-                      >주소: 부산광역시 강서구 녹산산단382로14번가길
-                      10~29번지(송정동)</span
-                    >
->>>>>>> yj_base
                   </div>
                 </div>
               </div>
             </div>
-<<<<<<< HEAD
           <!--  장소 카드 끝-->
-=======
-            <div class="place-card">
-              <div class="'food-img">
-                <img
-                  class="heart-img"
-                  src="@/img/Total_stress/img/image 47.png"
-                />
-                <img
-                  src="@/img/Total_stress/food/duck.jpg"
-                  alt="버거킹"
-                  class="place-card"
-                />
-              </div>
-              <div class="food-desc">
-                <div class="food-desc-box">
-                  <div class="food-title">
-                    <h4>버거킹 신논현역점</h4>
-                  </div>
-                  <div class="hash-tag">
-                    <span class="review-score">★ 별점없음</span>
-                  </div>
-                  <div class="food-detail">
-                    <span class="food-address"
-                      >주소: 부산광역시 강서구 녹산산단382로14번가길
-                      10~29번지(송정동)</span
-                    >
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="place-card">
-              <img
-                src="@/img/Total_stress/food/mega.jpg"
-                alt="버거킹"
-                class="place-card"
-              />
-            </div>
-            <div class="place-card">
-              <img
-                src="@/img/Total_stress/food/starbucks.jpg"
-                alt="버거킹"
-                class="place-card"
-              />
-            </div>
-            <div class="place-card">
-              <img
-                src="@/img/Total_stress/food/wf.jpg"
-                alt="버거킹"
-                class="place-card"
-              />
-            </div>
->>>>>>> yj_base
           </div>
           <!-- 장소보여주기 끝 -->
         </div>
@@ -258,7 +180,6 @@ export default {
       gaugeWidth: "0%", // 초기 게이지
       ratNumber: [10, 20, 30, 40, 50, 60, 70, 80, 90],
       stressRate: 0,
-<<<<<<< HEAD
 
       // 장소
       recommendPlace : null,
@@ -266,19 +187,14 @@ export default {
       // 스트레스 수치
       stressScore : null
 
-=======
->>>>>>> yj_base
     };
   },
   created() {
     // background-image 설정
     this.bgImage();
-<<<<<<< HEAD
 
     this.recommendPlace = JSON.parse(localStorage.getItem("recommendPlace"));
     this.stressScore = localStorage.getItem("stressScore");
-=======
->>>>>>> yj_base
   },
   methods: {
     // background-image 설정
@@ -309,11 +225,7 @@ export default {
   },
   mounted() {
     let currentWidth = 0;
-<<<<<<< HEAD
     const targetWidth = this.stressScore; // 목표 값
-=======
-    const targetWidth = 78; // 목표 값 추후 변경
->>>>>>> yj_base
     this.stressRate = targetWidth;
 
     const animationDuration = 5000;
@@ -323,16 +235,11 @@ export default {
 
     const animate = () => {
       if (currentWidth < targetWidth) {
-<<<<<<< HEAD
         currentWidth += step+0.2;
-=======
-        currentWidth += step;
->>>>>>> yj_base
         this.gaugeWidth = currentWidth + "%";
         this.stressRate = Math.round(currentWidth);
         requestAnimationFrame(animate);
       } else {
-<<<<<<< HEAD
         this.gaugeWidth =targetWidth + "%"; // 애니메이션이 완료되면 정확한 값으로 설정
         this.stressRate = Number(targetWidth).toFixed(2);
       }
@@ -343,13 +250,6 @@ export default {
     // localStorage.removeItem("recommendPlace");
     // localStorage.removeItem("stressScore");
 
-=======
-        this.gaugeWidth = targetWidth + "%"; // 애니메이션이 완료되면 정확한 값으로 설정
-        this.stressRate = targetWidth;
-      }
-    };
-    animate();
->>>>>>> yj_base
   },
 };
 </script>

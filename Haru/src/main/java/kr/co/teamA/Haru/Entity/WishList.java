@@ -13,29 +13,17 @@ import lombok.NoArgsConstructor;
 @Builder
 @Table(name = "WISHLIST")
 public class WishList {
-<<<<<<< HEAD
-=======
 
->>>>>>> yj_base
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "WISHLIST_SEQ_")
     @SequenceGenerator(name = "WISHLIST_SEQ_", sequenceName = "WISHLIST_SEQ_", allocationSize = 1)
     private Long wishListNum;
 
-<<<<<<< HEAD
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.REMOVE)
     @JoinColumn(name = "userId")
     private Member member;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.REMOVE)
     @JoinColumn(name = "placeNum")
-=======
-    @ManyToOne(cascade = CascadeType.REMOVE)
-    @JoinColumn(name = "userId")
-    private Member member;
-
-    @ManyToOne(cascade = CascadeType.REMOVE)
-    @JoinColumn(name = "placeNumber")
->>>>>>> yj_base
     private Place place;
 }

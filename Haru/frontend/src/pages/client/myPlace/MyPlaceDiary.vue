@@ -21,13 +21,10 @@
                 </tr>
               </thead>
 
-<<<<<<< HEAD
               <!--              'cal-set-today': isToday(childIndex),   ==>   오늘 날짜면 background-color 주기     -->
               <!--              'selected-cal-day': isSelected(i, childIndex),   ==>   선택이 됐으면 border 색상 주기     -->
               <!--              'calendar-event': isInRecList(i, childIndex),   ==>   추천된 기록이 있으면 작은 점으로 표시     -->
               <!--              'prev-next-monthDay': isPrevNextDay(i, childIndex),   ==>   전달, 다음달 날짜는 흐리게 표시     -->
-=======
->>>>>>> yj_base
               <tbody>
                 <tr v-for="(index, i) in days" :key="i">
                   <td
@@ -37,11 +34,7 @@
                     :class="{
                       'cal-set-today': isToday(childIndex),
                       'selected-cal-day': isSelected(i, childIndex),
-<<<<<<< HEAD
                       'calendar-event': isInRecList(i, childIndex),
-=======
-                      'calendar-event': isInRecList(childIndex),
->>>>>>> yj_base
                       'prev-next-monthDay': isPrevNextDay(i, childIndex),
                     }"
                   >
@@ -74,7 +67,6 @@
           </div>
         </div>
 
-<<<<<<< HEAD
         <!-- 컴포넌트로 토글되는 영역 (추천리스트, 일기 리스트) -->
         <div class="tab-content-area">
           <RecommendListC
@@ -93,21 +85,6 @@
             :sendSelectedDate="sendSelectedDate"
             class="rlist-container"
             v-show="isTabRecList === false"
-=======
-        <!-- 컴포넌트로 토글되는 영역 (추천리스트, 일기 리스트)myNum -->
-        <div class="tab-content-area">
-          <RecommendList
-            :RecommendList="RecommendList"
-            :isBtnHeartNone="isBtnHeartNone"
-            class="rlist-container"
-            v-if="isTabRecList === true"
-            ref="recList"
-          />
-          <MyDiaryList
-            :diaryList="diaryList"
-            class="rlist-container"
-            v-if="isTabRecList === false"
->>>>>>> yj_base
           />
         </div>
       </div>
@@ -116,11 +93,7 @@
 </template>
 
 <script>
-<<<<<<< HEAD
 import RecommendListC from "@/components/client/myPlace/RecommendList.vue";
-=======
-import RecommendList from "@/components/client/myPlace/RecommendList.vue";
->>>>>>> yj_base
 import MyDiaryList from "@/components/client/myPlace/MyDiaryList.vue";
 import moment from "moment";
 import { onMounted, ref } from "vue";
@@ -132,7 +105,6 @@ export default {
     const today = moment(); // moment 객체 생성
     const sDate = [today.year(), today.month(), today.date(), 0]; // 선택한 날짜 정보 (연도, 월, 일, index)
     const myDate = []; // 현재 화면에 보여지는 날짜 정보
-<<<<<<< HEAD
     const allDateList = new Set(); // 추천리스트, 일기 받은 날짜 담는 곳
 
     return {
@@ -145,76 +117,31 @@ export default {
       sendSelectedDate: "", // 추천리스트로 넘길 날짜
       diaryList: [], // 일기 리스트
       // 달력 관련 데이터 --------------------------------------
-=======
-
-    return {
-      // 달력 외 관련
-      activeTab: "recommend", // 기본값으로 추천 리스트를 활성화
-      isBtnHeartNone: false, // 하트버튼이 안보여야되는지
-      isTabRecList: true, // 추천 리스트 탭 활성화
-      RecommendList: [],
-      // 일기 리스트
-      diaryList: {
-        rdate: "2024년 01월 10일(수)",
-        dList: [
-          {
-            diaryNum: 0,
-            diaryName: "오늘 와룡산 갔다오고 나서(1)",
-            dContents:
-              "오늘은 크리스마스, 하얀 눈이 내리는 마법 같은 날이었다. 아침에 눈을 뜨자 창밖으로 내리쏟는 눈을 보며 설렘을 감추지 못했다. 따뜻한 코코아 한 잔을 손에 쥐고, 창가에 앉아 눈 내리는 거리를 바라봤다.오늘은 크리스마스, 하얀 눈이 내리는 마법 같은 날이었다. 아침에 눈을 뜨자 창밖으로 내리쏟는 눈을 보며 설렘을 감추지 못했다.",
-          },
-          {
-            diaryNum: 1,
-            diaryName: "오늘 와룡산 갔다오고 나서(2)",
-            dContents:
-              "따뜻한 코코아 한 잔을 손에 쥐고, 창가에 앉아 눈 내리는 거리를 바라봤다. 점심 식사, 우리가 나눈 웃음과 이야기들이 마음을 더욱 풍성하게 만들어주었다. 선물 교환은 언제나 즐거움의 정점을 찍는다. 서로의 마음을 담은 선물을 주고받으며, 그 속에 담긴 사랑과 감사의 마음을 느낄 수 있었다. 저녁이 되어, 가족들과 함께 크리스마스 영화를 보며 하루를 마무리했다.모든 순간이 따뜻하고, 평화롭고, 기쁨 가득했다. 오늘 하루가 주는 작은 기적들에 감사하며, 내일을 기대한다.",
-          },
-          {
-            diaryNum: 2,
-            diaryName: "강남에 맛집 탐방 후기",
-            dContents: "강남에 맛집 닭도리탕타앝수육",
-          },
-        ],
-      },
-      // 달력 관련 데이터
->>>>>>> yj_base
       today: today,
       sDate: sDate,
       myDate: myDate,
       week: ["일", "월", "화", "수", "목", "금", "토"],
-<<<<<<< HEAD
       calendarHeader: "", // 년도, 월 표시
       days: [], // 해당 월의 일 담은 배열
       isSelectedtoday: false, // 한 번 이라도 선택된게 있는지
       allDateList: allDateList, // 추천리스트, 일기 받은 날짜 담는 곳
       miniDotDates: [], // 달력에 작은 점 => 추천리스트 / 일기 있으면 찍힘
-=======
-      calendarHeader: "",
-      days: [], // 해당 월의 일 담은 배열
-      isSelectedtoday: false, // 한 번 이라도 선택된게 있는지
->>>>>>> yj_base
     };
   },
   mounted() {
     this.calendarImplementation();
     this.getMyRecPlace(this.sDate);
-<<<<<<< HEAD
     this.dayClick(3, this.sDate[2]);
     console.log('오늘 ' + this.sDate);
   },
   beforeCreate() {
 
-=======
->>>>>>> yj_base
   },
   created() {
     // 페이지가 로드될 때 초기 이미지 설정
     this.bgImage();
     this.getToken();
-<<<<<<< HEAD
     moment.locale('ko');
-=======
->>>>>>> yj_base
   },
   setup() {
     const isLoggedIn = ref(false);
@@ -239,11 +166,7 @@ export default {
     const decodeToken = (token) => {
       if (token == null) return false;
       const decoded = jwtDecode(token);
-<<<<<<< HEAD
       data.value = decoded; // Use data.value to set the value of the ref
-=======
-      data.value = decoded;
->>>>>>> yj_base
       return decoded;
     };
 
@@ -253,7 +176,6 @@ export default {
       decodeToken(token);
     });
 
-<<<<<<< HEAD
     return { logout, data }; // Return data in the setup function
   },
   methods: {
@@ -353,16 +275,6 @@ export default {
         .catch((error) => {
           console.error("error! " + error);
         });
-=======
-    return { logout, data };
-  },
-  methods: {
-    getMyRecPlace(sdate) {
-      // console.log(sdate)
-      var startMonth = moment([sdate[0], sdate[1], 1]).format("YYYY-MM-DD");
-      var endMonth = moment([sdate[0], sdate[1] + 1, 1]).format("YYYY-MM-DD");
-      console.log(`${startMonth}, ${endMonth}`);
->>>>>>> yj_base
     },
 
     // 달력 만들기----------------------------------
@@ -385,11 +297,7 @@ export default {
       // 시작날부터 마지막 날까지 채우기
       const basicDays = Array.from(
         { length: endDayOfTheMonth },
-<<<<<<< HEAD
         (v, ii) => ii + 1
-=======
-        (v, i) => i + 1
->>>>>>> yj_base
       );
 
       // 전달의 마지막 날 가져오기
@@ -411,10 +319,7 @@ export default {
       }
       this.calendarHeader = `${this.myDate[0]}년 ${this.myDate[1] + 1} 월`;
       this.addLastWeekEmptyDays();
-<<<<<<< HEAD
       this.getMyRecPlace(); // 달력에 event 작은 점 표시 -> 데이터가 있으면 표시
-=======
->>>>>>> yj_base
     },
 
     // 막주 날짜 채우기----------------------------------
@@ -432,11 +337,7 @@ export default {
       }
     },
 
-<<<<<<< HEAD
     // 월(날짜) 변경----------------------------------
-=======
-    // 날짜 변경----------------------------------
->>>>>>> yj_base
     changeMonth: function (val) {
       this.today = moment(this.today).add(val, "months").startOf("month");
       this.calendarImplementation();
@@ -459,10 +360,6 @@ export default {
 
     // 탭 전환하기----------------------------------
     changeTab(tab) {
-<<<<<<< HEAD
-=======
-      this.activeTab = tab;
->>>>>>> yj_base
       if (tab === "recommend") {
         this.isTabRecList = true;
       } else {
@@ -482,7 +379,6 @@ export default {
 
       return indexDay == today.format("YYYY-MM-DD");
     },
-<<<<<<< HEAD
     // 선택됐는지 확인해서 css 적용 ----------------------------------------------------------------
     isSelected(sIdx, day) {
       // 선택한 날짜
@@ -500,26 +396,11 @@ export default {
       if (this.isToday(day) && sdate && !this.isSelectedtoday) {
         return true;
       } else if (sdate == nowdate && sIdx == this.sDate[3]) {
-=======
-
-    isSelected(i, day) {
-      var sdate = moment([this.sDate[0], this.sDate[1], this.sDate[2]]).format(
-        "YYYY-MM-DD"
-      );
-      var nowdate = moment([this.myDate[0], this.myDate[1], day]).format(
-        "YYYY-MM-DD"
-      );
-      // 화면 최초 진입 시 오늘 날짜면 오늘 날짜에 표시
-      if (this.isToday(day) && sdate) {
-        return true;
-      } else if (sdate == nowdate && i == this.sDate[3]) {
->>>>>>> yj_base
         return true;
       }
       return false;
     },
 
-<<<<<<< HEAD
     // 날짜 클릭했을 때---------------------------------------------------------------------------------
     dayClick(i, day) {
       console.log('!!!! : ' + i + day);
@@ -527,11 +408,6 @@ export default {
       if (this.isSelectedtoday == false)
         this.isSelectedtoday = !this.isSelectedtoday;
 
-=======
-    // 한번 움직였으면 상태값 바꾸고 클릭한 곳에 동그라미 표시
-    // 데이터 불러오기
-    dayClick(i, day) {
->>>>>>> yj_base
       if (i == 0 && day > 6) {
         // 이전 달 클릭 시
         this.changeMonth(-1);
@@ -546,7 +422,6 @@ export default {
         // 다음 달 클릭 시
         this.changeMonth(1);
         this.sDate = [this.myDate[0], this.myDate[1], day, 0];
-<<<<<<< HEAD
       } else if (i == this.sDate[3] && day == this.sDate[2]) {
         // 현재 선택된 날짜 재 선택 시
         // console.log('같은 날짜 선택함');
@@ -644,32 +519,6 @@ export default {
   },
   components: {
     RecommendListC,
-=======
-      } else {
-        this.sDate = [this.myDate[0], this.myDate[1], day, i];
-      }
-    },
-
-    // 받아온 추천 리스트에 rDate를 화면에 점으로 표시하기----------------------------------
-    isInRecList(day) {
-      const rdates = this.RecommendList.map((item) => item.rdate);
-      var indexDay = moment([this.myDate[0], this.myDate[1], day]).format(
-        "YYYY-MM-DD"
-      );
-      return rdates.includes(indexDay);
-    },
-
-    // 이전달, 다음달 날짜면 회색 처리
-    isPrevNextDay(i, index) {
-      return (
-        (i == 0 && index > this.days[i][this.days[i].length - 1]) ||
-        (i == this.days.length - 1 && index < 7)
-      );
-    },
-  },
-  components: {
-    RecommendList,
->>>>>>> yj_base
     MyDiaryList,
   },
 };

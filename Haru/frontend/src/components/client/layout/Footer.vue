@@ -6,11 +6,7 @@
     <footer class="footer-area">
       <!-- 로고 이미지 -->
       <div class="img-area">
-<<<<<<< HEAD
         <img src="@/img/assets/logo/logo_white.png" alt="" />
-=======
-        <img src="@/assets/logo/logo_white.png" alt="" />
->>>>>>> yj_base
       </div>
 
       <div class="info-area">

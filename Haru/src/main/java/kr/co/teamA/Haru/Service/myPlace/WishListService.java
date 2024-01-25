@@ -1,22 +1,16 @@
 package kr.co.teamA.Haru.Service.myPlace;
 
-<<<<<<< HEAD
 import kr.co.teamA.Haru.DTO.DiaryDTO;
 import kr.co.teamA.Haru.DTO.WishListDTO;
 import kr.co.teamA.Haru.Entity.Diary;
 import kr.co.teamA.Haru.Entity.WishList;
 import kr.co.teamA.Haru.Repository.MemberRepository;
-=======
->>>>>>> yj_base
 import kr.co.teamA.Haru.Repository.WishListRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-<<<<<<< HEAD
 import java.util.Date;
-=======
->>>>>>> yj_base
 import java.util.List;
 
 @Service
@@ -26,18 +20,14 @@ public class WishListService {
     @Autowired
     private final WishListRepository wishListRepository;
 
-<<<<<<< HEAD
     @Autowired
     private MemberRepository memberRepository;
 
-=======
->>>>>>> yj_base
     public Object[] getWishListData(String userId) {
         Object[] wishListDTO = new List[]{wishListRepository.findPlaceAndWishListByUserId(userId)};
         return wishListDTO;
     }
 
-<<<<<<< HEAD
     // 찜 목록에 저장 - 이리수
     public WishList saveWishPlace(WishListDTO wishListDTO) {
         WishList wishList = new WishList();
@@ -53,8 +43,6 @@ public class WishListService {
         wishListRepository.deleteById(wishlistnum);
     }
 
-=======
->>>>>>> yj_base
 //    public Long getData(String userId) {
 //        return wishListRepository.findById(1L);
 //    }

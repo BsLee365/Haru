@@ -32,21 +32,14 @@ public class StressData {
     @Column(nullable = false)
     private Double diaryData;
 
-<<<<<<< HEAD
       // 척도 안받아옴.
 //    @Column(nullable = false)
 //    private Long measureData;
 
-=======
->>>>>>> yj_base
     @Column(nullable = false)
     private Double stressScore;
 
     @Column(nullable = false)
     private Date stressCdate;
 
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> yj_base

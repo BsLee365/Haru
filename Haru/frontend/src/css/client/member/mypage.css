@@ -243,11 +243,7 @@
 /* 알림 내용 span 태그 */
 #comment-content {
   display: inline-block;
-<<<<<<< HEAD
   width: 415px;
-=======
-  width: 485px;
->>>>>>> yj_base
   padding-right: 10px;
   font-weight: 500;
   font-size: 18px;
@@ -256,13 +252,8 @@
 /* 시간 아이콘, 작성일 */
 .alarm-time {
   display: inline-block;
-<<<<<<< HEAD
   width: 200px;
   text-align: right;
-=======
-  width: 110px;
-  text-align: center;
->>>>>>> yj_base
 }
 
 /* 시간 아이콘 */

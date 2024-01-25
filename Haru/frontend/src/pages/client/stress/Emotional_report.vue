@@ -2,11 +2,7 @@
   <div class="container1">
     <div class="report-container">
       <div class="report-title">
-<<<<<<< HEAD
         <span>{{ UserName }}의 스트레스 추이 😊</span>
-=======
-        <span>{{ UserName }}의 스트레스 종합 보고서 😊</span>
->>>>>>> yj_base
       </div>
       <div class="total_report_card">
         <div class="select-date-area">
@@ -74,17 +70,12 @@
             </select>
           </div>
           <div class="date-input-area">
-<<<<<<< HEAD
             <button class="big-ctlbtn else-btn" @click="sendStressData">검색</button>
-=======
-            <button class="big-ctlbtn else-btn">검색</button>
->>>>>>> yj_base
           </div>
         </div>
         <div class="report-contents">
           <div v-if="SelectDate === 'day'">
             {{ Oneday }} 스트레스 수치
-<<<<<<< HEAD
           </div>
           <div v-if="SelectDate === 'days'">
             {{ Startdays }} ~ {{ Enddays }} 스트레스 수치
@@ -98,30 +89,6 @@
         </div>
         <div class="report-chart-area">
           <canvas ref="charts"></canvas>
-=======
-            <span class="badge rounded-pill normal-badge">정상</span>
-          </div>
-          <div v-if="SelectDate === 'days'">
-            {{ Startdays }} ~ {{ Enddays }} 스트레스 수치
-            <span class="badge rounded-pill warn-badge">위험</span>
-          </div>
-          <div v-if="SelectDate === 'month'">
-            {{ Startmonth }}월 ~ {{ Endmonth }}월 스트레스 수치
-            <span class="badge rounded-pill normal-badge">정상</span>
-          </div>
-          <div v-if="SelectDate === 'year'">
-            {{ SelectYear }}년 스트레스 수치
-            <span class="badge rounded-pill attention-badge">주의</span>
-          </div>
-        </div>
-        <div class="report-chart-area">
-          <Line
-            ref="chart"
-            :options="chartOptions"
-            :data="chartData"
-            style="width: 100%; height: 100%"
-          ></Line>
->>>>>>> yj_base
         </div>
       </div>
     </div>
@@ -129,7 +96,6 @@
 </template>
 
 <script>
-<<<<<<< HEAD
 
 import { onMounted, ref } from "vue";
 import axios from "axios";
@@ -139,39 +105,10 @@ Chart.register(...registerables);
 export default {
   name: "Emotional_report",
   components: {
-=======
-import {
-  Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Title,
-  Tooltip,
-  Legend,
-} from "chart.js";
-import { Line } from "vue-chartjs";
-
-ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Title,
-  Tooltip,
-  Legend
-);
-
-export default {
-  name: "Emotional_report",
-  components: {
-    Line,
->>>>>>> yj_base
   },
   data() {
     return {
       SelectDate: "day",
-<<<<<<< HEAD
       UserName: "",
       imsichart: null,
       // 차트 시작
@@ -203,9 +140,6 @@ export default {
 
       // 현재 클라이언트 주소
       ipAddress : window.location.host.split(':')[0],
-=======
-      UserName: "이범석",
->>>>>>> yj_base
 
       // 현재 날짜
       nowDate: new Date().toISOString().slice(0, 10),
@@ -220,71 +154,25 @@ export default {
       maxEndDays: "",
 
       // 월간
-<<<<<<< HEAD
 
       Startmonth: new Date().toISOString().slice(0, 7),
       Endmonth: new Date().toISOString().slice(0, 7),
-=======
-      Startmonth: new Date().toISOString().slice(0, 10),
-      Endmonth: new Date().toISOString().slice(0, 10),
->>>>>>> yj_base
       minEndMonth: "",
       maxEndMonth: "",
 
       // 연도별로
       SelectYear: new Date().toISOString().slice(0, 4),
 
-<<<<<<< HEAD
       // 차트에 뿌려질 데이터
       stressData : [],
       diaryScore : [],
       faceScore : [],
       stressLabel: [],
 
-=======
-      //  차트 영역
-      chartData: {
-        //  바뀌어야 될 부분
-        labels: [
-          "1월",
-          "2월",
-          "3월",
-          "4월",
-          "5월",
-          "6월",
-          "7월",
-          "8월",
-          "9월",
-          "10월",
-          "11월",
-          "12월",
-        ],
-        datasets: [
-          {
-            label: this.UserName + "님 스트레스 수치",
-            backgroundColor: "#f87979",
-            // 바뀌어야 될 부분
-            data: [10, 7.8, 2.1, 3.4, 5.6, 7.8, 9.1, 8.7, 6.5, 4.3, 2.1, 1.2],
-            tension: 0.1,
-          },
-        ],
-      },
-      chartOptions: {
-        responsive: false,
-        pointStyle: "circle",
-        lineWidth: 5,
-        pointRadius: 8,
-        pointHoverRadius: 12,
-      },
->>>>>>> yj_base
     };
   },
   created() {
     this.bgImage();
-<<<<<<< HEAD
-=======
-    this.chartData.datasets[0].label = this.UserName + "님 스트레스 수치";
->>>>>>> yj_base
   },
   methods: {
     bgImage() {
@@ -323,7 +211,6 @@ export default {
 
       console.log(this.minEndMonth, this.maxEndMonth);
     },
-<<<<<<< HEAD
     // 날짜 보내기
     sendStressData() {
       const sendDate = new FormData();
@@ -442,9 +329,6 @@ export default {
 
 
   }
-=======
-  },
->>>>>>> yj_base
 };
 </script>
 <script setup></script>

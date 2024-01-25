@@ -18,11 +18,7 @@ public class SubCategory {
     @Column(length = 255, nullable = false)
     private String subCategory;
 
-<<<<<<< HEAD
-    @ManyToOne
-=======
     @ManyToOne(cascade = CascadeType.REMOVE)
->>>>>>> yj_base
     @JoinColumn(name = "mainCategory", referencedColumnName = "mainCategory")
     private MainCategory mainCategory;
 

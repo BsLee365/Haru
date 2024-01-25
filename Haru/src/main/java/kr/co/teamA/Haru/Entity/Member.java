@@ -43,11 +43,8 @@ public class Member implements UserDetails {
     private String cDate;
 
     @Column(length = 10)
-<<<<<<< HEAD
-    private String role = "ROLE_USER";
-=======
+    // private String role = "ROLE_USER";
     private String role;
->>>>>>> yj_base
 
     public void setUserId(String userId) {
         this.userId = userId;

@@ -18,11 +18,7 @@
               <img src="@/img/FaceRegistration/camera.png" alt="" />
               <p>프로필 수정</p>
             </div>
-<<<<<<< HEAD
             <img src="@/img/assets/bgImage/type3.png" class="profileImg" />
-=======
-            <img src="@/assets/bgImage/type3.png" class="profileImg" />
->>>>>>> yj_base
           </div>
 
           <div class="deleteMyInfo-btn-area">

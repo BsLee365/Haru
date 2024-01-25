@@ -6,11 +6,7 @@
       <div class="mydiary-modal-container mydiary-rec-modal" @click.stop>
         <!-- 일기 날짜 -->
         <div class="diary-date-area">
-<<<<<<< HEAD
           <h2 id="diary-date-h2">{{ formatCDate(myDiary.diary_cdate) }}</h2>
-=======
-          <h2 id="diary-date-h2">{{ rDate }}</h2>
->>>>>>> yj_base
         </div>
 
         <!-- 일기 제목, 내용 -->
@@ -22,13 +18,8 @@
               id="diary-title"
               placeholder="제목"
               maxlength="30"
-<<<<<<< HEAD
               ref="d_title"
               :value="myDiary.diary_title"
-=======
-              ref="diaryTitle"
-              :value="selectedDiary.diaryName"
->>>>>>> yj_base
               :readonly="dStatus === 'read'"
             />
           </div>
@@ -38,12 +29,8 @@
               id="diary-content"
               placeholder="어떤 일이 있었나요?"
               maxlength="1000"
-<<<<<<< HEAD
               ref="d_context"
               :value="myDiary.diary_context"
-=======
-              :value="selectedDiary.dContents"
->>>>>>> yj_base
               :readonly="dStatus === 'read'"
             ></textarea>
           </div>
@@ -65,19 +52,11 @@
           <button
             v-if="dStatus === 'update'"
             class="big-ctlbtn select-btn"
-<<<<<<< HEAD
             @click="updateSumit()"
           >
             수정완료
           </button>
           <button class="big-ctlbtn delete-btn" @click="$emit('delete-diary', this.myDiary.diary_num)">
-=======
-            @click="updateDStatus('update')"
-          >
-            수정완료
-          </button>
-          <button class="big-ctlbtn delete-btn" @click="deleteDiary">
->>>>>>> yj_base
             삭제하기
           </button>
         </div>
@@ -87,7 +66,6 @@
 </template>
 
 <script>
-<<<<<<< HEAD
 import {onMounted, ref} from "vue";
 import axios from "axios";
 import {jwtDecode} from "jwt-decode";
@@ -99,18 +77,12 @@ export default {
       formData: new FormData(),
       myDiary: {},
     };
-=======
-export default {
-  data() {
-    return {};
->>>>>>> yj_base
   },
   props: {
     selectedDiary: Object,
     rDate: String,
     dStatus: String,
   },
-<<<<<<< HEAD
   created() {
     // 초기 설정
     this.myDiary = this.selectedDiary;
@@ -188,15 +160,6 @@ export default {
     });
 
     return { logout, data }; // Return data in the setup function
-=======
-  methods: {
-    updateDStatus(status) {
-      this.$emit("update-d-status", status);
-      if (status === "update") {
-        this.$refs.diaryTitle.focus();
-      }
-    },
->>>>>>> yj_base
   },
 };
 </script>

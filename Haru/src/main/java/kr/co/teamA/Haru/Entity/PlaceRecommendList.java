@@ -5,7 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import oracle.sql.DATE;
+import java.util.Date;
 
 @Data
 @Entity
@@ -29,6 +29,6 @@ public class PlaceRecommendList {
     private Member member;
 
     @Column(columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
-    private DATE placeCdate;
+    private Date placeCdate;
 
 }

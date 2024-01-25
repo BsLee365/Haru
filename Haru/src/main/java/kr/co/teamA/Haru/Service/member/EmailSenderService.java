@@ -51,11 +51,7 @@ public class EmailSenderService {
         }
         this.authCode = authCode.toString();
     }
-<<<<<<< HEAD
-
-=======
     // 회원가입 : 이메일 인증번호 발송
->>>>>>> yj_base
     public void sendEmail(String toEmail) {
         createAuthCode();
         MimeMessage message = mailSender.createMimeMessage();
@@ -83,10 +79,7 @@ public class EmailSenderService {
             throw new RuntimeException(e);
         }
      }
-<<<<<<< HEAD
-=======
      // 아이디 찾기 : 이메일 인증번호 발송
->>>>>>> yj_base
     public void sendFindByIdEmail(String toEmail) {
         createAuthCode();
         MimeMessage message = mailSender.createMimeMessage();
@@ -115,10 +108,6 @@ public class EmailSenderService {
         }
     }
 
-<<<<<<< HEAD
-
-     public boolean isVerify(String email, String authCode) {
-=======
     // 비밀번호 찾기 : 이메일 인증번호 발송
     public void sendFindByPwdEmail(String toEmail) {
         createAuthCode();
@@ -152,7 +141,6 @@ public class EmailSenderService {
 
 
     public boolean isVerify(String email, String authCode) {
->>>>>>> yj_base
         System.out.println(certificationNumberDAO.hasKey(email));
         System.out.println(authCode);
         System.out.println(certificationNumberDAO.getCertificationNumber(email));

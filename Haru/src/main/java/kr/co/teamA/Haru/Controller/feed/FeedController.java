@@ -37,7 +37,7 @@ public class FeedController {
 
     @PostMapping("/addFeedComment")
     public List<FeedComment> addFeedComment(@RequestParam Map<String, String> data) {
-        int feedNum = Integer.parseInt(data.get("feedNum"));
+        Long feedNum = Long.parseLong(data.get("feedNum"));
         String userId = data.get("userId");
         String feedCommentContent = data.get("feedCommentContent");
         String feedUserId = data.get("feedUserId");
@@ -50,7 +50,7 @@ public class FeedController {
     @Transactional
     @PostMapping("/modifyFeedLike")
     public int modifyFeedLike(@RequestParam Map<String, String> data) {
-        int feedNum = Integer.parseInt(data.get("feedNum"));
+        Long feedNum = Long.parseLong(data.get("feedNum"));
         String userId = data.get("userId");
         String feedUserId = data.get("feedUserId");
 

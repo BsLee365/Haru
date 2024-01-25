@@ -253,8 +253,8 @@ export default {
           this.imageList.push(res.data.feedImg[i].feed_img);
           this.originImage.push(res.data.feedImg[i].feed_img);
           // E:/git/final/Haru/Haru/src/main/resources/static/img/Feed/
-          this.previewImageUrls.push(require("@/img/Feed/" + res.data.feedImg[i].feed_img));
-          this.originImagePreview.push(require("@/img/Feed/" + res.data.feedImg[i].feed_img));
+          this.previewImageUrls.push(require("@/img/Feed/" + res.data.feedImg[i].feed_img)); //변경
+          this.originImagePreview.push(require("@/img/Feed/" + res.data.feedImg[i].feed_img)); //변경
           this.imageNameList.push(res.data.feedImg[i].feed_img);
         }
         for (var j = 0; j < res.data.feedHashTag.length; j++) {

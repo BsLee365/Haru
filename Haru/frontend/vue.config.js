@@ -2,7 +2,7 @@ const CopyWebpackPlugin = require("copy-webpack-plugin");
 const path = require("path");
 
 module.exports = {
-  outputDir:'../src/main/resources/static',
+  outputDir:'../src/main/resources/static', // 추가함
   devServer: {
     proxy: {
       "/api": {

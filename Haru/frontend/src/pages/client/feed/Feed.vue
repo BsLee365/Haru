@@ -302,7 +302,7 @@ export default {
                     // E:/900_팀 프로젝트/최종 프로젝트/Haru/Haru/src/main/resources/static/img/Feed/
                     images.push(
                       require("@/img/Feed/" +
-                        img.feed_img)
+                        img.feed_img) // 변경
                     );
                   }
                 }
@@ -327,7 +327,7 @@ export default {
                 }
               }
               const cardList = {
-                profileImage: require("@/img/Feed/no_profile.png"), //data.feed[index].member.profile_img,
+                profileImage: require("@/img/Feed/no_profile.png"), //data.feed[index].member.profile_img, // 변경
                 uid: data.feed[index].member.user_id,
                 profileLink: data.feed[index].member.profile_link,
                 nickname: data.feed[index].member.nickname,

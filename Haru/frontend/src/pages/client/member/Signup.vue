@@ -502,7 +502,7 @@ export default {
           }
         })
         .catch((error) => {
-          console.error("API 호출 에러:", error);
+          console.error("API 호출 에러(/userIdCheck):", error);
           return false;
         });
     },
@@ -547,7 +547,7 @@ export default {
           }
         })
         .catch((error) => {
-          console.error("API 호출 에러:", error);
+          console.error("API 호출 에러(닉네임):", error);
           return false;
         });
     },
@@ -573,7 +573,7 @@ export default {
         })
         .catch((error) => {
           alert("인증 번호 발송에 오류가 발생했습니다.");
-          console.error("API 호출 에러", error);
+          console.error("API 호출 에러(인증번호 발송)", error);
           return false;
         });
     },
@@ -765,7 +765,7 @@ export default {
                 }
               })
               .catch((error) => {
-                console.error("API 호출 에러:", error);
+                console.error("API 호출 에러(/signup):", error);
                 return false;
               });
           } else {

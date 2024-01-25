@@ -28,8 +28,7 @@
           >
             <div class="all-info">
               <div class="rlist-img-area">
-                <a :href="'https://map.naver.com/p/search/' + item.place.place_name" target="_blank"
-                >
+                <a :href="'https://map.naver.com/p/smart-around/place/' + getPlaceLink(item.place.place_link)" target="_blank">
 <!--                  <img class="rec-detail-img" :src="item.place.place_img" alt=""/>-->
                   <!-- 장소 이미지 없는 경우 -->
                   <img
@@ -51,13 +50,13 @@
               <div class="content">
                 <div class="stname-address">
                   <!-- 가게 명 -->
-                  <a :href="'https://map.naver.com/p/search/' + item.place.place_name" target="_blank"
-                  ><h5 class="stName">{{ item.place.place_name }}</h5></a
-                  >
+                  <a :href="'https://map.naver.com/p/smart-around/place/' + getPlaceLink(item.place.place_link)" target="_blank">
+                    <h5 class="stName">{{ item.place.place_name }}</h5>
+                  </a>
                   <!-- 가게 주소 -->
-                  <a :href="'https://map.naver.com/p/search/' + item.place.place_name" target="_blank"
-                  ><p class="stAddress">{{ item.place.place_address }}</p></a
-                  >
+                  <a :href="'https://map.naver.com/p/smart-around/place/' + getPlaceLink(item.place.place_link)" target="_blank">
+                    <p class="stAddress">{{ item.place.place_address }}</p>
+                  </a>
                 </div>
                 <!-- 별점 -->
                 <p class="rlist-score-area">
@@ -163,6 +162,16 @@ export default {
         return true;
       }
       return false;
+    },
+
+    // 링크 주소 변경
+    getPlaceLink(link) {
+      var mylink = link.split("/");
+      if ( mylink[mylink.length-1] === '?entry=ple' ) {
+        return  mylink[mylink.length-2]
+      } else {
+        return mylink[mylink.length-1]
+      }
     },
 
     // 위시 리스트 담고 빼기 --------------------------------------------------------

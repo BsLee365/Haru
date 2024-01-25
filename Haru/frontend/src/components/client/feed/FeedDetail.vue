@@ -86,10 +86,12 @@
 						<!-- 추천 받은 장소 -->
 						<div class="feed-recommend-area">
 							<div class="rec-detail-img-area">
-								<a :href="recommend.url"><img class="rec-detail-img" :src="recommend.img" alt="" /></a>
+                <a :href="'https://map.naver.com/p/smart-around/place/' + getPlaceLink(recommend.url)" target="_blank">
+                  <img class="rec-detail-img" :src="recommend.img" alt="" />
+                </a>
 							</div>
 							<div class="rec-detail">
-								<a :href="recommend.url">
+                <a :href="'https://map.naver.com/p/smart-around/place/' + getPlaceLink(recommend.url)" target="_blank">
 									<p class="rec-detail-title">{{ recommend.name }}</p>
 									<p>{{ recommend.address }}</p>
 								</a>
@@ -123,7 +125,7 @@
 
 							<div class="comment-area2">
 								<div id="comment-form">
-									<textarea id="commentText" cols="37" rows="2"></textarea>
+									<textarea id="commentText" cols="35" rows="2"></textarea>
 									<button class="send-comment" @click="sendComment">전송</button>
 								</div>
 							</div>
@@ -248,6 +250,15 @@ export default {
 				});
 			});
 		},
+    // 링크 주소 변경
+    getPlaceLink(link) {
+      var mylink = link.split("/");
+      if ( mylink[mylink.length-1] === '?entry=ple' ) {
+        return  mylink[mylink.length-2]
+      } else {
+        return mylink[mylink.length-1]
+      }
+    },
 		feedDelete() {
 			if(confirm("정말 삭제하시겠습니까?") === true) {
 				var formData = new FormData();

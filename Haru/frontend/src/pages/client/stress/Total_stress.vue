@@ -118,32 +118,37 @@
                        :src="listCheck(item) ? existImage : noImage"
                        @click="toggleWish(item)"
                   />
-
-                <!-- 장소 이미지 없는 경우 -->
-                <img
-                    v-show="item.place_img === null"
-                    src="@/img/Total_stress/img/no-image.jpg"
+                <a :href="'https://map.naver.com/p/smart-around/place/' + getPlaceLink(item.place_link)" target="_blank">
+                  <!-- 장소 이미지 없는 경우 -->
+                  <img
+                      v-show="item.place_img === null"
+                      src="@/img/Total_stress/img/no-image.jpg"
+                      alt="no_image"
+                      class="place-card"
+                  />
+                  <!-- 장소 이미지 있는 경우 -->
+                  <img
+                    v-show="item.place_img != null"
+                    :src="item.place_img"
                     alt="no_image"
                     class="place-card"
-                />
-                <!-- 장소 이미지 있는 경우 -->
-                <img
-                  v-show="item.place_img != null"
-                  :src="item.place_img"
-                  alt="no_image"
-                  class="place-card"
-                />
+                  />
+                </a>
               </div>
               <div class="food-desc">
                 <div class="food-desc-box">
                   <div class="food-title">
-                    <h4>{{item.place_name}}</h4>
+                    <a :href="'https://map.naver.com/p/smart-around/place/' + getPlaceLink(item.place_link)" target="_blank">
+                      <h4>{{item.place_name}}</h4>
+                    </a>
                   </div>
                   <div class="hash-tag">
                     <span class="review-score">★ {{ (item.place_score/10).toFixed(1) }}점</span>
                   </div>
                   <div class="food-detail">
-                    <span class="food-address">{{item.place_address}}</span>
+                    <a :href="'https://map.naver.com/p/smart-around/place/' + getPlaceLink(item.place_link)" target="_blank">
+                      <span class="food-address">{{item.place_address}}</span>
+                    </a>
                   </div>
                 </div>
               </div>
@@ -298,6 +303,15 @@ export default {
       } catch (error) {
         console.log('찜에 있는지 확인하기 에러 ' + error);
         return false;
+      }
+    },
+    // 링크 주소 변경
+    getPlaceLink(link) {
+      var mylink = link.split("/");
+      if ( mylink[mylink.length-1] === '?entry=ple' ) {
+        return  mylink[mylink.length-2]
+      } else {
+        return mylink[mylink.length-1]
       }
     }
   },

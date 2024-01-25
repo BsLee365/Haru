@@ -18,7 +18,7 @@
                  @click="toggleWish(item[0], item[3])"
             />
 
-            <a :href="getPlaceLink(item[2])">
+            <a :href="'https://map.naver.com/p/smart-around/place/' + getPlaceLink(item[2])">
               <img v-if="item[1] != null" :src="item[1]" alt="" class="place-card" />
               <img v-else src="@/img/Total_stress/img/no-image.jpg" class="place-card" alt=""/>
             </a>
@@ -27,14 +27,18 @@
           <div class="food-desc">
             <div class="food-desc-box">
               <div class="food-title">
-                <h4>{{ item[3] }}</h4>
+                <a :href="'https://map.naver.com/p/smart-around/place/' + getPlaceLink(item[2])" target="_blank">
+                  <h4>{{ item[3] }}</h4>
+                </a>
               </div>
               <div class="hash-tag">
                 <!-- .toFixed(1) : 소수점 자리수 표시 format -->
                 <span class="review-score">★ {{ (item[4] / 10).toFixed(1) }}</span>
               </div>
               <div class="food-detail">
-                <span class="food-address">주소: {{ item[5] }}</span>
+                <a :href="'https://map.naver.com/p/smart-around/place/' + getPlaceLink(item[2])">
+                  <span class="food-address">주소: {{ item[5] }}</span>
+                </a>
               </div>
             </div>
           </div>
@@ -163,9 +167,14 @@ export default {
             console.log('삭제 에러 ' + err);
           })
     },
+    // 링크 주소 변경
     getPlaceLink(link) {
       var mylink = link.split("/");
-      console.log(mylink[mylink.length-1]);
+      if ( mylink[mylink.length-1] === '?entry=ple' ) {
+        return  mylink[mylink.length-2]
+      } else {
+        return mylink[mylink.length-1]
+      }
     }
   },
 };

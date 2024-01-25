@@ -21,13 +21,14 @@ public class Feed {
     @SequenceGenerator(name = "FEED_SEQ_", sequenceName = "FEED_SEQ_", allocationSize = 1)
     private Long feedNum;
 
-    // @OnDelete(action = OnDeleteAction.CASCADE)
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
+    @ManyToOne
     @JoinColumn(name = "userId")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Member member;
 
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
+    @ManyToOne
     @JoinColumn(name = "placeNum")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Place placeNum;
 
     @Column(length = 500, nullable = false)

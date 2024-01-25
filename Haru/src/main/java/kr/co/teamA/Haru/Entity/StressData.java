@@ -8,6 +8,9 @@ import lombok.NoArgsConstructor;
 
 import java.util.Date;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 
 @Data
 @Entity
@@ -23,6 +26,7 @@ public class StressData {
     private Long STRESSDATANUM;
 
     @ManyToOne
+    @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "userId", referencedColumnName = "userId")
     private Member member;
 
@@ -31,10 +35,6 @@ public class StressData {
 
     @Column(nullable = false)
     private Double diaryData;
-
-      // 척도 안받아옴.
-//    @Column(nullable = false)
-//    private Long measureData;
 
     @Column(nullable = false)
     private Double stressScore;

@@ -21,7 +21,8 @@ public class FeedImg {
     @SequenceGenerator(name = "FEEDIMG_SEQ_", sequenceName = "FEEDIMG_SEQ_", allocationSize = 1)
     private Long feedImgNum;
 
-    @OneToOne(cascade = CascadeType.REMOVE)
+    @OneToOne
+    @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "feedNum")
     private Feed feedNum;
 

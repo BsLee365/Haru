@@ -8,6 +8,9 @@ import lombok.NoArgsConstructor;
 
 import java.sql.Date;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 @Data
 @Entity
 @NoArgsConstructor
@@ -24,11 +27,13 @@ public class LogLoggin {
     @Column(nullable = false)
     private Long accessInfo;
 
-    @ManyToOne(cascade = CascadeType.REMOVE)
+    @ManyToOne
+    @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "adminId", referencedColumnName = "adminId")
     private ADMIN admin;
 
-    @ManyToOne(cascade = CascadeType.REMOVE)
+    @ManyToOne
+    @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "userId", referencedColumnName = "userId")
     private Member member;
 

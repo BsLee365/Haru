@@ -126,7 +126,7 @@ export default {
               for (const img of data.feedImg) {
                 if (img.feed_num.feed_num === feedNum) {
                   // E:/git/final/Haru/Haru/src/main/resources/static/img/Feed/
-                  // E:/900_팀 프로젝트/최종 프로젝트/Haru/Haru/src/main/resources/static/img/Feed/ 
+                  // E:/900_팀 프로젝트/최종 프로젝트/Haru/Haru/src/main/resources/static/img/Feed/
                   images.push(
                     require(`${process.env.VUE_APP_IMG_BASE_URL}/Haru/src/main/resources/static/img/Feed/` +
                       img.feed_img)
@@ -299,7 +299,7 @@ export default {
                 const images = [];
                 for (const img of data.feedImg) {
                   if (img.feed_num.feed_num === feedNum) {
-                    // E:/900_팀 프로젝트/최종 프로젝트/Haru/Haru/src/main/resources/static/img/Feed/
+                    // E:/900_팀 프로젝트/최종 프로젝트/Haru/Haru/src/main/resources/static/img/Feed/  
                     images.push(
                       require(`${process.env.VUE_APP_IMG_BASE_URL}/Haru/src/main/resources/static/img/Feed/` +
                         img.feed_img)

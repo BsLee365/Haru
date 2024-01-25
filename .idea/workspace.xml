@@ -6,9 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="6d0870f0-66eb-40b4-a5ab-e66ef439dd61" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Haru/frontend/.env" beforeDir="false" afterPath="$PROJECT_DIR$/Haru/frontend/.env" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Haru/frontend/src/pages/client/feed/Feed.vue" beforeDir="false" afterPath="$PROJECT_DIR$/Haru/frontend/src/pages/client/feed/Feed.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Haru/frontend/vue.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/Haru/frontend/vue.config.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -109,7 +107,7 @@
       <option name="presentableId" value="Default" />
       <updated>1706164717850</updated>
       <workItem from="1706164721185" duration="12140000" />
-      <workItem from="1706196583852" duration="436000" />
+      <workItem from="1706196583852" duration="901000" />
     </task>
     <servers />
   </component>

@@ -127,8 +127,7 @@ export default {
                 if (img.feed_num.feed_num === feedNum) {
 
                   images.push(
-                    require(`${process.env.BASE_URL}/static/img/Feed/` +
-                      img.feed_img)
+                      `${process.env.BASE_URL}/static/img/Feed/` + img.feed_img
                   );
                 }
               }
@@ -211,9 +210,7 @@ export default {
                   // E:/git/final/Haru/Haru/src/main/resources/static/img/Feed/
                   // E:/900_팀 프로젝트/최종 프로젝트/Haru/Haru/src/main/resources/static/img/Feed/
                   images.push(
-                    require(`${process.env.BASE_URL}/static/img/Feed/` +
-                      img.feed_img)
-                  );
+                    `${process.env.BASE_URL}/static/img/Feed/` + img.feed_img)
                 }
               }
               return images;
@@ -300,9 +297,7 @@ export default {
                   if (img.feed_num.feed_num === feedNum) {
                     // E:/900_팀 프로젝트/최종 프로젝트/Haru/Haru/src/main/resources/static/img/Feed/
                     images.push(
-                      require(`${process.env.BASE_URL}/static/img/Feed/` +
-                        img.feed_img)
-                    );
+                      `${process.env.BASE_URL}/static/img/Feed/` + img.feed_img)
                   }
                 }
                 return images;

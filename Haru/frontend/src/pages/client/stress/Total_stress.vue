@@ -24,7 +24,7 @@
       <div class="result-card-box">
         <div class="stress-area">
           <div class="result-comment">
-            이범석님의 스트레스 수치는
+            {{this.data.username}}님의 스트레스 수치는
             <span class="badge rounded-pill bg-danger custom-bedge" v-show="stressRate <= 60">정상</span>
             <span class="badge rounded-pill bg-danger custom-bedge" v-show="61 <= stressRate && stressRate <= 80">주의</span>
             <span class="badge rounded-pill bg-danger custom-bedge" v-show="81 <= stressRate ">심각</span>
@@ -85,7 +85,7 @@
           <div class="recommend-area-box">
             <div class="recommend-comment">
               <span
-                >이범석님의 스트레스 수치로 ‘하루의 여울’이 추천한
+                >{{this.data.username}}님의 스트레스 수치로 ‘하루의 여울’이 추천한
                 장소에요.</span
               >
             </div>
@@ -114,19 +114,15 @@
             <div class="place-card" v-for="(item, index) in recommendPlace.data" :key="index">
               <div class="'food-img">
                 <!-- 하트(찜) 하기 -->
-<!--                <img-->
-<!--                  class="heart-img"-->
-<!--                  src="@/img/Total_stress/img/image 47.png"-->
-<!--                />-->
                   <img class="heart-img cursor-p"
-                       :src="isInWishList(item) ? existImage : noImage"
+                       :src="listCheck(item) ? existImage : noImage"
                        @click="toggleWish(item)"
                   />
 
                 <!-- 장소 이미지 없는 경우 -->
                 <img
                     v-show="item.place_img === null"
-                    src="@/img/Total_stress/img/no_img.png"
+                    src="@/img/Total_stress/img/no-image.jpg"
                     alt="no_image"
                     class="place-card"
                 />
@@ -214,12 +210,19 @@ export default {
 
     this.recommendPlace = JSON.parse(localStorage.getItem("recommendPlace"));
     this.stressScore = localStorage.getItem("stressScore");
+    this.pushList();
   },
   methods: {
     // background-image 설정
     bgImage() {
       var newImage = "type2";
       this.$emit("bgImage", newImage);
+    },
+    //
+    async pushList() {
+      for (const item of this.recommendPlace.data) {
+        await this.isInWishList(item);
+      }
     },
     scrollLeft() {
       var slider = document.querySelector(".recommend-place");
@@ -241,20 +244,19 @@ export default {
     toReport() {
       this.$router.push("/Emotional_report")
     },
-    // 찜 기능 토글
+
+    // 찜 기능 토글 -> wishList에 추가/삭제
     toggleWish(item) {
       // console.log('찜기능에 넣을 place : ' + item.place_num);
 
       if (this.selectedWishList.indexOf(item.place_num) < 0) {
         this.selectedWishList.push(item.place_num);
-        // console.log('추가함 ! : ' + this.selectedWishList);
 
         axios.post(`http://${process.env.VUE_APP_BACK_END_URL}/wishList/addWishPlace`, {
           userid: this.data.id,
           place: item
         })
             .then(() => {
-              // console.log(res.data);
             })
             .catch(err => {
               console.log('등록 에러 ' + err);
@@ -262,28 +264,41 @@ export default {
 
       } else {
         this.selectedWishList.splice(this.selectedWishList.indexOf(item.place_num), 1);
-        // console.log('잘라냄 ! : ' + this.selectedWishList);
 
         axios.post(`http://${process.env.VUE_APP_BACK_END_URL}/wishList/deleteWishByPlaceNum`,{
           place_num: item.place_num
         })
             .then(() => {
               console.log('삭제됨');
-              // this.$emit('update-all-rec-list');
             })
             .catch(err => {
               console.log('삭제 에러 ' + err);
             })
-
       }
     },
+    // 하트 이미지 지정용 -> 리스트에 있으면 찜목록에 있는거
+    listCheck(item) {
+      return this.selectedWishList.indexOf(item.place_num) >= 0;
+    },
 
-    // 화면에 띄우기 용
-    isInWishList(item) {
-      if (this.selectedWishList.indexOf(item.place_num) < 0) {
+    // 찜 목록에 있는 장소인지 확인 후 리스트에 저장
+    async isInWishList(item) {
+      try {
+        const response = await axios.post(`http://${process.env.VUE_APP_BACK_END_URL}/wishList/findByPlaceNum`, {
+          place_num: item.place_num
+        });
+
+        if (response.data >= 1) {
+          this.selectedWishList.push(item.place_num);
+          return true;
+        } else {
+          return false;
+        }
+
+      } catch (error) {
+        console.log('찜에 있는지 확인하기 에러 ' + error);
         return false;
       }
-      return true;
     }
   },
   mounted() {

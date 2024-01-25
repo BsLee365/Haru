@@ -19,4 +19,7 @@ public interface WishListRepository extends JpaRepository<WishList, Long> {
     @Transactional
     @Query(nativeQuery = true, value = "delete from wishlist where place_num = :placeNum")
     void deleteByPlace_PlaceNum(Long placeNum);
+
+    @Query(nativeQuery = true, value = "select count(wish_list_num) from wishlist where place_num=:placeNum")
+    int findByPlaceNum(Long placeNum);
 }

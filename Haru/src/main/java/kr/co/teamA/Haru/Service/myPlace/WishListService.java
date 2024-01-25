@@ -48,6 +48,11 @@ public class WishListService {
         wishListRepository.deleteByPlace_PlaceNum(placenum);
     }
 
+    //
+    public int findByPlaceNum(Long placenum) {
+        return wishListRepository.findByPlaceNum(placenum);
+    }
+
 //    public Long getData(String userId) {
 //        return wishListRepository.findById(1L);
 //    }

@@ -44,4 +44,11 @@ public class WishListController {
         Long pnum = requestBody.get("place_num");
         wishListService.deleteWishByPlaceNum(pnum);
     }
+
+    // 찜 목록에 있는지 확인
+    @PostMapping("/findByPlaceNum")
+    public int findByPlaceNum(@RequestBody Map<String, Long> requestBody) {
+        Long pnum = requestBody.get("place_num");
+        return wishListService.findByPlaceNum(pnum);
+    }
 }

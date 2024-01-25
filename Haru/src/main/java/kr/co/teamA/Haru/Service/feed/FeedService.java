@@ -78,13 +78,13 @@ public class FeedService {
     }
 
     @Transactional
-    public List<FeedComment> addFeedComment(int feedNum, String userId, String feedCommentContent, String feedUserId) {
+    public List<FeedComment> addFeedComment(Long feedNum, String userId, String feedCommentContent, String feedUserId) {
         Feed feed = feedRepository.findByFeedNum(feedNum);
         Member member = memberRepository.findMemberByuserId(userId);
         Member feedUser = memberRepository.findMemberByuserId(feedUserId);
         FeedComment feedComment = FeedComment.builder()
-                .feedNum(feed)
-                .userId(member)
+                .feed(feed)
+                .member(member)
                 .feedCommentContent(feedCommentContent)
                 .build();
         feedCommentRepository.save(feedComment);
@@ -102,7 +102,7 @@ public class FeedService {
     }
 
     @Transactional
-    public int modifyFeedLike(int feedNum, String userId, String feedUserId) {
+    public int modifyFeedLike(Long feedNum, String userId, String feedUserId) {
         Feed feed = feedRepository.findByFeedNum(feedNum);
         Member member = memberRepository.findMemberByuserId(userId);
         Member feedUser = memberRepository.findMemberByuserId(feedUserId);
@@ -134,9 +134,9 @@ public class FeedService {
         System.out.println(data.get("hashTag"));
 
         Feed feed = Feed.builder()
-                .member(member)
+                .member(member)  // 머지해서 변경함 0125
                 .feedCategory(place.getSubCategory().getMainCategory().getMainCategory())
-                .placeNum(place)
+                .place(place)
                 .feedContent((String) data.get("contents"))
                 .build();
         feedRepository.save(feed);
@@ -157,7 +157,7 @@ public class FeedService {
     }
 
     public Feed getFeed(String feedNum) {
-        Feed feed = feedRepository.findByFeedNum(Integer.parseInt(feedNum));
+        Feed feed = feedRepository.findByFeedNum(Long.parseLong(feedNum));
         return feed;
     }
 
@@ -173,7 +173,7 @@ public class FeedService {
     @Transactional
     public void feedUpdate(Map<String, Object> data, List<String> feedImgs, List<String> hashTag) {
 
-        Feed feed = feedRepository.findByFeedNum(Integer.parseInt((String) data.get("feedNum")));
+        Feed feed = feedRepository.findByFeedNum(Long.parseLong((String) data.get("feedNum")));
         feed.setFeedContent((String) data.get("contents"));
         feedRepository.save(feed);
 
@@ -206,7 +206,7 @@ public class FeedService {
 
     @Transactional
     public void feedDelete(String feedNum) {
-        Feed feed = feedRepository.findByFeedNum(Integer.parseInt(feedNum));
+        Feed feed = feedRepository.findByFeedNum(Long.parseLong(feedNum));
         feedRepository.delete(feed);
     }
 

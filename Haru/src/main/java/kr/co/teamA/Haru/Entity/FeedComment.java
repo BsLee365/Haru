@@ -38,4 +38,11 @@ public class FeedComment {
 
     @Column(columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP", insertable = false)
     private Date feedCdate;
+
+    // public static class FeedCommentBuilder {
+    //     public FeedCommentBuilder feedNum(Feed feed) {
+    //         this.feed = feed;
+    //         return this;
+    //     }
+    // }
 }

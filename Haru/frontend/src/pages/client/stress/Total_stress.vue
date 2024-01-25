@@ -24,7 +24,7 @@
       <div class="result-card-box">
         <div class="stress-area">
           <div class="result-comment">
-            이범석님의 스트레스 수치는
+            {{this.data.username}}님의 스트레스 수치는
             <span class="badge rounded-pill bg-danger custom-bedge" v-show="stressRate <= 60">정상</span>
             <span class="badge rounded-pill bg-danger custom-bedge" v-show="61 <= stressRate && stressRate <= 80">주의</span>
             <span class="badge rounded-pill bg-danger custom-bedge" v-show="81 <= stressRate ">심각</span>
@@ -85,7 +85,7 @@
           <div class="recommend-area-box">
             <div class="recommend-comment">
               <span
-                >이범석님의 스트레스 수치로 ‘하루의 여울’이 추천한
+                >{{this.data.username}}님의 스트레스 수치로 ‘하루의 여울’이 추천한
                 장소에요.</span
               >
             </div>
@@ -113,20 +113,24 @@
             <!--장소 카드 시작-->
             <div class="place-card" v-for="(item, index) in recommendPlace.data" :key="index">
               <div class="'food-img">
-                <img
-                  class="heart-img"
-                  src="@/img/Total_stress/img/image 47.png"
-                />
+                <!-- 하트(찜) 하기 -->
+                  <img class="heart-img cursor-p"
+                       :src="listCheck(item) ? existImage : noImage"
+                       @click="toggleWish(item)"
+                  />
+
+                <!-- 장소 이미지 없는 경우 -->
                 <img
                     v-show="item.place_img === null"
-                    src="@/img/Total_stress/img/no_img.png"
-                    alt="버거킹"
+                    src="@/img/Total_stress/img/no-image.jpg"
+                    alt="no_image"
                     class="place-card"
                 />
+                <!-- 장소 이미지 있는 경우 -->
                 <img
-                    v-show="item.place_img != null"
+                  v-show="item.place_img != null"
                   :src="item.place_img"
-                  alt="버거킹"
+                  alt="no_image"
                   class="place-card"
                 />
               </div>
@@ -136,7 +140,7 @@
                     <h4>{{item.place_name}}</h4>
                   </div>
                   <div class="hash-tag">
-                    <span class="review-score">★ {{item.place_score/10}}점</span>
+                    <span class="review-score">★ {{ (item.place_score/10).toFixed(1) }}점</span>
                   </div>
                   <div class="food-detail">
                     <span class="food-address">{{item.place_address}}</span>
@@ -156,16 +160,16 @@
           >
             이전 추천 리스트
           </button>
-          <button class="big-ctlbtn select-btn" id="next-button">
+          <button @click="toReport" class="big-ctlbtn select-btn" id="next-button">
             나의 스트레스 보고서
           </button>
-          <button
-            @click="toMain"
+          <a
+              href="/"
             class="big-ctlbtn insert-btn"
             id="main-button"
           >
             메인으로 이동
-          </button>
+          </a>
         </div>
         <!-- 장소추천 영역 끝 -->
       </div>
@@ -173,6 +177,10 @@
   </div>
 </template>
 <script>
+import axios from "axios";
+import {onMounted, ref} from "vue";
+import {jwtDecode} from "jwt-decode";
+
 export default {
   name: "total_stress",
   data() {
@@ -185,7 +193,14 @@ export default {
       recommendPlace : null,
 
       // 스트레스 수치
-      stressScore : null
+      stressScore : null,
+
+      // 찜 목록
+      selectedWishList : [],
+
+      // 이미지
+      noImage : require("@/img/Total_stress/img/image 47.png"),
+      existImage: require("@/img/Total_stress/img/total_stress_heart.png"),
 
     };
   },
@@ -195,12 +210,19 @@ export default {
 
     this.recommendPlace = JSON.parse(localStorage.getItem("recommendPlace"));
     this.stressScore = localStorage.getItem("stressScore");
+    this.pushList();
   },
   methods: {
     // background-image 설정
     bgImage() {
       var newImage = "type2";
       this.$emit("bgImage", newImage);
+    },
+    //
+    async pushList() {
+      for (const item of this.recommendPlace.data) {
+        await this.isInWishList(item);
+      }
     },
     scrollLeft() {
       var slider = document.querySelector(".recommend-place");
@@ -219,9 +241,65 @@ export default {
     toMyPlaceDiary() {
       this.$router.push("/MyPlaceDiary");
     },
-    toMain() {
-      this.$router.push("/");
+    toReport() {
+      this.$router.push("/Emotional_report")
     },
+
+    // 찜 기능 토글 -> wishList에 추가/삭제
+    toggleWish(item) {
+      // console.log('찜기능에 넣을 place : ' + item.place_num);
+
+      if (this.selectedWishList.indexOf(item.place_num) < 0) {
+        this.selectedWishList.push(item.place_num);
+
+        axios.post(`http://${process.env.VUE_APP_BACK_END_URL}/wishList/addWishPlace`, {
+          userid: this.data.id,
+          place: item
+        })
+            .then(() => {
+            })
+            .catch(err => {
+              console.log('등록 에러 ' + err);
+            })
+
+      } else {
+        this.selectedWishList.splice(this.selectedWishList.indexOf(item.place_num), 1);
+
+        axios.post(`http://${process.env.VUE_APP_BACK_END_URL}/wishList/deleteWishByPlaceNum`,{
+          place_num: item.place_num
+        })
+            .then(() => {
+              console.log('삭제됨');
+            })
+            .catch(err => {
+              console.log('삭제 에러 ' + err);
+            })
+      }
+    },
+    // 하트 이미지 지정용 -> 리스트에 있으면 찜목록에 있는거
+    listCheck(item) {
+      return this.selectedWishList.indexOf(item.place_num) >= 0;
+    },
+
+    // 찜 목록에 있는 장소인지 확인 후 리스트에 저장
+    async isInWishList(item) {
+      try {
+        const response = await axios.post(`http://${process.env.VUE_APP_BACK_END_URL}/wishList/findByPlaceNum`, {
+          place_num: item.place_num
+        });
+
+        if (response.data >= 1) {
+          this.selectedWishList.push(item.place_num);
+          return true;
+        } else {
+          return false;
+        }
+
+      } catch (error) {
+        console.log('찜에 있는지 확인하기 에러 ' + error);
+        return false;
+      }
+    }
   },
   mounted() {
     let currentWidth = 0;
@@ -251,9 +329,48 @@ export default {
     // localStorage.removeItem("stressScore");
 
   },
+  setup() {
+    const isLoggedIn = ref(false);
+    const data = ref([]);
+
+    const getToken = () => {
+      const token = localStorage.getItem("jwtToken");
+      isLoggedIn.value = token ? true : false;
+    };
+
+    const logout = () => {
+      axios
+          .get(`http://${process.env.VUE_APP_BACK_END_URL}/api/auth/logout`)
+          .then((res) => {
+            if (res.data == "Logout") {
+              localStorage.removeItem("jwtToken");
+              window.location.href = "/login";
+            }
+          });
+    };
+
+    const decodeToken = (token) => {
+      if (token == null) return false;
+      const decoded = jwtDecode(token);
+      data.value = decoded; // Use data.value to set the value of the ref
+      return decoded;
+    };
+
+    onMounted(() => {
+      getToken();
+      const token = localStorage.getItem("jwtToken");
+      decodeToken(token);
+    });
+
+    return { logout, data }; // Return data in the setup function
+  },
 };
 </script>
 
 <style scoped>
 @import url("@/css/client/stress/total_stress.css");
+#main-button {
+  text-align: center;
+  line-height: 50px;
+}
 </style>

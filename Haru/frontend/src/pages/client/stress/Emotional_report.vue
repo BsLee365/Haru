@@ -2,7 +2,7 @@
   <div class="container1">
     <div class="report-container">
       <div class="report-title">
-        <span>{{ UserName }}의 스트레스 추이 😊</span>
+        <span>{{ UserName }}님의 스트레스 추이 😊</span>
       </div>
       <div class="total_report_card">
         <div class="select-date-area">

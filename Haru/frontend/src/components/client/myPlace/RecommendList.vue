@@ -29,8 +29,24 @@
             <div class="all-info">
               <div class="rlist-img-area">
                 <a :href="'https://map.naver.com/p/search/' + item.place.place_name" target="_blank"
-                ><img class="rec-detail-img" :src="item.place.place_img" alt=""
-                /></a>
+                >
+<!--                  <img class="rec-detail-img" :src="item.place.place_img" alt=""/>-->
+                  <!-- 장소 이미지 없는 경우 -->
+                  <img
+                      v-show="item.place.place_img === null"
+                      src="@/img/Total_stress/img/no-image.jpg"
+                      alt="no_image"
+                      class="rec-detail-img"
+                  />
+                  <!-- 장소 이미지 있는 경우 -->
+                  <img
+                      v-show="item.place.place_img != null"
+                      :src="item.place.place_img"
+                      alt="no_image"
+                      class="rec-detail-img"
+                  />
+
+                </a>
               </div>
               <div class="content">
                 <div class="stname-address">
@@ -45,7 +61,7 @@
                 </div>
                 <!-- 별점 -->
                 <p class="rlist-score-area">
-                  <span class="rlist-score">★ {{ item.place.place_score / 10 }}</span>
+                  <span class="rlist-score">★ {{ (item.place.place_score / 10).toFixed(1) }}</span>
                 </p>
               </div>
             </div>

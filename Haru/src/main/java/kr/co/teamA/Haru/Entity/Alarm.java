@@ -6,7 +6,6 @@ import org.hibernate.annotations.OnDeleteAction;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.*;
-import java.sql.Date;
 
 @Data
 @Entity

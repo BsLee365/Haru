@@ -21,7 +21,7 @@ public class WishListController {
     @PostMapping("/getMyFavoritePlace")
     public Object[] getMyFavoritePlace(@RequestBody Map<String ,String> data) {
         String userId = data.get("id");
-        wishListService.getWishListData(userId);
+//        wishListService.getWishListData(userId);
         return wishListService.getWishListData(userId);
     }
 
@@ -36,5 +36,19 @@ public class WishListController {
     public void deleteWishPlace(@RequestBody Map<String, Long> requestBody) {
         Long wnum = requestBody.get("wishlistnum");
         wishListService.deleteWishPlace(wnum);
+    }
+
+    // 찜 목록 삭제 -> place num으로 - 이리수
+    @PostMapping("/deleteWishByPlaceNum")
+    public void deleteWishByPlaceNum(@RequestBody Map<String, Long> requestBody) {
+        Long pnum = requestBody.get("place_num");
+        wishListService.deleteWishByPlaceNum(pnum);
+    }
+
+    // 찜 목록에 있는지 확인
+    @PostMapping("/findByPlaceNum")
+    public int findByPlaceNum(@RequestBody Map<String, Long> requestBody) {
+        Long pnum = requestBody.get("place_num");
+        return wishListService.findByPlaceNum(pnum);
     }
 }

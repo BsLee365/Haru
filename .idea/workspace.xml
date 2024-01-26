@@ -5,9 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6d0870f0-66eb-40b4-a5ab-e66ef439dd61" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/Haru/frontend/src/img/selectHobbyImg/액티비티/스키.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Haru/frontend/src/img/selectHobbyImg/액티비티/야구.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Haru/frontend/src/img/selectHobbyImg/자기계발/독서.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Haru/frontend/src/img/selectHobbyImg/취미/노래방.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Haru/frontend/src/components/client/myPlace/RecommendList.vue" beforeDir="false" afterPath="$PROJECT_DIR$/Haru/frontend/src/components/client/myPlace/RecommendList.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Haru/frontend/src/pages/client/member/SelectHobby.vue" beforeDir="false" afterPath="$PROJECT_DIR$/Haru/frontend/src/pages/client/member/SelectHobby.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Haru/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/Haru/src/main/resources/application.properties" afterDir="false" />
     </list>
+    <list id="4e5791bc-02a3-456b-9e99-3543e148e25e" name="Changes by user" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -67,7 +73,7 @@
     "Spring Boot.HaruApplication.executor": "Run",
     "git-widget-placeholder": "merge__0126__LISU__AI__01",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "E:/900_팀 프로젝트/최종 프로젝트/Haru/Haru/frontend/src/img/Total_stress/img",
+    "last_opened_file_path": "E:/900_팀 프로젝트/최종 프로젝트/Haru/Haru/frontend/src/img/selectHobbyImg/자기계발",
     "node.js.detected.package.eslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
@@ -78,6 +84,9 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\900_팀 프로젝트\최종 프로젝트\Haru\Haru\frontend\src\img\selectHobbyImg\자기계발" />
+      <recent name="E:\900_팀 프로젝트\최종 프로젝트\Haru\Haru\frontend\src\img\selectHobbyImg\취미" />
+      <recent name="E:\900_팀 프로젝트\최종 프로젝트\Haru\Haru\frontend\src\img\selectHobbyImg\액티비티" />
       <recent name="E:\900_팀 프로젝트\최종 프로젝트\Haru\Haru\frontend\src\img\Total_stress\img" />
     </key>
   </component>

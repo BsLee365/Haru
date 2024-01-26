@@ -150,12 +150,12 @@ export default {
 				{
 					name: "스키",
 					category: "스키장",
-					image: require("@/img/selectHobbyImg/액티비티/수영.png"),
+					image: require("@/img/selectHobbyImg/액티비티/스키.png"),
 				},
 				{
 					name: "야구",
 					category: "야구장",
-					image: require("@/img/selectHobbyImg/액티비티/농구.png"),
+					image: require("@/img/selectHobbyImg/액티비티/야구.png"),
 				},
 				{
 					name: "요가",
@@ -236,7 +236,7 @@ export default {
 				{
 					name: "노래",
 					category: "노래방",
-					image: require("@/img/selectHobbyImg/취미/게임.png"),
+					image: require("@/img/selectHobbyImg/취미/노래방.png"),
 				},
 				{
 					name: "공예",
@@ -280,7 +280,7 @@ export default {
 				{
 					name: "독서",
 					category: "도서관",
-					image: require("@/img/selectHobbyImg/자기계발/독서_스터디.png"),
+					image: require("@/img/selectHobbyImg/자기계발/독서.png"),
 				},
 				{
 					name: "스터디",

@@ -28,7 +28,6 @@
 
       <!-- 피드 Start -->
       <FeedList
-        :userData="this.data"
         :cardList="cardList"
         :listCnt="listCnt"
         :allCardList="allCardList"
@@ -83,6 +82,7 @@ export default {
     // 페이지가 로드될 때 초기 이미지 설정
     this.bgImage();
     window.addEventListener("scroll", this.handleScroll, true);
+    this.userData = this.data;
     
   },
   methods: {
@@ -137,6 +137,7 @@ export default {
             }
             const cardList = {
               profileImage: require(`${process.env.VUE_APP_IMG_BASE_URL}/Haru/src/main/resources/static/img/profileImg/` + data.feed[index].member.profile_img),
+              uid: data.feed[index].member.user_id,
               profileLink: data.feed[index].member.profile_link,
               nickname: data.feed[index].member.nickname,
               mainCategory:

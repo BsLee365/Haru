@@ -79,7 +79,7 @@ public class MemberService {
     }
 
     public void updateMyInfo(MemberDTO dto) {
-        memberRepository.updateByMember(dto.getId(), dto.getNickname(), dto.getEmail(), dto.getName());
+        memberRepository.updateByMember(dto.getId(), dto.getNickname(), dto.getName());
     }
 
     public int deleteMember(String userId) {

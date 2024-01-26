@@ -27,9 +27,10 @@ public interface MemberRepository extends JpaRepository<Member, String> {
     Optional findNicknameByNickname(@Param("nickname") String nickname);
 
     // 아이디로 회원정보 찾기
-//    Optional<UserDetails> findByUserId(String userId);
+    // Optional<UserDetails> findByUserId(String userId);
 
     MemberDTO findMemberByUserId(String userId);
+
     Member findMemberByuserId(String memberId);
 
     // 이메일로 회원 아이디 찾기
@@ -54,13 +55,13 @@ public interface MemberRepository extends JpaRepository<Member, String> {
 
     // 회원정보 수정
     @Modifying
-    @Query("UPDATE Member u SET u.nickname= :nickname, u.email= :email, u.name= :name WHERE u.userId = :id")
-    void updateByMember(@Param("id") String userId, @Param("nickname") String nickname, @Param("email") String email, @Param("name") String name);
+    @Query("UPDATE Member u SET u.nickname= :nickname, u.name= :name WHERE u.userId = :id")
+    void updateByMember(@Param("id") String userId, @Param("nickname") String nickname, @Param("name") String name);
 
     int countByUserIdIsNotNull();
 
     // 추가함. - 이범석
-    //Optional<Member> findById(@Param("userId") String userId);
+    // Optional<Member> findById(@Param("userId") String userId);
 
     // 추가함. - 이범석
     Optional<Member> findByUserId(@Param("userId") String userId);

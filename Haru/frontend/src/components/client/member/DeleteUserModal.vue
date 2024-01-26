@@ -76,9 +76,13 @@ export default {
             `http://${process.env.VUE_APP_BACK_END_URL}/member/delete/${userId}`
           )
           .then((res) => {
-            if (res == 1) {
+            if (res.data === 1) {
+              alert("회원 탈퇴가 완료되었습니다.")
               localStorage.removeItem("jwtToken");
-              window.location.href = "/login";
+              this.$router.push("/");
+              window.location.href = '/';
+
+              this.$emit('modalClose');
               // console.log(res);
               // if (res.data == 1) {
               //   localStorage.removeItem("jwtToken");

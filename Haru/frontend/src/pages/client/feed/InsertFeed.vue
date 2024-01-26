@@ -1,6 +1,6 @@
 <template>
 	<div class="container1">
-		<FeedRecommend v-if="modal_Check" @close-modal="closeModal" :RecommendList="RecommendList" />
+		<FeedRecommend v-if="modal_Check" @close-modal="closeModal" @get-rec-list="getRecList" :RecommendList="MyRecommendList" :selectedRecPlace="selectedRecPlace" />
 		<form>
 			<div class="bg">
 				<div>
@@ -73,6 +73,7 @@
 </template>
 <script>
 import FeedRecommend from "@/components/client/feed/FeedRecommendModal.vue";
+import moment from "moment";
 import axios from "axios";
 import { ref, onMounted } from "vue";
 import { jwtDecode } from "jwt-decode";
@@ -88,71 +89,9 @@ export default {
 			hashtag: [],
 			writeHashtag: [""], // 직접 입력 해시태그
 			activeTags: [], // 활성화된 해시태그
-			RecommendList: [
-				{
-					rdate: "9월 23일",
-					recList: [
-						{
-							storeName: "신논현역 딸부자네 불백",
-							stAddress: "서울시 강남구 꼬마빌딩 1층",
-							img: require("@/img/Feed/bul.png"),
-							link: "#",
-							hashtag: ["푸드", "맛집", "고기", "돼지고기", "갈매기살"],
-							heartOnOff: "on",
-						},
-						{
-							storeName: "신논현역 버거킹",
-							stAddress: "서울시 강남구 꼬마빌딩 2층",
-							img: require("@/img/Feed/bul.png"),
-							link: "#",
-							hashtag: ["패스트푸드", "맛집", "와퍼"],
-							heartOnOff: "off",
-						},
-						{
-							storeName: "신논현역 버거킹",
-							stAddress: "서울시 강남구 꼬마빌딩 2층",
-							img: require("@/img/Feed/bul.png"),
-							link: "#",
-							hashtag: ["패스트푸드", "맛집", "와퍼"],
-							heartOnOff: "off",
-						},
-					],
-				},
-				{
-					rdate: "9월 22일",
-					recList: [
-						{
-							storeName: "신논현역 와플대학",
-							stAddress: "서울시 강남구 꼬마빌딩 3층",
-							img: require("@/img/Feed/bul.png"),
-							link: "#",
-							hashtag: ["카페", "맛집", "와플", "애플시나몬", "레몬에이드", "레몬에이드", "레몬에이드"],
-							heartOnOff: "on",
-						},
-						{
-							storeName: "신논현역 딸부자네 불백",
-							stAddress: "서울시 강남구 꼬마빌딩 1층",
-							img: require("@/img/Feed/bul.png"),
-							link: "#",
-							hashtag: ["푸드", "맛집", "고기", "돼지고기", "갈매기살", "갈매기살"],
-							heartOnOff: "on",
-						},
-					],
-				},
-				{
-					rdate: "9월 21일",
-					recList: [
-						{
-							storeName: "신논현역 버거킹",
-							stAddress: "서울시 강남구 꼬마빌딩 2층",
-							img: require("@/img/Feed/bul.png"),
-							hashtag: ["패스트푸드", "맛집", "와퍼"],
-							heartOnOff: "off",
-						},
-					],
-				},
-			],
 			modal_Check: false,
+      MyRecommendList: [], // 추천 리스트
+      selectedRecPlace: {}, // 모달에서 선택된 항목 저장하는 곳
 		};
 	},
 	created() {
@@ -160,13 +99,35 @@ export default {
 		this.getToken();
 	},
 	methods: {
+    getMyRecommendList() {
+      // 시작 날짜, 끝 날짜 설정
+      var endRecDate = moment().add(1,"days").format("YYYY-MM-DD");
+      var startRecDate = moment().subtract(1,"months").format("YYYY-MM-DD");
+
+      // console.log(`시작~ 끝 날짜 !! : ${this.data.id} / ${startRecDate}, ${endRecDate}`);
+
+      axios
+          .post(`http://${process.env.VUE_APP_BACK_END_URL}/recommend/getMyRecList`, {
+            userid: this.data.id,
+            startdate: startRecDate,
+            enddate: endRecDate,
+          })
+          .then((res) => {
+            // console.log(res.data); // place, place_recommend_list, wish_list 가져옴
+            this.MyRecommendList = res.data;
+            // console.log(this.MyRecommendList);
+          })
+          .catch((error) => {
+            console.error("error! " + error);
+          });
+    },
 		bgImage() {
 			var newImage = "type4";
 			this.$emit("bgImage", newImage);
 		},
 		getToken() {
 			this.AccessToken = localStorage.getItem("jwtToken");
-			console.log(this.AccessToken);
+			// console.log(this.AccessToken);
 			if (this.AccessToken != null) {
 				this.isLoggedIn = true;
 			} else {
@@ -223,6 +184,11 @@ export default {
 			this.writeHashtag.splice(whIdx, 1);
 		},
 
+    getRecList(item) {
+      this.selectedRecPlace = item;
+      console.log('insert까지 넘어온 값: ' + this.selectedRecPlace);
+    },
+
 		openModal() {
 			this.modal_Check = true;
 		},
@@ -265,7 +231,7 @@ export default {
 			}
 			formData.append("contents", document.getElementById("contents").value);
 			formData.append("userId", this.data.id);
-			formData.append("placeNum", 1500);
+			formData.append("placeNum", this.selectedRecPlace.place_num);
 			console.log("해시태그", formData.getAll("hashTag"));
 			console.log("이미지", formData.getAll("file"));
 			console.log("내용", formData.getAll("contents"));
@@ -345,7 +311,10 @@ export default {
 
 		return { logout, data }; // Return data in the setup function
 	},
-	components: { FeedRecommend },
+  mounted() {
+    this.getMyRecommendList();
+  },
+  components: { FeedRecommend },
 };
 </script>
 <style scoped>

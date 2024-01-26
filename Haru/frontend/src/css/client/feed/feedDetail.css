@@ -202,6 +202,7 @@
   border-radius: 10px;
   border: 1px solid #dbdbdb;
   padding: 5px 10px;
+  resize: none;
 }
 
 /* 댓글 textarea, 전송 버튼 */

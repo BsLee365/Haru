@@ -48,7 +48,8 @@
           </div>
 
           <div class="part-area">
-            <p class="part-title">기존 해시태그</p>
+            <p class="part-title">기존 해시태그
+            </p>
             <div class="hashtag-area">
               <span
                 @click="toggleActive(oidx, 0)"
@@ -79,6 +80,15 @@
               >
                 #{{ hash }}
               </span>
+            </div>
+          </div>
+
+          <div class="part-area">
+            <div>
+              <p class="part-title">
+                해시태그 직접 입력<br />
+                <span style="color: #a7a7a7">추가하고 싶은 해시태그를 직접 입력해보세요!</span>
+              </p>
             </div>
             <div class="hashtag-area-two">
               <div

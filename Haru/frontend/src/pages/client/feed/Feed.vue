@@ -107,8 +107,6 @@ export default {
               const images = [];
               for (const img of data.feedImg) {
                 if (img.feed_num.feed_num === feedNum) {
-                  // E:/git/final/Haru/Haru/src/main/resources/static/img/Feed/
-                  // E:/900_팀 프로젝트/최종 프로젝트/Haru/Haru/src/main/resources/static/img/Feed/
                   images.push(
                     require(`${process.env.VUE_APP_IMG_BASE_URL}/Haru/src/main/resources/static/img/Feed/` +
                       img.feed_img)
@@ -437,12 +435,11 @@ export default {
   async mounted() {
     // 페이지 로드하면서 리스트 불러오기
     if (this.$route.query.nickname) {
-      // await this.$refs.feedList.getMyFeedList(this.$route.query.nickname);
-      await this.getMyFeedList(this.$route.query.nickname);
+      await this.getMyFeedList(this.$route.query.nickname); // 나의 피드 리스트 불러오기
       this.selectedNickname = this.$route.query.nickname;
-      if (this.$route.query.feedNum) {
+      if (this.$route.query.feedNum) { // 쿼리에 피드 번호가 있으면 -> 피드 상세보기 모달창 띄우기
         console.log("allCardList", this.allCardList);
-        for (const card of this.allCardList) {
+        for (const card of this.allCardList) { // 피드 리스트에서 해당 피드 찾기ㄴ
           console.log("card", card);
           if (card.feedNum == this.$route.query.feedNum) {
             console.log("찾았다", card);
@@ -452,7 +449,7 @@ export default {
         this.openModal(this.card, this.allCardList.indexOf(this.card));
       }
     } else {
-      await this.getFeedList();
+      await this.getFeedList(); // 전체 피드 리스트 불러오기
     }
     const feedList = this.$refs.feedList;
     console.log("feedList", feedList);

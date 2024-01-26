@@ -186,26 +186,26 @@ export default {
 				address: card.recommend.place_address,
 			};
 		},
-		async sendComment() {
+		async sendComment() { // 피드 상세보기에서 댓글 작성
 			this.formData = new FormData();
 			this.formData.append("feedNum", this.card.feedNum);
 			this.formData.append("feedCommentContent", document.getElementById("commentText").value);
 			this.formData.append("userId", this.userData.id);
 			this.formData.append("feedUserId", this.card.uid);
 			console.log(this.formData);
-			axios.post(`http://${process.env.VUE_APP_BACK_END_URL}/addFeedComment`, this.formData).then(() => {
+			axios.post(`http://${process.env.VUE_APP_BACK_END_URL}/addFeedComment`, this.formData).then(() => { // 댓글을 데이터베이스에 추가
 				console.log("addFeedComment");
-				axios.post(`http://${process.env.VUE_APP_BACK_END_URL}/reLoadFeedComment`, this.formData).then((res) => {
+				axios.post(`http://${process.env.VUE_APP_BACK_END_URL}/reLoadFeedComment`, this.formData).then((res) => { // 댓글을 데이터베이스에서 다시 불러옴
 					this.$emit("getFeedList");
 					console.log("갱신된 댓글", res);
 					this.comments = [];
 
-					res.data.sort((a, b) => new Date(b.feed_cdate) - new Date(a.feed_cdate));
+					res.data.sort((a, b) => new Date(b.feed_cdate) - new Date(a.feed_cdate)); // 댓글을 최신순으로 정렬
 
 					console.log(res.data[res.data.length - 1]);
 
-					for (const comment of res.data) {
-						const date = this.getTimeString(comment.feed_cdate);
+					for (const comment of res.data) { // 댓글을 불러와서 comments 배열에 추가
+						const date = this.getTimeString(comment.feed_cdate); // 댓글 작성 시간 1시간 전, 1일 전 등으로 변환
 
 						const commentMap = {
 							// profileImage: require("@/img/Feed/" + card.feedComments[comment].member.profile_img),
@@ -216,10 +216,10 @@ export default {
 							comment: comment.feed_comment_content,
 						};
 						this.comments.push(commentMap);
-						this.card.comments = res.data.length;
+						this.card.comments = res.data.length; // 댓글 수 갱신
 					}
 					console.log("댓글 추가");
-					document.getElementById("commentText").value = "";
+					document.getElementById("commentText").value = ""; // 댓글 작성 후 댓글 입력창 초기화
 				});
 			});
 		},

@@ -107,19 +107,19 @@ export default {
 			this.$emit("getMyFeedList", nickname);
 			this.myNickname = nickname;
 		},
-		sendLikeInFeed(feedNum, feedUserId) {
+		sendLikeInFeed(feedNum, feedUserId) { // 피드 리스트에서 좋아요 클릭 메소드
 			console.log("uid : ", this.data.id, "feedNum : ", feedNum, "feedUserId : ", feedUserId);
 			this.formData = new FormData();
 			this.formData.append("feedNum", feedNum);
 			this.formData.append("userId", this.data.id);
 			this.formData.append("feedUserId", feedUserId);
-			axios.post(`http://${process.env.VUE_APP_BACK_END_URL}/modifyFeedLike`, this.formData).then((res) => {
+			axios.post(`http://${process.env.VUE_APP_BACK_END_URL}/modifyFeedLike`, this.formData).then((res) => { // 해당 피드에 좋아요가 있으면 삭제 없으면 추가
 				console.log("modifyFeedLike");
-				if (this.searchKeyword) {
+				if (this.searchKeyword) { // 검색어가 있으면 검색어로 검색된 리스트로 갱신
 					this.searchFeed();
-				} else if (this.$route.query.nickname) {
+				} else if (this.$route.query.nickname) { // 쿼리에 닉네임이 있으면 해당 유저의 피드 리스트로 갱신
 					this.getMyFeedList(this.$route.query.nickname);
-				} else {
+				} else { // 아무것도 없으면 전체 피드 리스트로 갱신
 					this.$emit("getFeedList");
 				}
 

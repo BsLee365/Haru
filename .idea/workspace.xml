@@ -6,8 +6,11 @@
   <component name="ChangeListManager">
     <list default="true" id="6d0870f0-66eb-40b4-a5ab-e66ef439dd61" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Haru/frontend/src/css/client/feed/uploadFeed.css" beforeDir="false" afterPath="$PROJECT_DIR$/Haru/frontend/src/css/client/feed/uploadFeed.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Haru/frontend/src/pages/client/feed/UpdateFeed.vue" beforeDir="false" afterPath="$PROJECT_DIR$/Haru/frontend/src/pages/client/feed/UpdateFeed.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Haru/frontend/.env" beforeDir="false" afterPath="$PROJECT_DIR$/Haru/frontend/.env" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Haru/frontend/src/components/client/member/DeleteUserModal.vue" beforeDir="false" afterPath="$PROJECT_DIR$/Haru/frontend/src/components/client/member/DeleteUserModal.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Haru/frontend/src/css/client/member/mypage.css" beforeDir="false" afterPath="$PROJECT_DIR$/Haru/frontend/src/css/client/member/mypage.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Haru/src/main/java/kr/co/teamA/Haru/Service/member/MemberService.java" beforeDir="false" afterPath="$PROJECT_DIR$/Haru/src/main/java/kr/co/teamA/Haru/Service/member/MemberService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Haru/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/Haru/src/main/resources/application.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -66,7 +69,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "Spring Boot.HaruApplication.executor": "Run",
-    "git-widget-placeholder": "LISU__Feed__Recommend",
+    "git-widget-placeholder": "merge__0126__LISU__AI__01",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "E:/900_팀 프로젝트/최종 프로젝트/Haru/Haru/frontend/src/img/Total_stress/img",
     "node.js.detected.package.eslint": "true",

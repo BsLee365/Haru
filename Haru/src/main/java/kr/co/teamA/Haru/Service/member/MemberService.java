@@ -83,7 +83,9 @@ public class MemberService {
     }
 
     public int deleteMember(String userId) {
+        System.out.println("탈퇴할 아이디 : " + userId);
         Member member = memberRepository.findMemberByuserId(userId);
+        System.out.println("탈퇴할 멤버 : " + member);
         memberRepository.deleteById(member.getUserId());
         System.out.println("delete member");
         return 1;

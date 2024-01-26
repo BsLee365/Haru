@@ -6,11 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="6d0870f0-66eb-40b4-a5ab-e66ef439dd61" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Haru/frontend/.env" beforeDir="false" afterPath="$PROJECT_DIR$/Haru/frontend/.env" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Haru/frontend/src/components/client/member/DeleteUserModal.vue" beforeDir="false" afterPath="$PROJECT_DIR$/Haru/frontend/src/components/client/member/DeleteUserModal.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Haru/frontend/src/css/client/member/mypage.css" beforeDir="false" afterPath="$PROJECT_DIR$/Haru/frontend/src/css/client/member/mypage.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Haru/src/main/java/kr/co/teamA/Haru/Service/member/MemberService.java" beforeDir="false" afterPath="$PROJECT_DIR$/Haru/src/main/java/kr/co/teamA/Haru/Service/member/MemberService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Haru/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/Haru/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Haru/frontend/src/components/client/myPlace/RecommendList.vue" beforeDir="false" afterPath="$PROJECT_DIR$/Haru/frontend/src/components/client/myPlace/RecommendList.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

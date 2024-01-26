@@ -78,7 +78,7 @@ public class FeedService {
     }
 
     @Transactional
-    public List<FeedComment> addFeedComment(int feedNum, String userId, String feedCommentContent, String feedUserId) {
+    public void addFeedComment(int feedNum, String userId, String feedCommentContent, String feedUserId) {
         Feed feed = feedRepository.findByFeedNum(feedNum);
         Member member = memberRepository.findMemberByuserId(userId);
         Member feedUser = memberRepository.findMemberByuserId(feedUserId);
@@ -95,10 +95,6 @@ public class FeedService {
                 .alarmTypes((long) 2)
                 .build();
         alarmRepository.save(alarm);
-
-        List<FeedComment> feedCommentList = feedCommentRepository.findByFeedNum_FeedNum((long) feedNum);
-
-        return feedCommentList;
     }
 
     @Transactional
@@ -235,6 +231,11 @@ public class FeedService {
         feedList.put("myFeedLikes", myFeedLikes);
 
         return feedList;
+    }
+
+    public List<FeedComment> reLoadFeedComment(String feedNum) {
+        List<FeedComment> feedCommentList = feedCommentRepository.findByFeedNum_FeedNum(Long.parseLong(feedNum));
+        return feedCommentList;
     }
 
 }

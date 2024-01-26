@@ -36,13 +36,18 @@ public class FeedController {
     }
 
     @PostMapping("/addFeedComment")
-    public List<FeedComment> addFeedComment(@RequestParam Map<String, String> data) {
+    public void addFeedComment(@RequestParam Map<String, String> data) {
         int feedNum = Integer.parseInt(data.get("feedNum"));
         String userId = data.get("userId");
         String feedCommentContent = data.get("feedCommentContent");
         String feedUserId = data.get("feedUserId");
 
-        List<FeedComment> commentList = feedService.addFeedComment(feedNum, userId, feedCommentContent, feedUserId);
+        feedService.addFeedComment(feedNum, userId, feedCommentContent, feedUserId);
+    }
+
+    @PostMapping("/reLoadFeedComment")
+    public List<FeedComment> reLoadFeedComment(@RequestParam("feedNum") String feedNum) {
+        List<FeedComment> commentList = feedService.reLoadFeedComment(feedNum);
 
         return commentList;
     }
@@ -113,11 +118,16 @@ public class FeedController {
         List<String> feedImgs = new ArrayList<>();
         if (files != null) {
             for (MultipartFile file : files) {
-                saveFile(file);
+                String imgName = saveFile(file);
+                feedImgs.add(imgName);
+                if (imageName != null) {
+                    for (String name : imageName) {
+                        if (name.startsWith("FeedImg")) {
+                            feedImgs.add(name);
+                        }
+                    }
+                }
             }
-        }
-        for (String file : imageName) {
-            feedImgs.add(file);
         }
         feedService.feedUpdate(data, feedImgs, hashTag);
     }

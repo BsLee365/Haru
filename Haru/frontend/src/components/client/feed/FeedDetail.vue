@@ -163,6 +163,7 @@ export default {
 			console.log(card);
 			this.comments = [];
 			this.recommend = {};
+			card.feedComments.sort((a, b) => new Date(b.feed_cdate) - new Date(a.feed_cdate));
 			for (const comment in card.feedComments) {
 				const date = this.getTimeString(card.feedComments[comment].feed_cdate);
 
@@ -191,27 +192,34 @@ export default {
 			this.formData.append("userId", this.userData.id);
 			this.formData.append("feedUserId", this.card.uid);
 			console.log(this.formData);
-			axios.post(`http://${process.env.VUE_APP_BACK_END_URL}/addFeedComment`, this.formData).then((res) => {
+			axios.post(`http://${process.env.VUE_APP_BACK_END_URL}/addFeedComment`, this.formData).then(() => {
 				console.log("addFeedComment");
-				this.$emit("getFeedList");
-				console.log("갱신된 댓글", res);
-				this.comments = [];
-				for (const comment of res.data) {
-					const date = this.getTimeString(comment.feed_cdate);
+				axios.post(`http://${process.env.VUE_APP_BACK_END_URL}/reLoadFeedComment`, this.formData).then((res) => {
+					this.$emit("getFeedList");
+					console.log("갱신된 댓글", res);
+					this.comments = [];
 
-					const commentMap = {
-						// profileImage: require("@/img/Feed/" + card.feedComments[comment].member.profile_img),
-						profileImage: require("@/img/Feed/no_profile.png"),
-						uid: comment.user_id.user_id,
-						nickname: comment.user_id.nickname,
-						cDate: date,
-						comment: comment.feed_comment_content,
-					};
-					this.comments.push(commentMap);
-					this.card.comments = res.data.length;
-				}
-				console.log("댓글 추가");
-				document.getElementById("commentText").value = "";
+					res.data.sort((a, b) => new Date(b.feed_cdate) - new Date(a.feed_cdate));
+
+					console.log(res.data[res.data.length - 1]);
+
+					for (const comment of res.data) {
+						const date = this.getTimeString(comment.feed_cdate);
+
+						const commentMap = {
+							// profileImage: require("@/img/Feed/" + card.feedComments[comment].member.profile_img),
+							profileImage: require("@/img/Feed/no_profile.png"),
+							uid: comment.user_id.user_id,
+							nickname: comment.user_id.nickname,
+							cDate: date,
+							comment: comment.feed_comment_content,
+						};
+						this.comments.push(commentMap);
+						this.card.comments = res.data.length;
+					}
+					console.log("댓글 추가");
+					document.getElementById("commentText").value = "";
+				});
 			});
 		},
 		async sendLike() {
@@ -249,7 +257,7 @@ export default {
 			});
 		},
 		feedDelete() {
-			if(confirm("정말 삭제하시겠습니까?") === true) {
+			if (confirm("정말 삭제하시겠습니까?") === true) {
 				var formData = new FormData();
 				formData.append("feedNum", this.card.feedNum);
 				axios.post(`http://${process.env.VUE_APP_BACK_END_URL}/feedDelete`, formData).then(() => {

@@ -28,24 +28,33 @@
                 <div class="rlist-content-area">
                   <div class="all-info">
                     <div class="rlist-img-area">
-                      <a :href="recItemInfo.link"
-                      ><img
-                          class="rec-detail-img"
-                          :src="recItemInfo.img"
-                          alt=""
-                      /></a>
+                      <a :href="'https://map.naver.com/p/smart-around/place/' + getPlaceLink(recItemInfo.place_link)" target="_blank">
+                        <img
+                            v-show="recItemInfo.place_img === null"
+                            src="@/img/Total_stress/img/no-image.jpg"
+                            alt="no_image"
+                            class="rec-detail-img"
+                        />
+                        <!-- 장소 이미지 있는 경우 -->
+                        <img
+                            v-show="recItemInfo.place_img != null"
+                            :src="recItemInfo.place_img"
+                            alt="no_image"
+                            class="rec-detail-img"
+                        />
+                      </a>
                     </div>
                     <div class="content">
                       <div class="stname-address">
                         <!-- 가게 명 -->
-                        <h5 class="stName">{{ recItemInfo.storeName }}</h5>
+                        <h5 class="stName">{{ recItemInfo.place_name }}</h5>
                         <!-- 가게 주소 -->
-                        <p class="stAddress">{{ recItemInfo.stAddress }}</p>
+                        <p class="stAddress">{{ recItemInfo.place_address }}</p>
                       </div>
                       <!-- 별점 -->
                       <p class="rlist-score-area">
                         <span class="rlist-score"
-                        >★ {{ item.place_score / 10 }}</span
+                        >★ {{ (recItemInfo.place_score / 10).toFixed(1) }}</span
                         >
                       </p>
                     </div>
@@ -58,10 +67,11 @@
 
         <!-- 이전 추천 리스트 전체 영역 -->
         <div>
-          <p class="feed-rec-area-title">이전 추천 리스트</p>
+          <p class="feed-rec-area-title">이전 추천 리스트</p><span style="padding-bottom:10px; padding-left: 20px; display: inline-block;">최근 한달 동안 추천 받은 리스트입니다.</span>
           <RecList
               :AllRecList="RecommendList"
               :isBtnHeartNone="isBtnHeartNone"
+              :selectedRecPlace="selectedRecPlace"
               class="feed-rec-recList"
               @send-rec-List="getRecList"
           />
@@ -72,7 +82,7 @@
           <button @click="$emit('close-modal')" class="big-ctlbtn cancle-btn">
             취소하기
           </button>
-          <button class="big-ctlbtn insert-btn">선택하기</button>
+          <button class="big-ctlbtn insert-btn" @click="selectMyRecItem(recItemInfo)">선택하기</button>
         </div>
       </div>
     </div>
@@ -90,9 +100,28 @@ export default {
     };
   },
   methods: {
+    // 링크 주소 변경
+    getPlaceLink(link) {
+      var mylink = link.split("/");
+      if ( mylink[mylink.length-1] === '?entry=ple' ) {
+        return  mylink[mylink.length-2]
+      } else {
+        return mylink[mylink.length-1]
+      }
+    },
     getRecList(recItem) {
-      console.log(recItem);
+      // console.log('선택한 거 : ' + recItem);
       this.recItemInfo = recItem;
+    },
+    selectMyRecItem(item) {
+      console.log(item)
+      if (this.recItemInfo === "") {
+        alert("추천 장소가 선택되지 않았어요!")
+      } else {
+        // insert 화면으로 값 전달
+        this.$emit('get-rec-list', item)
+        this.$emit('close-modal')
+      }
     },
   },
   components: {
@@ -101,8 +130,18 @@ export default {
   created() {
     // console.log('this.RecommendList!!!! ' + this.RecommendList);
   },
+  mounted() {
+    // console.log(this.selectedRecPlace.place_num == null);
+    if (this.selectedRecPlace.place_num == null) {
+      console.log('선택돼서 넘어온거 없음')
+    } else {
+      console.log('선택돼서 넘어온거 있음')
+      this.recItemInfo = this.selectedRecPlace;
+    }
+  },
   props: {
     RecommendList: Array,
+    selectedRecPlace: Array,
   },
 };
 </script>

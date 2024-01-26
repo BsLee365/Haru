@@ -90,12 +90,14 @@
                 class="rlist-checkbox"
                 :class="{ recBtnDisplayNone: isBtnHeartNone === false }"
             >
+<!--              v-model="checkedNum"-->
               <input
                   type="radio"
                   class="recCheckbox"
                   :id="'recCheckbox' + idx"
+                  :checked="isChecked(item.place.place_num)"
                   name="recRadio"
-                  @click="sendRecList(item)"
+                  @click="sendRecList(item.place)"
               />
               <label :for="'recCheckbox' + idx"></label>
             </div>
@@ -140,8 +142,17 @@ export default {
     AllRecList: Object, // 추천 리스트 목록
     isBtnHeartNone: Boolean, // 하트 버튼이 눌리는 화면인지 추천 리스트 선택 버튼이 나와야되는 화면인지
     sendSelectedDate: String, // 추천 받은 날짜
+    selectedRecPlace: Object, // 모달창 - 선택된 장소 정보
+    // checkedNum: "", // 모달창 장소 선택 어떤거 됐는지
+  },
+  mounted() {
+    this.isChecked();
   },
   methods: {
+    isChecked(pnum) {
+      // console.log(this.selectedRecPlace.place_num + ' / ' + pnum)
+      return this.selectedRecPlace.place_num == pnum;
+    },
     FeedBtnOn(num) {
       this.myNum = num;
     },
@@ -153,6 +164,7 @@ export default {
     },
     // 선택한 항목 부모에게 전달 --------------------------------------------------------
     sendRecList(recItem) {
+      // item.place 전달
       this.$emit("send-rec-List", recItem);
     },
 

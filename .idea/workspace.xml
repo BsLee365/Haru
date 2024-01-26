@@ -6,8 +6,14 @@
   <component name="ChangeListManager">
     <list default="true" id="6d0870f0-66eb-40b4-a5ab-e66ef439dd61" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Haru/frontend/.env" beforeDir="false" afterPath="$PROJECT_DIR$/Haru/frontend/.env" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Haru/frontend/src/components/client/feed/FeedDetail.vue" beforeDir="false" afterPath="$PROJECT_DIR$/Haru/frontend/src/components/client/feed/FeedDetail.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Haru/frontend/src/components/client/feed/FeedRecommendModal.vue" beforeDir="false" afterPath="$PROJECT_DIR$/Haru/frontend/src/components/client/feed/FeedRecommendModal.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Haru/frontend/src/components/client/myPlace/RecommendList.vue" beforeDir="false" afterPath="$PROJECT_DIR$/Haru/frontend/src/components/client/myPlace/RecommendList.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Haru/frontend/src/css/client/feed/feedRecommend.css" beforeDir="false" afterPath="$PROJECT_DIR$/Haru/frontend/src/css/client/feed/feedRecommend.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Haru/frontend/src/css/client/myPlace/recommendList.css" beforeDir="false" afterPath="$PROJECT_DIR$/Haru/frontend/src/css/client/myPlace/recommendList.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Haru/frontend/src/pages/client/feed/InsertFeed.vue" beforeDir="false" afterPath="$PROJECT_DIR$/Haru/frontend/src/pages/client/feed/InsertFeed.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Haru/src/main/java/kr/co/teamA/Haru/Repository/PlaceRecommendListRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/Haru/src/main/java/kr/co/teamA/Haru/Repository/PlaceRecommendListRepository.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

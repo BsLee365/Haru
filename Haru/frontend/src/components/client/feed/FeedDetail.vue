@@ -96,8 +96,7 @@
 									<p>{{ recommend.address }}</p>
 								</a>
 								<p class="rec-hash-area">
-									{{ recommend.hashtag / 10 }}
-									<!-- <span class="rec-hash cursor-p" v-for="(hash, hidx) in recommend.hashtag" :key="hidx">#{{ hash }}</span> -->
+                  <span class="rlist-score">★ {{ (recommend.hashtag / 10).toFixed(1) }}</span>
 								</p>
 							</div>
 						</div>

@@ -1,6 +1,6 @@
 <template>
 	<div class="container1">
-		<FeedRecommend v-if="modal_Check" @close-modal="closeModal" :RecommendList="MyRecommendList" />
+		<FeedRecommend v-if="modal_Check" @close-modal="closeModal" @get-rec-list="getRecList" :RecommendList="MyRecommendList" :selectedRecPlace="selectedRecPlace" />
 		<form>
 			<div class="bg">
 				<div>
@@ -91,6 +91,7 @@ export default {
 			activeTags: [], // 활성화된 해시태그
 			modal_Check: false,
       MyRecommendList: [], // 추천 리스트
+      selectedRecPlace: {}, // 모달에서 선택된 항목 저장하는 곳
 		};
 	},
 	created() {
@@ -183,6 +184,11 @@ export default {
 			this.writeHashtag.splice(whIdx, 1);
 		},
 
+    getRecList(item) {
+      this.selectedRecPlace = item;
+      console.log('insert까지 넘어온 값: ' + this.selectedRecPlace);
+    },
+
 		openModal() {
 			this.modal_Check = true;
 		},
@@ -225,7 +231,7 @@ export default {
 			}
 			formData.append("contents", document.getElementById("contents").value);
 			formData.append("userId", this.data.id);
-			formData.append("placeNum", 1500);
+			formData.append("placeNum", this.selectedRecPlace.place_num);
 			console.log("해시태그", formData.getAll("hashTag"));
 			console.log("이미지", formData.getAll("file"));
 			console.log("내용", formData.getAll("contents"));

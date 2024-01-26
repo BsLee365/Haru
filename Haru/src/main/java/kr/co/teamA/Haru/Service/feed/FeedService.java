@@ -106,6 +106,7 @@ public class FeedService {
         Feed feed = feedRepository.findByFeedNum(feedNum);
         Member member = memberRepository.findMemberByuserId(userId);
         Member feedUser = memberRepository.findMemberByuserId(feedUserId);
+        System.out.println(feedNum + " " + userId + " " + feedUserId);
         if (feedLikeRepository.countByFeedNum_FeedNumAndFeedLikeBy_UserId(feedNum, userId) == 0) {
             Like like = Like.builder()
                     .feedNum(feed)

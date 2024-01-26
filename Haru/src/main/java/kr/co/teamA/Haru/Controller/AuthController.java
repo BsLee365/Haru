@@ -118,7 +118,6 @@ public class AuthController {
     // 회원정보 수정
     @PostMapping("/updateMyInfo")
     public ResponseEntity<?> updateMyInfo(@RequestBody MemberDTO dto) {
-        System.out.println(dto.getEmail());
         memberService.updateMyInfo(dto);
         return ResponseEntity.ok(1);
     }

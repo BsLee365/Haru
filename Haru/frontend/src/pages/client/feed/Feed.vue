@@ -28,7 +28,6 @@
 
       <!-- 피드 Start -->
       <FeedList
-        :userData="this.data"
         :cardList="cardList"
         :listCnt="listCnt"
         :allCardList="allCardList"
@@ -83,25 +82,8 @@ export default {
     // 페이지가 로드될 때 초기 이미지 설정
     this.bgImage();
     window.addEventListener("scroll", this.handleScroll, true);
-    // 페이지 로드하면서 리스트 불러오기
-    if (this.$route.query.nickname) {
-      // await this.$refs.feedList.getMyFeedList(this.$route.query.nickname);
-      await this.getMyFeedList(this.$route.query.nickname);
-      this.selectedNickname = this.$route.query.nickname;
-      if (this.$route.query.feedNum) {
-        console.log("allCardList", this.allCardList);
-        for (const card of this.allCardList) {
-          console.log("card", card);
-          if (card.feedNum == this.$route.query.feedNum) {
-            console.log("찾았다", card);
-            this.card = card;
-          }
-        }
-        this.openModal(this.card, this.allCardList.indexOf(this.card));
-      }
-    } else {
-      await this.getFeedList();
-    }
+    this.userData = this.data;
+    
   },
   methods: {
     // 해당 화면 Background 이미지 설정
@@ -154,7 +136,7 @@ export default {
               }
             }
             const cardList = {
-              profileImage: require("@/img/Feed/no_profile.png"), //data.feed[index].member.profile_img,
+              profileImage: require(`${process.env.VUE_APP_IMG_BASE_URL}/Haru/src/main/resources/static/img/profileImg/` + data.feed[index].member.profile_img),
               uid: data.feed[index].member.user_id,
               profileLink: data.feed[index].member.profile_link,
               nickname: data.feed[index].member.nickname,
@@ -238,7 +220,7 @@ export default {
               }
             }
             const cardList = {
-              profileImage: require("@/img/Feed/no_profile.png"), //data.feed[index].member.profile_img,
+              profileImage: require(`${process.env.VUE_APP_IMG_BASE_URL}/Haru/src/main/resources/static/img/profileImg/` + data.feed[index].member.profile_img),
               uid: data.feed[index].member.user_id,
               profileLink: data.feed[index].member.profile_link,
               nickname: data.feed[index].member.nickname,
@@ -327,7 +309,7 @@ export default {
                 }
               }
               const cardList = {
-                profileImage: require("@/img/Feed/no_profile.png"), //data.feed[index].member.profile_img,
+                profileImage: require(`${process.env.VUE_APP_IMG_BASE_URL}/Haru/src/main/resources/static/img/profileImg/` + data.feed[index].member.profile_img),
                 uid: data.feed[index].member.user_id,
                 profileLink: data.feed[index].member.profile_link,
                 nickname: data.feed[index].member.nickname,
@@ -453,25 +435,25 @@ export default {
     return { logout, data }; // Return data in the setup function
   },
   async mounted() {
-    // window.addEventListener("scroll", this.handleScroll, true);
-    // // 페이지 로드하면서 리스트 불러오기
-    // if (this.$route.query.nickname) {
-    // 	await this.$refs.feedList.getMyFeedList(this.$route.query.nickname);
-    // 	if (this.$route.query.feedNum) {
-    // 		console.log("allCardList", this.allCardList)
-    // 		// for (const card of this.allCardList) {
-    // 		// 	console.log("card", card);
-    // 		// 	if (card.feedNum == this.$route.query.feedNum) {
-    // 		// 		console.log("찾았다", card);
-    // 		// 		this.card = card;
-    // 		// 	}
-    // 		// }
-    // 		this.card = this.allCardList.find(card => card.feedNum === this.$route.query.feedNum);
-    // 		this.openModal(this.card, this.allCardList.indexOf(this.card));
-    // 	}
-    // } else {
-    // 	await this.getFeedList();
-    // }
+    // 페이지 로드하면서 리스트 불러오기
+    if (this.$route.query.nickname) {
+      // await this.$refs.feedList.getMyFeedList(this.$route.query.nickname);
+      await this.getMyFeedList(this.$route.query.nickname);
+      this.selectedNickname = this.$route.query.nickname;
+      if (this.$route.query.feedNum) {
+        console.log("allCardList", this.allCardList);
+        for (const card of this.allCardList) {
+          console.log("card", card);
+          if (card.feedNum == this.$route.query.feedNum) {
+            console.log("찾았다", card);
+            this.card = card;
+          }
+        }
+        this.openModal(this.card, this.allCardList.indexOf(this.card));
+      }
+    } else {
+      await this.getFeedList();
+    }
     const feedList = this.$refs.feedList;
     console.log("feedList", feedList);
     feedList.myNickname = this.$route.query.nickname;

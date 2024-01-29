@@ -48,7 +48,8 @@
           </div>
 
           <div class="part-area">
-            <p class="part-title">기존 해시태그</p>
+            <p class="part-title">기존 해시태그
+            </p>
             <div class="hashtag-area">
               <span
                 @click="toggleActive(oidx, 0)"
@@ -79,6 +80,15 @@
               >
                 #{{ hash }}
               </span>
+            </div>
+          </div>
+
+          <div class="part-area">
+            <div>
+              <p class="part-title">
+                해시태그 직접 입력<br />
+                <span style="color: #a7a7a7">추가하고 싶은 해시태그를 직접 입력해보세요!</span>
+              </p>
             </div>
             <div class="hashtag-area-two">
               <div
@@ -253,8 +263,8 @@ export default {
           this.imageList.push(res.data.feedImg[i].feed_img);
           this.originImage.push(res.data.feedImg[i].feed_img);
           // E:/git/final/Haru/Haru/src/main/resources/static/img/Feed/
-          this.previewImageUrls.push(require("@/img/Feed/" + res.data.feedImg[i].feed_img)); //변경
-          this.originImagePreview.push(require("@/img/Feed/" + res.data.feedImg[i].feed_img)); //변경
+          this.previewImageUrls.push(require(`${process.env.VUE_APP_IMG_BASE_URL}/Haru/src/main/resources/static/img/Feed/` + res.data.feedImg[i].feed_img));
+          this.originImagePreview.push(require(`${process.env.VUE_APP_IMG_BASE_URL}/Haru/src/main/resources/static/img/Feed/` + res.data.feedImg[i].feed_img));
           this.imageNameList.push(res.data.feedImg[i].feed_img);
         }
         for (var j = 0; j < res.data.feedHashTag.length; j++) {

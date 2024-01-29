@@ -71,8 +71,8 @@
 				<div class="card-btn">
 					<div>
 						<div class="heart">
-							<img v-if="!i.myFeedLike" class="cursor-p" src="@/img/Feed/heart.png" id="heart" @click="sendLikeInFeed(this.data.id, i.feedNum, i.uid)" />
-							<img v-if="i.myFeedLike" class="cursor-p" src="@/img/Feed/heart.png" id="heart" @click="sendLikeInFeed(this.data.id, i.feedNum, i.uid)" style="filter: opacity(0.4) drop-shadow(0 0 0 red)" />
+							<img v-if="!i.myFeedLike" class="cursor-p" src="@/img/Feed/heart.png" id="heart" @click="sendLikeInFeed(i.feedNum, i.uid)" />
+							<img v-if="i.myFeedLike" class="cursor-p" src="@/img/Feed/heart.png" id="heart" @click="sendLikeInFeed(i.feedNum, i.uid)" style="filter: opacity(0.4) drop-shadow(0 0 0 red)" />
 							<span>{{ i.likes }}</span>
 						</div>
 						<div class="comment">
@@ -107,11 +107,11 @@ export default {
 			this.$emit("getMyFeedList", nickname);
 			this.myNickname = nickname;
 		},
-		sendLikeInFeed(uid, feedNum, feedUserId) {
-			console.log("uid : ", uid, "feedNum : ", feedNum, "feedUserId : ", feedUserId);
+		sendLikeInFeed(feedNum, feedUserId) {
+			console.log("uid : ", this.data.id, "feedNum : ", feedNum, "feedUserId : ", feedUserId);
 			this.formData = new FormData();
 			this.formData.append("feedNum", feedNum);
-			this.formData.append("userId", uid);
+			this.formData.append("userId", this.data.id);
 			this.formData.append("feedUserId", feedUserId);
 			axios.post(`http://${process.env.VUE_APP_BACK_END_URL}/modifyFeedLike`, this.formData).then((res) => {
 				console.log("modifyFeedLike");
@@ -164,6 +164,7 @@ export default {
 	},
 	mounted() {
 		this.myNickname = this.selectedNickname;
+		console.log("id", this.data.id);
 	},
 };
 </script>

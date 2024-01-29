@@ -23,7 +23,7 @@ public class MemberController {
     private MemberService memberService;
 
     @Value("${profile-img-path}")
-    private String imageDirctory;
+    private String imageDirectory;
 
     public MemberController(MemberService memberService, EmailSenderService mailSender) {
         this.memberService = memberService;
@@ -42,12 +42,12 @@ public class MemberController {
 
     @PostMapping("/signup")
     public ResponseEntity<?> handleFileUpload(@ModelAttribute MemberDTO memberDTO,
-                                              @RequestParam("files") List<MultipartFile> files) {
+            @RequestParam("files") List<MultipartFile> files) {
 
         String imgName = null;
         for (MultipartFile multipartFile : files) {
             imgName = UUID.randomUUID() + getExtension(multipartFile.getOriginalFilename());
-            String filePath = imageDirctory + imgName;
+            String filePath = imageDirectory + imgName;
             try (FileOutputStream writer = new FileOutputStream(filePath)) {
                 writer.write(multipartFile.getBytes());
             } catch (Exception e) {
@@ -88,4 +88,20 @@ public class MemberController {
         int result = memberService.deleteMember(userId);
         return result;
     }
+
+    @PostMapping("/UpdateProfileImg")
+    public String UpdateProfileImg(@RequestParam("userId") String userId, @RequestParam("file") MultipartFile img) {
+        String rootPath = System.getProperty("user.dir");
+        String imgName = UUID.randomUUID() + getExtension(img.getOriginalFilename());
+        String filePath = rootPath + imageDirectory + imgName;
+        System.out.println(filePath);
+        try (FileOutputStream writer = new FileOutputStream(filePath)) {
+            writer.write(img.getBytes());
+        } catch (Exception e) {
+            throw new RuntimeException("Fail to upload files.");
+        }
+        memberService.updateProfileImg(userId, imgName);
+        return "success";
+    }
+
 }

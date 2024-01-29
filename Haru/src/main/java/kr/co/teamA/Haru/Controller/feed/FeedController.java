@@ -61,7 +61,7 @@ public class FeedController {
 
     @PostMapping("/uploadFeed")
     public void uploadFeed(@RequestParam Map<String, Object> data, @RequestParam("file") List<MultipartFile> files,
-                           @RequestParam("hashTag") List<String> hashTag) {
+            @RequestParam("hashTag") List<String> hashTag) {
         System.out.println(data);
         List<String> feedImgs = new ArrayList<>();
         for (MultipartFile file : files) {
@@ -106,9 +106,9 @@ public class FeedController {
 
     @PostMapping("/updateFeed")
     public void feedUpdate(@RequestParam Map<String, Object> data,
-                           @RequestParam(value = "file", required = false) List<MultipartFile> files,
-                           @RequestParam("hashTag") List<String> hashTag,
-                           @RequestParam(value = "imageName", required = false) List<String> imageName) {
+            @RequestParam(value = "file", required = false) List<MultipartFile> files,
+            @RequestParam("hashTag") List<String> hashTag,
+            @RequestParam(value = "imageName", required = false) List<String> imageName) {
         System.out.println(data);
         List<String> feedImgs = new ArrayList<>();
         if (files != null) {
@@ -129,7 +129,7 @@ public class FeedController {
 
     @PostMapping("/myFeedList")
     public Map<String, Object> myFeedList(@RequestParam("nickname") String nickname,
-                                          @RequestParam("userId") String userId) {
+            @RequestParam("userId") String userId) {
 
         Map<String, Object> myFeedList = feedService.getMyFeedList(nickname, userId);
 

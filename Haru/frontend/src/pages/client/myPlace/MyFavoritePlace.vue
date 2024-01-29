@@ -11,20 +11,34 @@
           v-for="(item, idx) in this.placeData"
           :key="idx"
         >
-          <div class="'food-img">
-            <img class="heart-img" src="@/img/Total_stress/img/image 47.png" />
-            <img :src="item" alt="" class="place-card" />
+<!--          {{item}}-->
+          <div class="food-img">
+            <img class="heart-img cursor-p"
+                 :src="existImage"
+                 @click="toggleWish(item[0], item[3])"
+            />
+
+            <a :href="'https://map.naver.com/p/smart-around/place/' + getPlaceLink(item[2])">
+              <img v-if="item[1] != null" :src="item[1]" alt="" class="place-card" />
+              <img v-else src="@/img/Total_stress/img/no-image.jpg" class="place-card" alt=""/>
+            </a>
+
           </div>
           <div class="food-desc">
             <div class="food-desc-box">
               <div class="food-title">
-                <h4>{{ item[2] }}</h4>
+                <a :href="'https://map.naver.com/p/smart-around/place/' + getPlaceLink(item[2])" target="_blank">
+                  <h4>{{ item[3] }}</h4>
+                </a>
               </div>
               <div class="hash-tag">
-                <span class="review-score">★ {{ item[3] }}</span>
+                <!-- .toFixed(1) : 소수점 자리수 표시 format -->
+                <span class="review-score">★ {{ (item[4] / 10).toFixed(1) }}</span>
               </div>
               <div class="food-detail">
-                <span class="food-address">주소: {{ item[4] }}</span>
+                <a :href="'https://map.naver.com/p/smart-around/place/' + getPlaceLink(item[2])">
+                  <span class="food-address">주소: {{ item[5] }}</span>
+                </a>
               </div>
             </div>
           </div>
@@ -44,6 +58,8 @@ export default {
     return {
       isLoggedIn: false,
       AccessToken: "",
+      // 하트 이미지
+      existImage: require("@/img/Total_stress/img/total_stress_heart.png"),
     };
   },
   created() {
@@ -103,6 +119,7 @@ export default {
         .then((res) => {
           // 요청 성공 시 처리 로직
           myFaboritePlace.value = res.data.place;
+          console.log(myFaboritePlace)
           res.data[0].forEach((element) => {
             placeData.value.push(element);
           });
@@ -132,6 +149,33 @@ export default {
         this.$router.push("/login");
       }
     },
+    // 찜 기능 토글
+    toggleWish(item, place_name) {
+      // console.log('placeData!! : ' + this.placeData);
+
+      if (confirm(`[${place_name}] 장소의 찜을 해제할까요?`))
+      axios.post(`http://${process.env.VUE_APP_BACK_END_URL}/wishList/deleteWishByPlaceNum`,{
+        place_num: item
+      })
+          .then(() => {
+            console.log('삭제됨');
+            // this.$emit('update-all-rec-list');
+            this.placeData=[];
+            this.getData();
+          })
+          .catch(err => {
+            console.log('삭제 에러 ' + err);
+          })
+    },
+    // 링크 주소 변경
+    getPlaceLink(link) {
+      var mylink = link.split("/");
+      if ( mylink[mylink.length-1] === '?entry=ple' ) {
+        return  mylink[mylink.length-2]
+      } else {
+        return mylink[mylink.length-1]
+      }
+    }
   },
 };
 </script>

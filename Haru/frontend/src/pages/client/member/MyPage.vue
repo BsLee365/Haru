@@ -4,6 +4,7 @@
     <UpdateProfileImgModal
       :mStatus="profileModalStatus"
       @modalClose="closeModal"
+      :profileImg="profileImg"
     />
 
     <!-- 컨텐츠 -->
@@ -20,7 +21,7 @@
                 <img src="@/img/FaceRegistration/camera.png" alt="" />
                 <p>프로필 수정</p>
               </div>
-              <img src="@/img/assets/bgImage/type3.png" class="profileImg" />
+              <img :src="profileImg" class="profileImg" />
             </li>
             <li>
               <div class="nickname-box">
@@ -151,6 +152,7 @@ export default {
       alarmList: [],
       likeCount: 0,
       commentCount: 0,
+      profileImg: "",
     };
   },
   created() {
@@ -189,13 +191,21 @@ export default {
         )
         .then((res) => {
           console.log(res);
+          var myAlarmList = [];
           this.userId = res.data.member.user_id;
           this.userName = res.data.member.name;
           this.userNickname = res.data.member.nickname;
           this.likeCount = res.data.likeCount;
           this.commentCount = res.data.commentCount;
-          this.alarmList = res.data.alarmList;
-
+          this.profileImg = require(`${process.env.VUE_APP_IMG_BASE_URL}/Haru/src/main/resources/static/img/profileImg/` + res.data.member.profile_img);
+          for (const data of res.data.alarmList) {
+            if (data.feed_comment != null && data.feed_comment.user_id.user_id != this.data.id) {
+              myAlarmList.push(data);
+            } else if (data.like != null && data.like.feed_like_by.user_id != this.data.id) {
+              myAlarmList.push(data);
+            }
+          }
+          this.alarmList = myAlarmList;
           this.alarmList.sort((a, b) => {
             const dateA = new Date(a.alarm_cdate);
             const dateB = new Date(b.alarm_cdate);

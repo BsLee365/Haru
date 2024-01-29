@@ -209,3 +209,7 @@
 .carousel-indicators > button {
   width: 15px !important;
 }
+
+.carousel-control-next:hover, .carousel-control-prev:hover {
+  background: #2d2d2d14;
+}

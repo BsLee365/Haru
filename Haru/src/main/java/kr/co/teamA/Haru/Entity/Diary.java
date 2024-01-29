@@ -8,6 +8,9 @@ import lombok.NoArgsConstructor;
 
 import java.util.Date;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 @Data
 @Entity
 @NoArgsConstructor
@@ -21,7 +24,8 @@ public class Diary {
     @SequenceGenerator(name = "Diary_SEQ", sequenceName = "Diary_SEQ", allocationSize = 1)
     private Long diaryNum;
 
-    @ManyToOne(cascade = CascadeType.REMOVE)
+    @ManyToOne
+    @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(nullable = false, name = "userId", referencedColumnName = "userId")
     private Member member;
 

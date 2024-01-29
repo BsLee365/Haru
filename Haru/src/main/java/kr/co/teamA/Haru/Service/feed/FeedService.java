@@ -38,9 +38,9 @@ public class FeedService {
     public final AlarmRepository alarmRepository;
 
     public FeedService(FeedRepository feedRepository, FeedCommentRepository feedCommentRepository,
-                       FeedHashTagRepository feedHashTagRepository, FeedImgRepository feedImgRepository,
-                       FeedLikeRepository feedLikeRepository, MemberRepository memberRepository, PlaceRepository placeRepository,
-                       AlarmRepository alarmRepository) {
+            FeedHashTagRepository feedHashTagRepository, FeedImgRepository feedImgRepository,
+            FeedLikeRepository feedLikeRepository, MemberRepository memberRepository, PlaceRepository placeRepository,
+            AlarmRepository alarmRepository) {
         this.feedRepository = feedRepository;
         this.feedCommentRepository = feedCommentRepository;
         this.feedHashTagRepository = feedHashTagRepository;
@@ -106,6 +106,7 @@ public class FeedService {
         Feed feed = feedRepository.findByFeedNum(feedNum);
         Member member = memberRepository.findMemberByuserId(userId);
         Member feedUser = memberRepository.findMemberByuserId(feedUserId);
+        System.out.println(feedNum + " " + userId + " " + feedUserId);
         if (feedLikeRepository.countByFeedNum_FeedNumAndFeedLikeBy_UserId(feedNum, userId) == 0) {
             Like like = Like.builder()
                     .feedNum(feed)

@@ -49,7 +49,6 @@ public class AuthController {
 
     private Member Member;
 
-
     // 아이디 중복 확인
     @GetMapping("/{userId}/userIdCheck")
     public ResponseEntity<?> duplicationUserIdCheck(@PathVariable String userId) {
@@ -72,7 +71,7 @@ public class AuthController {
         }
     }
 
-    //  이메일 중복 확인
+    // 이메일 중복 확인
     @PostMapping("emailCheck")
     public ResponseEntity<?> emailCheck(@RequestBody EmailCheckDTO dto) {
         int result = memberRepository.findUserEmailByEmail(dto.getEmail());
@@ -99,10 +98,11 @@ public class AuthController {
     @PostMapping("/signup")
     public ResponseEntity<?> signup(@ModelAttribute MemberDTO dto, @RequestPart("files") List<MultipartFile> files) {
         String imgName = null;
+        String rootPath = System.getProperty("user.dir");
         if (files.size() > 0) {
             for (MultipartFile multipartFile : files) {
                 imgName = UUID.randomUUID() + getExtension(multipartFile.getOriginalFilename());
-                String filePath = imageDirctory + imgName;
+                String filePath = rootPath + imageDirctory + imgName;
                 try (FileOutputStream writer = new FileOutputStream(filePath)) {
                     writer.write(multipartFile.getBytes());
                 } catch (Exception e) {
@@ -118,7 +118,6 @@ public class AuthController {
     // 회원정보 수정
     @PostMapping("/updateMyInfo")
     public ResponseEntity<?> updateMyInfo(@RequestBody MemberDTO dto) {
-        System.out.println(dto.getEmail());
         memberService.updateMyInfo(dto);
         return ResponseEntity.ok(1);
     }
@@ -129,13 +128,12 @@ public class AuthController {
             @RequestBody AuthenticationRequest authenticationRequest) {
 
         System.out.println("login " + authenticationRequest.getId());
-        System.out.println("password : "  + authenticationRequest.getPwd());
+        System.out.println("password : " + authenticationRequest.getPwd());
 
         try {
             Authentication authentication = authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(authenticationRequest.getId(),
-                            authenticationRequest.getPwd())
-            );
+                            authenticationRequest.getPwd()));
 
             // 인증 성공 시, SecurityContextHolder에 인증 정보를 설정한다.
             SecurityContextHolder.getContext().setAuthentication(authentication);
@@ -143,16 +141,15 @@ public class AuthController {
             member.setUserId(authenticationRequest.getId());
 
             String jwt = jwtTokenProvider.createToken(authentication);
-            System.out.print("jwt =>"+jwt);
+            System.out.print("jwt =>" + jwt);
             return ResponseEntity.ok(new AuthenticationResponse(jwt));
-        } catch
-        (Exception e) {
+        } catch (Exception e) {
             return ResponseEntity.ok(0);
         }
 
     }
 
-    //  로그아웃
+    // 로그아웃
     @GetMapping("/logout")
     public ResponseEntity<?> logoutUser() {
         // 실제로 JWT 토큰 기반 인증에서 로그아웃은 클라이언트 측에서 토큰을 삭제하는 것으로 처리되지만,

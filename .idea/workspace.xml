@@ -6,11 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="6d0870f0-66eb-40b4-a5ab-e66ef439dd61" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Haru/frontend/src/pages/client/feed/Feed.vue" beforeDir="false" afterPath="$PROJECT_DIR$/Haru/frontend/src/pages/client/feed/Feed.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Haru/frontend/src/pages/client/feed/UpdateFeed.vue" beforeDir="false" afterPath="$PROJECT_DIR$/Haru/frontend/src/pages/client/feed/UpdateFeed.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Haru/frontend/vue.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/Haru/frontend/vue.config.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Haru/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/Haru/src/main/resources/application.properties" afterDir="false" />
     </list>
+    <list id="4e5791bc-02a3-456b-9e99-3543e148e25e" name="Changes by user" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -44,9 +42,6 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="KubernetesApiProvider"><![CDATA[{
-  "isMigrated": true
-}]]></component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
@@ -61,33 +56,47 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Gradle.Build Haru.executor&quot;: &quot;Run&quot;,
-    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
-    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
-    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
-    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;Spring Boot.HaruApplication.executor&quot;: &quot;Run&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;E:/900_팀 프로젝트/최종 프로젝트/Haru/Haru/frontend/src/img/Total_stress/img&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;C:\\Program Files\\JetBrains\\IntelliJ IDEA 2023.3.2\\plugins\\javascript-impl\\jsLanguageServicesImpl\\external&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Gradle.Build Haru.executor": "Run",
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "Spring Boot.HaruApplication.executor": "Run",
+    "git-widget-placeholder": "merge__0126__LISU__AI__01",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "E:/900_팀 프로젝트/최종 프로젝트/Haru/Haru/frontend/src/img/selectHobbyImg/자기계발",
+    "node.js.detected.package.eslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "ts.external.directory.path": "C:\\Program Files\\JetBrains\\IntelliJ IDEA 2023.3.2\\plugins\\javascript-impl\\jsLanguageServicesImpl\\external",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\900_팀 프로젝트\최종 프로젝트\Haru\Haru\frontend\src\img\selectHobbyImg\자기계발" />
+      <recent name="E:\900_팀 프로젝트\최종 프로젝트\Haru\Haru\frontend\src\img\selectHobbyImg\취미" />
+      <recent name="E:\900_팀 프로젝트\최종 프로젝트\Haru\Haru\frontend\src\img\selectHobbyImg\액티비티" />
       <recent name="E:\900_팀 프로젝트\최종 프로젝트\Haru\Haru\frontend\src\img\Total_stress\img" />
     </key>
   </component>
   <component name="RunManager">
+    <configuration default="true" type="JetRunConfigurationType">
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <option name="filePath" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="HaruApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
       <module name="Haru.main" />
@@ -113,7 +122,7 @@
       <option name="presentableId" value="Default" />
       <updated>1706164717850</updated>
       <workItem from="1706164721185" duration="12140000" />
-      <workItem from="1706196583852" duration="3631000" />
+      <workItem from="1706186144131" duration="792000" />
     </task>
     <servers />
   </component>

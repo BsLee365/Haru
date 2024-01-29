@@ -167,19 +167,19 @@ export default {
       count_data: {
         count_member: {
           count: 0,
-          max: 14135,
+          max: 0,
         },
         count_stress_avg: {
           count: 0,
-          max: 64,
+          max: 0,
         },
         count_feed: {
           count: 0,
-          max: 13464,
+          max: 0,
         },
         count_like: {
           count: 0,
-          max: 132416,
+          max: 0,
         },
       },
     };
@@ -214,6 +214,14 @@ export default {
           this.count_data.count_member.max = res.data.memberCount;
           this.count_data.count_feed.max = res.data.feedCount;
           this.count_data.count_like.max = res.data.likeCount;
+          var stressTotal = 0;
+          for (const stress of res.data.stressList) {
+            stressTotal += stress.stress_score;
+          }
+          this.count_data.count_stress_avg.max = Math.ceil(
+            stressTotal / res.data.stressList.length * 10
+          );
+
         })
         .catch((err) => {
           console.log(err);

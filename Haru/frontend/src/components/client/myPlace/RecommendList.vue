@@ -28,24 +28,39 @@
           >
             <div class="all-info">
               <div class="rlist-img-area">
-                <a :href="'https://map.naver.com/p/search/' + item.place.place_name" target="_blank"
-                ><img class="rec-detail-img" :src="item.place.place_img" alt=""
-                /></a>
+                <a :href="'https://map.naver.com/p/smart-around/place/' + getPlaceLink(item.place.place_link)" target="_blank">
+<!--                  <img class="rec-detail-img" :src="item.place.place_img" alt=""/>-->
+                  <!-- 장소 이미지 없는 경우 -->
+                  <img
+                      v-show="item.place.place_img === null"
+                      src="@/img/Total_stress/img/no-image.jpg"
+                      alt="no_image"
+                      class="rec-detail-img"
+                  />
+                  <!-- 장소 이미지 있는 경우 -->
+                  <img
+                      v-show="item.place.place_img != null"
+                      :src="item.place.place_img"
+                      alt="no_image"
+                      class="rec-detail-img"
+                  />
+
+                </a>
               </div>
               <div class="content">
                 <div class="stname-address">
                   <!-- 가게 명 -->
-                  <a :href="'https://map.naver.com/p/search/' + item.place.place_name" target="_blank"
-                  ><h5 class="stName">{{ item.place.place_name }}</h5></a
-                  >
+                  <a :href="'https://map.naver.com/p/smart-around/place/' + getPlaceLink(item.place.place_link)" target="_blank">
+                    <h5 class="stName">{{ item.place.place_name }}</h5>
+                  </a>
                   <!-- 가게 주소 -->
-                  <a :href="'https://map.naver.com/p/search/' + item.place.place_name" target="_blank"
-                  ><p class="stAddress">{{ item.place.place_address }}</p></a
-                  >
+                  <a :href="'https://map.naver.com/p/smart-around/place/' + getPlaceLink(item.place.place_link)" target="_blank">
+                    <p class="stAddress">{{ item.place.place_address }}</p>
+                  </a>
                 </div>
                 <!-- 별점 -->
                 <p class="rlist-score-area">
-                  <span class="rlist-score">★ {{ item.place.place_score / 10 }}</span>
+                  <span class="rlist-score">★ {{ (item.place.place_score / 10).toFixed(1) }}</span>
                 </p>
               </div>
             </div>
@@ -75,12 +90,14 @@
                 class="rlist-checkbox"
                 :class="{ recBtnDisplayNone: isBtnHeartNone === false }"
             >
+<!--              v-model="checkedNum"-->
               <input
                   type="radio"
                   class="recCheckbox"
                   :id="'recCheckbox' + idx"
+                  :checked="isChecked(item.place.place_num)"
                   name="recRadio"
-                  @click="sendRecList(item)"
+                  @click="sendRecList(item.place)"
               />
               <label :for="'recCheckbox' + idx"></label>
             </div>
@@ -125,8 +142,28 @@ export default {
     AllRecList: Object, // 추천 리스트 목록
     isBtnHeartNone: Boolean, // 하트 버튼이 눌리는 화면인지 추천 리스트 선택 버튼이 나와야되는 화면인지
     sendSelectedDate: String, // 추천 받은 날짜
+    selectedRecPlace: [] // 모달창 - 선택된 장소 정보
+    // checkedNum: "", // 모달창 장소 선택 어떤거 됐는지
+  },
+  mounted() {
+    // this.isChecked();
   },
   methods: {
+    isChecked(pnum) {
+      try {
+        if (pnum != null && this.selectedRecPlace) {
+          console.log("yes");
+          return this.selectedRecPlace.place_num == pnum;
+        } else {
+          console.log("no");
+        }
+
+      } catch (error) {
+        // return error;
+      }
+      // return typeof this.selectedRecPlace === 'undefined';
+      // console.log(this.selectedRecPlace.place_num + ' / ' + pnum)
+    },
     FeedBtnOn(num) {
       this.myNum = num;
     },
@@ -138,6 +175,7 @@ export default {
     },
     // 선택한 항목 부모에게 전달 --------------------------------------------------------
     sendRecList(recItem) {
+      // item.place 전달
       this.$emit("send-rec-List", recItem);
     },
 
@@ -147,6 +185,16 @@ export default {
         return true;
       }
       return false;
+    },
+
+    // 링크 주소 변경
+    getPlaceLink(link) {
+      var mylink = link.split("/");
+      if ( mylink[mylink.length-1] === '?entry=ple' ) {
+        return  mylink[mylink.length-2]
+      } else {
+        return mylink[mylink.length-1]
+      }
     },
 
     // 위시 리스트 담고 빼기 --------------------------------------------------------

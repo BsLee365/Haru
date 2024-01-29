@@ -4,8 +4,8 @@ opython:S1192 "PDefine a constant instead of duplicating this literal 'ë°°ë“œ
 Lpython:S1172"/Remove the unused function parameter "request".(àŞŸÎúÿÿÿÿ
 mpython:S1542"PRename function "placeCrawl" to match the regular expression ^[a-z_][a-z0-9_]*$.(àŞŸÎúÿÿÿÿ
 npython:S1542"QRename function "getLinkList" to match the regular expression ^[a-z_][a-z0-9_]*$.(ö‚µ»ÿÿÿÿÿ
-Opython:S1481*"+Remove the unused local variable "element".(úà’ûúÿÿÿÿ8“éôÓ1
 Kpython:S1481("'Remove the unused local variable "req".(áÂÊÜøÿÿÿÿ8“éôÓ1
+Opython:S1481*"+Remove the unused local variable "element".(úà’ûúÿÿÿÿ8“éôÓ1
 qpython:S3776"TRefactor this function to reduce its Cognitive Complexity from 20 to the 15 allowed.(ö‚µ»ÿÿÿÿÿ
 =python:S125"Remove this commented out code.(éÍÔÖ8“éôÓ1
 Jpython:S5806$"+Rename this variable; it shadows a builtin.(Ú¸ë8“éôÓ1

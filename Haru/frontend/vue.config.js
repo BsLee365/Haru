@@ -12,6 +12,9 @@ module.exports = {
         },
       },
     },
+    client: {
+      overlay: false,
+    },
   },
   configureWebpack: {
     plugins: [
